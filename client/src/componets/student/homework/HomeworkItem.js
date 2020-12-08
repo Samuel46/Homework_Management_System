@@ -81,76 +81,80 @@ function HomeworkItem({ getHomeworkBy_id, submitHomework, removeHomework, studen
 
     return (
         <Fragment>
+
             {homework && loading === null ? <Spinner /> : <Fragment>
-                <div className="py-2">
-                    <div className="card bg-secondary">
-                        <div className="card-header ">
-                            <h4>Homework details</h4>
-                        </div>
-                        {/*  */}
-                        <div className="card-header">
-                            <label className="floating-label"> <strong>Title</strong> </label>
-                            <h5 className="card-title">{homework && homework.title}</h5>
-
-                        </div>
-                        {/*  */}
-                        {/* Dates */}
-                        <div className="ml-4">
-                            <div className=" mb-1 ">
-                                <strong>Issued</strong>:<Moment format='YYYY/MM/DD' >{homework && homework.set_date}</Moment>
+                <div className="container">
+                    <div className="py-2">
+                        <div className="card bg-secondary">
+                            <div className="card-header ">
+                                <h4>Homework details</h4>
                             </div>
-                            <div className=" mb-1">
-                                <strong>Due</strong>: <Moment format='YYYY/MM/DD' >{homework && homework.due_date}</Moment>
-                            </div>
-                            <div className="mb-1">
-                                <strong>Effort estimate</strong>:  {homework && homework.effort_time}
-                            </div>
-                        </div>
-                        <div className="card-body ">
-                            <label className="floating-label"> <strong>Description</strong> </label>
-                            <p>{homework && homework.description}</p>
-                            <button type="button" className="btn  btn-secondary">View
-            Attachments</button>
-                        </div>
-                        <div className="card-footer">
-                            {message ? <Message msg={message} /> : null}
-                            <Progress percentage={uploadPercentage} />
-                            <form onSubmit={onSubmit} action="upload/:id" method="POST" enctype="multipart/form-data" >
+                            {/*  */}
+                            <div className="card-header">
+                                <label className="floating-label"> <strong>Title</strong> </label>
+                                <h5 className="card-title">{homework && homework.title}</h5>
 
-                                <div className="form-group col-md-8 ">
-
-                                    <label htmlFor="file" className="col-form-label">
-                                        {filename}
-                                    </label>
-                                    <input className="form-control" type="file" onChange={onChange} name="file" id="file" />
-                                    <input
-                                        type='submit'
-                                        value='Upload'
-                                        className='btn btn-primary mt-4'
-                                    />
+                            </div>
+                            {/*  */}
+                            {/* Dates */}
+                            <div className="ml-4">
+                                <div className=" mb-1 ">
+                                    <strong>Issued</strong>:<Moment format='YYYY/MM/DD' >{homework && homework.set_date}</Moment>
                                 </div>
+                                <div className=" mb-1">
+                                    <strong>Due</strong>: <Moment format='YYYY/MM/DD' >{homework && homework.due_date}</Moment>
+                                </div>
+                                <div className="mb-1">
+                                    <strong>Effort estimate</strong>:  {homework && homework.effort_time}
+                                </div>
+                            </div>
+                            <div className="card-body ">
+                                <label className="floating-label"> <strong>Description</strong> </label>
+                                <p>{homework && homework.description}</p>
+                                <button type="button" className="btn  btn-secondary">View
+            Attachments</button>
+                            </div>
+                            <div className="card-footer">
+                                {message ? <Message msg={message} /> : null}
+                                <Progress percentage={uploadPercentage} />
+                                <form onSubmit={onSubmit} action="upload/:id" method="POST" enctype="multipart/form-data" >
 
-                                {/* displaying the forms */}
-                                {uploadedFile ? (
-                                    <div className='row mt-5'>
-                                        <div className='col-md-6 m-auto'>
-                                            <h3 className='text-center'>{uploadedFile.filename}</h3>
-                                            <img style={{ width: '100%' }} src={uploadedFile.attachements} alt='' />
+                                    <div className="form-group col-md-8 ">
 
-                                        </div>
+                                        <label htmlFor="file" className="col-form-label">
+                                            {filename}
+                                        </label>
+                                        <input className="form-control" type="file" onChange={onChange} name="file" id="file" />
+                                        <input
+                                            type='submit'
+                                            value='Upload'
+                                            className='btn btn-primary mt-4'
+                                        />
                                     </div>
-                                ) : null}
+
+                                    {/* displaying the forms */}
+                                    {uploadedFile ? (
+                                        <div className='row mt-5'>
+                                            <div className='col-md-6 m-auto'>
+                                                <h3 className='text-center'>{uploadedFile.filename}</h3>
+                                                <img style={{ width: '100%' }} src={uploadedFile.attachements} alt='' />
+
+                                            </div>
+                                        </div>
+                                    ) : null}
 
 
-                            </form>
+                                </form>
 
-                        </div>
+                            </div>
 
-                        <div className="col-sm-6 py-3">
-                            <button onClick={() => submitHomework(homework._id, formData, history, removeHomework(homework._id))} type="submit" className="btn btn-success mr-2">Submit Homework</button>
-                            <Link to="/student-dashboard" className="btn btn-secondary">Go back</Link>
+                            <div className="col-sm-6 py-3">
+                                <button onClick={() => submitHomework(homework._id, formData, history, removeHomework(homework._id))} type="submit" className="btn btn-success mr-2">Submit Homework</button>
+                                <Link to="/student-dashboard" className="btn btn-secondary">Go back</Link>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </Fragment>}

@@ -21,39 +21,42 @@ function Feedback({ messages }) {
 
     ))
     return (
-        <div className="row">
-            <div className="col-md-12" id="pending__homework">
-                <div className="card shadow">
-                    <div className="card-header">
-                        <h4 className="text-danger"><span className="badge badge-pill badge-info">Feeback</span>
-                        </h4>
-                    </div>
-                    <div className="card-body">
-                        <div className="row align-items-center m-l-0">
-                            <div className="col-sm-6">
-                            </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12" id="pending__homework">
+                    <div className="card shadow">
+                        <div className="card-header">
+                            <h4 className="text-danger"><span className="badge badge-pill badge-info">Feeback</span>
+                            </h4>
                         </div>
-                        <div className="table-responsive table__height">
-                            <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Teacher's Name</th>
-                                        <th>Subject</th>
-                                        <th>Date</th>
+                        <div className="card-body">
+                            <div className="row align-items-center m-l-0">
+                                <div className="col-sm-6">
+                                </div>
+                            </div>
+                            <div className="table-responsive table__height">
+                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Teacher's Name</th>
+                                            <th>Subject</th>
+                                            <th>Date</th>
 
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {feedback}
-                                </tbody>
-                            </table>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {feedback}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
     )
 }

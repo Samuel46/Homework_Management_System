@@ -27,39 +27,42 @@ View</button>
 
     ))
     return (
-        <div className="row">
-            <div className="col-md-12" id="complete">
-                <div className="card shadow">
-                    <div className="card-header">
-                        <h4 className="text-success"><span className="badge badge-pill badge-success">Complete
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12" id="complete">
+                    <div className="card shadow">
+                        <div className="card-header">
+                            <h4 className="text-success"><span className="badge badge-pill badge-success">Complete
     Homework</span> </h4>
-                    </div>
-                    <div className="card-body">
-                        <div className="row align-items-center m-l-0">
-                            <div className="col-sm-6">
-                            </div>
                         </div>
-                        <div className="table-responsive table__height">
-                            <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Student Name</th>
-                                        <th>Subject</th>
-                                        <th>Start Date</th>
-                                        <th>Due Date</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {completeWork}
-                                </tbody>
-                            </table>
+                        <div className="card-body">
+                            <div className="row align-items-center m-l-0">
+                                <div className="col-sm-6">
+                                </div>
+                            </div>
+                            <div className="table-responsive table__height">
+                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Student Name</th>
+                                            <th>Subject</th>
+                                            <th>Start Date</th>
+                                            <th>Due Date</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {completeWork}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
     )
 }

@@ -40,46 +40,49 @@ View</Link>
 
         <Fragment>
             {loading && homework ? <Spinner /> : <Fragment>
+                <div className="container">
+                    <div className="row">
 
-                <div className="row">
-
-                    <div className="col-md-12" id="pending__homework">
-                        <div className="card shadow">
-                            <div className="card-header">
-                                <h4 className="text-danger"><span className="badge badge-pill badge-danger">Pending Homework</span>
-                                </h4>
-                                <small className="mt-5 ml-3 py-4"><strong>Due date:</strong> 12/20/12</small>
-                            </div>
-                            <div className="card-body">
-                                <div className="row align-items-center m-l-0">
-                                    <div className="col-sm-6">
-                                    </div>
+                        <div className="col-md-12" id="pending__homework">
+                            <div className="card shadow">
+                                <div className="card-header">
+                                    <h4 className="text-danger"><span className="badge badge-pill badge-danger">Pending Homework</span>
+                                    </h4>
+                                    <small className="mt-5 ml-3 py-4"><strong>Due date:</strong> 12/20/12</small>
                                 </div>
-                                <div className="table-responsive">
-                                    <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Teacher's Name</th>
-                                                <th>Subject</th>
-                                                <th>Start Date</th>
-                                                <th>Due Date</th>
-                                                <th>Options</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                <div className="card-body">
+                                    <div className="row align-items-center m-l-0">
+                                        <div className="col-sm-6">
+                                        </div>
+                                    </div>
+                                    <div className="table-responsive">
+                                        <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title</th>
+                                                    <th>Teacher's Name</th>
+                                                    <th>Subject</th>
+                                                    <th>Start Date</th>
+                                                    <th>Due Date</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
 
 
-                                            {studenthomework}
+                                                {studenthomework}
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </Fragment>}
 
 
