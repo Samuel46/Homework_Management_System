@@ -51,7 +51,7 @@ function RegisterTeacher({ registerTeacher, history }) {
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group fill">
-                                        <label className="floating-label" htmlFor="Email">Email/Username</label>
+                                        <label className="floating-label" htmlFor="Email">Email Address</label>
                                         <input onChange={e => onChange(e)} name="email" value={email} type="email" className="form-control" id="Email" placeholder />
                                     </div>
                                 </div>
