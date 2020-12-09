@@ -74,7 +74,7 @@ function LoginStudent({ isAuthenticated, loginStudent, isLogin, token }) {
                         in</a> */}
             </div>
             <div className="text-left">
-                <p className="text-muted py-4">Don’t have an account? <br /> <strong> Don't have an account? <Link to="/register">Sign Up</Link></strong></p>
+                <p className="text-muted py-4">Don’t have an account? <br /> <strong> Join Our Community <Link to="/register">Sign Up</Link></strong></p>
                 <p />
             </div>
         </form>

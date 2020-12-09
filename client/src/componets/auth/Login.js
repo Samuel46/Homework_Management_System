@@ -113,7 +113,7 @@ function Login({ login, isAuthenticated }) {
                         in</a> */}
                       </div>
                       <div className="text-left">
-                        <p className="text-muted py-4">Don’t have an account? <br /> <strong> Don't have an account? <Link to="/register">Sign Up</Link></strong></p>
+                        <p className="text-muted py-4">Don’t have an account? <br /> <strong> Join Our Community <Link to="/register">Sign Up</Link></strong></p>
                         <p />
                       </div>
                     </form>
@@ -126,38 +126,7 @@ function Login({ login, isAuthenticated }) {
         </div>
       </div>
     </div>
-    // <Fragment>
-    //   <h1 className="large text-primary">Sign In</h1>
-    //   <p className="lead">
-    //     <i className="fas fa-user" /> Sign Into Your Account
-    //       </p>
-    //   <form className="form" onSubmit={onSubmit}>
-    //     <div className="form-group">
-    //       <input
-    //         type="email"
-    //         placeholder="Email Address"
-    //         name="email"
-    //         value={email}
-    //         onChange={onChange}
-    //         required
-    //       />
-    //     </div>
-    //     <div className="form-group">
-    //       <input
-    //         type="password"
-    //         placeholder="Password"
-    //         name="password"
-    //         value={password}
-    //         onChange={onChange}
-    //         minLength="6"
-    //       />
-    //     </div>
-    //     <input type="submit" className="btn btn-primary" value="Login" />
-    //   </form>
-    //   <p className="my-1">
-    //     Don't have an account? <Link to="/register">Sign Up</Link>
-    //   </p>
-    // </Fragment>
+
   );
 }
 

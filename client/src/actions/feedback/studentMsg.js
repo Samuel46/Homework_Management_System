@@ -23,7 +23,7 @@ export const getMsg = () => async dispatch => {
             type: GET_MSG,
             payload: res.data
         })
-        dispatch(setAlert('New feedback messages from the homework submission.', 'info'))
+        // dispatch(setAlert('New feedback messages from the homework submission.', 'info'))
 
 
     } catch (err) {
