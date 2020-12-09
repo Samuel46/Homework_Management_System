@@ -2,8 +2,8 @@
 - MERN homework management system
 
 
-## Quick Start ##
- * Install dependencies server/client
+### Quick Start ###
+ #### Install dependencies server/client ####
  * npm install
  * cd client
  * npm install
