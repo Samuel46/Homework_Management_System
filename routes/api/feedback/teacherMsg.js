@@ -28,16 +28,17 @@ router.post(
 
 
             const msg = await Complete.findById(req.params.id).populate("teacher", ["name", "email"]);
-
+            console.log(msg)
             const feedback = new TeacherMsg({
                 title: msg.title,
                 subject: msg.subject,
+                teacher: msg.teacher,
                 teacher: req.teacher.id,
                 text: req.body.text,
                 feedbackId: msg._id,
             });
 
-            console.log(msg._id)
+
             const teacherMsg = await feedback.save();
 
             res.json(teacherMsg);
@@ -58,7 +59,7 @@ router.post(
 router.get('/', authTeacher || authStudent, async (req, res) => {
     try {
 
-        const feedback = await TeacherMsg.find().populate("teacher", ["name", "email"]);
+        const feedback = await TeacherMsg.find({ teacher: req.teacher.id }).populate("teacher", ["name", "email"]);
 
         res.json(feedback)
     } catch (err) {

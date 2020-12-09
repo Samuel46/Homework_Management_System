@@ -101,18 +101,8 @@ function StudentDash({ getHomework, getCompletWork, logoutStudent, getMsg, stude
                                     </div>
                                 </div>
                             </div>
-                            {/* [ breadcrumb ] end */}
-                            {/* [ Main Content ] start */}
-                            {/* <div className="col-md-12 mt-5">
-                                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <strong>Pending Homework </strong>due in 3 day.Make sure you submit eailier
-              <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    </div>
-                                    <div className="alert alert-info alert-dismissible fade show" role="alert">
-                                        <strong> 3 New Feedback</strong> from Mr. Robin .
-              <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    </div>
-                                </div> */}
+
+
 
                             <StudentDashActions />
                             {/* ////////////////////////////////////// */}

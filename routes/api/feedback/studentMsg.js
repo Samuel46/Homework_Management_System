@@ -26,6 +26,7 @@ router.post(
 
             const feedback = new StudentMsg({
                 title: msg.title,
+                teacher: msg.teacher,
                 subject: msg.subject,
                 student: req.student.id,
                 text: req.body.text,
@@ -75,7 +76,7 @@ router.get('/me/:id', authStudent || authTeacher, async (req, res) => {
 router.get('/', authStudent || authTeacher, async (req, res) => {
     try {
 
-        const feedback = await TeacherMsg.find().populate("teacher", ["name", "email"]);
+        const feedback = await StudentMsg.find({ student: req.student.id }).populate("student", ["name", "username"]);
 
         res.json(feedback)
     } catch (err) {
@@ -91,7 +92,7 @@ router.get('/:id', authStudent || authTeacher, async (req, res) => {
 
     try {
 
-        const feedbackById = await TeacherMsg.find({ feedbackId: req.params.id }).populate("teacher", ["name", "email"]);
+        const feedbackById = await StudentMsg.findById(req.params.id)
         if (!feedbackById) {
             return res.status(404).json({ msg: "Feedback not foundsss" });
         }
@@ -108,5 +109,25 @@ router.get('/:id', authStudent || authTeacher, async (req, res) => {
         res.status(500).send('Server Error');
     }
 })
+
+
+// @Route Get      api/feedback/studentMsg
+// @Descri         Get feedback from teacher by ID of the messsage@@ student level
+// @Access         Private
+router.delete("/:id", authStudent, async (req, res) => {
+    try {
+        const deletekById = await TeacherMsg.find({ feedbackId: req.param }).populate("teacher", ["name", "email"]);
+        if (!deletekById) {
+            return res.status(404).json({ msg: "Feedback not found" });
+        }
+        await deletekById.remove();
+        res.json({ msg: "Feedback removed" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
+
 
 module.exports = router;

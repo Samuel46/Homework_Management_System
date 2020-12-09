@@ -17,7 +17,7 @@ export const getMsg = () => async dispatch => {
 
 
     try {
-        const res = await axios.get(`/api/feedback/studentMsg`)
+        const res = await axios.get('/api/feedback/studentMsg')
 
         dispatch({
             type: GET_MSG,

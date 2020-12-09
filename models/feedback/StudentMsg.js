@@ -20,6 +20,10 @@ const StudentMsgSchema = new Schema({
         type: String,
         required: true,
     },
+    teacher: {
+        type: String,
+        require: true,
+    },
 
 
     date: {
