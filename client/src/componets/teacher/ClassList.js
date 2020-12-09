@@ -38,8 +38,8 @@ w
                                 <div className="col-sm-6">
                                 </div>
                                 <div className="col-sm-6 text-right">
-                                    <button className="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#modal-report"><i className="feather icon-plus" /> Add
-                    Class</button>
+                                    <Link to="/manage-classes" className="btn btn-success btn-sm mb-3 btn-round"><i className="feather icon-plus" /> Add
+                    Class</Link>
                                 </div>
                             </div>
                             <div className="table-responsive">

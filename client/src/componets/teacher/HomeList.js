@@ -7,13 +7,13 @@ import { withRouter, Link } from 'react-router-dom'
 
 
 function HomeList({ homeworks, deleteHomework, history }) {
-    let count = 1;
+
     const homeWorkList = homeworks.map(homework => (
         <tr key={homework._d}>
             <td>{homework.title}</td>
             <td>
                 {homework.students.map((student, index) => (
-                    <p key={index}> {count++}. {""} {student}</p>
+                    <p key={index}>{""} {student}</p>
                 ))}
             </td>
             <td>{homework.subject}</td>
@@ -41,11 +41,11 @@ Edit</button>
                                 <div className="col-sm-6">
                                 </div>
                                 <div className="col-sm-6 text-right">
-                                    <button className="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#modal-report"><i className="feather icon-plus" />Add
-            Homework</button>
+                                    <Link to="/create-homework" className="btn btn-success btn-sm mb-3 btn-round"><i className="feather icon-plus" />Add
+            Homework</Link>
                                 </div>
                             </div>
-                            <div className="table-responsive table__hight">
+                            <div className="table-responsive">
                                 <table id="report-table" className="table   table-bordered table-striped mb-0">
                                     <thead>
                                         <tr>

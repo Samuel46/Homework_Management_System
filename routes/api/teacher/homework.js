@@ -123,7 +123,8 @@ router.get('/complete', authTeacher || authStudent, async (req, res) => {
 
     try {
 
-        const homeWork = await Complete.find({ teacher: req.teacher.id }).populate("student", ["name", "username"]);
+
+        const homeWork = await Complete.find().populate("student", ["name", "username"]);
 
 
         res.json(homeWork)
