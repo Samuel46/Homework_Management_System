@@ -6,7 +6,7 @@ import { deleteTeacher } from '../../../actions/teacher'
 
 
 function TeacherList({ teachers, deleteTeacher, history }) {
-    let count = 1
+
     const teacherList = teachers.map(teacher => (
 
         <tr key={teacher._id}>
@@ -15,11 +15,11 @@ function TeacherList({ teachers, deleteTeacher, history }) {
             <td>{teacher.email}</td>
             <td>{teacher.allocate_classes.map((allocate_class, index) => (
 
-                <p key={index} > {count++}. {''}{allocate_class}</p>
+                <p key={index} >{''}{allocate_class}</p>
             ))}</td>
             <td>
-                <button className="btn btn-info btn-sm  btn-round" data-toggle="modal" data-target="#edit_teacher"><i className="feather icon-settings" />
-Edit</button>
+                {/* <button className="btn btn-info btn-sm  btn-round" data-toggle="modal" data-target="#edit_teacher"><i className="feather icon-settings" />
+Edit</button> */}
                 <button onClick={() => deleteTeacher(teacher._id, history)} className="btn btn-danger btn-sm ml-2">Remove Teacher</button>
             </td>
         </tr>
@@ -39,8 +39,8 @@ Edit</button>
                                 <div className="col-sm-6">
                                 </div>
                                 <div className="col-sm-6 text-right">
-                                    <button className="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#modal-report"><i className="feather icon-plus" /> Add
-                    Teacher</button>
+                                    <Link to="/create-teacher" className="btn btn-success btn-sm mb-3 btn-round" ><i className="feather icon-plus" /> Add
+                    Teacher</Link>
                                 </div>
                             </div>
                             <div className="table-responsive">

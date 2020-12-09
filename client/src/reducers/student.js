@@ -52,7 +52,7 @@ export default function (state = intialState, action) {
 
 
         case GET_STUDENTS:
-        case DELETE_STUDENT:
+
             return {
                 ...state,
                 students: payload,
@@ -68,6 +68,7 @@ export default function (state = intialState, action) {
         case AUTH_STUDENT_ERROR:
         case LOGIN_STUDENT_FAIL:
         case LOGOUT_STUDENT:
+        case DELETE_STUDENT:
 
             localStorage.removeItem('token')
             return {

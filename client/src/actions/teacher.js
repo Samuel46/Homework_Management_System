@@ -54,10 +54,10 @@ export const registerTeacher = (formData, history) => async dispatch => {
             type: REGISTER_TEACHER,
             payload: res.data
         })
-        dispatch(loadTeacher())
+        dispatch(logoutTeacher())
         dispatch(setAlert('Teacher registered', 'success'))
         history.push('./dashboard')
-
+        dispatch(loadTeacher())
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -124,7 +124,7 @@ export const getTeachers = () => async dispatch => {
 
 
 // Delete Teacher
-export const deleteTeacher = id => async dispatch => {
+export const deleteTeacher = (id, history) => async dispatch => {
     try {
         const res = await axios.delete(`/api/admin/teacher/${id}`)
 
@@ -134,6 +134,8 @@ export const deleteTeacher = id => async dispatch => {
         })
 
         dispatch(setAlert('Teacher deleted', 'success'))
+        history.push('/create-subject')
+        history.push('/dashboard')
 
     } catch (err) {
         dispatch({

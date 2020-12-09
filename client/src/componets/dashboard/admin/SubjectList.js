@@ -9,16 +9,16 @@ import { Link, withRouter } from 'react-router-dom'
 
 function SubjectList({ subjects, deleteSubject, history }) {
 
-    let count = 1
+
     const allSubjects = subjects.map(subject => (
         <tr key={subject._id}>
             <td>{subject.subject_name}</td>
             <td>{subject.add_classes.map((add_class, index) => (
-                <p key={index}> {count++}.{""} {add_class}</p>
+                <p key={index}>{""} {add_class}</p>
             ))}</td>
             <td>{subject.assign_teachers}</td>
             <td>
-                <Link to='edit-subject' className="btn btn-info btn-sm mr-2">Edit</Link>
+                {/* <Link to='edit-subject' className="btn btn-info btn-sm mr-2">Edit</Link> */}
                 <button onClick={() => deleteSubject(subject._id, history)} className="btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>

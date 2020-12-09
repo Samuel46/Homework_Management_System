@@ -57,6 +57,7 @@ export const registerStudent = (formData, history) => async dispatch => {
             type: REGISTER_STUDENT,
             payload: res.data
         })
+        dispatch(logoutStudent())
         dispatch(setAlert('Student registered', 'success'))
         history.push('./dashboard')
 
@@ -124,7 +125,7 @@ export const getStudents = () => async dispatch => {
 // Delete Students
 export const deleteStudent = (id, history) => async dispatch => {
     try {
-        const res = await axios.delete(`/api/admin/students/student${id}`)
+        const res = await axios.delete(`/api/admin/students/student/${id}`)
 
         dispatch({
             type: DELETE_STUDENT,

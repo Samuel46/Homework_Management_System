@@ -17,7 +17,6 @@ const Student = require('../../../../models/admin/students/Student')
 router.post('/', [auth, [
     check('name', 'Name is required').not().isEmpty(),
     check('username', 'Username is required').not().isEmpty(),
-    check('email', 'Email is required').isEmail(),
     check('gender', 'gender is required').not().isEmpty(),
     check('birth_date', 'Birth date data is required').not().isEmpty(),
     check('code', 'Unique code is required').isLength({ min: 4 }),

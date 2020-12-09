@@ -11,7 +11,7 @@ function RegisterStudent({ registerStudent, history }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-
+        username: '',
         code: '',
         birth_date: '',
         gender: '',
@@ -24,6 +24,7 @@ function RegisterStudent({ registerStudent, history }) {
     const {
         name,
         email,
+        username,
         code,
         birth_date,
         gender,
@@ -63,8 +64,15 @@ function RegisterStudent({ registerStudent, history }) {
 
                                 <div className="col-sm-6">
                                     <div className="form-group fill">
-                                        <label className="floating-label" htmlFor="Email">Email/Username</label>
+                                        <label className="floating-label" htmlFor="Email">Email <small>Optional</small> </label>
+
                                         <input onChange={e => onChange(e)} name="email" value={email} type="email" className="form-control" id="Email" placeholder />
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="form-group fill">
+                                        <label className="floating-label" htmlFor="Email">Username</label>
+                                        <input onChange={e => onChange(e)} name="username" value={username} type="username" className="form-control" placeholder />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
@@ -94,7 +102,7 @@ function RegisterStudent({ registerStudent, history }) {
                                 </div>
                                 <div className="col-sm-2">
                                     <div className="form-group fill">
-                                        <label className="floating-label" >Code</label>
+                                        <label className="floating-label" >Student Code</label>
                                         <input onChange={e => onChange(e)} value={code} name="code" type="password" className="form-control" id="Birth" />
                                     </div>
                                 </div>

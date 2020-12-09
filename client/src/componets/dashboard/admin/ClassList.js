@@ -7,18 +7,18 @@ import { deleteClass } from '../../../actions/classRoom'
 
 
 function ClassList({ classes, deleteClass, history }) {
-    let count = 1
+
     const allClasses = classes.map(clas => (
         <tr key={clas._id}>
 
             <td>{clas.name}</td>
             <td>{clas.add_students.map((add_student, index) => (
-                <p key={index}> {count++}. {""} {add_student}</p>
+                <p key={index}>{""} {add_student}</p>
             ))} <br />
             </td>
             <td>{clas.assign_teachers}</td>
             <td>
-                <Link to="/edit-class" className="btn btn-info btn-sm mr-2">Edit</Link>
+                {/* <Link to="/edit-class" className="btn btn-info btn-sm mr-2">Edit</Link> */}
                 <button onClick={(e) => deleteClass(clas._id, history)} className="btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>

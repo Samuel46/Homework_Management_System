@@ -18,7 +18,7 @@ function StudentList({ students, deleteStudent, history }) {
             <td> <Moment format='YYYY/MM/DD' >{student.joining_date}</Moment></td>
             <td> <Moment format='YYYY' >{student.current_year_group}</Moment></td>
             <td>
-                <a href="#!" className="btn btn-info btn-sm mr-2">Edit</a>
+                {/* <a href="#!" className="btn btn-info btn-sm mr-2">Edit</a> */}
                 <button onClick={() => deleteStudent(student._id, history)} className="btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>
@@ -40,8 +40,8 @@ function StudentList({ students, deleteStudent, history }) {
                                 <div className="col-sm-6">
                                 </div>
                                 <div className="col-sm-6 text-right">
-                                    <button className="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#modal-report"><i className="feather icon-plus" /> Add
-                    Student</button>
+                                    <Link to="/create-student" className="btn btn-success btn-sm mb-3 btn-round"><i className="feather icon-plus" /> Add
+                    Student</Link>
                                 </div>
                             </div>
                             <div className="table-responsive">

@@ -4,6 +4,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom'
 import { connect } from "react-redux";
 import { deleteAccount, getCurrentProfile } from "../../actions/profile";
 import { useEffect } from "react";
+
 import Spinner from "../layouts/Spinner";
 import { logout } from '../../actions/auth'
 import Navigation from './Navigation'
@@ -104,10 +105,10 @@ function Dashboard({
                     </div>
                     <Link href="#!" className="dropdown-item">
                       <i data-feather="settings" />
-                      <span>Settings</span>
+                      <span>Account</span>
                     </Link>
-                    <Link href="#!" className="dropdown-item">
-                      <i data-feather="power" />
+                    <Link onClick={() => logout()} className="pc-head-link mr-0" to='#!'>
+                      <i className="fas fa-sign-out-alt"></i>{''}
                       <span>Logout</span>
                     </Link>
                   </div>
