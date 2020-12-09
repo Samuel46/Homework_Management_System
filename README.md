@@ -1,12 +1,12 @@
 # Homework__APP
-MERN homework management system
+- MERN homework management system
 
 
-## Quick Start
- *Install dependencies server/client
- *npm install
- *cd client
- *npm install
+## Quick Start ##
+ * Install dependencies server/client
+ * npm install
+ * cd client
+ * npm install
 
-Serve on localhost:3000
- -npm run dev
+### Serve on localhost:3000 ###
+ * npm run dev
