@@ -10,9 +10,7 @@ function CompleteWork({ isComplete }) {
         <tr key={complete._id}>
             <td>{complete.title}</td>
             <td>
-                {complete.students.map((student, index) => (
-                    <p key={index}>  {""} {student}</p>
-                ))}
+                {Object.values(complete.student.name)}
             </td>
             <td>{complete.subject}</td>
             <td><Moment format='YYYY/MM/DD' >{complete.set_date}</Moment></td>
@@ -46,8 +44,8 @@ Feedback</Link>
                                 </div>
 
                             </div>
-                            <div className="table-responsive table__height">
-                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                            <div className="table-responsive">
+                                <table id="report-table" className="table   table-bordered table-striped mb-0">
                                     <thead>
                                         <tr>
                                             <th>Title</th>

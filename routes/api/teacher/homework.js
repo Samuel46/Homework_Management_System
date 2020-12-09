@@ -117,13 +117,13 @@ router.delete("/:id", authTeacher, async (req, res) => {
 
 
 // @Route Get      api/teacher/homework
-// @Descri         Get all complete homework @@@ teacher level
+// @Descri         Get all complete homework from the student @@@ teacher level
 // @Access         Private
 router.get('/complete', authTeacher || authStudent, async (req, res) => {
 
     try {
 
-        const homeWork = await Complete.find().populate("teacher", ["name", "email"]);
+        const homeWork = await Complete.find({ teacher: req.teacher.id }).populate("student", ["name", "username"]);
 
 
         res.json(homeWork)

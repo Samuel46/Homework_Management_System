@@ -8,7 +8,7 @@ function CompleteWork({ completework, student: { student } }) {
         <tr key={work._id}>
             <td>{work.title}</td>
             <td>
-                {student && student.name}
+                {Object.values(work.student.name)}
             </td>
             <td>{work.subject}</td>
             <td><Moment format='YYYY/MM/DD' >{work.set_date}</Moment> </td>
@@ -40,8 +40,8 @@ View</button>
                                 <div className="col-sm-6">
                                 </div>
                             </div>
-                            <div className="table-responsive table__height">
-                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                            <div className="table-responsive ">
+                                <table id="report-table" className="table   table-bordered table-striped mb-0">
                                     <thead>
                                         <tr>
                                             <th>Title</th>

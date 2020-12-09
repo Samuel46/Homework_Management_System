@@ -95,7 +95,7 @@ function StudentDash({ getHomework, getCompletWork, logoutStudent, getMsg, stude
                                                 <h5 className="m-b-10">Student</h5>
                                             </div>
                                             <ul className="breadcrumb">
-                                                <li className="breadcrumb-item">Homework</li>
+                                                <li className="breadcrumb-item">{student && student.name}</li>
                                             </ul>
                                         </div>
                                     </div>

@@ -34,8 +34,8 @@ function Feedback({ messages }) {
                                 <div className="col-sm-6">
                                 </div>
                             </div>
-                            <div className="table-responsive table__height">
-                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                            <div className="table-responsive">
+                                <table id="report-table" className="table  table-bordered table-striped mb-0">
                                     <thead>
                                         <tr>
                                             <th>Title</th>

@@ -131,7 +131,7 @@ function Dashboard({
                       <h5 className="m-b-10">Dashboard</h5>
                     </div>
                     <ul className="breadcrumb">
-                      <li className="breadcrumb-item">Dashboard</li>
+                      <li className="breadcrumb-item">{user && user.name}</li>
                     </ul>
                   </div>
                 </div>

@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
 const CompleteSchema = new mongoose.Schema({
-    teacher: {
+    student: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "teacher",
+        ref: "student",
     },
     title: {
+        type: String,
+        require: true,
+    },
+    teacher: {
         type: String,
         require: true,
     },

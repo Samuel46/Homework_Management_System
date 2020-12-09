@@ -46,7 +46,7 @@ Edit</button>
                                 </div>
                             </div>
                             <div className="table-responsive table__hight">
-                                <table id="report-table" className="table  table__height table-bordered table-striped mb-0">
+                                <table id="report-table" className="table   table-bordered table-striped mb-0">
                                     <thead>
                                         <tr>
                                             <th>Title</th>

@@ -34,11 +34,14 @@ router.post(
     async (req, res) => {
         const id = req.params.id
 
+
         try {
             const work = await Homework.findById(id)
+
             // complete homewok by the student
             const completeWork = new Complete({
                 title: work.title,
+                teacher: work.teacher,
                 subject: work.subject,
                 effort_time: work.effort_time,
                 allocate_classes: work.allocate_classes,
@@ -47,6 +50,7 @@ router.post(
                 set_date: work.set_date,
                 due_date: work.due_date,
                 attachements: req.file.path,
+                student: req.student.id,
                 filename: req.file.originalname
             });
 
@@ -70,8 +74,7 @@ router.get('/', authStudent || authTeacher, async (req, res) => {
 
     try {
 
-        const homeWork = await Complete.find().populate("teacher", ["name", "email"]);
-
+        const homeWork = await Complete.find({ student: req.student.id }).populate("student", ["name", "username"])
 
         res.json(homeWork)
     } catch (err) {
