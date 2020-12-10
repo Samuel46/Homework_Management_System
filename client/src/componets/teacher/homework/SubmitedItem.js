@@ -26,6 +26,7 @@ function SubmitedItem({ getDoneWorkById, homework: {
 
                             <h6 className="text-success"><span className="badge badge-pill badge-success">Complete
     Homework</span> </h6>
+
                         </div>
                         {/*  */}
                         <div className="card-header">

@@ -70,7 +70,7 @@ export const deleteSubject = (id, history) => async dispatch => {
             payload: res.data
         })
 
-        dispatch(setAlert('Subject deleted', 'success'))
+        dispatch(setAlert('Subject deleted', 'danger'))
         history.push('/create-subject')
         history.push('/dashboard')
     } catch (err) {
@@ -100,7 +100,7 @@ export const updateSubject = (formData, history) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(setAlert('Subject Edited', 'success'))
+        dispatch(setAlert('Subject Edited', 'info'))
 
         history.push('/dashboard')
 

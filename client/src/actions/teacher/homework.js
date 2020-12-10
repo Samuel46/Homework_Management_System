@@ -6,7 +6,8 @@ import {
     GET_HOMEWORK,
     DELETE_HOMEWORK,
     GET_SUBMITED_HOMEWORK,
-    GET_SUBMITED_HOMEWORK_ID
+    GET_SUBMITED_HOMEWORK_ID,
+    DELETE_SUBMITED_HOMEWORK_ID
 
 
 } from '../types'
@@ -109,6 +110,26 @@ export const getDoneWorkById = (id) => async dispatch => {
             type: GET_SUBMITED_HOMEWORK_ID,
             payload: res.data
         })
+    } catch (err) {
+        dispatch({
+            type: HOMEWORK_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Delete complete homework by ID @@teacher level
+export const deleteDoneWorkById = (id, history) => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/teacher/homework/complete/${id}`)
+
+        dispatch({
+            type: DELETE_SUBMITED_HOMEWORK_ID,
+            payload: res.data
+        })
+        dispatch(setAlert('Submited homework deleted', 'danger'))
+        history.push('/teacher-dashboard')
+        history.push('/manage-homework')
     } catch (err) {
         dispatch({
             type: HOMEWORK_ERROR,

@@ -68,7 +68,7 @@ export const deleteClass = (id, history) => async dispatch => {
             payload: res.data
         })
 
-        dispatch(setAlert('Class deleted', 'success'))
+        dispatch(setAlert('Class deleted', 'danger'))
         history.push('./create-class')
         history.push('./dashboard')
     } catch (err) {

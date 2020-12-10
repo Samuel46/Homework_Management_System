@@ -132,7 +132,7 @@ export const deleteStudent = (id, history) => async dispatch => {
             payload: res.data
         })
 
-        dispatch(setAlert('Student deleted', 'success'))
+        dispatch(setAlert('Student deleted', 'danger'))
         history.push('/create-subject')
         history.push('/dashboard')
     } catch (err) {

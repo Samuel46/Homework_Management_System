@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Moment from 'react-moment'
+import { deleteDoneWorkById } from '../../../actions/teacher/homework'
 
 // @@TO-DO Convert this HTML to JXS
 
-function CompleteWork({ isComplete }) {
+function CompleteWork({ isComplete, deleteDoneWorkById, history }) {
     const completeWork = isComplete.map(complete => (
         <tr key={complete._id}>
             <td>{complete.title}</td>
@@ -23,8 +25,10 @@ function CompleteWork({ isComplete }) {
                 </div>
                 <Link to={`/sumited-work/${complete._id}`} className="btn btn-info btn-sm  btn-round mr-2"><i className="fas fa-eye" />
 View</Link>
-                <Link to={`/feedback/${complete._id}`} className="btn  btn-success btn-sm" > <i className="fas fa-comments" /> Give
+                <Link to={`/feedback/${complete._id}`} className="btn  btn-success btn-sm mr-2" > <i className="fas fa-comments" /> Give
 Feedback</Link>
+                <button onClick={() => deleteDoneWorkById(complete._id, history)} className="btn  btn-danger btn-sm" > <i class="far fa-trash-alt text-danger"></i> Delete
+Homework</button>
             </td>
         </tr>
 
@@ -73,4 +77,8 @@ Feedback</Link>
     )
 }
 
-export default CompleteWork
+CompleteWork.propTypes = {
+    deleteDoneWorkById: PropTypes.func.isRequired,
+}
+
+export default connect(null, { deleteDoneWorkById })(withRouter(CompleteWork))

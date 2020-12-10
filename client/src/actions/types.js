@@ -52,11 +52,13 @@ export const GET_HOMEWORK = 'GET_HOMEWORK';
 // get homework by :ID 
 export const GET_HOMEWORK_ID = 'GET_HOMEWORK_ID';
 
+
 // get submited homework @@Teacher level
 export const GET_SUBMITED_HOMEWORK = 'GET_SUBMITED_HOMEWORK'
 // get submited homework by ID @@ Teacher level
 export const GET_SUBMITED_HOMEWORK_ID = 'GET_SUBMITED_HOMEWORK_ID'
-
+// delete submited work
+export const DELETE_SUBMITED_HOMEWORK_ID = 'DELETE_SUBMITED_HOMEWORK_ID'
 // get homework @@ student level
 export const GET_STUDENT_HOMEWORK = 'GET_STUDENT_HOMEWORK';
 

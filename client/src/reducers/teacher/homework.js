@@ -1,4 +1,4 @@
-import { ADD_HOMEWORK, HOMEWORK_ERROR, GET_HOMEWORK, DELETE_HOMEWORK, GET_PENDING_HOMEWORK, GET_SUBMITED_HOMEWORK, GET_SUBMITED_HOMEWORK_ID } from "../../actions/types"
+import { ADD_HOMEWORK, HOMEWORK_ERROR, GET_HOMEWORK, DELETE_HOMEWORK, GET_PENDING_HOMEWORK, GET_SUBMITED_HOMEWORK, GET_SUBMITED_HOMEWORK_ID, DELETE_SUBMITED_HOMEWORK_ID } from "../../actions/types"
 
 const intialState = {
 
@@ -57,6 +57,14 @@ export default function (state = intialState, action) {
                 homeworks: payload,
                 loading: false,
                 isComplete: false
+            }
+
+        // delete submited homework
+        case DELETE_SUBMITED_HOMEWORK_ID:
+            return {
+                ...state,
+                complete: payload,
+                loading: false,
             }
 
 
