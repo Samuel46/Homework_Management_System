@@ -11,7 +11,7 @@ import {
 
 
 
-// Get the sent message from teacher with ID@@student Level
+// Get all the sent message from teacher.
 
 export const getMsg = () => async dispatch => {
 
@@ -39,7 +39,7 @@ export const getMsg = () => async dispatch => {
 export const getMsgById = (id) => async dispatch => {
 
     try {
-        const res = await axios.get(`/api/feedback/studentMsg/${id}`)
+        const res = await axios.get(`/api/feedback/studentMsg/Msg/${id}`)
 
         dispatch({
             type: GET_MSG_ID,

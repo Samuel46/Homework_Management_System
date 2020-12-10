@@ -32,7 +32,7 @@ router.post(
             const feedback = new TeacherMsg({
                 title: msg.title,
                 subject: msg.subject,
-                teacher: msg.teacher,
+                student: msg.student,
                 teacher: req.teacher.id,
                 text: req.body.text,
                 feedbackId: msg._id,

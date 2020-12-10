@@ -71,12 +71,12 @@ router.get('/me/:id', authStudent || authTeacher, async (req, res) => {
 
 
 // @Route Get   api/feedback/studentMsg
-// @Descri      Get all feedback@@@ Student level
+// @Descri      Get all feedback from the teachersk@@@ Student level
 // @Access      Private
 router.get('/', authStudent || authTeacher, async (req, res) => {
     try {
 
-        const feedback = await StudentMsg.find({ student: req.student.id }).populate("student", ["name", "username"]);
+        const feedback = await TeacherMsg.find({ student: req.student.id }).populate("student", ["name", "username"]);
 
         res.json(feedback)
     } catch (err) {
@@ -88,11 +88,11 @@ router.get('/', authStudent || authTeacher, async (req, res) => {
 // @Route Get      api/feedback/studentMsg
 // @Descri         Get feedback from teacher by ID of the messsage@@ student level
 // @Access         Private
-router.get('/:id', authStudent || authTeacher, async (req, res) => {
+router.get('/Msg/:id', authStudent || authTeacher, async (req, res) => {
 
     try {
 
-        const feedbackById = await StudentMsg.findById(req.params.id)
+        const feedbackById = await TeacherMsg.find({ feedbackId: req.params.id }).populate("teacher", ["name", "email"]);
         if (!feedbackById) {
             return res.status(404).json({ msg: "Feedback not foundsss" });
         }
@@ -116,7 +116,7 @@ router.get('/:id', authStudent || authTeacher, async (req, res) => {
 // @Access         Private
 router.delete("/:id", authStudent, async (req, res) => {
     try {
-        const deletekById = await TeacherMsg.find({ feedbackId: req.param }).populate("teacher", ["name", "email"]);
+        const deletekById = await TeacherMsg.find({ feedbackId: req.params.id }).populate("teacher", ["name", "email"]);
         if (!deletekById) {
             return res.status(404).json({ msg: "Feedback not found" });
         }

@@ -3,8 +3,12 @@ const Schema = mongoose.Schema;
 
 const TeacherMsgSchema = new Schema({
     teacher: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "teacher",
+    },
+    student: {
+        type: Schema.Types.ObjectId,
+        ref: "student",
     },
     title: {
         type: String,
@@ -27,7 +31,7 @@ const TeacherMsgSchema = new Schema({
         default: Date.now,
     },
     feedbackId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "homework",
     }
 

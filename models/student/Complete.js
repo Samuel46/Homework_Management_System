@@ -10,8 +10,8 @@ const CompleteSchema = new mongoose.Schema({
         require: true,
     },
     teacher: {
-        type: String,
-        require: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "teacher",
     },
     subject: {
         type: String,
