@@ -21,7 +21,7 @@ function EditClass({ classRoom: { classes, loading }, updateClassRoom, getClasse
             add_student: loading || !classes.add_student ? [] : classes.add_student,
             assign_teacher: loading || !classes.assign_teacher ? [] : classes.assign_teacher,
         })
-    }, [getClasses, loading])
+    }, [getClasses, loading, classes.add_student, classes.assign_teacher, classes.name])
 
     const {
         name,

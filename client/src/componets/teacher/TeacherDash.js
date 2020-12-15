@@ -5,7 +5,7 @@ import TeacherBody from './TeacherBody'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Spinner from '../layouts/Spinner'
-import homework from '../../reducers/teacher/homework'
+
 import setTeacherToken from '../../utils/setTeacherToken'
 import { loadTeacher } from '../../actions/teacher'
 

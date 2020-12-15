@@ -10,8 +10,8 @@ import student from './student'
 import classRoom from './classRoom'
 import subject from './subject'
 import auth from './auth'
-import profile from './profile'
-import post from './post'
+
+
 
 
 export default combineReducers({
@@ -26,8 +26,7 @@ export default combineReducers({
     classRoom,
     subject,
     homework,
-    profile,
-    post,
+
 
 
 

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import Moment from 'react-moment'
+import Spinner from '../../layouts/Spinner'
 
-function StudentRes({ studentMsg }) {
+function StudentRes({ studentMsg, loading }) {
     const studentRes = studentMsg.map(msg => (
         <div className="row m-b-20 send-chat" key={msg._id}>
             <div className="col">
@@ -18,7 +19,10 @@ function StudentRes({ studentMsg }) {
     ))
     return (
         <div className="container">
-            {studentRes}
+            {loading && studentMsg === null ? <Spinner /> : <Fragment>
+                {studentRes}
+            </Fragment>}
+
         </div>
     )
 }

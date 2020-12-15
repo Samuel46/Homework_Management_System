@@ -40,7 +40,7 @@ function Feedback({ sendFeedback, getFeedback, getMsgId, history, teacherMsg: {
                         <TeacherChat msg={msg} loading={loading} />
                         {/*  */}
                         {/* Student chat */}
-                        <StudentRes studentMsg={studentMsg} />
+                        <StudentRes studentMsg={studentMsg} loading={loading} />
 
 
                         <div className="right-icon-control m-t-15">

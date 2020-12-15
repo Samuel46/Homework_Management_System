@@ -23,8 +23,7 @@ import PrivateRoute from './componets/routing/PrivateRoute';
 import AuthTeacherRoute from './componets/routing/AuthTeacherRoute';
 
 
-import Profiles from './componets/profiles/Profiles'
-import Profile from './componets/profile/Profile'
+
 
 import CreateClass from './componets/dashboard/admin/CreateClass';
 import CreateSubject from './componets/dashboard/admin/CreateSubject';
@@ -92,8 +91,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
 
 
-            <Route exact path="/profiles" component={Profiles} />
-            <Route exact path="/profile/:id" component={Profile} />
+
 
 
             {/* Admin routes */}

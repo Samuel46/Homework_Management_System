@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Moment from 'react-moment'
 import { getFeedback } from '../../../actions/feedback/teacherMsg'
-function TeacherChat({ msg, loading, getFeedback, teacher: { teacher } }) {
+function TeacherChat({ msg, loading, getFeedback }) {
 
     useEffect(() => {
         getFeedback()
@@ -27,8 +27,8 @@ function TeacherChat({ msg, loading, getFeedback, teacher: { teacher } }) {
     ))
     return (
 
-        <Fragment>
-            {loading ? <Spinner /> :
+        <Fragment className="container">
+            {loading && messages === null ? <Spinner /> :
                 <Fragment>
                     {messages}
 
@@ -42,14 +42,12 @@ function TeacherChat({ msg, loading, getFeedback, teacher: { teacher } }) {
 
 TeacherChat.propTypes = {
 
-    teacher: PropTypes.object.isRequired,
+
     getFeedback: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-    teacher: state.teacher
-})
 
 
 
-export default connect(mapStateToProps, { getFeedback })(TeacherChat)
+
+export default connect(null, { getFeedback })(TeacherChat)

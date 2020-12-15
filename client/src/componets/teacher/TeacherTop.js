@@ -29,13 +29,13 @@ function TeacherTop({
                                 </Link>
                             </li>
                             <li className="dropdown pc-h-item">
-                                <a className="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    {/* <img src="../assets/images/user/avatar-1.jpg" alt="user-image" className="user-avtar" /> */}
+                                <Link className="pc-head-link dropdown-toggle arrow-none mr-0" to="#" role="button">
+
                                     <span>
                                         <span className="user-name">{teacher && teacher.name}</span>
                                         <span className="user-desc">Teacher</span>
                                     </span>
-                                </a>
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-right pc-h-dropdown">
                                     <div className=" dropdown-header">
                                         <h6 className="text-overflow m-0">Welcome {teacher && teacher.name}</h6>

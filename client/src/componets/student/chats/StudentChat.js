@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Moment from 'react-moment'
+import Spinner from '../../layouts/Spinner'
 
 function StudentChat({ myMsg, loading }) {
     const message = myMsg.map(msg => (
@@ -18,8 +19,10 @@ function StudentChat({ myMsg, loading }) {
     ))
     return (
         <Fragment>
-        
-            {message}
+            {loading && message === null ? <Spinner /> : <Fragment>
+                {message}
+            </Fragment>}
+
         </Fragment>
     )
 }

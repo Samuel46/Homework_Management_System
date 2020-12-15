@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from "react-redux";
-import { deleteAccount, getCurrentProfile } from "../../actions/profile";
+
 import { useEffect } from "react";
 
 import Spinner from "../layouts/Spinner";
@@ -24,24 +24,21 @@ import StudentList from "./admin/StudentList";
 
 
 
+
 function Dashboard({
-  getCurrentProfile,
+
   getClasses,
   getSubject,
   getTeachers,
   getStudents,
-  auth: { user, token },
-  teacher: { teachers },
+  auth: { user },
+  teacher: { teachers, loading },
   student: { students },
   classRoom: { classes },
   subject: { subjects },
-  profile: { profile, loading },
 
-  deleteAccount, logout, history
+
 }) {
-  useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
 
   useEffect(() => {
     getTeachers();
@@ -60,7 +57,7 @@ function Dashboard({
 
 
 
-  return loading && profile === null ? (
+  return loading && teachers === null && students === null && classes === null && subjects === null ? (
     <Spinner />
   ) : (
 
@@ -191,7 +188,7 @@ function Dashboard({
     );
 }
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+
   auth: PropTypes.object.isRequired,
   teacher: PropTypes.object.isRequired,
   student: PropTypes.object.isRequired,
@@ -201,9 +198,8 @@ Dashboard.propTypes = {
   getSubject: PropTypes.func.isRequired,
   classRoom: PropTypes.object.isRequired,
   subject: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
 
-  deleteAccount: PropTypes.func.isRequired,
+
   logout: PropTypes.func.isRequired,
 };
 
@@ -213,6 +209,6 @@ const mapStateToProps = (state) => ({
   student: state.student,
   classRoom: state.classRoom,
   subject: state.subject,
-  profile: state.profile,
+
 });
-export default connect(mapStateToProps, { getCurrentProfile, getClasses, getSubject, getStudents, getTeachers, deleteAccount, logout })(withRouter(Dashboard));
+export default connect(mapStateToProps, { getClasses, getSubject, getStudents, getTeachers, logout })(withRouter(Dashboard));

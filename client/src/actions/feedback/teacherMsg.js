@@ -72,7 +72,7 @@ export const getMsgId = (id) => async dispatch => {
             type: GET_MSG_ID,
             payload: res.data
         })
-        dispatch(setAlert('New feedback message', 'success'))
+        // dispatch(setAlert('New feedback message', 'success'))
 
 
     } catch (err) {

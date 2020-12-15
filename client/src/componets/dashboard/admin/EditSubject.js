@@ -22,7 +22,7 @@ function EditSubject({ subject: { subjects, loading }, updateSubject, getSubject
             add_class: loading || !subjects.add_class ? [] : subjects.add_class,
             assign_teacher: loading || !subjects.assign_teacher ? [] : subjects.assign_teacher,
         })
-    }, [getSubject, loading])
+    }, [getSubject, loading, subjects.add_class, subjects.assign_teacher, subjects.subject_name])
 
     const {
         subject_name,

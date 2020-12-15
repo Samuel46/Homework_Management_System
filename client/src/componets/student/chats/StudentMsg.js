@@ -31,7 +31,7 @@ function StudentMsg({ getMsgById, getMyMsg, sendMsg, studentMsg: { message, myMs
             <div className="card chat-card bg-secondary">
                 <form onSubmit={e => onSubmit(e)} className="card-body">
 
-                    <Message message={message} />
+                    <Message message={message} loading={loading} />
                     {/* Student__chat */}
                     <StudentChat myMsg={myMsg} loading={loading} />
                     {/*  */}
