@@ -16,6 +16,7 @@ import {
 
 } from '../actions/types'
 import setStudentToken from '../utils/setStudentToken'
+import { logoutParent } from './student/parents/parent'
 
 
 // Load Student
@@ -33,6 +34,7 @@ export const loadStudent = () => async dispatch => {
         })
     } catch (err) {
         dispatch({
+
             type: AUTH_STUDENT_ERROR
         })
     }
@@ -92,9 +94,8 @@ export const loginStudent = (username, code
             payload: res.data
         })
 
-
-
         dispatch(loadStudent())
+
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
@@ -151,6 +152,7 @@ export const logoutStudent = () => dispatch => {
         type: LOGOUT_STUDENT
 
     })
+    dispatch(logoutParent())
 
 
 }

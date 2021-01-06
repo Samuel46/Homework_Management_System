@@ -26,10 +26,7 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
             <td><Moment format='YYYY/MM/DD' >{homework.due_date}</Moment></td>
             <td>
                 {/*  */}
-                <div className="custom-control custom-checkbox mb-2">
-                    <input type="checkbox" className="custom-control-input input-success" id="customCheckc1" />
-                    <label className="custom-control-label" htmlFor="customCheckc1" />
-                </div>
+
                 <Link to={`/work/${homework._id}`} className="btn btn-danger btn-sm  btn-round"><i className="fas fa-eye" />
 View</Link>
                 <span className="badge badge-pill badge-danger ml-2 mr-2">Pending</span>

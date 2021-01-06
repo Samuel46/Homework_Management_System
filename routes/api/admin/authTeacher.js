@@ -11,8 +11,8 @@ const Teacher = require('../../../models/admin/Teacher')
 
 
 // @Route Get   api/admin/teacher
-// @Descri         Get autheticated teacher using a token
-// @Access         Private
+// @Descri      Get autheticated teacher using a token
+// @Access      Private
 router.get('/', auth, async (req, res) => {
     try {
         const teacher = await Teacher.findById(req.teacher.id).select('-password')

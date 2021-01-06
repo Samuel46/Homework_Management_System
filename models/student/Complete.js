@@ -13,6 +13,10 @@ const CompleteSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "teacher",
     },
+    parent: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "parent",
+    },
     subject: {
         type: String,
         required: true,

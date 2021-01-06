@@ -73,6 +73,24 @@ export const REMOVE_HOMEWORK = 'REMOVE_HOMEWORK';
 // Get complete homework@@student
 export const GET_COMPLETE_HOMEWORK = 'GET_COMPLETE_HOMEWORK'
 
+// parent reducers
+// @@register parent
+export const REGISTER_PARENT = 'REGISTER_PARENT'
+export const PARENT_FAIL = 'PARENT_FAIL'
+// @@get register parents using student ID
+export const GET_PARENTS = 'GET_PARENTS'
+export const GET_PARENTS_FAIL = 'GET_PARENTS_FAIL'
+
+// @@ Delete and load parent
+export const DELETE_PARENT = 'DELETE_PARENT'
+export const DELETE_PARENT_FAIL = 'DELETE_PARENT_FAIL'
+export const PARENT_LOADED = 'PARENT_LOADED'
+// @@Login parent
+export const AUTH_PARENT_ERROR = 'AUTH_PARENT_ERROR'
+export const LOGIN_PARENT_SUCCESS = 'LOGIN_PARENT_SUCCESS'
+export const LOGIN_PARENT_FAIL = 'LOGIN_PARENT_FAIL'
+export const LOGOUT_PARENT = 'LOGOUT_PARENT'
+
 
 
 // Add classes

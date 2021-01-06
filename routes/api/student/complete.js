@@ -25,6 +25,7 @@ const Homework = require('../../../models/teacher/Homework');
 const authStudent = require("../../../middleware/authStudent");
 const authTeacher = require("../../../middleware/authTeacher");
 
+
 // @route POST /api/student/complete
 // description: complete homework from student
 // @access private
@@ -101,5 +102,8 @@ router.delete("/:id", authStudent || authTeacher, async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+
+
+
 
 module.exports = router;

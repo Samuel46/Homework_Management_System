@@ -27,32 +27,35 @@ function StudentMsg({ getMsgById, getMyMsg, sendMsg, studentMsg: { message, myMs
     }
 
     return (
-        <div className="col-md-12 py-4">
-            <div className="card chat-card bg-secondary">
-                <form onSubmit={e => onSubmit(e)} className="card-body">
+        <div className="container">
+            <div className="col-md-12 py-4">
+                <div className="card chat-card bg-secondary">
+                    <form onSubmit={e => onSubmit(e)} className="card-body">
 
-                    <Message message={message} loading={loading} />
-                    {/* Student__chat */}
-                    <StudentChat myMsg={myMsg} loading={loading} />
-                    {/*  */}
+                        <Message message={message} loading={loading} />
+                        {/* Student__chat */}
+                        <StudentChat myMsg={myMsg} loading={loading} />
+                        {/*  */}
 
-                    <div className="right-icon-control m-t-15">
-                        <label>Send message</label>
-                        <div className="input-group input-group-button">
-                            <input value={text} onChange={e => setText(e.target.value)} name="text" type="text" className="form-control" placeholder="text" autoComplete="off" />
-                            <div className="input-group-append">
-                                <button className="btn btn-primary" type="submit"><i className="feather icon-message-circle m-0" /></button>
+                        <div className="right-icon-control m-t-15">
+                            <label>Send message</label>
+                            <div className="input-group input-group-button">
+                                <input value={text} onChange={e => setText(e.target.value)} name="text" type="text" className="form-control" placeholder="text" autoComplete="off" />
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary" type="submit"><i className="feather icon-message-circle m-0" /></button>
+                                </div>
                             </div>
-                        </div>
-                        <div className="input-group py-3">
-                            <Link to="/manage-homework" className="btn btn-secondary">Go back</Link>
-                        </div>
+                            <div className="input-group py-3">
+                                <Link to="/manage-homework" className="btn btn-secondary">Go back</Link>
+                            </div>
 
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-
         </div>
+
     )
 }
 

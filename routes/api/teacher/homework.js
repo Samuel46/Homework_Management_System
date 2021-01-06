@@ -5,6 +5,7 @@ const { check, validationResult } = require("express-validator");
 const Homework = require('../../../models/teacher/Homework');
 const authStudent = require("../../../middleware/authStudent");
 const Complete = require("../../../models/student/Complete");
+const Student = require("../../../models/admin/students/Student");
 
 
 // @route POST api/teacher/homework
@@ -32,7 +33,6 @@ router.post(
         const {
             title,
             subject,
-
             effort_time,
             allocate_classes,
             description,
@@ -177,6 +177,25 @@ router.delete('/complete/:id', authTeacher || authStudent, async (req, res) => {
         res.status(500).send('Server Error');
     }
 })
+
+
+// conditional logics to add students, classes, subjects
+
+// @Route Get  /api/teacher/homework/student
+// @Descri         Get all Students created by the admin
+// @Access         Private
+router.get('/student', authTeacher || auth, async (req, res) => {
+
+    try {
+        const allStudents = await Student.find()
+
+        res.json(allStudents)
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
 
 
 

@@ -4,14 +4,14 @@ import ClassList from './ClassList'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getHomework } from '../../actions/teacher/homework'
+import { getHomework, getStudents } from '../../actions/teacher/homework'
 import { getClassRooms } from '../../actions/teacher/classRoom'
 import { useEffect } from 'react'
 import Alert from '../layouts/Alert'
 
 
 
-function TeacherBody({ getHomework, getClassRooms, homework: { homeworks }, classroomTeacher: { classes }, teacher: { teacher } }) {
+function TeacherBody({ getHomework, getStudents, getClassRooms, homework: { homeworks }, classroomTeacher: { classes }, teacher: { teacher } }) {
 
     useEffect(() => {
         getHomework()
@@ -20,6 +20,12 @@ function TeacherBody({ getHomework, getClassRooms, homework: { homeworks }, clas
     useEffect(() => {
         getClassRooms()
     }, [getClassRooms])
+    // load all the students
+    useEffect(() => {
+        getStudents();
+    }, []);
+
+
 
 
 
@@ -118,6 +124,7 @@ function TeacherBody({ getHomework, getClassRooms, homework: { homeworks }, clas
 
 TeacherBody.propTypes = {
     getHomework: PropTypes.func.isRequired,
+    getStudents: PropTypes.func.isRequired,
     homework: PropTypes.object.isRequired,
     getClassRooms: PropTypes.func.isRequired,
     classroomTeacher: PropTypes.object.isRequired,
@@ -132,4 +139,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { getHomework, getClassRooms })(TeacherBody)
+export default connect(mapStateToProps, { getHomework, getStudents, getClassRooms })(TeacherBody)

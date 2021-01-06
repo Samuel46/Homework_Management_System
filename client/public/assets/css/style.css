@@ -63,6 +63,13 @@ body {
     background-color: #f0f2f8;
    
 }
+.parent {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    width: 100%;
+    padding-top: 10px;
+ }
+ 
 
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -10563,7 +10570,7 @@ a.text-dark:hover, a.text-dark:focus {
   h3 {
         page-break-after: avoid;
     }
-  @    page {
+     page {
         size: a3;
     }
 

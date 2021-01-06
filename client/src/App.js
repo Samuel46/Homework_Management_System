@@ -21,10 +21,6 @@ import CreateHomework from './componets/teacher/CreateHomework';
 import AddClass from './componets/teacher/AddClass';
 import PrivateRoute from './componets/routing/PrivateRoute';
 import AuthTeacherRoute from './componets/routing/AuthTeacherRoute';
-
-
-
-
 import CreateClass from './componets/dashboard/admin/CreateClass';
 import CreateSubject from './componets/dashboard/admin/CreateSubject';
 import EditClass from './componets/dashboard/admin/EditClass';
@@ -40,12 +36,15 @@ import setStudentToken from './utils/setStudentToken';
 import HomeworkItem from './componets/student/homework/HomeworkItem';
 import SubmitedItem from './componets/teacher/homework/SubmitedItem';
 import StudentMsg from './componets/student/chats/StudentMsg';
-
-
-
-
-
-
+import StudentAccount from './componets/student/account/StudentAccount';
+import Parent from './componets/student/account/Parent';
+import setParentToken from './utils/setParentToken';
+import { loadParent } from './actions/student/parents/parent';
+import AuthParentRoute from './componets/routing/AuthParentRoute';
+import ParentDash from './componets/parent/ParentDash';
+import HomeworkObject from './componets/parent/HomeworkObject';
+import CompleteObject from './componets/parent/CompleteObject';
+import ParentMsg from './componets/parent/feedback/ParentMsg';
 
 
 if (localStorage.token) {
@@ -58,6 +57,10 @@ if (localStorage.token) {
 
 if (localStorage.token) {
   setStudentToken(localStorage.token)
+}
+
+if (localStorage.token) {
+  setParentToken(localStorage.token)
 }
 
 
@@ -73,6 +76,11 @@ const App = () => {
   useEffect(() => {
     store.dispatch(loadStudent())
   }, [])
+
+  useEffect(() => {
+    store.dispatch(loadParent())
+  }, [])
+
 
 
   return (
@@ -114,13 +122,19 @@ const App = () => {
 
             {/* Student Routes */}
             <AuthStudentRoute exact path="/student-dashboard" component={StudentDash} />
+
+            <AuthStudentRoute exact path="/student-account" component={StudentAccount} />
+            <AuthStudentRoute exact path="/add-parents" component={Parent} />
             <AuthStudentRoute exact path="/work/:id" component={HomeworkItem} />
             {/* Feedback Routes@@teacher & student */}
             <AuthTeacherRoute exact path="/sumited-work/:id" component={SubmitedItem} />
-
-
-
             <AuthStudentRoute exact path="/message/:id" component={StudentMsg} />
+            {/* Parent route */}
+            <AuthParentRoute exact path="/parent-dashboard" component={ParentDash} />
+            <AuthParentRoute exact path="/parent-work/:id" component={HomeworkObject} />
+            <AuthParentRoute exact path="/complete-work/:id" component={CompleteObject} />
+            <AuthParentRoute exact path="/parent-message/:id" component={ParentMsg} />
+
 
           </Switch>
 

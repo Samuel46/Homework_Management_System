@@ -5,6 +5,10 @@ const HomeworkSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "teacher",
     },
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "student",
+    },
     title: {
         type: String,
         require: true,

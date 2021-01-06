@@ -7,7 +7,7 @@ function Message({ message, loading }) {
         <div className="row m-b-20 received-chat" key={msg && msg._id}>
             <div className="col-auto p-r-0 mb-2">
                 <small>Teacher</small> <br />
-                <strong>{Object.values(msg && msg.teacher.name)}</strong>
+                <strong>{msg === null ? "Loading..." : Object.values(msg && msg.teacher.name)}</strong>
             </div>
             <div className="col">
                 <div className="msg">

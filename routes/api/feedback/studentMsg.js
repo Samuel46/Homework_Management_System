@@ -129,5 +129,30 @@ router.delete("/:id", authStudent, async (req, res) => {
 });
 
 
+// @Route Delete   api/feedback/
+// @Descri         Delete complete homework by Id @@teacher level
+// @Access         Private
+router.delete('/complete/:id', authTeacher || authStudent, async (req, res) => {
+
+    try {
+
+        const deleteHomeWorkId = await Complete.findById(req.params.id).populate("student", ["name", "username"]);
+        if (!deleteHomeWorkId) {
+            return res.status(404).json({ msg: "Homework not found" });
+        }
+
+        await deleteHomeWorkId.remove()
+        res.json({ msg: "Complete homework removed" });
+    } catch (err) {
+        console.error(err.message);
+        if (err.kind === "ObjectId") {
+            return res.status(404).json({ msg: "Homework not found" });
+        }
+        res.status(500).send('Server Error');
+    }
+})
+
+
+
 
 module.exports = router;

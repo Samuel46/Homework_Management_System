@@ -6,6 +6,7 @@ import { login } from '../../actions/auth';
 import Alert from '../layouts/Alert'
 import LoginTeacher from './LoginTeacher';
 import LoginStudent from './LoginStudent';
+import LoginParent from './LoginParent';
 function Login({ login, isAuthenticated }) {
 
   const [formData, setFormData] = useState({
@@ -55,6 +56,9 @@ function Login({ login, isAuthenticated }) {
                   </li>
                   <li className="nav-item">
                     <a className="nav-link text-uppercase text-primary" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">School</a>
+                  </li>
+                  <li className="nav-item parent ">
+                    <a className="nav-link text-uppercase text-primary" id="parent-tab" data-toggle="tab" href="#parent" role="tab" aria-controls="parent" aria-selected="false">Parent</a>
                   </li>
                 </ul>
                 {/* Tab content */}
@@ -119,6 +123,13 @@ function Login({ login, isAuthenticated }) {
                     </form>
                   </div>
                   {/* / */}
+
+                  {/* Login parent */}
+                  <div className="tab-pane fade" id="parent" role="tabpanel" aria-labelledby="parent-tab">
+
+                    <LoginParent />
+                  </div>
+
                 </div>
               </div>
             </div>

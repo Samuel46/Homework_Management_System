@@ -6,10 +6,7 @@ function Feedback({ messages }) {
     const feedback = messages.map(message => (
         <tr key={message._id}>
             <td>{message.title}</td>
-            <td>
 
-                {Object.values(message && message.student.name)}
-            </td>
             <td>{message.subject}</td>
             <td><td><Moment format='YYYY/MM/DD' >{message.date}</Moment></td></td>
 
@@ -39,7 +36,7 @@ function Feedback({ messages }) {
                                     <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Student's Name</th>
+
                                             <th>Subject</th>
                                             <th>Date</th>
 

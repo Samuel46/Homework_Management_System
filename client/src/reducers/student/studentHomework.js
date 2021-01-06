@@ -1,5 +1,5 @@
 import {
-    HOMEWORK_ERROR, GET_PENDING_HOMEWORK, GET_STUDENT_HOMEWORK, GET_HOMEWORK_ID, SUBMIT_HOMEWORK, REMOVE_HOMEWORK, GET_COMPLETE_HOMEWORK
+    HOMEWORK_ERROR, GET_PENDING_HOMEWORK, GET_STUDENT_HOMEWORK, GET_HOMEWORK_ID, SUBMIT_HOMEWORK, REMOVE_HOMEWORK, GET_COMPLETE_HOMEWORK, GET_SUBMITED_HOMEWORK_ID
 } from "../../actions/types"
 
 const intialState = {
@@ -7,7 +7,7 @@ const intialState = {
     homework: null,
     loading: true,
     error: {},
-
+    complete: null,
     completework: []
 }
 
@@ -57,6 +57,14 @@ export default function (state = intialState, action) {
 
 
             }
+        // get complete homework ID @@ parent level
+        case GET_SUBMITED_HOMEWORK_ID:
+            return {
+                ...state,
+                complete: payload,
+                loading: false,
+            }
+
 
         // get pending homework
 

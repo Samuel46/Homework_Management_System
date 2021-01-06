@@ -25,7 +25,7 @@ function StudentNavigation({ logoutStudent }) {
                             <small className="mobo__nav">Dashboard</small></Link></li>
 
 
-                        <li className="pc-item mr-5 "><Link to="#!" className="pc-link  text-danger">
+                        <li className="pc-item mr-5 "><Link to="/student-account" className="pc-link  text-danger">
                             <i class="far fa-user-circle f-26"></i> <br />
                             <small className="mobo__nav">Account</small>
                         </Link></li>
@@ -52,9 +52,9 @@ function StudentNavigation({ logoutStudent }) {
                             <li className="pc-item pc-caption">
                                 <label>Navigation</label>
                             </li>
-                            <li className="pc-item"><Link className="pc-link text-primary" to="#!"><i className="fas fa-home f-26" /> Dashboard</Link></li>
+                            <li className="pc-item"><Link className="pc-link text-primary" to="/teacher-dashboard" ><i className="fas fa-home f-26" /> Dashboard</Link></li>
 
-                            <li className="pc-item"><Link to="#!" className="pc-link text-danger">
+                            <li className="pc-item"><Link to="/student-account" className="pc-link text-danger">
                                 <i class="far fa-user-circle f-26"></i> My Account
     </Link></li>
                         </ul>

@@ -7,12 +7,12 @@ import StudentNavigation from './StudentNavigation'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Alert from '../layouts/Alert'
-
 import { getCompletWork, getHomework } from '../../actions/student/homework'
 import Spinner from '../layouts/Spinner'
 import { logoutStudent } from '../../actions/student'
 import { Link } from 'react-router-dom'
 import { getMsg } from '../../actions/feedback/studentMsg'
+
 
 function StudentDash({ getHomework, getCompletWork, logoutStudent, getMsg, studentHomework: { homeworks, completework }, student: { student, loading }, studentMsg: { messages } }) {
     useEffect(() => {
@@ -83,7 +83,7 @@ function StudentDash({ getHomework, getCompletWork, logoutStudent, getMsg, stude
                     </header>
                     {/* [ Header ] end */}
                     {/* [ Main Content ] start */}
-                    {/* [ Main Content ] start */}
+
                     <div className="pc-container">
                         <div className="pcoded-content">
                             {/* [ breadcrumb ] start */}

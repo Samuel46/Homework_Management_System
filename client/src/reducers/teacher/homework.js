@@ -1,9 +1,13 @@
-import { ADD_HOMEWORK, HOMEWORK_ERROR, GET_HOMEWORK, DELETE_HOMEWORK, GET_PENDING_HOMEWORK, GET_SUBMITED_HOMEWORK, GET_SUBMITED_HOMEWORK_ID, DELETE_SUBMITED_HOMEWORK_ID } from "../../actions/types"
+import {
+    ADD_HOMEWORK, HOMEWORK_ERROR, GET_HOMEWORK, DELETE_HOMEWORK, GET_PENDING_HOMEWORK, GET_SUBMITED_HOMEWORK, GET_SUBMITED_HOMEWORK_ID, DELETE_SUBMITED_HOMEWORK_ID, GET_STUDENTS,
+    GET_STUDENTS_FAIL
+} from "../../actions/types"
 
 const intialState = {
 
     homework: null,
     homeworks: [],
+    studentz: [],
     loading: true,
     error: {},
     isComplete: [],
@@ -66,9 +70,20 @@ export default function (state = intialState, action) {
                 complete: payload,
                 loading: false,
             }
+        // get students from the admin
+
+        // get complete homework ID
+        case GET_STUDENTS:
+            return {
+                ...state,
+                studentz: payload,
+                loading: false,
+            }
+
 
 
         case HOMEWORK_ERROR:
+        case GET_STUDENTS_FAIL:
             return {
                 ...state,
                 error: payload,

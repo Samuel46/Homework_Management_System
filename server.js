@@ -40,7 +40,15 @@ app.use("/api/teacher/classroom", require("./routes/api/teacher/classroom"));
 // Student Route @@retrive the homework from the teacher
 app.use("/api/student/homework", require("./routes/api/student/homework"));
 app.use("/api/student/complete", require("./routes/api/student/complete"));
+app.use("/api/student/parents/parent", require("./routes/api/student/parents/parent"));
+// @@Login teachers using token
+app.use("/api/student/parents/authParent", require("./routes/api/student/parents/authParent"));
 
+// Parent Route
+app.use("/api/parent/complete", require("./routes/api/parent/complete"));
+app.use("/api/parent/pending", require("./routes/api/parent/pending"));
+// @@@Get student feedback
+app.use("/api/parent/feedback", require("./routes/api/parent/feedback"));
 // feedback routes
 app.use("/api/feedback/teacherMsg", require("./routes/api/feedback/teacherMsg"));
 app.use("/api/feedback/studentMsg", require("./routes/api/feedback/studentMsg"));

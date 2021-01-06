@@ -12,14 +12,14 @@ function StudentChat({ myMsg, loading }) {
                 <p className="text-muted m-b-0"><i className="fas fa-clock m-r-10" /><Moment format='LLLL' >{msg.date}</Moment></p>
             </div>
             <div className="col-auto p-l-0">
-                <p className="m-b-2">   {Object.values(msg.student.name)}</p>
+                <p className="m-b-2">   {msg && Object.values(msg.student.name)}</p>
 
             </div>
         </div>
     ))
     return (
         <Fragment>
-            {loading && message === null ? <Spinner /> : <Fragment>
+            { message === null && loading ? <Spinner /> : <Fragment>
                 {message}
             </Fragment>}
 

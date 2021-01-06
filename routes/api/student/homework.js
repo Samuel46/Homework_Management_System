@@ -4,14 +4,13 @@ const router = express.Router();
 
 const Homework = require('../../../models/teacher/Homework');
 const authStudent = require("../../../middleware/authStudent");
+const authParent = require("../../../middleware/authParent");
 
 
 // @Route Get   api/student/homework
-// @Descri         Get all homework
-// @Access         Private
-router.get('/', authStudent, async (req, res) => {
-
-
+// @Descri      Get all homework @@ pending homework
+// @Access      Private
+router.get('/', authStudent || authParent, async (req, res) => {
 
     try {
 
@@ -28,7 +27,7 @@ router.get('/', authStudent, async (req, res) => {
 // // @Route Get   api/student/homework
 // @Descri         Get homework by ID
 // @Access         Private
-router.get('/:id', authStudent, async (req, res) => {
+router.get('/:id', authStudent || authParent, async (req, res) => {
 
     try {
 
@@ -51,7 +50,7 @@ router.get('/:id', authStudent, async (req, res) => {
 // description: Delete homework ID
 // @access private
 
-router.delete("/:id", authStudent, async (req, res) => {
+router.delete("/:id", authStudent || authParent, async (req, res) => {
     try {
         const deleteHomework = await Homework.findById(req.params.id);
         if (!deleteHomework) {

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import { deleteDoneWorkById } from '../../../actions/teacher/homework'
 
-// @@TO-DO Convert this HTML to JXS
 
 function CompleteWork({ isComplete, deleteDoneWorkById, history }) {
     const completeWork = isComplete.map(complete => (

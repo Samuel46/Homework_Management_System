@@ -7,7 +7,9 @@ import {
     DELETE_HOMEWORK,
     GET_SUBMITED_HOMEWORK,
     GET_SUBMITED_HOMEWORK_ID,
-    DELETE_SUBMITED_HOMEWORK_ID
+    DELETE_SUBMITED_HOMEWORK_ID,
+    GET_STUDENTS,
+    GET_STUDENTS_FAIL
 
 
 } from '../types'
@@ -133,6 +135,23 @@ export const deleteDoneWorkById = (id, history) => async dispatch => {
     } catch (err) {
         dispatch({
             type: HOMEWORK_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Get all the students
+export const getStudents = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/teacher/homework/student')
+
+        dispatch({
+            type: GET_STUDENTS,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: GET_STUDENTS_FAIL,
             payload: { msg: err.response.statusText, status: err.response.status }
         })
     }
