@@ -24,7 +24,7 @@
    * create a default.json file in add the mongoDB url provided after creating a cluster
  * connect the db to app in the server.js as shon in the source code  
 
-###Creating a Cluster MongoDB ###
+### Creating a Cluster MongoDB ###
  * Login to MongoDB strat a new project follow the standard procedur
  * Create a cluter in your current project
  * In the newtwork setting allow all IP for developmet porposes
