@@ -20,7 +20,7 @@
  * npm install config
  * create a config folder in server add the following
  
-   1. create a DB file include initialize the as shown in the source code
+   1. Add a DB file include the following:
      - const mongoose = require("mongoose");
      -  const config = require("config");
      -  const db = config.get("mongoURL");
