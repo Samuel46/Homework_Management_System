@@ -21,11 +21,11 @@
  * create a config folder in server add the following
  
    * create a DB file include initialize the as shown in the source code
-    * const mongoose = require("mongoose");
-     const config = require("config");
-     const db = config.get("mongoURL");
-     const connectDB = async () => {
-      try {
+    * - const mongoose = require("mongoose");
+     -  const config = require("config");
+     -  const db = config.get("mongoURL");
+     -  const connectDB = async () => {
+       try {
        await mongoose.connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -33,17 +33,17 @@
         useFindAndModify: false,
       });
 
-      console.log("MongoDb is Connected...");
+      - console.log("MongoDb is Connected...");
     }  catch (err) {
       console.error(err.message);
       / /    exit this process
       process.exit(1);
     }
    };
-  module.exports = connectDB;
+ - module.exports = connectDB;
 *
   * create a default.json file in add the MongoDB URL provided after creating a cluster
-   * {
+   * - {
   "mongoURL": "mongodb+srv://USER__NAME:HTi7H4UkzGCT0iCB@homeworkapp.dzqur.mongodb.net/DATABSE__NAME?retryWrites=true&w=majority",
   "
 }
