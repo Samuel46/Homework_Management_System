@@ -59,4 +59,4 @@ iii. connect the DB to the app in the server.js as shown in the source code
  * Create a cluster in your current project
  * In the network setting allow all IP for development purposes
  * Connect to the app> add the current user and database name in the provided URL.
- * Copy the URL in the default.json file in the config folder.
+ * Copy the URL to the default.json file in the config folder.
