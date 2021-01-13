@@ -11,7 +11,7 @@
 ### Serve on localhost:3000 ###
  * npm run dev
  
-# Databse Integration
+# Database Integration
 - Connecting MongoDB to the app 
 
 
@@ -20,7 +20,7 @@
  * npm install config
  * create a config folder in server add the following
  
-   1. Add a DB file include the following:
+   1. Add a DB file in the config folder and include the following:
      - const mongoose = require("mongoose");
      -  const config = require("config");
      -  const db = config.get("mongoURL");
