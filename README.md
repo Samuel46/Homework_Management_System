@@ -40,15 +40,15 @@
       process.exit(1);
     }
    };
- - module.exports = connectDB;
+    module.exports = connectDB;
 
-  2. create a default.json file in add the MongoDB URL provided after creating a cluster
-   * - {
+  ii. create a default.json file in add the MongoDB URL provided after creating a cluster
+    - {
   "mongoURL": "mongodb+srv://USER__NAME:HTi7H4UkzGCT0iCB@homeworkapp.dzqur.mongodb.net/DATABSE__NAME?retryWrites=true&w=majority",
   "
 }
 
-3. connect the DB to the app in the server.js as shown in the source code  
+iii. connect the DB to the app in the server.js as shown in the source code  
 
  - const connectDB = require("./config/db");
  - // connect database
