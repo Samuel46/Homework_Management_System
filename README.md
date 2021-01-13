@@ -42,7 +42,7 @@
    };
     module.exports = connectDB;
 
-  ii. create a default.json file in add the MongoDB URL provided after creating a cluster
+  ii. Add a default.json file in the config folder then add the MongoDB URL provided after creating a cluster
     - {
   "mongoURL": "mongodb+srv://USER__NAME:HTi7H4UkzGCT0iCB@homeworkapp.dzqur.mongodb.net/DATABSE__NAME?retryWrites=true&w=majority",
   "
