@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const config = require('config')
+const config = require("config");
 const { check, validationResult } = require('express-validator')
 const authStudent = require("../../../../middleware/authStudent");
 const Parent = require('../../../../models/student/Parent')
@@ -18,7 +18,8 @@ router.post('/', [authStudent, [
     check('email', 'Email is required').isEmail(),
 
 
-]], async (req, res) => {
+],
+], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
@@ -31,7 +32,7 @@ router.post('/', [authStudent, [
     parentField.student = req.student.id
     if (name) parentField.name = name;
     if (email) parentField.email = email;
-    if (password) parentField.code = password;
+    if (password) parentField.password = password;
     try {
 
         // See if parent exists

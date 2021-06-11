@@ -1,138 +1,429 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { addHomework } from '../../actions/teacher/homework'
-import Alert from '../layouts/Alert'
-import { Link, withRouter } from 'react-router-dom'
-import { useState } from 'react'
+import React, { useEffect, Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addHomework } from "../../actions/teacher/homework";
+import Alert from "../layouts/Alert";
+import { Link, withRouter } from "react-router-dom";
+import { useState } from "react";
+import { Select } from "antd";
+import Avatar from "../../utilities/avatar";
+import { Check } from "react-feather";
+import { toast } from "react-toastify";
+import {
+  getStudents,
+  getSubject,
+  getClasses,
+} from "../../actions/teacher/teacher";
+import { getClassRooms } from "../../actions/teacher/classRoom";
+import { Button, UncontrolledTooltip } from "reactstrap";
+import { removePending } from "../../actions/student/homework";
+import TeacherTop from "./TeacherTop";
+const { Option } = Select;
 
-function CreateHomework({ addHomework, history, teacher: { teacher } }) {
-    const [formData, setFormData] = useState({
-        title: '',
-        subject: '',
+function CreateHomework({
+  addHomework,
+  history,
+  teacher: { teacher },
+  getClasses,
+  getStudents,
+  getSubject,
+  teacherReducer: { classrooms, studentList, subjects },
+  getClassRooms,
+  classroomTeacher: { classes },
+}) {
+  useEffect(() => {
+    getClasses();
+    getStudents();
+    getSubject();
+    getClassRooms();
+  }, [getSubject, getClasses, getStudents, getClassRooms]);
 
-        effort_time: '',
-        allocate_classes: '',
-        description: '',
-        students: '',
-        set_date: '',
-        due_date: '',
-        attachements: ''
-    })
+  const [title, setTitle] = useState("");
+  const [subject, setSubject] = useState([]);
+  const [effort_time, setEffort_Time] = useState("");
+  const [allocate_classes, setAllocate_Classes] = useState([]);
+  const [description, setDescription] = useState("");
+  const [students, setStudent] = useState([]);
+  const [set_date, setNew_Date] = useState("");
+  const [due_date, setDue_Date] = useState("");
+  const [attachements, setAttachements] = useState("");
 
-    const {
-        title,
-        subject,
+  // render all classroom options from the admin
+  const classOptions = classrooms.map((rooms) => (
+    <Option value={rooms.name} key={rooms._id}>
+      {rooms.name}
+    </Option>
+  ));
 
-        effort_time,
-        allocate_classes,
-        description,
-        students,
-        set_date,
-        due_date,
-        attachements
-    } = formData;
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+  // render all classroom options from the teacher
+  const classOptions2 = classes.map((rooms) => (
+    <Option value={rooms.name} key={rooms._id}>
+      {rooms.name}
+    </Option>
+  ));
+  // render  student's options
+  const studentOptions = studentList.map((student) => (
+    <Option value={student.name} key={student._id}>
+      {""} {student.name}
+    </Option>
+  ));
 
-    const onSubmit = e => {
-        e.preventDefault()
-        addHomework(formData, history)
-    }
+  // render  subjectopt ions
+  const subjectOptions = subjects.map((subject) => (
+    <Option color="primary" value={subject.subject_name} key={subject._id}>
+      {""} {subject.subject_name}
+    </Option>
+  ));
 
-    return (
-        <div className="container">
-            <div className="col-md-12 py-4">
-                <div className="card bg-secondary shadow">
-                    <div className="card-header">
-                        <h4 className="card-title">Create Homework</h4> <br />
-                        <h5 className="card-title">Teacher Name:{""} {teacher && teacher.name}</h5>
-                    </div>
+  // ** Adds Homework
+  const handleAddHomework = () => {
+    const obj = {
+      title,
+      subject,
 
-                    <div className="card-body">
-                        <div>
-                            <Alert />
-                        </div>
-                        <form onSubmit={e => onSubmit(e)}>
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label">Title</label>
-                                        <input onChange={e => onChange(e)} name='title' value={title} type="text" className="form-control" placeholder />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name">Subject</label>
-                                        <input onChange={e => onChange(e)} name="subject" value={subject} type="text" className="form-control" placeholder />
-                                    </div>
-                                </div>
+      effort_time,
+      allocate_classes,
+      description,
+      students,
+      set_date,
+      due_date,
+      attachements,
+    };
 
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name"> Effort Estimat <small>amount of
-                  hours</small></label>
-                                        <input onChange={e => onChange(e)} name="effort_time" value={effort_time} type="text" className="form-control" id="Name" placeholder="Estimated delivery time/hrs" />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name"> Allocate Class </label>
-                                        <input onChange={e => onChange(e)} name="allocate_classes" value={allocate_classes} type="text" className="form-control" id="Name" placeholder="Allocate class" />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name"> Add Students</label>
-                                        <input onChange={e => onChange(e)} name="students" value={students} type="text" className="form-control" placeholder="Add Students" />
-                                    </div>
-                                </div>
+    addHomework(obj);
+  };
 
-                                <div className="col-sm-6">
-                                    <div className="form-group fill">
-                                        <label className="floating-label" htmlFor="Icon">Attachements</label>
-                                        <input onChange={e => onChange(e)} name="attachements" value={attachements} type="file" className="form-control btn-secondary" id="Icon" placeholder />
-                                    </div>
-                                </div>
-                                <div className="col-sm-12">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Address">Description</label>
-                                        <textarea onChange={e => onChange(e)} name="description" value={description} className="form-control" id="Address" rows={4} defaultValue={""} />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group fill">
-                                        <label className="floating-label" htmlFor="Occupation">Set Date</label>
-                                        <input onChange={e => onChange(e)} name="set_date" value={set_date} type="date" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="form-group fill">
-                                        <label className="floating-label" htmlFor="Occupation">Due Date</label>
-                                        <input onChange={e => onChange(e)} name="due_date" value={due_date} type="date" className="form-control" />
-                                    </div>
-                                </div>
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleAddHomework();
+  };
 
-
-                                <div className="col-sm-6">
-                                    <button type="submit" className="btn btn-success mr-2">Submit Homework</button>
-                                    <Link to="teacher-dashboard" className="btn btn-secondary">Go back</Link>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
+  return (
+    <>
+      <TeacherTop />
+      <div className="pc-container">
+        <div className="pcoded-content">
+          {/* [ breadcrumb ] start */}
+          <div className="page-header">
+            <div className="page-block">
+              <div className="row align-items-center">
+                <div className="col-md-12">
+                  <ul className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      Create Homework|| {teacher && teacher.name}
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
 
-    )
+          {/* HomeworkList */}
+          <div className="py-2">
+            <Alert />
+          </div>
+          <div className="container">
+            <div className="col-md-12 py-4">
+              <div className="card  shadow">
+                <div className="card-header">
+                  <h4 className="card-title">Create Homework</h4> <br />
+                  <h5 className="card-title">
+                    Teacher Name:{""} {teacher && teacher.name}
+                  </h5>
+                  <div class="cover-img-block img_img">
+                    <img
+                      src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+
+                <div className="card-body">
+                  <div>
+                    <Alert />
+                  </div>
+                  <form onSubmit={(e) => onSubmit(e)}>
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <label className="floating-label">Title</label>
+                          <input
+                            onChange={(e) => setTitle(e.target.value)}
+                            name="title"
+                            value={title}
+                            type="text"
+                            className="form-control"
+                            placeholder
+                          />
+                        </div>
+                      </div>
+
+                      {subjects !== null ? (
+                        <div className="col-sm-6 ">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Email">
+                              Add Subject
+                            </label>
+                            <Select
+                              mode="multiple"
+                              autoFocus
+                              allowClear
+                              defaultValue={[""]}
+                              style={{ width: "100%" }}
+                              placeholder="Please Allocate Subjects"
+                              onChange={setSubject}
+                              value={subject}
+                            >
+                              {subjectOptions}
+                            </Select>
+                          </div>
+                        </div>
+                      ) : (
+                        <h2>no availabel</h2>
+                        // <div className="col-sm-6">
+                        //   <div className="form-group">
+                        //     <label className="floating-label" htmlFor="Name">
+                        //       Allocate Class
+                        //     </label>
+                        //     <input
+                        //       name="allocate_classes"
+                        //       value={allocate_classes}
+                        //       type="text"
+                        //       className="form-control"
+                        //       id="Name"
+                        //       placeholder
+                        //     />
+                        //   </div>
+                        // </div>
+                      )}
+
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <label className="floating-label" htmlFor="Name">
+                            {" "}
+                            Effort Estimat <small>amount of hours</small>
+                          </label>
+                          <input
+                            onChange={(e) => setEffort_Time(e.target.value)}
+                            name="effort_time"
+                            value={effort_time}
+                            type="text"
+                            className="form-control"
+                            id="Name"
+                            placeholder="Estimated delivery time/hrs"
+                          />
+                        </div>
+                      </div>
+                      {classrooms !== null ? (
+                        <div className="col-sm-6 ">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Email">
+                              Allocate Class
+                            </label>
+                            <Select
+                              mode="multiple"
+                              autoFocus
+                              allowClear
+                              defaultValue={[""]}
+                              style={{ width: "100%" }}
+                              placeholder="Please Allocate Classes"
+                              onChange={setAllocate_Classes}
+                              value={allocate_classes}
+                            >
+                              {classOptions}
+                              {classOptions2}
+                            </Select>
+                          </div>
+                        </div>
+                      ) : (
+                        <h2>no availabel</h2>
+                        // <div className="col-sm-6">
+                        //   <div className="form-group">
+                        //     <label className="floating-label" htmlFor="Name">
+                        //       Allocate Class
+                        //     </label>
+                        //     <input
+                        //       name="allocate_classes"
+                        //       value={allocate_classes}
+                        //       type="text"
+                        //       className="form-control"
+                        //       id="Name"
+                        //       placeholder
+                        //     />
+                        //   </div>
+                        // </div>
+                      )}
+
+                      {/* student options */}
+                      {studentList !== null ? (
+                        <div className="col-sm-6 ">
+                          <div className="form-group">
+                            <label
+                              id="positionRight"
+                              className="floating-label"
+                              htmlFor="Email"
+                            >
+                              Add Students <small>Optional</small>
+                              <UncontrolledTooltip
+                                placement="right"
+                                target="positionRight"
+                              >
+                                You can add students from others classrooms if
+                                needed this is Optional
+                              </UncontrolledTooltip>
+                              <UncontrolledTooltip
+                                placement="top"
+                                target="positionTop"
+                              >
+                                You can add students from others classrooms if
+                                needed this is Optional
+                              </UncontrolledTooltip>
+                            </label>
+                            <Select
+                              mode="multiple"
+                              id="positionTop"
+                              autoFocus
+                              allowClear
+                              defaultValue={[""]}
+                              style={{ width: "100%" }}
+                              placeholder="Please Add Students"
+                              onChange={setStudent}
+                              value={students}
+                            >
+                              {studentOptions}
+                            </Select>
+                          </div>
+                        </div>
+                      ) : (
+                        <h2>no availabel</h2>
+                        // <div className="col-sm-6">
+                        //   <div className="form-group">
+                        //     <label className="floating-label" htmlFor="Name">
+                        //       Allocate Class
+                        //     </label>
+                        //     <input
+                        //       name="allocate_classes"
+                        //       value={allocate_classes}
+                        //       type="text"
+                        //       className="form-control"
+                        //       id="Name"
+                        //       placeholder
+                        //     />
+                        //   </div>
+                        // </div>
+                      )}
+
+                      <div className="col-sm-6">
+                        <div className="form-group fill">
+                          <label className="floating-label" htmlFor="Icon">
+                            Attachements
+                          </label>
+                          <input
+                            onChange={(e) => setAttachements(e.target.value)}
+                            name="attachements"
+                            value={attachements}
+                            type="file"
+                            className="form-control btn-secondary"
+                            id="Icon"
+                            placeholder
+                          />
+                        </div>
+                      </div>
+                      <div className="col-sm-12">
+                        <div className="form-group">
+                          <label className="floating-label" htmlFor="Address">
+                            Description
+                          </label>
+                          <textarea
+                            onChange={(e) => setDescription(e.target.value)}
+                            name="description"
+                            value={description}
+                            className="form-control"
+                            id="Address"
+                            rows={4}
+                            defaultValue={""}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="form-group fill">
+                          <label
+                            className="floating-label"
+                            htmlFor="Occupation"
+                          >
+                            Set Date
+                          </label>
+                          <input
+                            onChange={(e) => setNew_Date(e.target.value)}
+                            name="set_date"
+                            value={set_date}
+                            type="date"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="form-group fill">
+                          <label
+                            className="floating-label"
+                            htmlFor="Occupation"
+                          >
+                            Due Date
+                          </label>
+                          <input
+                            onChange={(e) => setDue_Date(e.target.value)}
+                            name="due_date"
+                            value={due_date}
+                            type="date"
+                            className="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="col-sm-6">
+                        <button type="submit" className="btn btn-success mr-2">
+                          Create Homework
+                        </button>
+
+                        <Link
+                          to="./teacher-dashboard"
+                          className="btn btn-secondary"
+                        >
+                          Go back
+                        </Link>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 CreateHomework.propTpyes = {
-    addHomework: PropTypes.func.isRequired,
-    teacher: PropTypes.object.isRequired,
-}
-const mapStateToProps = state => ({
-    teacher: state.teacher
-})
-export default connect(mapStateToProps, { addHomework })(withRouter(CreateHomework))
+  addHomework: PropTypes.func.isRequired,
+  teacher: PropTypes.object.isRequired,
+  getClasses: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  getSubject: PropTypes.func.isRequired,
+  teacherReducer: PropTypes.func.isRequired,
+  classroomTeacher: PropTypes.object.isRequired,
+  getClassRooms: PropTypes.func.isRequired,
+};
+const mapStateToProps = (state) => ({
+  teacher: state.teacher,
+  teacherReducer: state.teacherReducer,
+  classroomTeacher: state.classroomTeacher,
+});
+export default connect(mapStateToProps, {
+  addHomework,
+  getClasses,
+  getStudents,
+  getSubject,
+  getClassRooms,
+})(withRouter(CreateHomework));

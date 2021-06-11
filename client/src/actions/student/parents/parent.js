@@ -57,8 +57,8 @@ export const registerParent = (formData, history) => async dispatch => {
         })
         // @@TODO Log out parents after registration
         dispatch(logoutParent())
-        dispatch(setAlert('Parent Added', 'success'))
-        history.push('./student-account')
+        dispatch(setAlert('Parent Created', 'success'))
+        // history.push('./student-account')
 
 
     } catch (err) {
@@ -132,8 +132,7 @@ export const deleteParent = (id, history) => async dispatch => {
         })
 
         dispatch(setAlert('Parent removed', 'danger'))
-        history.push('/student-dashboard')
-        history.push('/student-account')
+        dispatch(getParent())
     } catch (err) {
         dispatch({
             type: DELETE_PARENT_FAIL,

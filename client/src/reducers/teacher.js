@@ -1,5 +1,6 @@
 import {
-    REGISTER_TEACHER, TEACHER_FAIL, GET_TEACHERS, GET_TEACHERS_FAIL, DELETE_TEACHER, TEACHER_LOADED, AUTH_TEACHER_ERROR, LOGIN_TEACHER_SUCCESS, LOGIN_TEACHER_FAIL, LOGOUT_TEACHER
+    REGISTER_TEACHER, TEACHER_FAIL, GET_TEACHERS, GET_TEACHERS_FAIL, DELETE_TEACHER, TEACHER_LOADED, AUTH_TEACHER_ERROR, LOGIN_TEACHER_SUCCESS, LOGIN_TEACHER_FAIL, LOGOUT_TEACHER, UPDATE_TEACHER, UPDATE_TEACHER_FAIL, 
+    GET_TEACHERSBYID
 } from "../actions/types"
 
 const intialState = {
@@ -8,6 +9,7 @@ const intialState = {
     isAuthenticated: null,
     loading: true,
     teacher: null,
+    selectedTeacher: null,
     teachers: [],
     error: {}
 }
@@ -28,8 +30,16 @@ export default function (state = intialState, action) {
                 loading: false,
                 teacher: payload
             }
+
+            case GET_TEACHERSBYID:
+            return {
+                ...state,
+                loading: false,
+                selectedTeacher: payload
+            }
         case REGISTER_TEACHER:
         case LOGIN_TEACHER_SUCCESS:
+            case UPDATE_TEACHER:
 
             localStorage.setItem('token', payload.token)
             return {
@@ -72,15 +82,12 @@ export default function (state = intialState, action) {
             }
 
         case GET_TEACHERS_FAIL:
+            case UPDATE_TEACHER_FAIL:
             return {
                 ...state,
                 error: payload,
                 loading: false
             }
-
-
-
-
 
         default:
             return state;

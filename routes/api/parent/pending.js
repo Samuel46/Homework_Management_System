@@ -15,8 +15,9 @@ router.get('/', authParent || authStudent, async (req, res) => {
 
     try {
 
-        // const parent = await Parent.findById(req.parent.id)
-        const pendingWork = await Homework.find().populate("teacher", ["name", "email"]);
+        const parent = await Parent.findById(req.parent.id).populate("student", ["name", "email"]);
+        
+        const pendingWork = await Homework.find({students: parent.student.name}).populate("teacher", ["name", "email"]);
 
 
         res.json(pendingWork)

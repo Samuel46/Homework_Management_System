@@ -6,7 +6,18 @@
     z-index: 1025;
     transition: all 0.15s ease-in-out;
 }
+.editorClassName {
+    height: 350px !important;
+   
+   
+}
+.toolbarClassName {
+    background-color:#e8e7fc !important;
+}
 
+.wrapperClassName {
+    background-color: #e7e9ea2d !important;
+}
 .pct-customizer.active {
     right: 0;
 }

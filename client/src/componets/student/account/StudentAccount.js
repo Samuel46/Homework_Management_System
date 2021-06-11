@@ -189,7 +189,7 @@ function StudentAccount({ studentHomework: { homeworks, completework }, studentM
                         </div>
 
                         <div className="col-md-6  py-3 mb-3  ">
-                            <Link to='/add-parents' className="btn btn-success"><i className="feather icon-plus" />Add Parent</Link>
+                            <Link to='/register-parents' className="btn btn-success"><i className="feather icon-plus" />Add Parent</Link>
                         </div>
                     </div>
                 </div>

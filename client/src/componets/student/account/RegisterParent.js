@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { registerParent } from '../../../actions/student/parents/parent'
 
-function Parent({ registerParent, history }) {
+function RegisterParent({ registerParent, history }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -70,8 +70,8 @@ function Parent({ registerParent, history }) {
         </div>
     )
 }
-Parent.propTypes = {
+RegisterParent.propTypes = {
     registerParent: PropTypes.func.isRequired,
 }
 
-export default connect(null, { registerParent })(withRouter(Parent))
+export default connect(null, { registerParent })(withRouter(RegisterParent))

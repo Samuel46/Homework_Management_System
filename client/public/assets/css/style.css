@@ -63,6 +63,12 @@ body {
     background-color: #f0f2f8;
    
 }
+
+.img_img img{
+  height: 150px;
+   object-fit: contain;
+   width: 100%;
+}
 .parent {
     border-top: 2px solid lightgray;
     border-bottom: 2px solid lightgray;

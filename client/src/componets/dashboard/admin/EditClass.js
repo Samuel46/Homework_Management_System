@@ -1,100 +1,184 @@
-import React, { useEffect, useState } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import { updateClassRoom, getClasses } from '../../../actions/classRoom'
-import Alert from '../../layouts/Alert'
+import React, { useEffect, useState } from "react";
+import { withRouter, Link } from "react-router-dom";
+import {
+  updateClassRoom,
+  getClasses,
+  getClassById,
+} from "../../../actions/classRoom";
+import { Alert } from "reactstrap";
+import { logout } from "../../../actions/auth";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import EditClassForm from "./EditClassForm";
+import Navigation from "../Navigation";
 
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+function EditClass({
+  classRoom: { selectedClass, loading },
+  getClassById,
+  match,
+  history,
+  updateClassRoom,
+  teacher: { teachers },
+  student: { students },
+  auth:{user},
+  logout
+}) {
+  useEffect(() => {
+    getClassById(match.params.id);
+  }, [getClassById, match.params.id]);
 
-function EditClass({ classRoom: { classes, loading }, updateClassRoom, getClasses, history }) {
+  return selectedClass !== null && selectedClass !== undefined ? (
+    <> 
+     <Navigation />
+     <header className="pc-header ">
+        <div className="header-wrapper">
+          <div className="mr-auto pc-mob-drp">
+            <ul className="list-unstyled"></ul>
+          </div>
+          <div className="ml-auto">
+            <ul className="list-unstyled">
+              <li className="pc-h-item ">
+                <Link
+                  onClick={() => logout()}
+                  className="pc-head-link mr-0"
+                  to="#!"
+                >
+                  <i className="fas fa-sign-out-alt"></i>
+                  {""}
+                  <span>Logout</span>
+                </Link>
+              </li>
 
-    const [formData, setFormData] = useState({
-        name: '',
-        add_student: '',
-        assign_teacher: ''
-    })
-
-    useEffect(() => {
-        getClasses()
-        setFormData({
-            name: loading || !classes.name ? '' : classes.name,
-            add_student: loading || !classes.add_student ? [] : classes.add_student,
-            assign_teacher: loading || !classes.assign_teacher ? [] : classes.assign_teacher,
-        })
-    }, [getClasses, loading, classes.add_student, classes.assign_teacher, classes.name])
-
-    const {
-        name,
-        add_student,
-        assign_teacher
-    } = formData;
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-
-    const onSubmit = e => {
-        e.preventDefault()
-        updateClassRoom(formData, history)
-    }
-    return (
-        <div className="conatainer">
-            <div className="col-md-12 py-4">
-                <div className="card bg-secondary">
-                    <div className="card-header">
-                        <h4 className="card-title">Create Class</h4>
-                    </div>
-                    <div className="card-body">
-                        <div>
-                            <Alert />
-                        </div>
-                        <form className="form" onSubmit={e => onSubmit(e)}>
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name">Class Name</label>
-                                        <input onChange={e => onChange(e)} name="name" value={name} type="text" className="form-control" placeholder />
-                                    </div>
-                                </div>
-                                {/* add classes */}
-
-
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name">Add Students</label>
-                                        <input onChange={e => onChange(e)} name="add_student" value={add_student} type="text" className="form-control" placeholder />
-                                    </div>
-                                </div>
-
-                                {/* add Teacher */}
-
-                                <div className="col-sm-6">
-                                    <div className="form-group">
-                                        <label className="floating-label" htmlFor="Name">Assign Teacher</label>
-                                        <input onChange={e => onChange(e)} name="assign_teacher" value={assign_teacher} type="text" className="form-control" placeholder />
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-12">
-                                    <button type='submit' className="btn btn-success mr-2">Add Class</button>
-                                    <Link to='/dashboard' className="btn btn-secondary">Go Back</Link>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+              <li className="dropdown pc-h-item">
+                <Link
+                  className="pc-head-link dropdown-toggle arrow-none mr-0"
+                  data-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="false"
+                  aria-expanded="false"
+                >
+                  <span>
+                    <span className="user-name">
+                      Welcome {user && user.name}
+                    </span>
+                    <span className="user-desc">Administrator</span>
+                  </span>
+                </Link>
+                <div className="dropdown-menu dropdown-menu-right pc-h-dropdown">
+                  <div className=" dropdown-header">
+                    <h6 className="text-overflow m-0">
+                      Welcome {user && user.name}
+                    </h6>
+                  </div>
+                  <Link href="#!" className="dropdown-item">
+                    <i data-feather="settings" />
+                    <span>Account</span>
+                  </Link>
+                  <Link
+                    onClick={() => logout()}
+                    className="pc-head-link mr-0"
+                    to="#!"
+                  >
+                    <i className="fas fa-sign-out-alt"></i>
+                    {""}
+                    <span>Logout</span>
+                  </Link>
                 </div>
-            </div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </header>
 
-    )
+      {/* [ Main Content ] start */}
+      <div className="pc-container">
+        <div className="pcoded-content">
+          {/* [ breadcrumb ] start */}
+          <div className="page-header">
+            <div className="page-block">
+              <div className="row align-items-center">
+                <div className="col-md-6">
+                  <div className="page-header-title">
+                    <h5 className="m-b-10">Dashboard</h5>
+                  </div>
+                  <ul className="breadcrumb">
+                    <li className="breadcrumb-item">{user && user.name}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* [ breadcrumb ] end */}
+          {/* [ Main Content ] start */}
+
+          
+          <div className="py-4">
+          <div className="conatainer">
+      <div className="col-md-12 py-4">
+        <div className="card ">
+          <div className="card-header">
+            <h4 className="card-title">Edit Class</h4>
+            <div class="cover-img-block img_img">
+                <img
+                  src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+          </div>
+          <div className="card-body">
+            <EditClassForm
+              updateClassRoom={updateClassRoom}
+              selectedClass={selectedClass}
+              loading={loading}
+              teachers={teachers}
+              students={students}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+
+        </div>
+      </div>
+      {/*  */}
+  
+
+    </>
+  ) : (
+    <Alert color="danger">
+      <h4 className="alert-heading">Class not found</h4>
+      <div className="alert-body">
+        Class with id: {match.params.id} doesn't exist. Check list of all Class:{" "}
+        <Link to="/dashboard">Dashboard</Link>
+      </div>
+    </Alert>
+  );
 }
 
 EditClass.propTypes = {
-    updateClassRoom: PropTypes.func.isRequired,
-    getClasses: PropTypes.func.isRequired,
-    classRoom: PropTypes.object.isRequired,
+  updateClassRoom: PropTypes.func.isRequired,
+  getClasses: PropTypes.func.isRequired,
+  classRoom: PropTypes.object.isRequired,
+  getClassById: PropTypes.func.isRequired,
+  teacher: PropTypes.object.isRequired,
+  student: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
-}
+const mapStateToProps = (state) => ({
+  classRoom: state.classRoom,
+  teacher: state.teacher,
+  student: state.student,
+  auth: state.auth
+});
 
-const mapStateToProps = state => ({
-    classRoom: state.classRoom
-})
-
-export default connect(mapStateToProps, { updateClassRoom, getClasses })(withRouter(EditClass))
+export default connect(mapStateToProps, {
+  updateClassRoom,
+  getClassById,
+  getClasses,
+  logout
+})(withRouter(EditClass));

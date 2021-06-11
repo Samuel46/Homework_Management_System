@@ -31,6 +31,15 @@ View</Link>
                 <div className="card-header">
                     <h4 className="text-success"><span className="badge badge-pill badge-success">Complete
                 Homework</span> </h4>
+
+                <div class="cover-img-block img_img">
+                <img
+                  src="https://image.freepik.com/free-vector/completed-concept-illustration_114360-3449.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+                
                 </div>
                 <div className="card-body">
                     <div className="row align-items-center m-l-0">

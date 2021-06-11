@@ -3,10 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 
-function StudentDashActions({ studentHomework: { homeworks, completework }, studentMsg: { messages } }) {
+
+function StudentDashActions({ studentHomework: { homeworks, completework }, studentMsg: { messages }, parents}) {
     return (
         <div className="row">
-            <div className="col-xl-4 col-md-6">
+            <div className="col-xl-3 col-md-3">
                 <div className="card shadow">
                     <div className="card-body bg-info">
                         <div className="row align-items-center m-l-0">
@@ -23,7 +24,7 @@ function StudentDashActions({ studentHomework: { homeworks, completework }, stud
                 </div>
             </div>
             {/* Student */}
-            <div className="col-xl-4 col-md-6">
+            <div className="col-xl-3 col-md-3">
                 <div className="card shadow">
                     <div className="card-body bg-danger">
                         <div className="row align-items-center m-l-0">
@@ -36,7 +37,7 @@ function StudentDashActions({ studentHomework: { homeworks, completework }, stud
 
                 </div>
             </div>
-            <div className="col-xl-4 col-md-6">
+            <div className="col-xl-3 col-md-3">
                 <div className="card shadow rounded ">
                     <div className="card-body bg-success ">
                         <div className="row align-items-center m-l-0">
@@ -49,6 +50,22 @@ function StudentDashActions({ studentHomework: { homeworks, completework }, stud
 
                 </div>
             </div>
+            {/* and Parents */}
+
+            <div className="col-xl-3 col-md-3">
+                <div className="card shadow rounded ">
+                    <div className="card-body bg-primary ">
+                        <div className="row align-items-center m-l-0">
+                            <div className="col-auto">
+                                <h6 className="text-primary m-b-10">Parents</h6>
+                                <h2 className="m-b-0 text-primary">{parents && parents.length}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
         </div>
     )
 }

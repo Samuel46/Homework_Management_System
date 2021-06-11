@@ -26,6 +26,15 @@ function Feedback({ messages }) {
                             <h4 className="text-danger"><span className="badge badge-pill badge-info">Feeback</span>
                             </h4>
                         </div>
+
+                        <div class="cover-img-block img_img">
+                <img
+                  src="https://image.freepik.com/free-vector/people-communicating-via-social-media_74855-5551.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+
                         <div className="card-body">
                             <div className="row align-items-center m-l-0">
                                 <div className="col-sm-6">
