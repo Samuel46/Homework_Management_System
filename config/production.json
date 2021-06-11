@@ -3,6 +3,6 @@
     "jwtSecret": "myscrettoken",
     "jwtTeacherSecret": "teacherscrettoken",
     "jwtStudentSecret": "studentsecrettoken",
-    "githubClientId": "8686fa4cc856f644b8f7",
-    "githubSecret": "1c33e1a745eecaace1b3c56a5d2019adadc43fc4"
-}
+    "jwtParentSecret": "ParentSecretooon",
+    "githubClientId": "8686fa4cc856f644b8f7hgggdf",
+    "githubSecret": "1c33e1a745eecaace1b3c56a5d20nvhvjvhj19adadc43fc4"}
