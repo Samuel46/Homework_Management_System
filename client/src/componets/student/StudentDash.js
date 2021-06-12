@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import CompleteWork from "../student/CompleteWork";
 import Feedback from "../student/Feedback";
 import PendingWork from "../student/PendingWork";
@@ -7,7 +7,7 @@ import StudentNavigation from "./StudentNavigation";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import Alert from "../layouts/Alert";
+import { Alert } from 'reactstrap'
 import {
   getCompletWork,
   getHomework,
@@ -18,7 +18,7 @@ import { logoutStudent } from "../../actions/student";
 import { Link } from "react-router-dom";
 import { getMsg } from "../../actions/feedback/studentMsg";
 import MyClassRooms from "./MyClassRooms";
-import { getParent } from '../../actions/student/parents/parent'
+import { getParent } from "../../actions/student/parents/parent";
 
 function StudentDash({
   getHomework,
@@ -27,12 +27,13 @@ function StudentDash({
   logoutStudent,
   getMsg,
   getMyClass,
-  parent:{parents},
+  parent: { parents },
 
   studentHomework: { homeworks, completework, classRooms },
   student: { student, loading },
   studentMsg: { messages },
 }) {
+
   useEffect(() => {
     getHomework();
   }, [getHomework]);
@@ -41,8 +42,8 @@ function StudentDash({
   }, [getCompletWork]);
 
   useEffect(() => {
-    getParent()
-  }, [getParent])
+    getParent();
+  }, [getParent]);
 
   useEffect(() => {
     getMyClass();
@@ -51,9 +52,11 @@ function StudentDash({
   useEffect(() => {
     getMsg();
   }, [getMsg]);
+  const [visible, setVisible] = useState(true)
 
-  return student !== null && loading !== false && homeworks !== null || student !== undefined ? (
-    <Fragment> 
+  return (student !== null && loading !== false && homeworks !== null) ||
+    student !== undefined ? (
+    <Fragment>
       <StudentNavigation />
 
       {/* [ Header ] start */}
@@ -147,7 +150,21 @@ function StudentDash({
 
           <StudentDashActions parents={parents} />
           {/* ////////////////////////////////////// */}
-          <Alert />
+          {/* <Alert /> */}
+          {/* { messages && messages !== null ?  <div className="demo-spacing-0">
+            <Alert
+              color="info"
+              isOpen={visible}
+              toggle={() => setVisible(false)}
+            >
+              <div className="alert-body">
+               You have received new feedback from your homework submission
+              </div>
+            </Alert>
+          </div>  :(
+            null
+          )} */}
+         
           {/* {!isComplete ? <PendingWork homeworks={homeworks} /> :    <CompleteWork /> } */}
           <PendingWork homeworks={homeworks} />
           {/* ////////////////////// */}
@@ -156,8 +173,7 @@ function StudentDash({
           {/* All my assigned classes */}
           <MyClassRooms classRooms={classRooms} />
 
-          <Feedback messages={messages} />
-          
+          <Feedback messages={ messages} />
         </div>
       </div>
     </Fragment>
@@ -182,7 +198,7 @@ const mapStateToProps = (state) => ({
   studentHomework: state.studentHomework,
   student: state.student,
   studentMsg: state.studentMsg,
-  parent: state.parent
+  parent: state.parent,
 });
 
 export default connect(mapStateToProps, {
@@ -191,5 +207,5 @@ export default connect(mapStateToProps, {
   getMyClass,
   getMsg,
   logoutStudent,
-  getParent
+  getParent,
 })(StudentDash);

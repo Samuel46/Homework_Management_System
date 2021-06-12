@@ -15,7 +15,7 @@ const TeacherMsgSchema = new Schema({
         require: true,
     },
     subject: {
-        type: String,
+        type: [String],
         required: true,
 
     },

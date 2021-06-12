@@ -18,7 +18,7 @@ router.get("/subject", authTeacher || auth, async (req, res) => {
       assign_teachers: teacher.name,
     });
 
-    console.log(teacher, "samulal here");
+   
 
     res.json(allSubject);
   } catch (err) {

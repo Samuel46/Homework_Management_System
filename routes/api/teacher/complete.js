@@ -11,7 +11,7 @@ const Student = require("../../../models/admin/students/Student");
 // @Access         Private
 router.get("/", authTeacher || authStudent, async (req, res) => {
   try {
-    console.log(req, "sss");
+   
     const homeWork = await Complete.find({ teacher: req.teacher.id }).populate(
         "student",
         ["name", "email"]

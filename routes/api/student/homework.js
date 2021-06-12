@@ -17,7 +17,7 @@ router.get("/", authStudent || authParent, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select("-password");
 
-    console.log(student, "samuel is hehehehehhehe");
+  
     const homeWork = await Homework.find({ students: student.name }).populate(
       "teacher",
       ["name", "email"]
@@ -30,93 +30,6 @@ router.get("/", authStudent || authParent, async (req, res) => {
   }
 });
 
-// @route POST /api/student/homework
-// description: Edit homework by student
-// @access private
-// router.post(
-//   "/:id",
-//   authStudent,
-//   check(
-//     "completeStudentWork",
-//     "Homework Empty👀! Make sure you copy your homework in the Homework editor in the correct format, in order to submityour homework😎"
-//   )
-//     .not()
-//     .isEmpty(),
-//   async (req, res) => {
-//     const id = req.params.id;
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
-
-//     const work = await Homework.findById(id);
-
-//     // complete homewok by the student
-//     const {
-//       title,
-//       teacher,
-//       subject,
-//       effort_time,
-//       allocate_classes,
-//       description,
-//       students,
-//       set_date,
-//       due_date,
-//       attachements,
-//       student,
-//       filename,
-//       isComplete,
-//       completeStudentWork,
-//       completeTime,
-//     } = req.body;
-
-//     const completeFields = {};
-//     completeFields.student = req.student.id;
-//     if (title) teacherFields.title = title;
-//     if (teacher) teacherFields.teacher = teacher;
-//     if (subject) teacherFields.subject = subject;
-//     if (effort_time) teacherFields.effort_time = effort_time;
-//     if (allocate_classes) teacherFields.allocate_classes = allocate_classes;
-//     if (description) teacherFields.description = description;
-//     if (students) teacherFields.students = students;
-//     if (set_date) teacherFields.set_date = set_date;
-//     if (due_date) teacherFields.due_date = due_date;
-//     if (attachements) teacherFields.attachements = attachements;
-//     if (student) teacherFields.student = student;
-//     if (filename) teacherFields.filename = filename;
-//     if (isComplete) teacherFields.isComplete = isComplete;
-//     if (completeStudentWork)
-//       teacherFields.completeStudentWork = completeStudentWork;
-//     if (completeTime) teacherFields.completeTime = completeTime;
-
-//     try {
-//       // see if user exists
-//       let completeWork = await Homework.findById({ id });
-
-//       if (newClass) {
-//         newClass = await Class.findOneAndUpdate(
-//           { name },
-//           { $set: profileFields },
-//           { new: true }
-//         );
-//         return res.json(newClass);
-//       }
-
-  
-//       newClass = new Complete(profileFields);
-     
-//       await newClass.save();
-      
-//       res.json({ profileFields });
-
-//       const homeDone = await completeWork.save();
-//       res.json(homeDone);
-//     } catch (err) {
-//       console.error(err.message);
-//       res.status(500).send("Server Error");
-//     }
-//   }
-// );
 
 // @Route Get   api/student/homework/work
 // @Descri      Get all classes associate with this student @@ pending homework
@@ -127,11 +40,13 @@ router.get("/work", authStudent || authParent, async (req, res) => {
     const classrooms = await Class.find({
       add_students: student.name,
     }).populate("user", ["name", "email"]);
-
-    // const allClass = classrooms.map((room) => console.log(room.name));
+    // const clasStudent = []
+    // .filter(event => calnder.includes(event.calenderType))
+    // const allClass = classrooms.filter((room) => clasStudent.includes(room.name));
     // const homeWork = await Homework.find({
-    //   allocate_classes: classrooms.map((room) => room.name),
+    //   allocate_classes: classrooms.filter((room) => room.name),
     // });
+    // console.log(allClass, 'sasasasasnnnnnnnnnn')
     res.json(classrooms);
   } catch (err) {
     console.error(err.message);

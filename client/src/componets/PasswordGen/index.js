@@ -176,7 +176,7 @@ function CodeGenerator() {
           </div>
 
           <button onClick={handleGeneratePassword} className="btn btn-light-primary mr-2">
-            Generate Password
+            Generate Code
           </button>
           <ToastContainer
             position='top-center'
