@@ -9,6 +9,9 @@ import { Select } from "antd";
 import Avatar from "../../utilities/avatar";
 import { Check } from "react-feather";
 import { toast } from "react-toastify";
+import { EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   getStudents,
   getSubject,
@@ -346,6 +349,22 @@ function CreateHomework({
                           />
                         </div>
                       </div>
+                       {/* <div className="col-sm-12">
+                        <div className="form-group">
+                          <label className="floating-label" htmlFor="Address">
+                            Description
+                          </label>
+
+                          <Editor
+                          editorState={description}
+                          onEditorStateChange={(data) => setDescription(data)}
+                          toolbarClassName="toolbarClassName"
+                          wrapperClassName="wrapperClassName"
+                          editorClassName="editorClassName"
+                        />
+                         
+                        </div>
+                      </div> */}
                       <div className="col-sm-6">
                         <div className="form-group fill">
                           <label

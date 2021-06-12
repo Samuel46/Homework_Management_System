@@ -48,6 +48,7 @@ router.post(
     // Bulilding homework object
     const homeworkFields = {};
     homeworkFields.teacher = req.teacher.id;
+    homeworkFields.student
     if (title) homeworkFields.title = title;
     if (subject) homeworkFields.subject = subject;
     if (effort_time) homeworkFields.effort_time = effort_time;

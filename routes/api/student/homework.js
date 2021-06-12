@@ -40,13 +40,7 @@ router.get("/work", authStudent || authParent, async (req, res) => {
     const classrooms = await Class.find({
       add_students: student.name,
     }).populate("user", ["name", "email"]);
-    // const clasStudent = []
-    // .filter(event => calnder.includes(event.calenderType))
-    // const allClass = classrooms.filter((room) => clasStudent.includes(room.name));
-    // const homeWork = await Homework.find({
-    //   allocate_classes: classrooms.filter((room) => room.name),
-    // });
-    // console.log(allClass, 'sasasasasnnnnnnnnnn')
+    
     res.json(classrooms);
   } catch (err) {
     console.error(err.message);

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { UncontrolledTooltip } from "reactstrap";
 import Alert from "../../layouts/Alert";
+
 const { Option } = Select;
 
 function EditHomeWorkForm({
@@ -36,7 +37,9 @@ function EditHomeWorkForm({
     setAttachements(selectedHomeWork.attachements || due_date);
   }, [selectedHomeWork]);
 
-  // render all classroom options from the admin
+
+ // render all classroom options from the admin
+ 
   const classOptions = classrooms.map((rooms) => (
     <Option value={rooms.name} key={rooms._id}>
       {rooms.name}
@@ -286,6 +289,7 @@ function EditHomeWorkForm({
               />
             </div>
           </div>
+           
           <div className="col-sm-6">
             <div className="form-group fill">
               <label className="floating-label" htmlFor="Occupation">
@@ -317,7 +321,7 @@ function EditHomeWorkForm({
 
           <div className="col-sm-6">
             <button type="submit" className="btn btn-success mr-2">
-              Create Homework
+              Update Homework
             </button>
             <Link to="/teacher-dashboard" className="btn btn-secondary">
               Go back

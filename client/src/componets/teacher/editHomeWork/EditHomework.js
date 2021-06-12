@@ -60,7 +60,7 @@ function EditHomework({
           {/* / */}
 
           {/* HomeworkList */}
-         
+
           <div className="container py-4">
             <div className="col-md-12 py-4">
               <div className="card shadow">
@@ -70,12 +70,12 @@ function EditHomework({
                     Teacher Name:{""} {teacher && teacher.name}
                   </h5>
                   <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
+                    <img
+                      src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
                 </div>
 
                 <div className="card-body">
