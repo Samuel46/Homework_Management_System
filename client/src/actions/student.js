@@ -40,7 +40,7 @@ export const loadStudent = () => async (dispatch) => {
 };
 
 // Register student/@@ admin level
-export const registerStudent = (formData, history) => async (dispatch) => {
+export const registerStudent = (formData) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const registerStudent = (formData, history) => async (dispatch) => {
     });
     dispatch(logoutStudent());
     dispatch(setAlert("Student registered", "success"));
-    history.push("./dashboard");
+   
 
     dispatch(loadStudent());
   } catch (err) {

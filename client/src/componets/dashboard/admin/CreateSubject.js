@@ -217,7 +217,7 @@ function CreateSubject({
                 )}
 
                 {/* add Teacher */}
-                {teachers !== null ? (
+                {teachers.length !== 0 ? (
                   <div className="col-sm-6 ">
                     <div className="form-group">
                       <label className="floating-label" htmlFor="Email">
@@ -238,22 +238,18 @@ function CreateSubject({
                     </div>
                   </div>
                 ) : (
-                  <h2>not available</h2>
-                  // <div className="col-sm-6">
-                  //   <div className="form-group">
-                  //     <label className="floating-label" htmlFor="Name">
-                  //       Allocate Class
-                  //     </label>
-                  //     <input
-                  //       name="allocate_classes"
-                  //       value={allocate_classes}
-                  //       type="text"
-                  //       className="form-control"
-                  //       id="Name"
-                  //       placeholder
-                  //     />
-                  //   </div>
-                  // </div>
+                  <Alert color="info">
+                  <h4 className="alert-heading">
+                    Teachers not found!
+                  </h4>
+                  <div className="alert-body">
+                    No Teachers are available! Make you add class to
+                    the subject,
+                    <Link to="/create-teacher">
+                      Create Class
+                    </Link>
+                  </div>
+                </Alert>
                 )}
 
                 <div className="col-sm-12">

@@ -47,7 +47,7 @@ function RegisterStudent({ registerStudent, history , auth:{user}, logout}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    registerStudent(formData, history);
+    registerStudent(formData);
   };
   return (
     <> 
