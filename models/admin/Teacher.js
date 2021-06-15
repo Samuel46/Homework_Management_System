@@ -23,7 +23,7 @@ const TeacherSchema = new mongoose.Schema({
   },
   allocate_classes: {
     type: [String],
-    required: true,
+    
   },
 
   profile_image: {

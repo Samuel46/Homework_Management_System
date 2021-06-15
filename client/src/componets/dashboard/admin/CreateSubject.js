@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { addSubject } from "../../../actions/subject";
 import PropTypes from "prop-types";
 import { Select } from "antd";
 import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import Navigation from "../Navigation";
-
+import {Alert}  from 'reactstrap'
 const { Option } = Select;
 function CreateSubject({
   addSubject,
@@ -160,7 +160,7 @@ function CreateSubject({
           </div>
           <div className="card-body">
             <div>
-              <Alert />
+              <NodeAlert />
             </div>
             <form className="form" onSubmit={(e) => onSubmit(e)}>
               <div className="row">
@@ -181,7 +181,7 @@ function CreateSubject({
                 </div>
                 {/* add classes */}
 
-                {classes !== null ? (
+                {classes.length !== 0 ? (
                   <div className="col-sm-6 ">
                     <div className="form-group">
                       <label className="floating-label" htmlFor="Email">
@@ -202,22 +202,18 @@ function CreateSubject({
                     </div>
                   </div>
                 ) : (
-                  <h2>no availabel</h2>
-                  // <div className="col-sm-6">
-                  //   <div className="form-group">
-                  //     <label className="floating-label" htmlFor="Name">
-                  //       Allocate Class
-                  //     </label>
-                  //     <input
-                  //       name="allocate_classes"
-                  //       value={allocate_classes}
-                  //       type="text"
-                  //       className="form-control"
-                  //       id="Name"
-                  //       placeholder
-                  //     />
-                  //   </div>
-                  // </div>
+                  <Alert color="info">
+                  <h4 className="alert-heading">
+                    Class not found!
+                  </h4>
+                  <div className="alert-body">
+                    No Classes are available! Make you add class to
+                    the subject,
+                    <Link to="/create-class">
+                      Create Class
+                    </Link>
+                  </div>
+                </Alert>
                 )}
 
                 {/* add Teacher */}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { Select } from "antd";
 const { Option } = Select;
 
@@ -48,7 +48,7 @@ function EditClassRoomForm({
 
   return (
     <>
-      <Alert />
+      <NodeAlert />
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="row">
           <div className="col-sm-6">

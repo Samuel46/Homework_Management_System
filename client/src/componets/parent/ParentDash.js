@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import Alert from '../layouts/Alert'
+import NodeAlert from '../layouts/NodeAlert'
 import Feedback from './Feedback'
 import CompleteWork from './CompleteWork'
 import ParentDashActions from './ParentDashActions'
@@ -113,7 +113,7 @@ function ParentDash({ getMsg, getCompletWork, getHomework, logoutParent, parent:
 
 
                             <ParentDashActions />
-                            <Alert />
+                            <NodeAlert />
                             {/* pending homework */}
                             <PendingWork homeworks={homeworks} />
                             {/* complete homework */}

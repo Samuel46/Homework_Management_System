@@ -68,11 +68,6 @@ function HomeworkItem({
     setFilename(e.target.files[0].name);
   };
 
-  const obj = {
-    completeStudentWork,
-    isComplete,
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -278,9 +273,9 @@ function HomeworkItem({
                         <strong>Description</strong>{" "}
                       </label>
                       <p>{homework && homework.description}</p>
-                      <button type="button" className="btn  btn-secondary">
+                      {/* <button type="button" className="btn  btn-secondary">
                         Download Homework Attachments
-                      </button>
+                      </button> */}
                     </div>
                     <div className="card-footer">
                       {/* submit homework */}

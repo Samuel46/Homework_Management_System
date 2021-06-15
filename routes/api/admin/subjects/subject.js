@@ -16,8 +16,7 @@ router.post(
     auth,
     [
       check("subject_name", "Class name is required").not().isEmpty(),
-      check("add_classes", "Add class is required").not().isEmpty(),
-      check("assign_teachers", "Assign teacher is required").not().isEmpty(),
+     
     ],
   ],
   async (req, res) => {

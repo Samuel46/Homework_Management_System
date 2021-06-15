@@ -7,7 +7,7 @@ import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
 import Moment from "react-moment";
 import TeacherTop from "../TeacherTop";
-import Alert from '../../layouts/Alert'
+import NodeAlert from '../../layouts/NodeAlert'
 import {
     Table,
     Badge,
@@ -121,7 +121,7 @@ function SubmitedItem({
 
           {/* HomeworkList */}
           <div className="py-4">
-            <Alert />
+            <NodeAlert />
 
             <div className="container">
               {complete && loading === null ? (

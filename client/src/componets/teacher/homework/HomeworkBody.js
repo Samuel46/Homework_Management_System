@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getHomework, getDoneWork } from '../../../actions/teacher/homework'
-import Alert from '../../layouts/Alert'
+import NodeAlert from '../../layouts/NodeAlert'
 import Spinner from '../../layouts/Spinner'
 
 
@@ -92,7 +92,7 @@ function HomeworkBody({ getHomework, getDoneWork, homework: { homeworks, isCompl
 
                         </div>
 
-                        <Alert />
+                        <NodeAlert />
 
                         {/* CompleteHomework */}
                         <CompleteWork isComplete={isComplete} />

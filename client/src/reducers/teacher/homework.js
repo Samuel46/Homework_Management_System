@@ -11,6 +11,8 @@ import {
   GET_STUDENTS_FAIL,
   GET_HOMEWORKBYID,
   UPDATE_HOMEWORK,
+  UPLOAD_HOMEWORK,
+  UPLOAD_HOMEWORK_FAIL
 } from "../../actions/types";
 
 const intialState = {
@@ -22,6 +24,7 @@ const intialState = {
   error: {},
   isComplete: [],
   complete: null,
+  uploads:[]
 };
 
 export default function (state = intialState, action) {
@@ -37,6 +40,14 @@ export default function (state = intialState, action) {
         loading: false,
       };
 
+       // upload homework by teacher
+    case UPLOAD_HOMEWORK:
+      return {
+        ...state,
+        uploads: payload,
+        loading: false,
+      };
+
     case GET_HOMEWORK:
       return {
         ...state,
@@ -49,6 +60,7 @@ export default function (state = intialState, action) {
         loading: false,
         selectedHomeWork: payload,
       };
+
     //    get all complete homework
     case GET_SUBMITED_HOMEWORK:
       return {
@@ -93,6 +105,7 @@ export default function (state = intialState, action) {
 
     case HOMEWORK_ERROR:
     case GET_STUDENTS_FAIL:
+      case UPLOAD_HOMEWORK_FAIL:
       return {
         ...state,
         error: payload,

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Select } from "antd";
 import Spinner from "../../layouts/Spinner";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 const { Option } = Select;
 
 function EditTeacherForm({
@@ -72,7 +72,7 @@ function EditTeacherForm({
   return classes !== null ? (
     <Fragment>
       <div>
-        <Alert />
+        <NodeAlert />
       </div>
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">

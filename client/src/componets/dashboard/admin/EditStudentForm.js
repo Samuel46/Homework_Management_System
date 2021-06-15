@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../../layouts/Spinner";
 import { Link, withRouter } from "react-router-dom";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import Moment from "react-moment";
 
 function EditStudentForm({ updateStudent, loading, selectedStudent }) {
@@ -66,7 +66,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
   };
   return loading !== true && selectedStudent !== null ? (
     <>
-      <Alert />
+      <NodeAlert />
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
           <div className="col-12">

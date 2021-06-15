@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { getHomework, getStudents } from '../../actions/teacher/homework'
 import { getClassRooms } from '../../actions/teacher/classRoom'
 import { useEffect } from 'react'
-import Alert from '../layouts/Alert'
+import NodeAlert from '../layouts/NodeAlert'
 
 
 
@@ -110,7 +110,7 @@ function TeacherBody({ getHomework, getStudents, getClassRooms, homework: { home
 
                 {/* HomeworkList */}
                 <div className="py-2">
-                    <Alert />
+                    <NodeAlert />
                 </div>
                 <HomeList homeworks={homeworks} />
                 {/* ClassList */}

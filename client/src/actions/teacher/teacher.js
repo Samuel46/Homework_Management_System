@@ -8,7 +8,40 @@ import {
   GET_STUDENTS_FAIL,
   GET_SUBJECTS,
   SUBJECT_ERROR,
+  UPLOAD_HOMEWORK,
+  UPLOAD_HOMEWORK_FAIL
 } from "../types";
+
+
+
+// UPLOAD HOMEWORK@@ teacher level
+export const uploadHomework = (formData) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "form-data",
+      },
+    };
+
+    const res = await axios.post(
+     "/api/teacher/teacher/upload",
+      formData,
+      config
+    );
+
+    dispatch({
+      type: UPLOAD_HOMEWORK,
+      payload: res.data,
+    });
+    dispatch(setAlert("Homework attachement uploaded", "success"));
+
+  } catch (err) {
+    dispatch({
+      type: UPLOAD_HOMEWORK_FAIL,
+      payload: { msg: err.response },
+    });
+  }
+};
 
 // get all subject by teacher's name
 export const getSubject = () => async (dispatch) => {

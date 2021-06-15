@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { Link, withRouter } from "react-router-dom";
 import StudentRes from "../../teacher/homework/StudentRes";
 import TeacherChat from "./TeacherChat";
@@ -59,7 +59,7 @@ function Feedback({
           <div className="py-4">
             <div className="container">
               <div className="col-md-12 py-4">
-                <Alert />
+                <NodeAlert />
 
                 <div className="card chat-card ">
                   <div class="cover-img-block img_img">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Alert from '../../layouts/Alert'
+import NodeAlert from '../../layouts/NodeAlert'
 import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -35,7 +35,7 @@ function RegisterParent({ registerParent, history }) {
 
                     <div className="card-body">
                         <div>
-                            <Alert />
+                            <NodeAlert />
                         </div>
                         <form onSubmit={e => onSubmit(e)} >
                             <div className="row">

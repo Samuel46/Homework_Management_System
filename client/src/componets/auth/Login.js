@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
-import Alert from '../layouts/Alert'
+import NodeAlert from '../layouts/NodeAlert'
 import LoginTeacher from './LoginTeacher';
 import LoginStudent from './LoginStudent';
 import LoginParent from './LoginParent';
@@ -42,7 +42,7 @@ function Login({ login, isAuthenticated }) {
             </div>
             <div className="col-md-6">
               <div className="card-body">
-                <Alert />
+                <NodeAlert />
                 <div className="text-left">
                   <h4 className="mb-3 f-w-600">Welcome to <span className="text-primary">Homework App</span></h4>
                   <p className="text-muted mb-4">Welcome back, Please login <br />into a account</p>

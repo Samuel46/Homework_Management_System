@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addHomework } from "../../actions/teacher/homework";
-import Alert from "../layouts/Alert";
+import NodeAlert from "../layouts/NodeAlert";
 import { Link, withRouter } from "react-router-dom";
 import { useState } from "react";
 import { Select } from "antd";
@@ -123,7 +123,7 @@ function CreateHomework({
 
           {/* HomeworkList */}
           <div className="py-2">
-            <Alert />
+            <NodeAlert />
           </div>
           <div className="container">
             <div className="col-md-12 py-4">
@@ -144,7 +144,7 @@ function CreateHomework({
 
                 <div className="card-body">
                   <div>
-                    <Alert />
+                    <NodeAlert />
                   </div>
                   <form onSubmit={(e) => onSubmit(e)}>
                     <div className="row">
@@ -317,7 +317,7 @@ function CreateHomework({
                         // </div>
                       )}
 
-                      <div className="col-sm-6">
+                      {/* <div className="col-sm-6">
                         <div className="form-group fill">
                           <label className="floating-label" htmlFor="Icon">
                             Attachements
@@ -332,7 +332,7 @@ function CreateHomework({
                             placeholder
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="floating-label" htmlFor="Address">

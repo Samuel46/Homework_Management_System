@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Alert from "../layouts/Alert";
+import NodeAlert from "../layouts/NodeAlert";
 import { addClassRoom } from "../../actions/teacher/classRoom";
 import PropTypes from "prop-types";
 import { Select } from "antd";
@@ -66,7 +66,7 @@ function AddClass({
 
           {/* HomeworkList */}
           <div className="py-2">
-            <Alert />
+            <NodeAlert />
           </div>
           <div className="container">
             <div className="col-md-12 py-4">
@@ -86,7 +86,7 @@ function AddClass({
                 </div>
                 <div className="card-body">
                   <div>
-                    <Alert />
+                    <NodeAlert />
                   </div>
                   <form className="form" onSubmit={(e) => onSubmit(e)}>
                     <div className="row">

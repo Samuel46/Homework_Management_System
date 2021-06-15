@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { Select } from "antd";
 import { Link, withRouter } from "react-router-dom";
 
@@ -69,7 +69,7 @@ function EditSubjectForm({
     (classes !== null && classes !== undefined) ? (
     <>
       <div>
-        <Alert />
+        <NodeAlert />
       </div>
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="row">

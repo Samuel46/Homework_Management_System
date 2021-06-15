@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { registerStudent } from "../../../actions/student";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -152,7 +152,7 @@ function RegisterStudent({ registerStudent, history , auth:{user}, logout}) {
           </div>
           <div className="card-body">
             <div className="py-1">
-              <Alert />
+              <NodeAlert />
             </div>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="row">

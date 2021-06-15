@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { getClassById } from "../../../actions/classRoom";
 import { getStudents } from "../../../actions/student";
 import { connect } from "react-redux";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { Select } from "antd";
 import Spinner from "../../layouts/Spinner";
 const { Option } = Select;
@@ -86,7 +86,7 @@ function EditClassForm({
     (students !== null && students !== undefined) ? (
     <>
       <div>
-        <Alert />
+        <NodeAlert />
       </div>
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <div className="row">

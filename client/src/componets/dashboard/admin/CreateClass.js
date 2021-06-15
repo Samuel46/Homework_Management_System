@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { addClassRoom } from "../../../actions/classRoom";
 import PropTypes from "prop-types";
 import { Select } from "antd";
 import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import Navigation from "../Navigation";
+import {Alert} from 'reactstrap'
 const { Option } = Select;
 
 function CreateClass({
@@ -15,7 +16,7 @@ function CreateClass({
   teacher: { teachers },
   student: { students },
   logout,
-  auth: {user}
+  auth: { user },
 }) {
   const [name, setName] = useState("");
   const [add_students, setAdd_Students] = useState([]);
@@ -61,9 +62,9 @@ function CreateClass({
     handleCreateClass();
   };
   return (
-    <> 
-    <Navigation/>
-    <header className="pc-header ">
+    <>
+      <Navigation />
+      <header className="pc-header ">
         <div className="header-wrapper">
           <div className="mr-auto pc-mob-drp">
             <ul className="list-unstyled"></ul>
@@ -145,147 +146,135 @@ function CreateClass({
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
 
-         
           <div className="py-4">
-          <div className="container">
-      <div className="col-md-12 py-4">
-        <div className="card">
-          <div className="card-header">
-            <h4 className="card-title">Create Class</h4>
-            <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
+            <div className="container">
+              <div className="col-md-12 py-4">
+                <div className="card">
+                  <div className="card-header">
+                    <h4 className="card-title">Create Class</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <div>
+                      <NodeAlert />
+                    </div>
+                    <form className="form" onSubmit={(e) => onSubmit(e)}>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Class Name
+                            </label>
+                            <input
+                              onChange={(e) => setName(e.target.value)}
+                              name="name"
+                              value={name}
+                              type="text"
+                              className="form-control"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+                        {/* add students */}
+
+                        {students.length !== 0 ? (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Add Students
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Add Students"
+                                onChange={setAdd_Students}
+                                value={add_students}
+                              >
+                                {studentOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        ) : (
+                          <Alert color="info">
+                            <h4 className="alert-heading">
+                              Students not found!
+                            </h4>
+                            <div className="alert-body">
+                              No Students available! make you add students to
+                              the classroom,
+                              <Link to="/create-student">
+                                Register Students
+                              </Link>
+                            </div>
+                          </Alert>
+                        )}
+
+                        {/* add Teacher */}
+
+                        {teachers.length !== 0 ? (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Assign Teacher
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Assign Teacher"
+                                onChange={setAssign_Teachers}
+                                value={assign_teachers}
+                              >
+                                {teacherOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        ) : (
+                          <Alert color="info">
+                            <h4 className="alert-heading">
+                              Teachers not found!
+                            </h4>
+                            <div className="alert-body">
+                              No Teacher's are available! Make you add teachers to
+                              the classroom,
+                              <Link to="/create-teacher">
+                                Register Teachers
+                              </Link>
+                            </div>
+                          </Alert>
+                        )}
+
+                        <div className="col-sm-12">
+                          <button
+                            type="submit"
+                            className="btn btn-success mr-2"
+                          >
+                            Add Class
+                          </button>
+                          <Link to="/dashboard" className="btn btn-secondary">
+                            Go Back
+                          </Link>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-          </div>
-          <div className="card-body">
-            <div>
-              <Alert />
             </div>
-            <form className="form" onSubmit={(e) => onSubmit(e)}>
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label className="floating-label" htmlFor="Name">
-                      Class Name
-                    </label>
-                    <input
-                      onChange={(e) => setName(e.target.value)}
-                      name="name"
-                      value={name}
-                      type="text"
-                      className="form-control"
-                      placeholder
-                    />
-                  </div>
-                </div>
-                {/* add students */}
-
-                {students !== null ? (
-                  <div className="col-sm-6 ">
-                    <div className="form-group">
-                      <label className="floating-label" htmlFor="Email">
-                        Add Students
-                      </label>
-                      <Select
-                        mode="multiple"
-                        autoFocus
-                        allowClear
-                        defaultValue={[""]}
-                        style={{ width: "100%" }}
-                        placeholder="Please Add Students"
-                        onChange={setAdd_Students}
-                        value={add_students}
-                      >
-                        {studentOptions}
-                      </Select>
-                    </div>
-                  </div>
-                ) : (
-                  <h2>no available</h2>
-                  // <div className="col-sm-6">
-                  //   <div className="form-group">
-                  //     <label className="floating-label" htmlFor="Name">
-                  //       Allocate Class
-                  //     </label>
-                  //     <input
-                  //       name="allocate_classes"
-                  //       value={allocate_classes}
-                  //       type="text"
-                  //       className="form-control"
-                  //       id="Name"
-                  //       placeholder
-                  //     />
-                  //   </div>
-                  // </div>
-                )}
-
-                {/* add Teacher */}
-
-                {teachers !== null ? (
-                  <div className="col-sm-6 ">
-                    <div className="form-group">
-                      <label className="floating-label" htmlFor="Email">
-                        Assign Teacher
-                      </label>
-                      <Select
-                        mode="multiple"
-                        autoFocus
-                        allowClear
-                        defaultValue={[""]}
-                        style={{ width: "100%" }}
-                        placeholder="Please Assign Teacher"
-                        onChange={setAssign_Teachers}
-                        value={assign_teachers}
-                      >
-                        {teacherOptions}
-                      </Select>
-                    </div>
-                  </div>
-                ) : (
-                  <h2>not available</h2>
-                  // <div className="col-sm-6">
-                  //   <div className="form-group">
-                  //     <label className="floating-label" htmlFor="Name">
-                  //       Allocate Class
-                  //     </label>
-                  //     <input
-                  //       name="allocate_classes"
-                  //       value={allocate_classes}
-                  //       type="text"
-                  //       className="form-control"
-                  //       id="Name"
-                  //       placeholder
-                  //     />
-                  //   </div>
-                  // </div>
-                )}
-
-                <div className="col-sm-12">
-                  <button type="submit" className="btn btn-success mr-2">
-                    Add Class
-                  </button>
-                  <Link to="/dashboard" className="btn btn-secondary">
-                    Go Back
-                  </Link>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>
-    </div>
-          </div>
-
-         
-        </div>
-      </div>
-    
-  
-
-    
     </>
   );
 }
@@ -301,7 +290,7 @@ CreateClass.propType = {
 const mapStateToProps = (state) => ({
   teacher: state.teacher,
   student: state.student,
-  auth: state.auth
+  auth: state.auth,
 });
 export default connect(mapStateToProps, { addClassRoom, logout })(
   withRouter(CreateClass)

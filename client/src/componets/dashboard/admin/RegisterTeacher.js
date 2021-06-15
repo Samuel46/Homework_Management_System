@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 import { registerTeacher } from "../../../actions/teacher";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { Select } from "antd";
 import { useForm } from "react-hook-form";
-import Navigation from '../Navigation'
-
+import Navigation from "../Navigation";
+import { Alert } from "reactstrap";
 import { logout } from "../../../actions/auth";
 const { Option } = Select;
-function RegisterTeacher({ registerTeacher, history, classRoom: { classes }, auth: { user }, logout }) {
-
+function RegisterTeacher({
+  registerTeacher,
+  history,
+  classRoom: { classes },
+  auth: { user },
+  logout,
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +30,8 @@ function RegisterTeacher({ registerTeacher, history, classRoom: { classes }, aut
       {rooms.name}
     </Option>
   ));
+
+  console.log(classes, "samuel here classes");
 
   // ** Adds New Lesson Event
   const handleAddClass = () => {
@@ -57,9 +64,9 @@ function RegisterTeacher({ registerTeacher, history, classRoom: { classes }, aut
   };
 
   return (
-    <> 
-    <Navigation/>
-    <header className="pc-header ">
+    <>
+      <Navigation />
+      <header className="pc-header ">
         <div className="header-wrapper">
           <div className="mr-auto pc-mob-drp">
             <ul className="list-unstyled"></ul>
@@ -141,158 +148,150 @@ function RegisterTeacher({ registerTeacher, history, classRoom: { classes }, aut
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
 
-         
           <div className="py-2">
-            <Alert />
+            <NodeAlert />
             <div className="container py-5">
-      <div className="col-md-12 py-4">
-        <div className="card ">
-          <div className="card-header">
-            <h4 className="card-title">Register Teacher</h4>
-            <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/add-user-concept-illustration_114360-458.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
-          </div>
-          <div className="card-body">
-            <div className="py-1">
-              <Alert />
-            </div>
-
-            <form onSubmit={(e) => onSubmit(e)}>
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label className="floating-label" htmlFor="Name">
-                      Name
-                    </label>
-                    <input
-                      onChange={(e) => setName(e.target.value)}
-                      name="name"
-                      value={name}
-                      type="text"
-                      className="form-control"
-                      id="Name"
-                      placeholder
-                    />
-                  </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="form-group fill">
-                    <label className="floating-label" htmlFor="Email">
-                      Email Address
-                    </label>
-                    <input
-                      onChange={(e) => setEmail(e.target.value)}
-                      name="email"
-                      value={email}
-                      type="email"
-                      className="form-control"
-                      id="Email"
-                      placeholder
-                    />
-                  </div>
-                </div>
-
-                {classes !== null ? (
-                  <div className="col-sm-6 ">
-                    <div className="form-group">
-                      <label className="floating-label" htmlFor="Email">
-                        Allocate Class
-                      </label>
-                      <Select
-                        mode="multiple"
-                        autoFocus
-                        allowClear
-                        defaultValue={[""]}
-                        style={{ width: "100%" }}
-                        placeholder="Please Allocate Classes"
-                        onChange={setAllocate_Classes}
-                        value={allocate_classes}
-                      >
-                        {classOptions}
-                      </Select>
+              <div className="col-md-12 py-4">
+                <div className="card ">
+                  <div className="card-header">
+                    <h4 className="card-title">Register Teacher</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/add-user-concept-illustration_114360-458.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
                     </div>
                   </div>
-                ) : (
-                  <h2>no availabel</h2>
-                  // <div className="col-sm-6">
-                  //   <div className="form-group">
-                  //     <label className="floating-label" htmlFor="Name">
-                  //       Allocate Class
-                  //     </label>
-                  //     <input
-                  //       name="allocate_classes"
-                  //       value={allocate_classes}
-                  //       type="text"
-                  //       className="form-control"
-                  //       id="Name"
-                  //       placeholder
-                  //     />
-                  //   </div>
-                  // </div>
-                )}
+                  <div className="card-body">
+                    <div className="py-1">
+                      <NodeAlert />
+                    </div>
 
-                <div className="col-sm-6">
-                  <div className="form-group fill">
-                    <label className="floating-label" htmlFor="Occupation">
-                      Joining Date
-                    </label>
-                    <input
-                      onChange={(e) => setJoining_Date(e.target.value)}
-                      name="joining_date"
-                      value={joining_date}
-                      type="date"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="col-sm-6">
-                  <div className="form-group fill">
-                    <label className="floating-label" htmlFor="Email">
-                      Password
-                    </label>
-                    <input
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      name="password"
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-                {/* <div className="col-sm-6 mt-4">
+                    <form onSubmit={(e) => onSubmit(e)}>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Name
+                            </label>
+                            <input
+                              onChange={(e) => setName(e.target.value)}
+                              name="name"
+                              value={name}
+                              type="text"
+                              className="form-control"
+                              id="Name"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+                        <div className="col-sm-6">
+                          <div className="form-group fill">
+                            <label className="floating-label" htmlFor="Email">
+                              Email Address
+                            </label>
+                            <input
+                              onChange={(e) => setEmail(e.target.value)}
+                              name="email"
+                              value={email}
+                              type="email"
+                              className="form-control"
+                              id="Email"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+
+                        {!classes.length && classes.length === 0 ? (
+                          <Alert color="info">
+                            <h4 className="alert-heading">Classes not found</h4>
+                            <div className="alert-body">
+                              No Classes are available! Make you assign a classroom to the teacher, 
+                              <Link to="/create-class">Create Classroom</Link>
+                            </div>
+                          </Alert>
+                        ) : (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Allocate Class
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Allocate Classes"
+                                onChange={setAllocate_Classes}
+                                value={allocate_classes}
+                              >
+                                {classOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="col-sm-6">
+                          <div className="form-group fill">
+                            <label
+                              className="floating-label"
+                              htmlFor="Occupation"
+                            >
+                              Joining Date
+                            </label>
+                            <input
+                              onChange={(e) => setJoining_Date(e.target.value)}
+                              name="joining_date"
+                              value={joining_date}
+                              type="date"
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-sm-6">
+                          <div className="form-group fill">
+                            <label className="floating-label" htmlFor="Email">
+                              Password
+                            </label>
+                            <input
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
+                              name="password"
+                              type="password"
+                              className="form-control"
+                              id="password"
+                              placeholder="Password"
+                            />
+                          </div>
+                        </div>
+                        {/* <div className="col-sm-6 mt-4">
                                     <div className="form-group fill">
                                         <button className="btn btn-secondary">Reset Password</button>
                                     </div>
                                 </div> */}
-                <div className="col-sm-12">
-                  <button type="submit" className="btn btn-success mr-2">
-                    Add Teacher
-                  </button>
-                  <Link to="/dashboard" className="btn btn-secondary">
-                    Go Back
-                  </Link>
+                        <div className="col-sm-12">
+                          <button
+                            type="submit"
+                            className="btn btn-success mr-2"
+                          >
+                            Add Teacher
+                          </button>
+                          <Link to="/dashboard" className="btn btn-secondary">
+                            Go Back
+                          </Link>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-          </div>
-
-        
         </div>
       </div>
       {/*  */}
-  
-
     </>
   );
 }
@@ -306,7 +305,7 @@ RegisterTeacher.propTypes = {
 
 const mapStateToProps = (state) => ({
   classRoom: state.classRoom,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { registerTeacher, logout })(

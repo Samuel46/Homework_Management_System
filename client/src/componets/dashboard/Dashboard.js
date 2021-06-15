@@ -9,7 +9,7 @@ import Spinner from "../layouts/Spinner";
 import { logout } from "../../actions/auth";
 import Navigation from "./Navigation";
 import AdminAction from "./admin/AdminAction";
-import Alert from "../layouts/Alert";
+import NodeAlert from "../layouts/NodeAlert";
 import Class from "./admin/ClassList";
 import { getClasses } from "../../actions/classRoom";
 import SubjectList from "./admin/SubjectList";
@@ -18,6 +18,7 @@ import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
 import TeacherList from "./admin/TeacherList";
 import StudentList from "./admin/StudentList";
+import {Alert} from 'reactstrap'
 
 function Dashboard({
   getClasses,
@@ -46,10 +47,8 @@ function Dashboard({
     getSubject();
   }, [getSubject]);
 
-  return (loading && teachers !== null) ||
-    students !== null ||
-    classes !== null ||
-    subjects !== null ? (
+  
+  return user !== null && user !== undefined ?(
     <Fragment>
       {/* Navigation */}
       <Navigation />
@@ -139,7 +138,29 @@ function Dashboard({
 
           <AdminAction />
           <div className="py-2">
-            <Alert />
+            <NodeAlert />
+            {!classes.length && !students.length && !teachers.length && !subjects.length ?
+            <Alert color="danger">
+            <h4 className="alert-heading">
+              Welcome to Homework APP!!🏩
+            </h4>
+            <div className="alert-body">
+              Are you ready to setup your account✨  <br /> First add the students😄  <Link to="/create-student">
+                Register Students
+              </Link> <br />
+              Then add some teachers😎
+              <Link to="/create-teacher">
+                Create Teacher
+              </Link> <br /> Finally you could add classes <Link to="/create-class">
+                Create Classes
+              </Link> or subjects depending on your preferences🤗
+              <Link to="/create-subject">
+                Create Subject📜
+              </Link>
+            </div>
+          </Alert> : null
+          }
+             
             <TeacherList teachers={teachers} />
             <StudentList students={students} />
             <Class classes={classes} />

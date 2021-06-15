@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import ParentInfo from './ParentInfo'
 import { getParent } from '../../../actions/student/parents/parent'
-import Alert from '../../layouts/Alert'
+import NodeAlert from '../../layouts/NodeAlert'
 import { logoutStudent } from '../../../actions/student'
 
 
@@ -120,7 +120,7 @@ function StudentAccount({ studentHomework: { homeworks, completework }, studentM
                         </div>
 
                         <div className="col-md-12">
-                            <Alert /></div>
+                            <NodeAlert /></div>
                         {/* Personal information */}
                         <div className="col-md-12">
                             <div className="card">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { UncontrolledTooltip } from "reactstrap";
-import Alert from "../../layouts/Alert";
+import NodeAlert from "../../layouts/NodeAlert";
 
 const { Option } = Select;
 
@@ -91,7 +91,7 @@ function EditHomeWorkForm({
 
   return (
     <>
-      <Alert />
+      <NodeAlert />
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
           <div className="col-sm-6">
