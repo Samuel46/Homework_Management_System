@@ -30,10 +30,13 @@ function ParentDash({ getMsg, getCompletWork, getHomework, logoutParent, parent:
         getMsg()
     }, [getMsg])
 
+    
+
     return (
+        
 
         <Fragment>
-            {parent === null && loading ? <Spinner /> :
+            {parent !== null && parent !== undefined  ? 
                 <Fragment>
                     <ParentNavigation />
                     {/* Header section */}
@@ -124,7 +127,10 @@ function ParentDash({ getMsg, getCompletWork, getHomework, logoutParent, parent:
                             {/* <Feedback messages={messages} /> */}
                         </div>
                     </div>
-                </Fragment>}
+                </Fragment> :
+                <Spinner /> 
+                
+            }
 
         </Fragment>
     )

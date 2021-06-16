@@ -9,7 +9,6 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
     name: "",
     email: "",
     username: "",
-    code: "",
     birth_date: Date,
     gender: "",
     joining_date: Date,
@@ -24,7 +23,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
       email: loading || !selectedStudent.email ? "" : selectedStudent.email,
       username:
         loading || !selectedStudent.username ? "" : selectedStudent.username,
-      code: loading || !selectedStudent.code ? "" : selectedStudent.code,
+     
       gender: loading || !selectedStudent.gender ? "" : selectedStudent.gender,
       joining_date:
         loading || !selectedStudent.joining_date
@@ -182,19 +181,6 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               />
             </div>
           </div>
-          <div className="col-sm-2">
-            <div className="form-group fill">
-              <label className="floating-label">Student Code</label>
-              <input
-                onChange={(e) => onChange(e)}
-                value={code}
-                name="code"
-                type="password"
-                className="form-control"
-                id="Birth"
-              />
-            </div>
-          </div>
           <div className="col-sm-6">
             <div className="form-group">
               <label className="floating-label" htmlFor="Sex">
@@ -216,12 +202,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
           <div className="col-sm-6">
             <div className="form-group"></div>
           </div>
-          <div className="col-sm-6">
-            <div className="form-group">
-              <button className="btn btn-secondary">Reset Password</button>
-            </div>
-          </div>
-
+       
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success mr-2">
               Add Student

@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { Select } from "antd";
-import { useForm } from "react-hook-form";
 import Navigation from "../Navigation";
 import { Alert } from "reactstrap";
 import { logout } from "../../../actions/auth";
 const { Option } = Select;
+
 function RegisterTeacher({
   registerTeacher,
-  history,
   classRoom: { classes },
   auth: { user },
   logout,
@@ -31,7 +30,7 @@ function RegisterTeacher({
     </Option>
   ));
 
-  console.log(classes, "samuel here classes");
+ 
 
   // ** Adds New Lesson Event
   const handleAddClass = () => {

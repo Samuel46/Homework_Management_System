@@ -2,12 +2,14 @@ import React from "react";
 import { Fragment } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import Spinner from "../layouts/Spinner";
 
 function PendingWork({ homeworks }) {
+ 
   const pendingWork = homeworks.map((homework) => (
     <tr key={homework._id}>
       <td>{homework.title}</td>
-      <td>{/* {Object.values(homework.teacher.name)} */}</td>
+      <td>{Object.values( homework.teacher.name)}</td>
       <td>{homework.subject}</td>
       <td>
         <Moment format="YYYY/MM/DD">{homework.set_date}</Moment>
@@ -29,7 +31,7 @@ function PendingWork({ homeworks }) {
       </td>
     </tr>
   ));
-  return (
+  return  homeworks.length !== 0 ? (
     <Fragment>
       <div className="col-md-12" id="pending__homework">
         <div className="card shadow">
@@ -77,7 +79,9 @@ function PendingWork({ homeworks }) {
         </div>
       </div>
     </Fragment>
-  );
+  ): (
+    <Spinner/>
+  )
 }
 
 export default PendingWork;

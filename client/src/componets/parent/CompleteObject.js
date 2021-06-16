@@ -8,6 +8,11 @@ import { getDoneWorkById } from "../../actions/parent/homework";
 import Spinner from "../layouts/Spinner";
 import ParentNavigation from "./ParentNavigation";
 import { logoutParent } from "../../actions/student/parents/parent";
+import {
+  Table,
+  Badge,
+  
+} from "reactstrap";
 
 function CompleteObject({
   getDoneWorkById,
@@ -117,7 +122,7 @@ function CompleteObject({
           </div>
 
           <div className="container py-5">
-            {complete && loading === null ? (
+            {complete  === null ? (
               <Spinner />
             ) : (
               <Fragment>
@@ -149,6 +154,37 @@ function CompleteObject({
                     </div>
                     {/*  */}
                     {/* Dates */}
+                    <Table responsive>
+                      <thead>
+                        <tr>
+                          <th>Issued Date</th>
+                          <th>Due Date</th>
+                          <th>Effort Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <Badge pill color="light-success" className="mr-1">
+                              *
+                            </Badge>
+                            <Moment format="YYYY/MM/DD">
+                              {complete && complete.set_date}
+                            </Moment>
+                          </td>
+
+                          <td>
+                            <Badge pill color="light-danger" className="mr-1">
+                              *
+                            </Badge>
+                            <Moment format="YYYY/MM/DD">
+                              {complete && complete.due_date}
+                            </Moment>
+                          </td>
+                          <td>{complete && complete.effort_time}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
                     <div className="ml-4 pt-3">
                       <div className=" mb-1 ">
                         <strong>Issued</strong>: {""}

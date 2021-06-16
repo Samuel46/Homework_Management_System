@@ -21,19 +21,23 @@ function TeacherDash({
         loadTeacher()
     }, [loadTeacher])
 
+
+    
     return (
         <Fragment>
             {
 
-                loading && teacher === null ?
-                    <Spinner />
-                    :
-                    <Fragment>
+                teacher !== null && teacher !== undefined ?
+                <Fragment>
                         <div>
                             <TeacherTop />
                         </div>
                         <TeacherBody />
                     </Fragment>
+                   
+                    :
+                    <Spinner />
+                    
             }
 
 

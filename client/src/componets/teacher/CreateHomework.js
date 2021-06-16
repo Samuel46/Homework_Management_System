@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Alert } from "reactstrap";
 import {
   getStudents,
   getSubject,
@@ -162,7 +163,15 @@ function CreateHomework({
                         </div>
                       </div>
 
-                      {subjects !== null ? (
+                      {!subjects.length && subjects.length === 0 ? (
+                        <Alert color="info">
+                          <h4 className="alert-heading">Subjects not found</h4>
+                          <div className="alert-body">
+                            No Subjects are available! Make you assign a
+                            subject to the homework
+                          </div>
+                        </Alert>
+                      ) : (
                         <div className="col-sm-6 ">
                           <div className="form-group">
                             <label className="floating-label" htmlFor="Email">
@@ -182,23 +191,6 @@ function CreateHomework({
                             </Select>
                           </div>
                         </div>
-                      ) : (
-                        <h2>no availabel</h2>
-                        // <div className="col-sm-6">
-                        //   <div className="form-group">
-                        //     <label className="floating-label" htmlFor="Name">
-                        //       Allocate Class
-                        //     </label>
-                        //     <input
-                        //       name="allocate_classes"
-                        //       value={allocate_classes}
-                        //       type="text"
-                        //       className="form-control"
-                        //       id="Name"
-                        //       placeholder
-                        //     />
-                        //   </div>
-                        // </div>
                       )}
 
                       <div className="col-sm-6">
@@ -218,7 +210,15 @@ function CreateHomework({
                           />
                         </div>
                       </div>
-                      {classrooms !== null ? (
+                      {!classrooms.length && classrooms.length === 0 ? (
+                        <Alert color="info">
+                          <h4 className="alert-heading">Classes not found</h4>
+                          <div className="alert-body">
+                            No Classes are available! Make you assign a
+                            classroom to the homework
+                          </div>
+                        </Alert>
+                      ) : (
                         <div className="col-sm-6 ">
                           <div className="form-group">
                             <label className="floating-label" htmlFor="Email">
@@ -239,27 +239,18 @@ function CreateHomework({
                             </Select>
                           </div>
                         </div>
-                      ) : (
-                        <h2>no availabel</h2>
-                        // <div className="col-sm-6">
-                        //   <div className="form-group">
-                        //     <label className="floating-label" htmlFor="Name">
-                        //       Allocate Class
-                        //     </label>
-                        //     <input
-                        //       name="allocate_classes"
-                        //       value={allocate_classes}
-                        //       type="text"
-                        //       className="form-control"
-                        //       id="Name"
-                        //       placeholder
-                        //     />
-                        //   </div>
-                        // </div>
                       )}
 
                       {/* student options */}
-                      {studentList !== null ? (
+                      {!studentList.length && studentList === 0 ? (
+                        <Alert color="info">
+                          <h4 className="alert-heading">Student not found</h4>
+                          <div className="alert-body">
+                            No Student's are available! Make you assign a
+                            student to the homework
+                          </div>
+                        </Alert>
+                      ) : (
                         <div className="col-sm-6 ">
                           <div className="form-group">
                             <label
@@ -298,23 +289,6 @@ function CreateHomework({
                             </Select>
                           </div>
                         </div>
-                      ) : (
-                        <h2>no availabel</h2>
-                        // <div className="col-sm-6">
-                        //   <div className="form-group">
-                        //     <label className="floating-label" htmlFor="Name">
-                        //       Allocate Class
-                        //     </label>
-                        //     <input
-                        //       name="allocate_classes"
-                        //       value={allocate_classes}
-                        //       type="text"
-                        //       className="form-control"
-                        //       id="Name"
-                        //       placeholder
-                        //     />
-                        //   </div>
-                        // </div>
                       )}
 
                       {/* <div className="col-sm-6">
@@ -349,7 +323,7 @@ function CreateHomework({
                           />
                         </div>
                       </div>
-                       {/* <div className="col-sm-12">
+                      {/* <div className="col-sm-12">
                         <div className="form-group">
                           <label className="floating-label" htmlFor="Address">
                             Description

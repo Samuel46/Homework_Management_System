@@ -1,82 +1,236 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
-import { Fragment } from 'react'
-import Moment from 'react-moment'
-import { getHomeworkBy_id } from '../../actions/parent/homework'
-import Spinner from '../layouts/Spinner'
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { Fragment } from "react";
+import Moment from "react-moment";
+import { getHomeworkBy_id } from "../../actions/parent/homework";
+import Spinner from "../layouts/Spinner";
+import ParentNavigation from "./ParentNavigation";
+import { logoutParent } from "../../actions/student/parents/parent";
+import {
+    Table,
+    Badge,
+    
+  } from "reactstrap";
 
-
-function HomeworkObject({ getHomeworkBy_id, parentwork: { homework, loading
-
-}, match, history
+function HomeworkObject({
+  getHomeworkBy_id,
+  parentwork: { homework, loading },
+  parent: { parent }, 
+  match,
+  history,
 }) {
-    useEffect(() => {
-        getHomeworkBy_id(match.params.id)
-    }, [getHomeworkBy_id, match.params.id])
+  useEffect(() => {
+    getHomeworkBy_id(match.params.id);
+  }, [getHomeworkBy_id, match.params.id]);
+ 
 
-
-    return (
+  return (
+    <Fragment>
+      {homework === null ? (
+        <Spinner />
+      ) : (
         <Fragment>
-
-            {homework && loading === null ? <Spinner /> : <Fragment>
-                <div className="container">
-                    <div className="py-2">
-                        <div className="card bg-secondary">
-                            <div className="card-header ">
-                                <h4>Homework details</h4>
-                            </div>
-                            {/*  */}
-                            <div className="card-header">
-                                <label className="floating-label"> <strong>Title</strong> </label>
-                                <h5 className="card-title">{homework && homework.title}</h5>
-
-                            </div>
-                            {/*  */}
-                            {/* Dates */}
-                            <div className="ml-4">
-                                <div className=" mb-1 ">
-                                    <strong>Issued</strong>:<Moment format='YYYY/MM/DD' >{homework && homework.set_date}</Moment>
-                                </div>
-                                <div className=" mb-1">
-                                    <strong>Due</strong>: <Moment format='YYYY/MM/DD' >{homework && homework.due_date}</Moment>
-                                </div>
-                                <div className="mb-1">
-                                    <strong>Effort estimate</strong>:  {homework && homework.effort_time}
-                                </div>
-                            </div>
-                            <div className="card-body ">
-                                <label className="floating-label"> <strong>Description</strong> </label>
-                                <p>{homework && homework.description}</p>
-                                <button type="button" className="btn  btn-secondary mr-3">View
-            Attachments</button>
-                                <Link to="/parent-dashboard" className="btn  btn-secondary">Go Back</Link>
-                            </div>
-
-
-
-                        </div>
+          <ParentNavigation />
+          {/* Header section */}
+          <header className="pc-header ">
+            <div className="header-wrapper">
+              <div className="mr-auto pc-mob-drp">
+                <ul className="list-unstyled"></ul>
+              </div>
+              <div className="ml-auto">
+                <ul className="list-unstyled">
+                  <li className="pc-h-item ">
+                    <Link
+                      onClick={logoutParent}
+                      to="#!"
+                      className="dropdown-item"
+                    >
+                      <i className="fas fa-sign-out-alt"></i>
+                      {""}
+                      <span>Logout</span>
+                    </Link>
+                  </li>
+                  <li className="dropdown pc-h-item">
+                    <a
+                      className="pc-head-link dropdown-toggle arrow-none mr-0"
+                      data-toggle="dropdown"
+                      href="#"
+                      role="button"
+                      aria-haspopup="false"
+                      aria-expanded="false"
+                    >
+                      <span>
+                        <span className="user-name">
+                          {" "}
+                          {parent &&
+                            Object.values(parent && parent.student.name)}
+                        </span>
+                        <span className="user-desc">Studen't Account</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li className="dropdown pc-h-item">
+                    <a
+                      className="pc-head-link dropdown-toggle arrow-none mr-0"
+                      data-toggle="dropdown"
+                      href="#"
+                      role="button"
+                      aria-haspopup="false"
+                      aria-expanded="false"
+                    >
+                      <span>
+                        <span className="user-name">
+                          {parent && parent.name}
+                        </span>
+                        <span className="user-desc">Parent</span>
+                      </span>
+                    </a>
+                    <div className="dropdown-menu dropdown-menu-right pc-h-dropdown">
+                      <div className=" dropdown-header">
+                        <h6 className="text-overflow m-0">
+                          Welcome !{parent && parent.name}
+                        </h6>
+                      </div>
+                      <a
+                        href="../students/account.html"
+                        className="dropdown-item"
+                      >
+                        <i data-feather="user" />
+                        <span>My Account</span>
+                      </a>
+                      <Link
+                        onClick={logoutParent}
+                        href="#!"
+                        className="dropdown-item"
+                      >
+                        <i data-feather="power" />
+                        <span>Logout</span>
+                      </Link>
                     </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </header>
 
+          {/* [ Main Content ] start */}
+          <div className="pc-container">
+            <div className="pcoded-content">
+              {/* [ breadcrumb ] start */}
+              <div className="page-header mb-3">
+                <div className="page-block">
+                  <div className="row align-items-center">
+                    <div className="col-md-12">
+                      <div className="page-header-title">
+                        <h5 className="m-b-10">Parent's Name</h5>
+                      </div>
+                      <ul className="breadcrumb">
+                        <li className="breadcrumb-item m-b-8">
+                          {parent && parent.name}
+                        </li>
+                      </ul>
+                    </div>
+                    {/*  */}
+                  </div>
                 </div>
+              </div>
 
-            </Fragment>}
+              <div className="container py-5">
+                <div className="py-2">
+                  <div className="card ">
+                    <div className="card-header ">
+                      <h4>Homework details</h4>
+                      <div class="cover-img-block img_img">
+                    <img
+                      src="https://image.freepik.com/free-vector/happy-kid-school_97632-828.jpg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                    </div>
+                    {/*  */}
+                    <div className="card-header">
+                      <label className="floating-label">
+                        {" "}
+                        <strong>Title</strong>{" "}
+                      </label>
+                      <h5 className="card-title">
+                        {homework && homework.title}
+                      </h5>
+                    </div>
+                    {/*  */}
+                    {/* Dates */}
+                    <Table responsive>
+                      <thead>
+                        <tr>
+                          <th>Issued Date</th>
+                          <th>Due Date</th>
+                          <th>Effort Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <Badge pill color="light-success" className="mr-1">
+                              *
+                            </Badge>
+                            <Moment format="YYYY/MM/DD">
+                              {homework && homework.set_date}
+                            </Moment>
+                          </td>
+
+                          <td>
+                            <Badge pill color="light-danger" className="mr-1">
+                              *
+                            </Badge>
+                            <Moment format="YYYY/MM/DD">
+                              {homework && homework.due_date}
+                            </Moment>
+                          </td>
+                          <td>{homework && homework.effort_time}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                   
+                    <div className="card-body bg-light-primary ">
+                      <label className="floating-label">
+                        {" "}
+                        <strong>Description</strong>{" "}
+                      </label>
+                      <p>{homework && homework.description}</p>
+
+                      <Link
+                        to="/parent-dashboard"
+                        className="btn  btn-secondary"
+                      >
+                        Go Back
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </Fragment>
-
-
-    )
+      )}
+    </Fragment>
+  );
 }
 
 HomeworkObject.propTypes = {
-    getHomeworkBy_id: PropTypes.func.isRequired,
-    parentwork: PropTypes.object.isRequired,
+  getHomeworkBy_id: PropTypes.func.isRequired,
+  parentwork: PropTypes.object.isRequired,
+  parent: PropTypes.object.isRequired,
 
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+  parentwork: state.parentwork,
+  parent: state.parent
+});
 
-    parentwork: state.parentwork,
-})
-
-export default connect(mapStateToProps, { getHomeworkBy_id })(withRouter(HomeworkObject))
+export default connect(mapStateToProps, { getHomeworkBy_id })(
+  withRouter(HomeworkObject)
+);

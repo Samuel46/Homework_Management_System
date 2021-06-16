@@ -17,13 +17,8 @@ router.post(
     authTeacher || authStudent,
     [
       check("title", "Title is required").not().isEmpty(),
-      check("subject", "Subject is required").not().isEmpty(),
-
       check("effort_time", "Effort time is required").not().isEmpty(),
-
-      check("allocate_classes", "Please allocate a class").not().isEmpty(),
       check("description", "Description is required").not().isEmpty(),
-
       check("set_date", "Set date is required").not().isEmpty(),
     ],
   ],
