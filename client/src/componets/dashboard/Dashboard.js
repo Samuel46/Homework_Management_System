@@ -172,11 +172,11 @@ function Dashboard({
             !subjects.length ? (
               <Alert color="primary">
                 <h4 className="alert-heading">
-                You're almost there🏃‍♂️!!  Setup The Classes & Subjects
+                You're almost there🏃‍♂️!! 
                 </h4>
-                <div class="cover-img-block img_img">✔✔</div>
+                <div class="cover-img-block img_img">😄</div>
                 <div className="alert-body">
-                  
+                Setup the Classes
                   <Link to="/create-class">Create Classes</Link>
                 </div>
               </Alert>

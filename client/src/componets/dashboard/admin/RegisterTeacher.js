@@ -148,7 +148,7 @@ function RegisterTeacher({
           {/* [ Main Content ] start */}
 
           <div className="py-2">
-            <NodeAlert />
+           
             <div className="container py-5">
               <div className="col-md-12 py-4">
                 <div className="card ">
