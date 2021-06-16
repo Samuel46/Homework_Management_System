@@ -18,7 +18,7 @@ import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
 import TeacherList from "./admin/TeacherList";
 import StudentList from "./admin/StudentList";
-import {Alert} from 'reactstrap'
+import { Alert } from "reactstrap";
 
 function Dashboard({
   getClasses,
@@ -47,8 +47,7 @@ function Dashboard({
     getSubject();
   }, [getSubject]);
 
-  
-  return user !== null && user !== undefined ?(
+  return user !== null && user !== undefined ? (
     <Fragment>
       {/* Navigation */}
       <Navigation />
@@ -139,28 +138,65 @@ function Dashboard({
           <AdminAction />
           <div className="py-2">
             <NodeAlert />
-            {!classes.length && !students.length && !teachers.length && !subjects.length ?
-            <Alert color="danger">
-            <h4 className="alert-heading">
-              Welcome to Homework APP!!🏩
-            </h4>
-            <div className="alert-body">
-              Are you ready to setup your account✨  <br /> First add the students😄  <Link to="/create-student">
-                Register Students
-              </Link> <br />
-              Then add some teachers😎
-              <Link to="/create-teacher">
-                Create Teacher
-              </Link> <br /> Finally you could add classes <Link to="/create-class">
-                Create Classes
-              </Link> or subjects depending on your preferences🤗
-              <Link to="/create-subject">
-                Create Subject📜
-              </Link>
-            </div>
-          </Alert> : null
-          }
-             
+            {!classes.length &&
+            !students.length &&
+            !teachers.length &&
+            !subjects.length ? (
+              <Alert color="danger">
+                <h4 className="alert-heading">Welcome to Homework APP!!🏩</h4>
+                <div className="alert-body">
+                  Are you ready to setup your account✨ <br /> First add the
+                  students😄 <Link to="/create-student">Register Students</Link>{" "}
+                </div>
+              </Alert>
+            ) : null}
+
+            {!classes.length &&
+            students.length &&
+            !teachers.length &&
+            !subjects.length ? (
+              <Alert color="primary">
+                <h4 className="alert-heading">
+                  Now! Let's Setup The Teacher😎
+                </h4>
+                <div className="alert-body">
+                  Add some cool teachers😎
+                  <Link to="/create-teacher">Create Teacher</Link> <br />{" "}
+                </div>
+              </Alert>
+            ) : null}
+
+            {!classes.length &&
+            students.length &&
+            teachers.length &&
+            !subjects.length ? (
+              <Alert color="primary">
+                <h4 className="alert-heading">
+                You're almost there🏃‍♂️!!  Setup The Classes & Subjects
+                </h4>
+                <div class="cover-img-block img_img">✔✔</div>
+                <div className="alert-body">
+                  
+                  <Link to="/create-class">Create Classes</Link>
+                </div>
+              </Alert>
+            ) : null}
+
+            {classes.length &&
+            students.length &&
+            teachers.length &&
+            !subjects.length ? (
+              <Alert color="success">
+                <h4 className="alert-heading">Finally!! Setup The Subjects</h4>
+                <div class="cover-img-block img_img">🤗🤗</div>
+                <div className="alert-body">
+                  You're done✨✨✨✨  <Link to="/create-subject">Create Subject📜</Link> <br />
+                  And you're ready to Rock🚀
+                 
+                </div>
+              </Alert>
+            ) : null}
+
             <TeacherList teachers={teachers} />
             <StudentList students={students} />
             <Class classes={classes} />
