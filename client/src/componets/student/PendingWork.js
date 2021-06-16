@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
 function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
+  console.log(homework,'saassasaasasa')
   const studenthomework = homeworks.map((homework) => (
     <tr key={homework._id}>
       <td>{homework.title}</td>
@@ -15,7 +16,8 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
           <ListGroupItem color="primary" className="mb-2">
             {" "}
             {""}Mr/Mrs {""}
-            {Object.values(homework && homework.teacher.name)}
+
+            {Object.values(homework !== null ? homework && homework.teacher.name : null)}
           </ListGroupItem>
         </ListGroup>
       </td>
