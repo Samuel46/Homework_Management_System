@@ -15,6 +15,7 @@ function EditTeacherForm({
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [create_classes, setCreate_Classes] = useState(false);
   const [joining_date, setJoining_Date] = useState("");
@@ -23,6 +24,7 @@ function EditTeacherForm({
   useEffect(() => {
     setName(selectedTeacher.name || name);
     setEmail(selectedTeacher.email || email);
+    setPassword(selectedTeacher.password || password);
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
     setCreate_Classes(selectedTeacher.create_classes || create_classes);
     setJoining_Date(selectedTeacher.joining_date || joining_date);
@@ -42,6 +44,7 @@ function EditTeacherForm({
     const obj = {
       name,
       email,
+      password,
       create_classes,
       joining_date,
       allocate_classes,
@@ -159,7 +162,22 @@ function EditTeacherForm({
               />
             </div>
           </div>
-        
+          <div className="col-sm-6 code_display">
+            <div className="form-group fill">
+              <label className="floating-label" htmlFor="Email">
+                Password
+              </label>
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
           {/* <div className="col-sm-6 mt-4">
                                     <div className="form-group fill">
                                         <button className="btn btn-secondary">Reset Password</button>

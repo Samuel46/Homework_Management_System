@@ -11,6 +11,9 @@
    
    
 }
+.code_display {
+    display: none !important;
+}
 .toolbarClassName {
     background-color:#e8e7fc !important;
 }
