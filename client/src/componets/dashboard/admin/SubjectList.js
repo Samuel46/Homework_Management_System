@@ -5,6 +5,13 @@ import { deleteSubject } from "../../../actions/subject";
 import { Table } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
 
 function SubjectList({ subjects, deleteSubject, history }) {
   const allSubjects = subjects.map((subject) => (
@@ -36,12 +43,18 @@ function SubjectList({ subjects, deleteSubject, history }) {
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={() => deleteSubject(subject._id, history)}
-          className="btn btn-danger btn-sm"
+
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this subject🙄?"
+          onConfirm={() => deleteSubject(subject._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </button>
+          <a href="#">Delete</a>
+        </Popconfirm>
       </td>
     </tr>
   ));

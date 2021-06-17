@@ -67,11 +67,14 @@ router.post(
 
     try {
       // update the students
+
       let student = await Student.findOne({ email });
       if (student) {
+        const salt = await bcrypt.genSalt(10);
+        const hashpassword = await bcrypt.hash(req.body.code, salt);
         student = await Student.findOneAndUpdate(
           { email },
-          { $set: studentField },
+          { $set: studentField, code: hashpassword },
           { new: true }
         );
         return res.json(student);

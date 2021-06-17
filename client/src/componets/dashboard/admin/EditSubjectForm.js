@@ -82,6 +82,7 @@ function EditSubjectForm({
                 onChange={(e) => setSubject_Name(e.target.value)}
                 name="subject_name"
                 value={subject_name}
+                disabled
                 type="text"
                 className="form-control"
                 placeholder

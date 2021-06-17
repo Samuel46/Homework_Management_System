@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
 function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
-  console.log(homework,'saassasaasasa')
   const studenthomework = homeworks.map((homework) => (
     <tr key={homework._id}>
       <td>{homework.title}</td>
@@ -16,8 +15,9 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
           <ListGroupItem color="primary" className="mb-2">
             {" "}
             {""}Mr/Mrs {""}
-
-            {Object.values(homework !== null ? homework && homework.teacher.name : null)}
+            {Object.values(
+              homework !== null ? homework && homework.teacher.name : null
+            )}
           </ListGroupItem>
         </ListGroup>
       </td>
@@ -42,7 +42,7 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
       </td>
     </tr>
   ));
-  return homeworks !== null && homeworks !== undefined ? (
+  return (
     <Fragment>
       <div className="container">
         <div className="row">
@@ -51,16 +51,16 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
               <div className="card-header">
                 <h4 className="text-danger">
                   <span className="badge badge-pill badge-danger">
-                    Pending Homework
+                    Homework
                   </span>
-                  
                 </h4>
                 <div class="cover-img-block img_img">
-											<img src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg" alt="" class="img-fluid"/>
-										</div>
-                <small className="mt-5 ml-3 py-4">
-                  <strong>Due date:</strong> 12/20/12
-                </small>
+                  <img
+                    src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
               </div>
               <div className="card-body">
                 <div className="row align-items-center m-l-0">
@@ -91,8 +91,6 @@ function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
         </div>
       </div>
     </Fragment>
-  ) : (
-    <Spinner />
   );
 }
 PendingWork.propTypes = {

@@ -99,9 +99,7 @@ export const submitHomework = (id, formData, history) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert("Homework Submited", "success"));
-
     history.push("/student-dashboard");
-    dispatch(removePending(id))
   } catch (err) {
     dispatch({
       type: HOMEWORK_ERROR,
@@ -121,7 +119,7 @@ export const removeHomework = (id) => async (dispatch) => {
     });
 
     dispatch(setAlert("Homework removed!", "danger"));
-    dispatch(getCompletWork())
+    dispatch(getCompletWork());
   } catch (err) {
     dispatch({
       type: HOMEWORK_ERROR,
@@ -130,9 +128,8 @@ export const removeHomework = (id) => async (dispatch) => {
   }
 };
 
-
 // Remove homework from pending to complete after the student submits the homework
-export const removePending= (id) => async (dispatch) => {
+export const removePending = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/student/homework/${id}`);
 
@@ -142,7 +139,7 @@ export const removePending= (id) => async (dispatch) => {
     });
 
     dispatch(setAlert("Homework removed!", "danger"));
-    dispatch(getCompletWork())
+    dispatch(getCompletWork());
   } catch (err) {
     dispatch({
       type: HOMEWORK_ERROR,

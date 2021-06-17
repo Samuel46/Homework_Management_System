@@ -53,9 +53,7 @@ function HomeworkItem({
   // file upload logics
   const [file, setFile] = useState("");
   const [isComplete, setIsComplete] = useState(false);
-  const [completeStudentWork, setCompleteWork] = useState(
-    EditorState.createEmpty()
-  );
+  const [completeStudentWork, setCompleteWork] = useState("");
   const [filename, setFilename] = useState("Attach Homework");
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState("");
@@ -63,6 +61,7 @@ function HomeworkItem({
 
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("completeStudentWork", completeStudentWork);
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
@@ -72,6 +71,7 @@ function HomeworkItem({
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("completeStudentWork", completeStudentWork);
 
     try {
       //   extracting the id from url
@@ -218,12 +218,12 @@ function HomeworkItem({
                     <div className="card-header ">
                       <h4>Homework Details</h4>
                       <div class="cover-img-block img_img">
-                    <img
-                      src="https://image.freepik.com/free-vector/happy-kid-school_97632-828.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
+                        <img
+                          src="https://image.freepik.com/free-vector/happy-kid-school_97632-828.jpg"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </div>
                     </div>
                     {/*  */}
                     <div className="card-header">
@@ -286,32 +286,26 @@ function HomeworkItem({
                         enctype="multipart/form-data"
                         id="attachWork"
                       >
-                        {/* <Card>
-                      <CardHeader>
-                        <UncontrolledTooltip
-                          placement="top"
-                          target="positionTop"
-                        >
-                          You can now edit you Homework here without leaving the
-                          app, Please make sure your homework is well organised
-                          and formated in the right manner
-                        </UncontrolledTooltip>
-                       
-                        
-                        <CardTitle id="positionTop" tag="h4">
-                          Homework Editor
-                        </CardTitle>
-                      </CardHeader>
-                      <CardBody id="positionTop">
-                        <Editor
-                          editorState={completeStudentWork}
-                          onEditorStateChange={(data) => setCompleteWork(data)}
-                          toolbarClassName="toolbarClassName"
-                          wrapperClassName="wrapperClassName"
-                          editorClassName="editorClassName"
-                        />
-                      </CardBody>
-                    </Card> */}
+                        <div className="form-group col-md-12 ">
+                          <label htmlFor="file" className="col-form-label">
+                            <ListGroup>
+                              <ListGroupItem color="info" className="mb-2">
+                                {" "}
+                                {""}🛠{""}
+                                Homework Editor
+                              </ListGroupItem>
+                            </ListGroup>
+                          </label>
+                          <textarea
+                            rows="6"
+                            className="form-control"
+                            type="completeStudentWork"
+                            value={completeStudentWork}
+                            onChange={(e) => setCompleteWork(e.target.value)}
+                            name="text"
+                            // id="file"
+                          />
+                        </div>
 
                         <div className="row">
                           <div className="form-group col-md-6 ">
@@ -331,12 +325,6 @@ function HomeworkItem({
                               name="file"
                               id="file"
                             />
-
-                            {/* <input
-                          type="submit"
-                          value="Upload Homework"
-                          className="btn btn-primary mt-2"
-                        /> */}
                           </div>
 
                           <div className="form-group col-md-6 mt-5 ">

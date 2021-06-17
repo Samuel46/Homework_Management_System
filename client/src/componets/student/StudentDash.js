@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { getMsg } from "../../actions/feedback/studentMsg";
 import MyClassRooms from "./MyClassRooms";
 import { getParent } from "../../actions/student/parents/parent";
+import setStudentToken from "../../utils/setStudentToken";
 
 function StudentDash({
   getHomework,
@@ -34,6 +35,10 @@ function StudentDash({
   studentMsg: { messages },
 }) {
 
+
+  if (localStorage.token) {
+    setStudentToken(localStorage.token);
+  }
   useEffect(() => {
     getHomework();
   }, [getHomework]);

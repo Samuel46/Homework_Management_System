@@ -7,25 +7,15 @@ import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
 import Moment from "react-moment";
 import TeacherTop from "../TeacherTop";
-import NodeAlert from '../../layouts/NodeAlert'
-import {
-    Table,
-    Badge,
-    Card,
-    
-    CardHeader,
-    CardTitle,
-    CardBody,
-    UncontrolledTooltip,
-    ListGroupItem,
-    ListGroup,
-  } from "reactstrap";
+import NodeAlert from "../../layouts/NodeAlert";
+
+import { Table, Badge } from "reactstrap";
 
 function SubmitedItem({
   getDoneWorkById,
   homework: { complete, loading },
   match,
-  teacher: {teacher}
+  teacher: { teacher },
 }) {
   useEffect(() => {
     getDoneWorkById(match.params.id);
@@ -137,45 +127,49 @@ function SubmitedItem({
                           </span>{" "}
                         </h6>
                         <div class="cover-img-block img_img">
-                    <img
-                      src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
+                          <img
+                            src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
+                            alt=""
+                            class="img-fluid"
+                          />
+                        </div>
                       </div>
                       {/*  */}
                       <Table responsive>
-                  <thead>
-                    <tr>
-                      <th>Issued Date</th>
-                      <th>Due Date</th>
-                      <th>Effort Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <Badge pill color="light-success" className="mr-1">
-                          *
-                        </Badge>
-                        <Moment format="YYYY/MM/DD">
-                          {complete && complete.set_date}
-                        </Moment>
-                      </td>
+                        <thead>
+                          <tr>
+                            <th>Issued Date</th>
+                            <th>Due Date</th>
+                            <th>Effort Time</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <Badge
+                                pill
+                                color="light-success"
+                                className="mr-1"
+                              >
+                                *
+                              </Badge>
+                              <Moment format="YYYY/MM/DD">
+                                {complete && complete.set_date}
+                              </Moment>
+                            </td>
 
-                      <td>
-                        <Badge pill color="light-danger" className="mr-1">
-                          *
-                        </Badge>
-                        <Moment format="YYYY/MM/DD">
-                          {complete && complete.due_date}
-                        </Moment>
-                      </td>
-                      <td>{complete && complete.effort_time}</td>
-                    </tr>
-                  </tbody>
-                </Table>
+                            <td>
+                              <Badge pill color="light-danger" className="mr-1">
+                                *
+                              </Badge>
+                              <Moment format="YYYY/MM/DD">
+                                {complete && complete.due_date}
+                              </Moment>
+                            </td>
+                            <td>{complete && complete.effort_time}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
                       <div className="card-header bg-light-primary">
                         <label className="floating-label">
                           {" "}
@@ -187,7 +181,7 @@ function SubmitedItem({
                       </div>
                       {/*  */}
                       {/* Dates */}
-                   
+
                       <div className="card-body ">
                         <label className="floating-label">
                           {" "}
@@ -196,12 +190,15 @@ function SubmitedItem({
                         <p>{complete && complete.description}</p>
                       </div>
                       <div className="card-footer">
+                        {/* <Link to="/files/myfile.pdf" target="_blank" download>Download</Link> */}
                         {/*@@TODO Check wheheter the attachment from the state match with */}
                         <Link
-                          to={`/${complete && complete.attachements}`}
+                          to={`uploads/${complete && complete.attachements}`}
                           className="btn  btn-info"
+                          target="_blank"
+                          download
                         >
-                          View Submited Attachments
+                          Download attachements
                         </Link>
                       </div>
 
@@ -234,7 +231,7 @@ SubmitedItem.propTypes = {
 
 const mapStateToProps = (state) => ({
   homework: state.homework,
-  teacher: state.teacher
+  teacher: state.teacher,
 });
 
 export default connect(mapStateToProps, { getDoneWorkById })(SubmitedItem);

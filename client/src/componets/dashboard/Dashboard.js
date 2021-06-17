@@ -171,12 +171,10 @@ function Dashboard({
             teachers.length &&
             !subjects.length ? (
               <Alert color="primary">
-                <h4 className="alert-heading">
-                You're almost there🏃‍♂️!! 
-                </h4>
+                <h4 className="alert-heading">You're almost there🏃‍♂️!!</h4>
                 <div class="cover-img-block img_img">😄</div>
                 <div className="alert-body">
-                Setup the Classes
+                  Setup the Classes
                   <Link to="/create-class">Create Classes</Link>
                 </div>
               </Alert>
@@ -190,9 +188,9 @@ function Dashboard({
                 <h4 className="alert-heading">Finally!! Setup The Subjects</h4>
                 <div class="cover-img-block img_img">🤗🤗</div>
                 <div className="alert-body">
-                  You're done✨✨✨✨  <Link to="/create-subject">Create Subject📜</Link> <br />
+                  You're done✨✨✨✨{" "}
+                  <Link to="/create-subject">Create Subject📜</Link> <br />
                   And you're ready to Rock🚀
-                 
                 </div>
               </Alert>
             ) : null}
@@ -201,10 +199,6 @@ function Dashboard({
             <StudentList students={students} />
             <Class classes={classes} />
             <SubjectList subjects={subjects} />
-          </div>
-
-          <div className="col-md-12  py-3 mb-3  ">
-            <button className="btn btn-danger">Delete Account</button>
           </div>
         </div>
       </div>

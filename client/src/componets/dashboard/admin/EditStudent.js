@@ -13,16 +13,16 @@ function EditStudent({
   getStudentById,
   student: { loading, selectedStudent },
   match,
-  auth:{user},
-  logout
+  auth: { user },
+  logout,
 }) {
   useEffect(() => {
     getStudentById(match.params.id);
   }, [getStudentById, match.params.id]);
   return selectedStudent !== null && selectedStudent !== undefined ? (
-    <> 
-    <Navigation/>
-    <header className="pc-header ">
+    <>
+      <Navigation />
+      <header className="pc-header ">
         <div className="header-wrapper">
           <div className="mr-auto pc-mob-drp">
             <ul className="list-unstyled"></ul>
@@ -104,31 +104,30 @@ function EditStudent({
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
 
-          
           <div className="py-4">
-          <div className="container">
-      <div className="col-md-12 py-4">
-        <div className="card bg-secondary">
-          <div className="card-header">
-            <h4 className="card-title">Edit Student</h4>
-            <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
+            <div className="container">
+              <div className="col-md-12 py-4">
+                <div className="card">
+                  <div className="card-header">
+                    <h4 className="card-title">Edit Student</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <EditStudentForm
+                      selectedStudent={selectedStudent}
+                      loading={loading}
+                      updateStudent={updateStudent}
+                    />
+                  </div>
+                </div>
               </div>
-          </div>
-          <div className="card-body">
-            <EditStudentForm
-              selectedStudent={selectedStudent}
-              loading={loading}
-              updateStudent={updateStudent}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+            </div>
           </div>
 
           <div className="col-md-12  py-3 mb-3  ">
@@ -137,7 +136,6 @@ function EditStudent({
         </div>
       </div>
       {/*  */}
-    
     </>
   ) : (
     <Alert color="danger">
@@ -159,9 +157,11 @@ EditStudent.propTypes = {
 
 const mapStateToProps = (state) => ({
   student: state.student,
-  auth: state.auth
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { updateStudent, logout, getStudentById })(
-  EditStudent
-);
+export default connect(mapStateToProps, {
+  updateStudent,
+  logout,
+  getStudentById,
+})(EditStudent);

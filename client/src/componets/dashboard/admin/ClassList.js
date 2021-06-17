@@ -3,9 +3,16 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { deleteClass } from "../../../actions/classRoom";
-
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import Spinner from "../../layouts/Spinner";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
+
 function ClassList({ classes, deleteClass, history }) {
   const allClasses = classes.map((clas) => (
     <tr key={clas._id}>
@@ -23,19 +30,18 @@ function ClassList({ classes, deleteClass, history }) {
         <br />
       </td>
       <td>
-      
-        {clas !== null && clas !== undefined ?  clas.assign_teachers.map((assign_teacher, index) => (
-          <ListGroup key={index}>
-            <ListGroupItem color="primary" className="mb-2">
-              {" "}
-              {""}😎 {""}
-              {assign_teacher}
-            </ListGroupItem>
-          </ListGroup>
-          
-
-        )): (
-          <Spinner/>
+        {clas !== null && clas !== undefined ? (
+          clas.assign_teachers.map((assign_teacher, index) => (
+            <ListGroup key={index}>
+              <ListGroupItem color="primary" className="mb-2">
+                {" "}
+                {""}😎 {""}
+                {assign_teacher}
+              </ListGroupItem>
+            </ListGroup>
+          ))
+        ) : (
+          <Spinner />
         )}
       </td>
       <td>
@@ -46,12 +52,18 @@ function ClassList({ classes, deleteClass, history }) {
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={(e) => deleteClass(clas._id, history)}
-          className="btn btn-danger btn-sm"
+
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this classroom🙄?"
+          onConfirm={(e) => deleteClass(clas._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </button>
+          <a href="#">Delete</a>
+        </Popconfirm>
       </td>
     </tr>
   ));
@@ -65,12 +77,12 @@ function ClassList({ classes, deleteClass, history }) {
             <div className="card-header">
               <h5>Class List</h5>
               <div class="cover-img-block img_img">
-                        <img
-                          src="https://image.freepik.com/free-vector/kids-online-lessons_52683-36818.jpg"
-                          alt=""
-                          class="img-fluid"
-                        />
-                      </div>
+                <img
+                  src="https://image.freepik.com/free-vector/kids-online-lessons_52683-36818.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
             </div>
 
             <div className="card-body">

@@ -4,6 +4,13 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { deleteStudent } from "../../../actions/student";
 import { Link, withRouter } from "react-router-dom";
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
 
 function StudentList({ students, deleteStudent, history }) {
   const allStudents = students.map((student) => (
@@ -26,7 +33,7 @@ function StudentList({ students, deleteStudent, history }) {
       </td>
       <td>
         {" "}
-        <Moment format="YYYY">{student.current_year_group}</Moment>
+        <Moment format="MM/YYYY">{student.current_year_group}</Moment>
       </td>
       <td>
         <Link
@@ -36,12 +43,18 @@ function StudentList({ students, deleteStudent, history }) {
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={() => deleteStudent(student._id, history)}
-          className="btn btn-danger btn-sm"
+
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this student🙄?"
+          onConfirm={() => deleteStudent(student._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </button>
+          <a href="#">Remove Student</a>
+        </Popconfirm>
       </td>
     </tr>
   ));

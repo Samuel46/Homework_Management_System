@@ -8,6 +8,8 @@ import { Select } from "antd";
 import Navigation from "../Navigation";
 import { Alert } from "reactstrap";
 import { logout } from "../../../actions/auth";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const { Option } = Select;
 
 function RegisterTeacher({
@@ -21,7 +23,7 @@ function RegisterTeacher({
   const [password, setPassword] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [create_classes, setCreate_Classes] = useState(false);
-  const [joining_date, setJoining_Date] = useState("");
+  const [joining_date, setJoining_Date] = useState(new Date());
 
   // render all classroom options
   const classOptions = classes.map((rooms) => (
@@ -29,8 +31,6 @@ function RegisterTeacher({
       {rooms.name}
     </Option>
   ));
-
- 
 
   // ** Adds New Lesson Event
   const handleAddClass = () => {
@@ -148,7 +148,6 @@ function RegisterTeacher({
           {/* [ Main Content ] start */}
 
           <div className="py-2">
-           
             <div className="container py-5">
               <div className="col-md-12 py-4">
                 <div className="card ">
@@ -206,7 +205,8 @@ function RegisterTeacher({
                           <Alert color="info">
                             <h4 className="alert-heading">Classes not found</h4>
                             <div className="alert-body">
-                              No Classes are available! Make you assign a classroom to the teacher, 
+                              No Classes are available! Make you assign a
+                              classroom to the teacher,
                               <Link to="/create-class">Create Classroom</Link>
                             </div>
                           </Alert>
@@ -240,12 +240,10 @@ function RegisterTeacher({
                             >
                               Joining Date
                             </label>
-                            <input
-                              onChange={(e) => setJoining_Date(e.target.value)}
-                              name="joining_date"
-                              value={joining_date}
-                              type="date"
-                              className="form-control"
+                            <DatePicker
+                              selected={joining_date}
+                              className="form-control date__width"
+                              onChange={(date) => setJoining_Date(date)}
                             />
                           </div>
                         </div>

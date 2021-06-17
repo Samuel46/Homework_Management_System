@@ -95,6 +95,7 @@ export const getHomeWorkById = (id, history) => async (dispatch) => {
       type: GET_HOMEWORKBYID,
       payload: res.data,
     });
+    dispatch(getHomework());
   } catch (err) {
     dispatch({
       type: HOMEWORK_ERROR,

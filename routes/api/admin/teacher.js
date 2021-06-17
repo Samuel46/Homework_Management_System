@@ -50,12 +50,13 @@ router.post(
     try {
       // See if user exists
       let teacher = await Teacher.findOne({ email });
-
+      const salt = await bcrypt.genSalt(10);
+      const hashpassword = await bcrypt.hash(req.body.password, salt);
       if (teacher) {
         // update the teacher by the school
         teacher = await Teacher.findOneAndUpdate(
           { email },
-          { $set: teacherFields },
+          { $set: teacherFields, password: hashpassword },
           { new: true }
         );
         return res.json(teacher);

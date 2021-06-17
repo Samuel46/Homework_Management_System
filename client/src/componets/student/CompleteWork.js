@@ -5,21 +5,17 @@ import Moment from "react-moment";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { removeHomework } from "../../actions/student/homework";
 
-
 function CompleteWork({ completework, student: { student }, removeHomework }) {
-
-
   const completeWork = completework.map((work) => (
     <tr key={work._id}>
       <td>{work.title}</td>
       <td>
-      
-      <ListGroup>
-            <ListGroupItem color="info" className="mb-2">
-              {" "}
-              {Object.values(work.student.name)}
-            </ListGroupItem>
-          </ListGroup>
+        <ListGroup>
+          <ListGroupItem color="info" className="mb-2">
+            {" "}
+            {Object.values(work.student.name)}
+          </ListGroupItem>
+        </ListGroup>
       </td>
       <td>{work.subject}</td>
       <td>
@@ -32,13 +28,14 @@ function CompleteWork({ completework, student: { student }, removeHomework }) {
         {/*  */}
         <div className="custom-control custom-checkbox mb-2">
           <input
+            disabled
             type="checkbox"
             className="custom-control-input input-success"
             id="customCheckc1"
             defaultChecked
           />
-          <label className="custom-control-label" htmlFor="customCheckc1">
-            Completed
+          <label className="custom-control-label " htmlFor="customCheckc1">
+            Under Review
           </label>
         </div>
         {/* <button
@@ -106,4 +103,4 @@ CompleteWork.propTypes = {
 const mapStateToProps = (state) => ({
   student: state.student,
 });
-export default connect(mapStateToProps, {removeHomework})(CompleteWork);
+export default connect(mapStateToProps, { removeHomework })(CompleteWork);

@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 import { Select } from "antd";
 import Spinner from "../../layouts/Spinner";
 import NodeAlert from "../../layouts/NodeAlert";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const { Option } = Select;
 
 function EditTeacherForm({
@@ -18,7 +21,7 @@ function EditTeacherForm({
   const [password, setPassword] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [create_classes, setCreate_Classes] = useState(false);
-  const [joining_date, setJoining_Date] = useState("");
+  const [joining_date, setJoining_Date] = useState(new Date());
 
   // fill the from with data from the state
   useEffect(() => {
@@ -27,8 +30,8 @@ function EditTeacherForm({
     setPassword(selectedTeacher.password || password);
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
     setCreate_Classes(selectedTeacher.create_classes || create_classes);
-    setJoining_Date(selectedTeacher.joining_date || joining_date);
-  }, [selectedTeacher.name]);
+    setJoining_Date(new Date(selectedTeacher.joining_date));
+  }, [selectedTeacher.name, selectedTeacher.joining_date]);
 
   // handle onChange event of the dropdown
   const classOptions =
@@ -62,6 +65,10 @@ function EditTeacherForm({
     //     closeButton: false,
     //   }
     // );
+  };
+
+  const onReset = () => {
+    setPassword("");
   };
 
   const onSubmit = (e) => {
@@ -100,6 +107,7 @@ function EditTeacherForm({
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
+                disabled
                 value={email}
                 type="email"
                 className="form-control"
@@ -153,12 +161,11 @@ function EditTeacherForm({
               <label className="floating-label" htmlFor="Occupation">
                 Joining Date
               </label>
-              <input
-                onChange={(e) => setJoining_Date(e.target.value)}
-                name="joining_date"
-                value={joining_date}
-                type="date"
-                className="form-control"
+
+              <DatePicker
+                selected={joining_date}
+                className="form-control date__width"
+                onChange={(date) => setJoining_Date(date)}
               />
             </div>
           </div>
@@ -169,6 +176,7 @@ function EditTeacherForm({
               </label>
               <input
                 value={password}
+                defaultValue={"**********"}
                 onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 type="password"
@@ -178,11 +186,17 @@ function EditTeacherForm({
               />
             </div>
           </div>
-          {/* <div className="col-sm-6 mt-4">
-                                    <div className="form-group fill">
-                                        <button className="btn btn-secondary">Reset Password</button>
-                                    </div>
-                                </div> */}
+          <div className="col-sm-6 mt-4">
+            <div className="form-group fill">
+              <button
+                type="reset"
+                onClick={onReset}
+                className="btn btn-primary"
+              >
+                Reset Password
+              </button>
+            </div>
+          </div>
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success mr-2">
               Update Teacher

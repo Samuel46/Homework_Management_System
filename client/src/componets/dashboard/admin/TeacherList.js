@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteTeacher } from "../../../actions/teacher";
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
 
 function TeacherList({ teachers, deleteTeacher, history }) {
   const teacherList = teachers.map((teacher) => (
@@ -25,12 +32,18 @@ function TeacherList({ teachers, deleteTeacher, history }) {
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={() => deleteTeacher(teacher._id, history)}
+
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
           className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this teacher🙄?"
+          onConfirm={() => deleteTeacher(teacher._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Remove Teacher
-        </button>
+          <a href="#">Remove Teacher</a>
+        </Popconfirm>
       </td>
     </tr>
   ));
@@ -49,8 +62,7 @@ function TeacherList({ teachers, deleteTeacher, history }) {
                 />
               </div>
             </div>
-            
-               
+
             <div className="card-body">
               <div className="row align-items-center m-l-0">
                 <div className="col-sm-6"></div>

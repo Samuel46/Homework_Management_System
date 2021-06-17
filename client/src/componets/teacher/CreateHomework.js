@@ -6,12 +6,6 @@ import NodeAlert from "../layouts/NodeAlert";
 import { Link, withRouter } from "react-router-dom";
 import { useState } from "react";
 import { Select } from "antd";
-import Avatar from "../../utilities/avatar";
-import { Check } from "react-feather";
-import { toast } from "react-toastify";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Alert } from "reactstrap";
 import {
   getStudents,
@@ -19,9 +13,10 @@ import {
   getClasses,
 } from "../../actions/teacher/teacher";
 import { getClassRooms } from "../../actions/teacher/classRoom";
-import { Button, UncontrolledTooltip } from "reactstrap";
-import { removePending } from "../../actions/student/homework";
+import { UncontrolledTooltip } from "reactstrap";
 import TeacherTop from "./TeacherTop";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const { Option } = Select;
 
 function CreateHomework({
@@ -48,8 +43,8 @@ function CreateHomework({
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [description, setDescription] = useState("");
   const [students, setStudent] = useState([]);
-  const [set_date, setNew_Date] = useState("");
-  const [due_date, setDue_Date] = useState("");
+  const [set_date, setNew_Date] = useState(new Date());
+  const [due_date, setDue_Date] = useState(new Date());
   const [attachements, setAttachements] = useState("");
 
   // render all classroom options from the admin
@@ -167,8 +162,8 @@ function CreateHomework({
                         <Alert color="info">
                           <h4 className="alert-heading">Subjects not found</h4>
                           <div className="alert-body">
-                            No Subjects are available! Make you assign a
-                            subject to the homework
+                            No Subjects are available! Make you assign a subject
+                            to the homework
                           </div>
                         </Alert>
                       ) : (
@@ -347,12 +342,11 @@ function CreateHomework({
                           >
                             Set Date
                           </label>
-                          <input
-                            onChange={(e) => setNew_Date(e.target.value)}
-                            name="set_date"
-                            value={set_date}
-                            type="date"
-                            className="form-control"
+
+                          <DatePicker
+                            selected={set_date}
+                            className="form-control date__width"
+                            onChange={(date) => setNew_Date(date)}
                           />
                         </div>
                       </div>
@@ -364,12 +358,10 @@ function CreateHomework({
                           >
                             Due Date
                           </label>
-                          <input
-                            onChange={(e) => setDue_Date(e.target.value)}
-                            name="due_date"
-                            value={due_date}
-                            type="date"
-                            className="form-control"
+                          <DatePicker
+                            selected={due_date}
+                            className="form-control date__width"
+                            onChange={(date) => setDue_Date(date)}
                           />
                         </div>
                       </div>

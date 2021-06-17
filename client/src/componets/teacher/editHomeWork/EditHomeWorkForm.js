@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Select } from "antd";
 import { UncontrolledTooltip } from "reactstrap";
 import NodeAlert from "../../layouts/NodeAlert";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const { Option } = Select;
 
@@ -32,14 +34,13 @@ function EditHomeWorkForm({
     setAllocate_Classes(selectedHomeWork.allocate_classes || allocate_classes);
     setDescription(selectedHomeWork.description || description);
     setStudent(selectedHomeWork.students || students);
-    setNew_Date(selectedHomeWork.set_date || set_date);
-    setDue_Date(selectedHomeWork.due_date || due_date);
-    setAttachements(selectedHomeWork.attachements || due_date);
-  }, [selectedHomeWork]);
+    setNew_Date(new Date(selectedHomeWork.set_date));
+    setDue_Date(new Date(selectedHomeWork.due_date));
+    setAttachements(selectedHomeWork.attachements || attachements);
+  }, [selectedHomeWork, selectedHomeWork.set_date]);
 
+  // render all classroom options from the admin
 
- // render all classroom options from the admin
- 
   const classOptions = classrooms.map((rooms) => (
     <Option value={rooms.name} key={rooms._id}>
       {rooms.name}
@@ -289,18 +290,16 @@ function EditHomeWorkForm({
               />
             </div>
           </div>
-           
+
           <div className="col-sm-6">
             <div className="form-group fill">
               <label className="floating-label" htmlFor="Occupation">
                 Set Date
-              </label>
-              <input
-                onChange={(e) => setNew_Date(e.target.value)}
-                name="set_date"
-                value={set_date}
-                type="date"
-                className="form-control"
+              </label>{" "}
+              <DatePicker
+                selected={set_date}
+                className="form-control date__width"
+                onChange={(date) => setNew_Date(date)}
               />
             </div>
           </div>
@@ -309,12 +308,10 @@ function EditHomeWorkForm({
               <label className="floating-label" htmlFor="Occupation">
                 Due Date
               </label>
-              <input
-                onChange={(e) => setDue_Date(e.target.value)}
-                name="due_date"
-                value={due_date}
-                type="date"
-                className="form-control"
+              <DatePicker
+                selected={due_date}
+                className="form-control date__width"
+                onChange={(date) => setDue_Date(date)}
               />
             </div>
           </div>

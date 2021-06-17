@@ -99,6 +99,7 @@ function EditClassForm({
                 onChange={(e) => setName(e.target.value)}
                 name="name"
                 value={name}
+                disabled
                 type="text"
                 className="form-control"
                 placeholder
