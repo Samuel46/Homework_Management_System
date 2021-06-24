@@ -5,4 +5,8 @@
     "jwtStudentSecret": "studentsecrettoken",
     "jwtParentSecret": "ParentSecretooon",
     "githubClientId": "8686fa4cc856f644b8f7hgggdf",
-    "githubSecret": "1c33e1a745eecaace1b3c56a5d20nvhvjvhj19adadc43fc4"}
+    "githubSecret": "1c33e1a745eecaace1b3c56a5d20nvhvjvhj19adadc43fc4",
+    "AWS_ID": "AKIAWQFB3GCB5UGX22W2",
+    "AWS_SECRET": "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",
+    "AWS_BUCKET_NAME": "pending-homework"
+}
