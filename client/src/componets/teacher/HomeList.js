@@ -5,6 +5,13 @@ import Moment from "react-moment";
 import { deleteHomework } from "../../actions/teacher/homework";
 import { withRouter, Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
 
 function HomeList({ homeworks, deleteHomework, history }) {
   const homeWorkList = homeworks.map((homework) => (
@@ -47,12 +54,18 @@ function HomeList({ homeworks, deleteHomework, history }) {
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={() => deleteHomework(homework._id, history)}
-          className="btn btn-danger btn-sm mr-2"
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this homework🙄?"
+          onConfirm={() => deleteHomework(homework._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </button>
+          <a href="#">Remove Homework</a>
+        </Popconfirm>
+
         {/* <a href="../Teachers/homework.html" className="btn btn-success btn-sm">Submission</a> */}
       </td>
     </tr>
@@ -69,8 +82,12 @@ function HomeList({ homeworks, deleteHomework, history }) {
                 </span>{" "}
               </h5>
               <div class="cover-img-block img_img">
-											<img src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg" alt="" class="img-fluid"/>
-										</div>
+                <img
+                  src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
             </div>
             <div className="card-body">
               <div className="row align-items-center m-l-0">

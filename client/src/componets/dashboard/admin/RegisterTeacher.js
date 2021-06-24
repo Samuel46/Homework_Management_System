@@ -233,7 +233,7 @@ function RegisterTeacher({
                         )}
 
                         <div className="col-sm-6">
-                          <div className="form-group fill">
+                          <div className="form-group fill label_display">
                             <label
                               className="floating-label"
                               htmlFor="Occupation"

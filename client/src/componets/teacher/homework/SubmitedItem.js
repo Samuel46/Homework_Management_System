@@ -9,7 +9,7 @@ import Moment from "react-moment";
 import TeacherTop from "../TeacherTop";
 import NodeAlert from "../../layouts/NodeAlert";
 
-import { Table, Badge } from "reactstrap";
+import { Table, Badge, ListGroupItem, ListGroup } from "reactstrap";
 
 function SubmitedItem({
   getDoneWorkById,
@@ -189,17 +189,32 @@ function SubmitedItem({
                         </label>
                         <p>{complete && complete.description}</p>
                       </div>
+
+                      <div className="card-body bg-light-primary ">
+                        <label className="floating-label">
+                          {" "}
+                          <strong>Edited Homework</strong>{" "}
+                        </label>
+                        <p>{complete && complete.completeStudentWork}</p>
+                      </div>
                       <div className="card-footer">
-                        {/* <Link to="/files/myfile.pdf" target="_blank" download>Download</Link> */}
-                        {/*@@TODO Check wheheter the attachment from the state match with */}
-                        <Link
-                          to={`uploads/${complete && complete.attachements}`}
-                          className="btn  btn-info"
+                        <ListGroup>
+                          <ListGroupItem color="info" className="mb-2">
+                            {" "}
+                            {""}📜 {""}
+                            {complete && complete.filename}
+                          </ListGroupItem>
+                        </ListGroup>
+                        <a
+                          href={complete && complete.attachements}
+                          className="btn  btn-primary"
                           target="_blank"
                           download
                         >
-                          Download attachements
-                        </Link>
+                          {complete && complete.attachements.length === 0
+                            ? "No files available"
+                            : " Download Files"}
+                        </a>
                       </div>
 
                       <div className="col-sm-6 py-3">

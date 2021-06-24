@@ -13,7 +13,7 @@ import {
   getClasses,
 } from "../../actions/teacher/teacher";
 import { getClassRooms } from "../../actions/teacher/classRoom";
-import { UncontrolledTooltip } from "reactstrap";
+import { UncontrolledTooltip, ListGroupItem, ListGroup } from "reactstrap";
 import TeacherTop from "./TeacherTop";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,6 +37,8 @@ function CreateHomework({
     getClassRooms();
   }, [getSubject, getClasses, getStudents, getClassRooms]);
 
+  const [file, setFile] = useState("");
+  const [filename, setFilename] = useState("Attach Files");
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState([]);
   const [effort_time, setEffort_Time] = useState("");
@@ -45,7 +47,22 @@ function CreateHomework({
   const [students, setStudent] = useState([]);
   const [set_date, setNew_Date] = useState(new Date());
   const [due_date, setDue_Date] = useState(new Date());
-  const [attachements, setAttachements] = useState("");
+
+  // using form-data to submit homework with attachements
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("title", title);
+  formData.append("subject", subject);
+  formData.append("effort_time", effort_time);
+  formData.append("allocate_classes", allocate_classes);
+  formData.append("description", description);
+  formData.append("students", students);
+  formData.append("set_date", set_date);
+  formData.append("due_date", due_date);
+  const onChange = (e) => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
 
   // render all classroom options from the admin
   const classOptions = classrooms.map((rooms) => (
@@ -74,27 +91,19 @@ function CreateHomework({
     </Option>
   ));
 
-  // ** Adds Homework
-  const handleAddHomework = () => {
-    const obj = {
-      title,
-      subject,
-
-      effort_time,
-      allocate_classes,
-      description,
-      students,
-      set_date,
-      due_date,
-      attachements,
-    };
-
-    addHomework(obj);
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    handleAddHomework();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("subject", subject);
+    formData.append("effort_time", effort_time);
+    formData.append("allocate_classes", allocate_classes);
+    formData.append("description", description);
+    formData.append("students", students);
+    formData.append("set_date", set_date);
+    formData.append("due_date", due_date);
   };
 
   return (
@@ -142,7 +151,13 @@ function CreateHomework({
                   <div>
                     <NodeAlert />
                   </div>
-                  <form onSubmit={(e) => onSubmit(e)}>
+                  <form
+                    onSubmit={onSubmit}
+                    action="upload/:id"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    id="attachWork"
+                  >
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
@@ -285,23 +300,24 @@ function CreateHomework({
                           </div>
                         </div>
                       )}
-
-                      {/* <div className="col-sm-6">
-                        <div className="form-group fill">
-                          <label className="floating-label" htmlFor="Icon">
-                            Attachements
-                          </label>
-                          <input
-                            onChange={(e) => setAttachements(e.target.value)}
-                            name="attachements"
-                            value={attachements}
-                            type="file"
-                            className="form-control btn-secondary"
-                            id="Icon"
-                            placeholder
-                          />
-                        </div>
-                      </div> */}
+                      <div className="form-group col-md-6 ">
+                        <label htmlFor="file" className="col-form-label">
+                          <ListGroup>
+                            <ListGroupItem color="primary" className="mb-2">
+                              {" "}
+                              {""}📜 {""}
+                              {filename}
+                            </ListGroupItem>
+                          </ListGroup>
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          onChange={onChange}
+                          name="file"
+                          id="file"
+                        />
+                      </div>
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="floating-label" htmlFor="Address">
@@ -318,24 +334,9 @@ function CreateHomework({
                           />
                         </div>
                       </div>
-                      {/* <div className="col-sm-12">
-                        <div className="form-group">
-                          <label className="floating-label" htmlFor="Address">
-                            Description
-                          </label>
 
-                          <Editor
-                          editorState={description}
-                          onEditorStateChange={(data) => setDescription(data)}
-                          toolbarClassName="toolbarClassName"
-                          wrapperClassName="wrapperClassName"
-                          editorClassName="editorClassName"
-                        />
-                         
-                        </div>
-                      </div> */}
                       <div className="col-sm-6">
-                        <div className="form-group fill">
+                        <div className="form-group fill label_display">
                           <label
                             className="floating-label"
                             htmlFor="Occupation"
@@ -351,7 +352,7 @@ function CreateHomework({
                         </div>
                       </div>
                       <div className="col-sm-6">
-                        <div className="form-group fill">
+                        <div className="form-group fill label_display">
                           <label
                             className="floating-label"
                             htmlFor="Occupation"
@@ -367,7 +368,11 @@ function CreateHomework({
                       </div>
 
                       <div className="col-sm-6">
-                        <button type="submit" className="btn btn-success mr-2">
+                        <button
+                          onClick={() => addHomework(formData)}
+                          type="submit"
+                          className="btn btn-success mr-2"
+                        >
                           Create Homework
                         </button>
 

@@ -5,6 +5,8 @@ import { UncontrolledTooltip } from "reactstrap";
 import NodeAlert from "../../layouts/NodeAlert";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { ListGroupItem, ListGroup } from "reactstrap";
+import { Alert } from "reactstrap";
 
 const { Option } = Select;
 
@@ -16,15 +18,32 @@ function EditHomeWorkForm({
   updateHomeWork,
   selectedHomeWork,
 }) {
+  const [file, setFile] = useState("");
+  const [filename, setFilename] = useState("Attach Files");
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState([]);
   const [effort_time, setEffort_Time] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [description, setDescription] = useState("");
   const [students, setStudent] = useState([]);
-  const [set_date, setNew_Date] = useState("");
-  const [due_date, setDue_Date] = useState("");
-  const [attachements, setAttachements] = useState("");
+  const [set_date, setNew_Date] = useState(new Date());
+  const [due_date, setDue_Date] = useState(new Date());
+
+  // using form-data to submit homework with attachements
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("title", title);
+  formData.append("subject", subject);
+  formData.append("effort_time", effort_time);
+  formData.append("allocate_classes", allocate_classes);
+  formData.append("description", description);
+  formData.append("students", students);
+  formData.append("set_date", set_date);
+  formData.append("due_date", due_date);
+  const onChange = (e) => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
 
   // fill the from with data from the state
   useEffect(() => {
@@ -36,7 +55,8 @@ function EditHomeWorkForm({
     setStudent(selectedHomeWork.students || students);
     setNew_Date(new Date(selectedHomeWork.set_date));
     setDue_Date(new Date(selectedHomeWork.due_date));
-    setAttachements(selectedHomeWork.attachements || attachements);
+    setFilename(selectedHomeWork.filename || filename);
+    setFile(selectedHomeWork.file || file);
   }, [selectedHomeWork, selectedHomeWork.set_date]);
 
   // render all classroom options from the admin
@@ -67,33 +87,31 @@ function EditHomeWorkForm({
     </Option>
   ));
 
-  // ** Adds Homework
-  const handleUpdateHomework = () => {
-    const obj = {
-      title,
-      subject,
-
-      effort_time,
-      allocate_classes,
-      description,
-      students,
-      set_date,
-      due_date,
-      attachements,
-    };
-
-    updateHomeWork(obj);
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    handleUpdateHomework();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("subject", [subject]);
+    formData.append("effort_time", effort_time);
+    formData.append("allocate_classes", [allocate_classes]);
+    formData.append("description", description);
+    formData.append("students", [students]);
+    formData.append("set_date", set_date);
+    formData.append("due_date", due_date);
   };
 
   return (
     <>
       <NodeAlert />
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form
+        onSubmit={onSubmit}
+        action="upload/:id"
+        method="POST"
+        enctype="multipart/form-data"
+        id="attachWork"
+      >
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group">
@@ -104,12 +122,21 @@ function EditHomeWorkForm({
                 value={title}
                 type="text"
                 className="form-control"
+                disabled
                 placeholder
               />
             </div>
           </div>
 
-          {subjects !== null ? (
+          {!subjects.length && subjects.length === 0 ? (
+            <Alert color="info">
+              <h4 className="alert-heading">Subjects not found</h4>
+              <div className="alert-body">
+                No Subjects are available! Make you assign a subject to the
+                homework
+              </div>
+            </Alert>
+          ) : (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label className="floating-label" htmlFor="Email">
@@ -129,23 +156,6 @@ function EditHomeWorkForm({
                 </Select>
               </div>
             </div>
-          ) : (
-            <h2>no availabel</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
 
           <div className="col-sm-6">
@@ -165,7 +175,15 @@ function EditHomeWorkForm({
               />
             </div>
           </div>
-          {classrooms || classes !== null ? (
+          {!classrooms.length && classrooms.length === 0 ? (
+            <Alert color="info">
+              <h4 className="alert-heading">Classes not found</h4>
+              <div className="alert-body">
+                No Classes are available! Make you assign a classroom to the
+                homework
+              </div>
+            </Alert>
+          ) : (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label className="floating-label" htmlFor="Email">
@@ -186,27 +204,18 @@ function EditHomeWorkForm({
                 </Select>
               </div>
             </div>
-          ) : (
-            <h2>no availabel</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
 
           {/* student options */}
-          {studentList !== null ? (
+          {!studentList.length && studentList === 0 ? (
+            <Alert color="info">
+              <h4 className="alert-heading">Student not found</h4>
+              <div className="alert-body">
+                No Student's are available! Make you assign a student to the
+                homework
+              </div>
+            </Alert>
+          ) : (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label
@@ -239,40 +248,26 @@ function EditHomeWorkForm({
                 </Select>
               </div>
             </div>
-          ) : (
-            <h2>no availabel</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
 
-          <div className="col-sm-6">
-            <div className="form-group fill">
-              <label className="floating-label" htmlFor="Icon">
-                Attachements
-              </label>
-              <input
-                onChange={(e) => setAttachements(e.target.value)}
-                name="attachements"
-                value={attachements}
-                type="file"
-                className="form-control btn-secondary"
-                id="Icon"
-                placeholder
-              />
-            </div>
+          <div className="form-group col-md-6 ">
+            <label htmlFor="file" className="col-form-label">
+              <ListGroup>
+                <ListGroupItem color="primary" className="mb-2">
+                  {" "}
+                  {""}📜 {""}
+                  {filename}
+                </ListGroupItem>
+              </ListGroup>
+            </label>
+            <input
+              className="form-control"
+              type="file"
+              onChange={onChange}
+              placeholder="sasasas"
+              name="file"
+              id="file"
+            />
           </div>
           <div className="col-sm-12">
             <div className="form-group">
@@ -292,7 +287,7 @@ function EditHomeWorkForm({
           </div>
 
           <div className="col-sm-6">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label" htmlFor="Occupation">
                 Set Date
               </label>{" "}
@@ -304,7 +299,7 @@ function EditHomeWorkForm({
             </div>
           </div>
           <div className="col-sm-6">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label" htmlFor="Occupation">
                 Due Date
               </label>
@@ -317,7 +312,11 @@ function EditHomeWorkForm({
           </div>
 
           <div className="col-sm-6">
-            <button type="submit" className="btn btn-success mr-2">
+            <button
+              onClick={() => updateHomeWork(formData)}
+              type="submit"
+              className="btn btn-success mr-2"
+            >
               Update Homework
             </button>
             <Link to="/teacher-dashboard" className="btn btn-secondary">

@@ -17,11 +17,9 @@ router.get("/", authStudent || authParent, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select("-password");
 
-  
-    const homeWork = await Homework.find({ students: student.name }).populate(
-      "teacher",
-      ["name", "email"]
-    );
+    const homeWork = await Homework.find({
+      students: student.name,
+    }).populate("teacher", ["name", "email"]);
 
     res.json(homeWork);
   } catch (err) {
@@ -29,7 +27,6 @@ router.get("/", authStudent || authParent, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 
 // @Route Get   api/student/homework/work
 // @Descri      Get all classes associate with this student @@ pending homework
@@ -40,7 +37,7 @@ router.get("/work", authStudent || authParent, async (req, res) => {
     const classrooms = await Class.find({
       add_students: student.name,
     }).populate("user", ["name", "email"]);
-    
+
     res.json(classrooms);
   } catch (err) {
     console.error(err.message);
@@ -88,6 +85,5 @@ router.delete("/:id", authStudent || authParent, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
 
 module.exports = router;

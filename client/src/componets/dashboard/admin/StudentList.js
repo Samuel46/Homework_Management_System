@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { deleteStudent } from "../../../actions/student";
 import { Link, withRouter } from "react-router-dom";
 import { Popconfirm, message } from "antd";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 function cancel(e) {
@@ -17,8 +18,14 @@ function StudentList({ students, deleteStudent, history }) {
     <tr key={student._id}>
       <td>
         {" "}
-        😃 {""}
-        {student.name}
+        {""}
+        <ListGroup>
+          <ListGroupItem color="info" className="mb-2">
+            {" "}
+            {""} 😃 {""}
+            {student.name}
+          </ListGroupItem>
+        </ListGroup>
       </td>
       <td>{student.email}</td>
 

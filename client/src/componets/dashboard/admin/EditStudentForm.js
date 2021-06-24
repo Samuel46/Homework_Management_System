@@ -134,7 +134,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
             </div>
           </div>
           <div className="col-sm-6">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label pr-3" htmlFor="Birth">
                 Birth Date
               </label>
@@ -151,7 +151,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
             </div>
           </div>
           <div className="col-sm-6">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label pr-3" htmlFor="Birth">
                 Joining Date
               </label>
@@ -164,7 +164,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
             </div>
           </div>
           <div className="col-sm-6">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label" htmlFor="Birth">
                 Joining Year Group
               </label>
@@ -178,7 +178,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
             </div>
           </div>
           <div className="col-sm-4">
-            <div className="form-group fill">
+            <div className="form-group fill label_display">
               <label className="floating-label" htmlFor="Birth">
                 Current Year Group
               </label>

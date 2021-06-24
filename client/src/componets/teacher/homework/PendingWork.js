@@ -62,9 +62,12 @@ function PendingWork({ homeworks }) {
                 </span>
               </h4>
               <div class="cover-img-block img_img">
-											<img src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg" alt="" class="img-fluid"/>
-										</div>
-
+                <img
+                  src="https://image.freepik.com/free-vector/smart-cute-child-boy-cartoon-character-sitting-chair-with-laptop-flat-illustration-isolated-white-background-personage-distance-home-education_181313-722.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
             </div>
             <div className="card-body">
               <div className="row align-items-center m-l-0">

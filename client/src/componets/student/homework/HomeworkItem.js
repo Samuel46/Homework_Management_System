@@ -10,27 +10,15 @@ import {
 import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
 import Moment from "react-moment";
-// import Message from "./Message";
-// import Progress from "./Progress";
-import axios from "axios";
 import { logoutStudent } from "../../../actions/student";
-// testing new look
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   Table,
   Badge,
-  Card,
   Alert,
-  CardHeader,
-  CardTitle,
-  CardBody,
   UncontrolledTooltip,
   ListGroupItem,
   ListGroup,
 } from "reactstrap";
-
 import { DragSwitch } from "react-dragswitch";
 import "react-dragswitch/dist/index.css";
 import StudentNavigation from "../StudentNavigation";
@@ -38,7 +26,6 @@ import StudentNavigation from "../StudentNavigation";
 function HomeworkItem({
   getHomeworkBy_id,
   submitHomework,
-  removePending,
   studentHomework: { homework, loading },
   match,
   history,
@@ -49,15 +36,11 @@ function HomeworkItem({
     getHomeworkBy_id(match.params.id);
   }, [getHomeworkBy_id, match.params.id]);
 
-  // const [value, setValue] = useState(EditorState.createEmpty());
   // file upload logics
   const [file, setFile] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [completeStudentWork, setCompleteWork] = useState("");
   const [filename, setFilename] = useState("Attach Homework");
-  const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState("");
-  const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const formData = new FormData();
   formData.append("file", file);
@@ -72,42 +55,6 @@ function HomeworkItem({
     const formData = new FormData();
     formData.append("file", file);
     formData.append("completeStudentWork", completeStudentWork);
-
-    try {
-      //   extracting the id from url
-      const id = match.params.id;
-      const res = await axios.post(
-        `/api/student/complete/upload/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (progressEvent) => {
-            setUploadPercentage(
-              parseInt(
-                Math.round((progressEvent.loaded * 100) / progressEvent.total)
-              )
-            );
-
-            // Clear percentage
-            setTimeout(() => setUploadPercentage(0), 10000);
-          },
-        }
-      );
-
-      const { attachements, filename } = res.data;
-
-      setUploadedFile({ attachements, filename });
-
-      setMessage("You have Uploaded your work, it's time to submit");
-    } catch (err) {
-      if (err.response.status === 500) {
-        setMessage("No File Uploaded");
-      } else {
-        setMessage(err.response.data.msg);
-      }
-    }
   };
 
   return homework !== null && homework !== undefined ? (
@@ -273,9 +220,23 @@ function HomeworkItem({
                         <strong>Description</strong>{" "}
                       </label>
                       <p>{homework && homework.description}</p>
-                      {/* <button type="button" className="btn  btn-secondary">
-                        Download Homework Attachments
-                      </button> */}
+                      <ListGroup>
+                        <ListGroupItem color="info" className="mb-2">
+                          {" "}
+                          {""}📜 {""}
+                          {homework && homework.filename}
+                        </ListGroupItem>
+                      </ListGroup>
+                      <a
+                        href={homework && homework.attachements}
+                        className="btn  btn-secondary"
+                        target="_blank"
+                        download
+                      >
+                        {homework.attachements.length === 0
+                          ? "No files available"
+                          : " Download Files"}
+                      </a>
                     </div>
                     <div className="card-footer">
                       {/* submit homework */}

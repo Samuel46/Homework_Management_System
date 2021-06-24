@@ -21,9 +21,13 @@ function ClassList({ classes, deleteClass, history }) {
         {clas.add_students.map((add_student, index) => (
           <>
             <p key={index}>
-              {" "}
-              ✔{""}
-              {add_student}
+              <ListGroup>
+                <ListGroupItem color="info" className="mb-2">
+                  {" "}
+                  {""} 😃 {""}
+                  {add_student}
+                </ListGroupItem>
+              </ListGroup>
             </p>
           </>
         ))}{" "}

@@ -6,7 +6,7 @@ import Spinner from "../layouts/Spinner";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
-function PendingWork({ homeworks, studentHomework: { loading, homework } }) {
+function PendingWork({ homeworks, completework }) {
   const studenthomework = homeworks.map((homework) => (
     <tr key={homework._id}>
       <td>{homework.title}</td>

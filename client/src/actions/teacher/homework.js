@@ -19,11 +19,15 @@ export const addHomework = (formData, history) => async (dispatch) => {
   try {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "form-data",
       },
     };
 
-    const res = await axios.post("/api/teacher/homework", formData, config);
+    const res = await axios.post(
+      "/api/teacher/homework/upload",
+      formData,
+      config
+    );
 
     dispatch({
       type: ADD_HOMEWORK,
@@ -48,12 +52,15 @@ export const addHomework = (formData, history) => async (dispatch) => {
 export const updateHomeWork = (formData, history) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "form-data",
     },
   };
-
   try {
-    const res = await axios.post("/api/teacher/homework", formData, config);
+    const res = await axios.post(
+      "/api/teacher/homework/upload",
+      formData,
+      config
+    );
     dispatch({
       type: UPDATE_HOMEWORK,
       payload: res.data,

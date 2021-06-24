@@ -7,7 +7,7 @@ import StudentNavigation from "./StudentNavigation";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import { Alert } from 'reactstrap'
+import { Alert } from "reactstrap";
 import {
   getCompletWork,
   getHomework,
@@ -34,8 +34,6 @@ function StudentDash({
   student: { student, loading },
   studentMsg: { messages },
 }) {
-
-
   if (localStorage.token) {
     setStudentToken(localStorage.token);
   }
@@ -57,7 +55,15 @@ function StudentDash({
   useEffect(() => {
     getMsg();
   }, [getMsg]);
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
+
+  // const allwork = homeworks.map((work) => work);
+  // const allcomplete = completework.map((complete) => complete);
+  // if (allwork.title === allcomplete.title) {
+  //   console.log("samuel is awseom");
+  // } else {
+  //   console.log("ypppppppppppppppppppppp");
+  // }
 
   return (student !== null && loading !== false && homeworks !== null) ||
     student !== undefined ? (
@@ -154,31 +160,16 @@ function StudentDash({
           </div>
 
           <StudentDashActions parents={parents} />
-          {/* ////////////////////////////////////// */}
-          {/* <Alert /> */}
-          {/* { messages && messages !== null ?  <div className="demo-spacing-0">
-            <Alert
-              color="info"
-              isOpen={visible}
-              toggle={() => setVisible(false)}
-            >
-              <div className="alert-body">
-               You have received new feedback from your homework submission
-              </div>
-            </Alert>
-          </div>  :(
-            null
-          )} */}
-         
+
           {/* {!isComplete ? <PendingWork homeworks={homeworks} /> :    <CompleteWork /> } */}
-          <PendingWork homeworks={homeworks} />
+          <PendingWork homeworks={homeworks} completework={completework} />
           {/* ////////////////////// */}
           {/* Complete */}
           <CompleteWork completework={completework} />
           {/* All my assigned classes */}
           <MyClassRooms classRooms={classRooms} />
 
-          <Feedback messages={ messages} />
+          <Feedback messages={messages} />
         </div>
       </div>
     </Fragment>

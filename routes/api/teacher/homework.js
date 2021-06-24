@@ -7,11 +7,46 @@ const authStudent = require("../../../middleware/authStudent");
 const Complete = require("../../../models/student/Complete");
 const Student = require("../../../models/admin/students/Student");
 
+const config = require("config");
+// s3 uploader
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
+const multer = require("multer");
+const path = require("path");
+
+const s3 = new aws.S3({
+  accessKeyId: config.get("AWS_ID"),
+  secretAccessKey: config.get("AWS_SECRET"),
+  Bucket: config.get("AWS_BUCKET_NAME"),
+});
+
+/**
+ * Single Upload
+ */
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: config.get("AWS_BUCKET_NAME"),
+    acl: "public-read",
+    key: function (req, file, cb) {
+      cb(
+        null,
+        path.basename(file.originalname, path.extname(file.originalname)) +
+          "-" +
+          Date.now() +
+          path.extname(file.originalname)
+      );
+    },
+  }),
+  limits: { fileSize: 200000000 }, // In bytes: 2000000 bytes = 2 MB
+}).single("file");
+
 // @route POST api/teacher/homework
 // @descri    Creating new homework
 // @access public
 router.post(
-  "/",
+  "/upload",
+  upload,
 
   [
     authTeacher || authStudent,
@@ -27,57 +62,123 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+    // save both file inputs and text input
+    if (req.file !== undefined) {
+      const {
+        title,
+        subject,
+        effort_time,
+        allocate_classes,
+        description,
+        students,
+        set_date,
+        due_date,
+      } = req.body;
 
-    const {
-      title,
-      subject,
-      effort_time,
-      allocate_classes,
-      description,
-      students,
-      set_date,
-      due_date,
-      attachements,
-    } = req.body;
+      // Bulilding homework object
+      const homeworkFields = {};
+      homeworkFields.teacher = req.teacher.id;
+      homeworkFields.attachements = req.file.location;
+      homeworkFields.filename = req.file.key;
+      if (title) homeworkFields.title = title;
+      if (subject)
+        homeworkFields.subject = subject.split(",").map((sub) => sub);
+      if (effort_time) homeworkFields.effort_time = effort_time;
+      if (set_date) homeworkFields.set_date = set_date;
+      if (due_date) homeworkFields.due_date = due_date;
+      if (description) homeworkFields.description = description;
+      if (allocate_classes)
+        homeworkFields.allocate_classes = allocate_classes
+          .split(",")
+          .map((room) => room);
 
-    // Bulilding homework object
-    const homeworkFields = {};
-    homeworkFields.teacher = req.teacher.id;
-    homeworkFields.student
-    if (title) homeworkFields.title = title;
-    if (subject) homeworkFields.subject = subject;
-    if (effort_time) homeworkFields.effort_time = effort_time;
-    if (set_date) homeworkFields.set_date = set_date;
-    if (due_date) homeworkFields.due_date = due_date;
-    if (description) homeworkFields.description = description;
-    if (allocate_classes) homeworkFields.allocate_classes = allocate_classes;
-    if (students) homeworkFields.students = students;
-    if (attachements) homeworkFields.attachements = attachements;
+      if (students)
+        homeworkFields.students = students.split(",").map((student) => student);
 
-    try {
-      // see if homework exists
-      let homework = await Homework.findOne({ title });
+      try {
+        // see if homework exists
+        // {
+        //   req.file !== undefined ?
+        // }
+        let homework = await Homework.findOne({ title });
 
-      if (homework) {
-        // update the homework by the teacher
-        homework = await Homework.findOneAndUpdate(
-          { title },
-          { $set: homeworkFields },
-          { new: true }
-        );
-        return res.json(homework);
+        if (homework) {
+          // update the homework by the teacher
+          homework = await Homework.findOneAndUpdate(
+            { title },
+            { $set: homeworkFields },
+            { new: true }
+          );
+          return res.json(homework);
+        }
+
+        //create new homework abject
+        homework = new Homework(homeworkFields);
+
+        //Save homework to database
+        await homework.save();
+        // return homewoek
+        res.json({ homework });
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
       }
+    } else {
+      // save only text inputs
+      const {
+        title,
+        subject,
+        effort_time,
+        allocate_classes,
+        description,
+        students,
+        set_date,
+        due_date,
+      } = req.body;
 
-      //create new homework abject
-      homework = new Homework(homeworkFields);
+      // Bulilding homework object
+      const homeworkFields = {};
+      homeworkFields.teacher = req.teacher.id;
+      if (title) homeworkFields.title = title;
+      if (subject)
+        homeworkFields.subject = subject.split(",").map((sub) => sub);
+      if (effort_time) homeworkFields.effort_time = effort_time;
+      if (set_date) homeworkFields.set_date = set_date;
+      if (due_date) homeworkFields.due_date = due_date;
+      if (description) homeworkFields.description = description;
+      if (allocate_classes)
+        homeworkFields.allocate_classes = allocate_classes
+          .split(",")
+          .map((room) => room);
+      if (students)
+        homeworkFields.students = students.split(",").map((student) => student);
 
-      //Save homework to database
-      await homework.save();
-      // return homewoek
-      res.json({ homework });
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server error");
+      try {
+        // see if homework exists
+
+        let homework = await Homework.findOne({ title });
+
+        if (homework) {
+          // update the homework by the teacher
+          homework = await Homework.findOneAndUpdate(
+            { title },
+            { $set: homeworkFields },
+            { new: true }
+          );
+          return res.json(homework);
+        }
+
+        //create new homework abject
+        homework = new Homework(homeworkFields);
+
+        //Save homework to database
+        await homework.save();
+        // return homewoek
+        res.json({ homework });
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+      }
     }
   }
 );
@@ -134,23 +235,6 @@ router.delete("/:id", authTeacher, async (req, res) => {
     }
     await deleteHomework.remove();
     res.json({ msg: "Homework removed" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-
-// conditional logics to add students, classes, subjects
-
-// @Route Get  /api/teacher/homework/student
-// @Descri         Get all Students created by the admin
-// @Access         Private
-router.get("/student", authTeacher || auth, async (req, res) => {
-  try {
-    const allStudents = await Student.find();
-
-    res.json(allStudents);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

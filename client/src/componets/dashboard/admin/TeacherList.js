@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { deleteTeacher } from "../../../actions/teacher";
 import { Popconfirm, message } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
+import { ListGroupItem, ListGroup } from "reactstrap";
 
 function cancel(e) {
   console.log(e);
@@ -14,7 +15,15 @@ function cancel(e) {
 function TeacherList({ teachers, deleteTeacher, history }) {
   const teacherList = teachers.map((teacher) => (
     <tr key={teacher._id}>
-      <td>{teacher.name}</td>
+      <td>
+        <ListGroup>
+          <ListGroupItem color="primary" className="mb-2">
+            {" "}
+            {""} 😎 {""}
+            {teacher.name}
+          </ListGroupItem>
+        </ListGroup>
+      </td>
       <td>{teacher.email}</td>
       <td>
         {teacher.allocate_classes.map((allocate_class, index) => (

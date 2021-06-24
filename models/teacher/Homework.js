@@ -5,10 +5,6 @@ const HomeworkSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "teacher",
   },
-  student: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "student",
-  },
   title: {
     type: String,
     require: true,
@@ -36,10 +32,17 @@ const HomeworkSchema = new mongoose.Schema({
   },
   due_date: {
     type: Date,
-    required: true,
   },
   attachements: {
     type: [String],
+  },
+  filename: {
+    type: String,
+    require: true,
+  },
+  uploadtime: {
+    type: Date,
+    default: Date.now,
   },
 });
 

@@ -45,16 +45,13 @@ const CompleteSchema = new mongoose.Schema({
   },
   attachements: {
     type: String,
-    required: true,
   },
   isComplete: {
     type: Boolean,
-   
   },
 
   completeStudentWork: {
     type: String,
-   
   },
   filename: {
     type: String,
@@ -62,8 +59,7 @@ const CompleteSchema = new mongoose.Schema({
   completeTime: {
     type: Date,
     default: Date.now,
-  }
-
+  },
 });
 
 module.exports = Complete = mongoose.model("complete", CompleteSchema);

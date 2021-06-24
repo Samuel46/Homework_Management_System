@@ -12,7 +12,10 @@
     display: none !important;
 } */
 .date__width {
-  width: 297px;
+  width: 100% !important;
+}
+.label_display {
+  display: grid;
 }
 .toolbarClassName {
   background-color: #e8e7fc !important;

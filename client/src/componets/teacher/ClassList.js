@@ -6,6 +6,14 @@ import { Link, withRouter } from "react-router-dom";
 import { useEffect } from "react";
 import { getClasses } from "../../actions/teacher/teacher";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { Popconfirm, message } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
+
 function ClassList({
   classes,
   teacherReducer: { classrooms },
@@ -68,12 +76,17 @@ function ClassList({
           <i className="feather icon-settings" />
           Edit
         </Link>
-        <button
-          onClick={() => deleteClassRoom(clas._id, history)}
-          className="btn btn-danger btn-sm "
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this student🙄?"
+          onConfirm={() => deleteClassRoom(clas._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
         >
-          Delete
-        </button>
+          <a href="#">Remove Class</a>
+        </Popconfirm>
       </td>
     </tr>
   ));
