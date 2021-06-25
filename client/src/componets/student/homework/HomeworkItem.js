@@ -22,11 +22,12 @@ import {
 import { DragSwitch } from "react-dragswitch";
 import "react-dragswitch/dist/index.css";
 import StudentNavigation from "../StudentNavigation";
+import NodeAlert from "../../layouts/NodeAlert";
 
 function HomeworkItem({
   getHomeworkBy_id,
   submitHomework,
-  studentHomework: { homework, loading },
+  studentHomework: { homework, loading, error },
   match,
   history,
   logoutStudent,
@@ -171,6 +172,9 @@ function HomeworkItem({
                           class="img-fluid"
                         />
                       </div>
+                      <NodeAlert />
+
+                      {/* {error && error !== null ? error : null} */}
                     </div>
                     {/*  */}
                     <div className="card-header">

@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-// const authTeacher = require("../../../middleware/authTeacher");
-const { check, validationResult } = require("express-validator");
 const Homework = require("../../../models/teacher/Homework");
 const authStudent = require("../../../middleware/authStudent");
 const authParent = require("../../../middleware/authParent");
 const Student = require("../../../models/admin/students/Student");
 const Class = require("../../../models/admin/classes/Class");
-const Complete = require("../../../models/student/Complete");
-const authTeacher = require("../../../middleware/authTeacher");
 
 // @Route Get   api/student/homework
 // @Descri      Get all homework @@ pending homework
