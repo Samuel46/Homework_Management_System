@@ -9,6 +9,7 @@ import {
   SUBMIT_HOMEWORK,
   GET_COMPLETE_HOMEWORK,
   REMOVE_HOMEWORK,
+  COMPLETE_WORK,
 } from "../types";
 
 // Get all pending homework
@@ -140,6 +141,22 @@ export const removePending = (id) => async (dispatch) => {
 
     dispatch(setAlert("Homework removed!", "danger"));
     dispatch(getCompletWork());
+  } catch (err) {
+    dispatch({
+      type: HOMEWORK_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// display none for pending homework after submissiom
+export const movePending = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: COMPLETE_WORK,
+    });
+
+    dispatch(setAlert("Homework Complete!", "success"));
   } catch (err) {
     dispatch({
       type: HOMEWORK_ERROR,

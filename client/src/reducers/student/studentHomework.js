@@ -9,6 +9,7 @@ import {
   GET_SUBMITED_HOMEWORK_ID,
   GET_CLASS_STUDENT,
   GET_CLASS_STUDENT_FAIL,
+  COMPLETE_WORK,
 } from "../../actions/types";
 
 const intialState = {
@@ -20,6 +21,7 @@ const intialState = {
   error: {},
   complete: null,
   completework: [],
+  isActive: false,
 };
 
 export default function (state = intialState, action) {
@@ -33,6 +35,12 @@ export default function (state = intialState, action) {
         ...state,
         homework: payload,
         loading: false,
+      };
+
+    //  complete work
+    case COMPLETE_WORK:
+      return {
+        isActive: true,
       };
 
     // Get all my classes at student level.

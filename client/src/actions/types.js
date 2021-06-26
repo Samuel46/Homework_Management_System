@@ -49,6 +49,8 @@ export const AUTH_STUDENT_ERROR = "AUTH_STUDENT_ERROR";
 // Log in Students
 export const LOGIN_STUDENT_SUCCESS = "LOGIN_STUDENT_SUCCESS";
 export const LOGIN_STUDENT_FAIL = "LOGIN_STUDENT_FAIL";
+// complete work
+export const COMPLETE_WORK = "COMPLETE_WORK";
 // Logout student
 export const LOGOUT_STUDENT = "LOGOUT_STUDENT";
 // Get all class @ students level.
@@ -88,10 +90,12 @@ export const GET_COMPLETE_HOMEWORK = "GET_COMPLETE_HOMEWORK";
 // parent reducers
 // @@register parent
 export const REGISTER_PARENT = "REGISTER_PARENT";
+export const UPDATE_PARENT = "UPDATE_PARENT";
 export const PARENT_FAIL = "PARENT_FAIL";
 // @@get register parents using student ID
 export const GET_PARENTS = "GET_PARENTS";
 export const GET_PARENTS_FAIL = "GET_PARENTS_FAIL";
+export const GET_PARENT_BYID = "GET_PARENTS_BYID";
 
 // @@ Delete and load parent
 export const DELETE_PARENT = "DELETE_PARENT";

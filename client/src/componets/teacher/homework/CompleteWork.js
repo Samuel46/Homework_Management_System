@@ -6,6 +6,7 @@ import Moment from "react-moment";
 import { deleteDoneWorkById } from "../../../actions/teacher/homework";
 import { Popconfirm, message } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
 function cancel(e) {
   console.log(e);
@@ -16,7 +17,15 @@ function CompleteWork({ isComplete, deleteDoneWorkById, history }) {
   const completeWork = isComplete.map((complete) => (
     <tr key={complete._id}>
       <td>{complete.title}</td>
-      <td>{Object.values(complete.student.name)}</td>
+      <td>
+        <ListGroup>
+          <ListGroupItem color="info" className="mb-2">
+            {" "}
+            {""}😃 {""}
+            {Object.values(complete.student.name)}
+          </ListGroupItem>
+        </ListGroup>
+      </td>
       <td>{complete.subject}</td>
       <td>
         <Moment format="YYYY/MM/DD">{complete.set_date}</Moment>

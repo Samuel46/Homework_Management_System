@@ -3,7 +3,6 @@ import React from "react";
 import Moment from "react-moment";
 import { ListGroup, ListGroupItem } from "reactstrap";
 function PendingWork({ homeworks }) {
-  let count = 1;
   const pendingWork = homeworks.map((homework) => (
     <tr key={homework._id}>
       <td>{homework.title}</td>
@@ -57,9 +56,7 @@ function PendingWork({ homeworks }) {
           <div className="card shadow">
             <div className="card-header">
               <h4 className="text-danger">
-                <span className="badge badge-pill badge-danger">
-                  Pending Homework
-                </span>
+                <span className="badge badge-pill badge-danger">Homework</span>
               </h4>
               <div class="cover-img-block img_img">
                 <img

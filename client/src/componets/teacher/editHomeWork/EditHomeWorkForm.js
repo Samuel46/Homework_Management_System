@@ -143,7 +143,6 @@ function EditHomeWorkForm({
                   Add Subject
                 </label>
                 <Select
-                  mode="multiple"
                   autoFocus
                   allowClear
                   defaultValue={[""]}

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Moment from "react-moment";
@@ -6,9 +6,17 @@ import Spinner from "../layouts/Spinner";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
-function PendingWork({ homeworks, completework }) {
+function PendingWork({ homeworks }) {
+  const [isActive, setActive] = useState("false");
+  const handleToggle = () => {
+    setActive(!isActive);
+  };
+
+  useEffect(() => {
+    handleToggle();
+  }, []);
   const studenthomework = homeworks.map((homework) => (
-    <tr key={homework._id}>
+    <tr key={homework._id} className={isActive ? "display" : "diplay_none"}>
       <td>{homework.title}</td>
       <td>
         <ListGroup>
@@ -38,7 +46,9 @@ function PendingWork({ homeworks, completework }) {
           <i className="fas fa-eye" />
           View
         </Link>
-        <span className="badge badge-pill badge-danger ml-2 mr-2">Pending</span>
+        <span className="badge badge-pill badge-danger ml-2 mr-2">
+          under review
+        </span>
       </td>
     </tr>
   ));

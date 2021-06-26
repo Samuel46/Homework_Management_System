@@ -6,6 +6,7 @@ import {
   getHomeworkBy_id,
   submitHomework,
   removePending,
+  movePending,
 } from "../../../actions/student/homework";
 import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
@@ -31,6 +32,7 @@ function HomeworkItem({
   match,
   history,
   logoutStudent,
+  movePending,
   student: { student },
 }) {
   useEffect(() => {
@@ -173,8 +175,6 @@ function HomeworkItem({
                         />
                       </div>
                       <NodeAlert />
-
-                      {/* {error && error !== null ? error : null} */}
                     </div>
                     {/*  */}
                     <div className="card-header">
@@ -356,12 +356,7 @@ function HomeworkItem({
                       ) : (
                         <button
                           onClick={() =>
-                            submitHomework(
-                              homework._id,
-                              formData,
-                              history
-                              // removePending(homework._id)
-                            )
+                            submitHomework(homework._id, formData, history)
                           }
                           type="submit"
                           className="btn btn-success mr-2"
@@ -397,6 +392,7 @@ HomeworkItem.propTypes = {
   submitHomework: PropTypes.func.isRequired,
   removePending: PropTypes.func.isRequired,
   logoutStudent: PropTypes.func.isRequired,
+  movePending: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -409,4 +405,5 @@ export default connect(mapStateToProps, {
   submitHomework,
   logoutStudent,
   removePending,
+  movePending,
 })(withRouter(HomeworkItem));

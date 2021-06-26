@@ -35,7 +35,7 @@ function CompleteWork({ completework, student: { student }, removeHomework }) {
             defaultChecked
           />
           <label className="custom-control-label " htmlFor="customCheckc1">
-            Under Review
+            Submitted✔
           </label>
         </div>
         {/* <button

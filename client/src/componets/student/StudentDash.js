@@ -57,14 +57,6 @@ function StudentDash({
   }, [getMsg]);
   const [visible, setVisible] = useState(true);
 
-  // const allwork = homeworks.map((work) => work);
-  // const allcomplete = completework.map((complete) => complete);
-  // if (allwork.title === allcomplete.title) {
-  //   console.log("samuel is awseom");
-  // } else {
-  //   console.log("ypppppppppppppppppppppp");
-  // }
-
   return (student !== null && loading !== false && homeworks !== null) ||
     student !== undefined ? (
     <Fragment>

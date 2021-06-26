@@ -1,39 +1,32 @@
-import React, { useState } from "react";
-import NodeAlert from "../../layouts/NodeAlert";
-import { Link, withRouter } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import NodeAlert from "../../../layouts/NodeAlert";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { registerParent } from "../../../actions/student/parents/parent";
-import { logoutStudent } from "../../../actions/student";
-import StudentNavigation from "../StudentNavigation";
-import { Fragment } from "react";
-function ParentForm({
-  registerParent,
-  history,
+import {
+  updateParent,
+  getParentById,
+} from "../../../../actions/student/parents/parent";
+import { logoutStudent } from "../../../../actions/student";
+import StudentNavigation from "../../StudentNavigation";
+import { Alert } from "reactstrap";
+import EditParentForm from "./EditParentForm";
+
+function EditParents({
+  updateParent,
   logoutStudent,
+  getParentById,
+  match,
   student: { student, loading },
+  parent: { selectedParent },
 }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleAddParent = () => {
-    const parent = {
-      name,
-      email,
-      password,
-    };
-    registerParent(parent);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    handleAddParent();
-  };
-  return (
+  // TO_DO get parents by id
+  useEffect(() => {
+    getParentById(match.params.id);
+  }, [getParentById, match.params.id]);
+  return selectedParent !== null && selectedParent !== undefined ? (
     <Fragment>
       <StudentNavigation />
-
       {/* [ Header ] start */}
       <header className="pc-header ">
         <div className="header-wrapper">
@@ -127,11 +120,11 @@ function ParentForm({
             <div className="col-md-12 py-4">
               <div className="card  shadow">
                 <div className="card-header">
-                  <h4 className="card-title">Add Parent</h4>
+                  <h4 className="card-title">Update Parent</h4>
                 </div>
                 <div class="cover-img-block img_img">
                   <img
-                    src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
+                    src="https://image.freepik.com/free-vector/editing-body-text-concept-illustration_114360-5791.jpg"
                     alt=""
                     class="img-fluid"
                   />
@@ -141,66 +134,12 @@ function ParentForm({
                   <div>
                     <NodeAlert />
                   </div>
-                  <form onSubmit={(e) => onSubmit(e)}>
-                    <div className="row">
-                      <div className="col-sm-6">
-                        <div className="form-group fill">
-                          <label className="floating-label">
-                            Parent's Name
-                          </label>
-                          <input
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
-                            name="name"
-                            type="text"
-                            className="form-control"
-                            placeholder
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group fill">
-                          <label className="floating-label" htmlFor="Email">
-                            Email Address
-                          </label>
-                          <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            name="email"
-                            type="email"
-                            className="form-control"
-                            id="Email"
-                            placeholder
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group fill">
-                          <label className="floating-label">Password</label>
-                          <input
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            name="password"
-                            type="password"
-                            className="form-control"
-                            id="Password"
-                            placeholder
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-12">
-                        <button type="submit" className="btn btn-primary mr-4">
-                          Add Parent
-                        </button>
-                        <Link
-                          to="/student-parent"
-                          className="btn btn-secondary"
-                        >
-                          Go Back
-                        </Link>
-                      </div>
-                    </div>
-                  </form>
+                  {/* edit parent form */}
+
+                  <EditParentForm
+                    selectedParent={selectedParent}
+                    updateParent={updateParent}
+                  />
                 </div>
               </div>
             </div>
@@ -208,16 +147,31 @@ function ParentForm({
         </div>
       </div>
     </Fragment>
+  ) : (
+    <Alert color="danger">
+      <h4 className="alert-heading">Parent not found</h4>
+      <div className="alert-body">
+        Parent with id: {match.params.id} doesn't exist. Check list of all
+        Student: <Link to="/student-parent">Dashboard</Link>
+      </div>
+    </Alert>
   );
 }
-ParentForm.propTypes = {
-  registerParent: PropTypes.func.isRequired,
+
+EditParentForm.propTypes = {
+  updateParent: PropTypes.func.isRequired,
   logoutStudent: PropTypes.func.isRequired,
+  getParentById: PropTypes.func.isRequired,
+  parent: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   student: state.student,
+  parent: state.parent,
 });
-export default connect(mapStateToProps, { registerParent, logoutStudent })(
-  withRouter(ParentForm)
-);
+
+export default connect(mapStateToProps, {
+  updateParent,
+  getParentById,
+  logoutStudent,
+})(EditParents);

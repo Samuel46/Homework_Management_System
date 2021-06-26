@@ -51,6 +51,7 @@ import EditHomework from "./componets/teacher/editHomeWork/EditHomework";
 import ParentForm from "./componets/student/Parents/ParentForm";
 import RegisterParent from "./componets/student/account/RegisterParent";
 import Parents from "./componets/student/Parents/Parents";
+import EditParent from "./componets/student/Parents/eiditParent";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -177,13 +178,26 @@ const App = () => {
               path="/student-account"
               component={StudentAccount}
             />
-             <AuthStudentRoute
+            <AuthStudentRoute
+              exact
+              path="/edit-parent/:id"
+              component={EditParent}
+            />
+            <AuthStudentRoute
               exact
               path="/student-parent"
               component={Parents}
             />
-            <AuthStudentRoute exact path="/add-parents" component={ParentForm} />
-            <AuthStudentRoute exact path="/register-parents" component={RegisterParent} />
+            <AuthStudentRoute
+              exact
+              path="/add-parents"
+              component={ParentForm}
+            />
+            <AuthStudentRoute
+              exact
+              path="/register-parents"
+              component={RegisterParent}
+            />
             <AuthStudentRoute exact path="/work/:id" component={HomeworkItem} />
             {/* Feedback Routes@@teacher & student */}
             <AuthTeacherRoute

@@ -188,7 +188,7 @@ function CreateHomework({
                               Add Subject
                             </label>
                             <Select
-                              mode="multiple"
+                              // mode="multiple"
                               autoFocus
                               allowClear
                               defaultValue={[""]}

@@ -41,76 +41,11 @@ function SubmitedItem({
             </div>
           </div>
           {/* / */}
-          <div className="row">
-            {/* Teacher class card*/}
-            <div className="col-xl-4 col-md-4">
-              <div className="card shadow">
-                <div className="card-body bg-success">
-                  <div className="row align-items-center m-l-0">
-                    <div className="col-auto">
-                      <i className="fas fa-laptop f-36 text-success" />
-                    </div>
-                    <div className="col-auto">
-                      <h6 className="text-success m-b-10">Classes</h6>
-                      {/* <h2 className="m-b-0 text-success ">2</h2> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-12  py-3 mb-3    ">
-                  <Link to="/manage-classes" className="btn btn-success">
-                    Manage Classes
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* create homework */}
-            <div className="col-xl-4 col-md-4">
-              <div className="card shadow">
-                <div className="card-body bg-info">
-                  <div className="row align-items-center m-l-0">
-                    <div className="col-auto">
-                      <i class="far fa-address-card f-36 text-info"></i>
-                    </div>
-                    <div className="col-auto">
-                      <h6 className="text-info m-b-10">Create Homework</h6>
-                      {/* <h2 className="m-b-0 text-info ">45</h2> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-12  py-3 mb-3 ">
-                  <Link to="/create-homework" className="btn btn-info">
-                    Create Homework
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* homework submittion */}
-            <div className="col-xl-4 col-md-4">
-              <div className="card shadow">
-                <div className="card-body bg-danger">
-                  <div className="row align-items-center m-l-0">
-                    <div className="col-auto">
-                      <i className="fas fa-book f-36 text-danger" />
-                    </div>
-                    <div className="col-auto">
-                      <h6 className="text-danger m-b-10">Submissions</h6>
-                      {/* <h2 className="m-b-0 text-danger ">45</h2> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-12 center py-3 mb-3 ">
-                  <Link to="/manage-homework" className="btn btn-danger">
-                    Manage Homework
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* end of row */}
 
           {/* HomeworkList */}
-          <div className="py-4">
+          <div className="py-5">
             <NodeAlert />
 
             <div className="container">
