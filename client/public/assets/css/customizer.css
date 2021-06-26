@@ -1,9 +1,34 @@
+/*Error page */
+.misc-wrapper {
+  display: flex;
+  flex-basis: 100%;
+  min-height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.misc-inner {
+  position: relative;
+  max-width: 750px;
+}
+.brand-logo {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  margin: 0;}
+  
 .pct-customizer {
   position: fixed;
   right: -360px;
   top: 160px;
   z-index: 1025;
   transition: all 0.15s ease-in-out;
+}
+
+.brand-text {
+  font-weight: 600;
 }
 .editorClassName {
   height: 350px !important;

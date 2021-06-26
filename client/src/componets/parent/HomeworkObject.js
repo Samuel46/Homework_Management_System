@@ -11,6 +11,7 @@ import { logoutParent } from "../../actions/student/parents/parent";
 import {
     Table,
     Badge,
+    ListGroupItem, ListGroup
     
   } from "reactstrap";
 
@@ -200,6 +201,26 @@ function HomeworkObject({
                         <strong>Description</strong>{" "}
                       </label>
                       <p>{homework && homework.description}</p>
+                      <div className="card-footer">
+                        <ListGroup>
+                          <ListGroupItem color="info" className="mb-2">
+                            {" "}
+                            {""}📜 {""}
+                            {homework && homework.filename}
+                          </ListGroupItem>
+                        </ListGroup>
+                        <a
+                          href={homework && homework.attachements}
+                          className="btn  btn-primary"
+                          target="_blank"
+                          download
+                        >
+                          {homework && homework.attachements.length === 0
+                            ? "No files available"
+                            : " Download Files"}
+                        </a>
+                      </div>
+                      
 
                       <Link
                         to="/parent-dashboard"

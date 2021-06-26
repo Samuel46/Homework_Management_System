@@ -11,6 +11,7 @@ import { logoutParent } from "../../actions/student/parents/parent";
 import {
   Table,
   Badge,
+  ListGroupItem, ListGroup
   
 } from "reactstrap";
 
@@ -209,6 +210,25 @@ function CompleteObject({
                         <strong>Description</strong>{" "}
                       </label>
                       <p>{complete && complete.description}</p>
+                      <div className="card-footer">
+                        <ListGroup>
+                          <ListGroupItem color="info" className="mb-2">
+                            {" "}
+                            {""}📜 {""}
+                            {complete && complete.filename}
+                          </ListGroupItem>
+                        </ListGroup>
+                        <a
+                          href={complete && complete.attachements}
+                          className="btn  btn-primary"
+                          target="_blank"
+                          download
+                        >
+                          {complete && complete.attachements.length === 0
+                            ? "No files available"
+                            : " Download Files"}
+                        </a>
+                      </div>
                     </div>
                     <div className="card-footer">
                       {/*@@TODO Check wheheter the attachment from the state match with */}
