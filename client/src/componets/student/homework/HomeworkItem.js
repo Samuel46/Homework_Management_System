@@ -5,8 +5,6 @@ import { Link, withRouter } from "react-router-dom";
 import {
   getHomeworkBy_id,
   submitHomework,
-  removePending,
-  movePending,
 } from "../../../actions/student/homework";
 import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
@@ -28,11 +26,10 @@ import NodeAlert from "../../layouts/NodeAlert";
 function HomeworkItem({
   getHomeworkBy_id,
   submitHomework,
-  studentHomework: { homework, loading, error },
+  studentHomework: { homework, loading },
   match,
   history,
   logoutStudent,
-  movePending,
   student: { student },
 }) {
   useEffect(() => {
@@ -316,25 +313,7 @@ function HomeworkItem({
                           Attach your complete Homework here make sure the
                           Document are well formatted
                         </UncontrolledTooltip>
-
-                        {/* displaying the forms */}
-                        {/* {uploadedFile ? (
-                      <div className="row ">
-                        <div className="col-md-6 m-auto">
-                          <h3 className="text-center">
-                            {uploadedFile.filename}
-                          </h3>
-                          <img
-                            style={{ width: "100%" }}
-                            src={uploadedFile.attachements}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    ) : null} */}
                       </form>
-                      {/* {message ? <Message msg={message} /> : null}
-                  <Progress percentage={uploadPercentage} /> */}
                     </div>
 
                     <div className="col-sm-6 py-3">
@@ -390,9 +369,7 @@ HomeworkItem.propTypes = {
   getHomeworkBy_id: PropTypes.func.isRequired,
   studentHomework: PropTypes.object.isRequired,
   submitHomework: PropTypes.func.isRequired,
-  removePending: PropTypes.func.isRequired,
   logoutStudent: PropTypes.func.isRequired,
-  movePending: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -404,6 +381,4 @@ export default connect(mapStateToProps, {
   getHomeworkBy_id,
   submitHomework,
   logoutStudent,
-  removePending,
-  movePending,
 })(withRouter(HomeworkItem));

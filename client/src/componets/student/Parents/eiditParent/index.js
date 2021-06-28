@@ -17,8 +17,8 @@ function EditParents({
   logoutStudent,
   getParentById,
   match,
-  student: { student, loading,  },
-  parent: {selectedParent  },
+  student: { student },
+  parent: { selectedParent },
 }) {
   // TO_DO get parents by id
   useEffect(() => {
@@ -148,27 +148,32 @@ function EditParents({
       </div>
     </Fragment>
   ) : (
-   
-
-<div className='misc-wrapper'>
-
-<div className='misc-inner p-2 p-sm-3'>
-  <div className='w-100 text-center'>
-   
-    <Alert color="danger">
-      <h4 className="alert-heading">Parent not found  🕵🏻‍♀️</h4>
-      <div className="alert-body">
-        Parent with id: {match.params.id} doesn't exist. Check list of all the
-        parent: <Link to="/student-parent">Parent List</Link>
+    <div className="misc-wrapper">
+      <div className="misc-inner p-2 p-sm-3">
+        <div className="w-100 text-center">
+          <Alert color="danger">
+            <h4 className="alert-heading">Parent not found 🕵🏻‍♀️</h4>
+            <div className="alert-body">
+              Parent with id: {match.params.id} doesn't exist. Check the:{" "}
+              <Link to="/student-parent">Parent List</Link>
+            </div>
+          </Alert>
+          <Button
+            tag={Link}
+            to="/student-dashboard"
+            color="primary"
+            className="btn-sm-block mb-2"
+          >
+            Back to home
+          </Button>
+          <img
+            className="img-fluid"
+            src="https://image.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg"
+            alt="Not authorized page"
+          />
+        </div>
       </div>
-    </Alert>
-    <Button tag={Link} to='/student-dashboard' color='primary' className='btn-sm-block mb-2'>
-      Back to home
-    </Button>
-    <img className='img-fluid' src="https://image.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg" alt='Not authorized page' />
-  </div>
-</div>
-</div>
+    </div>
   );
 }
 

@@ -63,7 +63,7 @@ function MyClassRooms({ classRooms }) {
                         <th>Classroom name</th>
                         <th>Teacher's Name</th>
 
-                        <th>Students</th>
+                        <th>Classmates</th>
                       </tr>
                     </thead>
                     <tbody>{myclassrooms}</tbody>

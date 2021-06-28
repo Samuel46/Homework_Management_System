@@ -17,8 +17,9 @@
   position: absolute;
   top: 2rem;
   left: 2rem;
-  margin: 0;}
-  
+  margin: 0;
+}
+
 .pct-customizer {
   position: fixed;
   right: -360px;
@@ -33,9 +34,9 @@
 .editorClassName {
   height: 350px !important;
 }
-/* .code_display {
-    display: none !important;
-} */
+.none_display {
+  display: none !important;
+}
 .date__width {
   width: 100% !important;
 }

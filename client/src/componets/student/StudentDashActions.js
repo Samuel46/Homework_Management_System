@@ -7,6 +7,16 @@ function StudentDashActions({
   studentMsg: { messages },
   parents,
 }) {
+  const pendingTitle = homeworks.map((work) => work.title);
+  const completeTitle = completework.map((work) => work.title);
+
+  const filteredHomework = pendingTitle.filter((work) =>
+    completeTitle.includes(work)
+  );
+  const pendingLength = pendingTitle.filter(
+    (work) => !filteredHomework.includes(work)
+  );
+
   return (
     <div className="row">
       <div className="col-xl-3 col-md-3">
@@ -34,7 +44,7 @@ function StudentDashActions({
               <div className="col-auto">
                 <h6 className="text-danger m-b-10">Homewrok</h6>
                 <h2 className="m-b-0 text-danger">
-                  {homeworks && homeworks.length}
+                  {pendingLength && pendingLength.length}
                 </h2>
               </div>
             </div>

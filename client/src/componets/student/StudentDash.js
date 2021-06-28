@@ -12,7 +12,7 @@ import {
   getCompletWork,
   getHomework,
   getMyClass,
-  getHomeworkFromClass 
+  getHomeworkFromClass,
 } from "../../actions/student/homework";
 import Spinner from "../layouts/Spinner";
 import { logoutStudent } from "../../actions/student";
@@ -24,7 +24,7 @@ import setStudentToken from "../../utils/setStudentToken";
 
 function StudentDash({
   getHomework,
-  getHomeworkFromClass, 
+  getHomeworkFromClass,
   getCompletWork,
   getParent,
   logoutStudent,
@@ -43,8 +43,8 @@ function StudentDash({
     getHomework();
   }, [getHomework]);
   useEffect(() => {
-    getHomeworkFromClass() 
-  }, [getHomeworkFromClass])
+    getHomeworkFromClass();
+  }, [getHomeworkFromClass]);
   useEffect(() => {
     getCompletWork();
   }, [getCompletWork]);
@@ -161,8 +161,7 @@ function StudentDash({
           {/* {!isComplete ? <PendingWork homeworks={homeworks} /> :    <CompleteWork /> } */}
           <PendingWork homeworks={homeworks} completework={completework} />
           {/* ////////////////////// */}
-          {/* Complete */}
-          <CompleteWork completework={completework} />
+
           {/* All my assigned classes */}
           <MyClassRooms classRooms={classRooms} />
 
@@ -202,5 +201,5 @@ export default connect(mapStateToProps, {
   getMsg,
   logoutStudent,
   getParent,
-  getHomeworkFromClass 
+  getHomeworkFromClass,
 })(StudentDash);
