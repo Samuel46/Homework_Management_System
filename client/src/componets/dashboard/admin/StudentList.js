@@ -34,7 +34,10 @@ function StudentList({ students, deleteStudent, history }) {
         {" "}
         <Moment format="YYYY/MM/DD">{student.birth_date}</Moment>
       </td>
-      <td> {student.joining_date}</td>
+      <td>
+        {" "}
+        <Moment format="YYYY/MM/DD">{student.joining_date}</Moment>
+      </td>
       <td> {student.current_year_group}</td>
       <td>
         <Link
