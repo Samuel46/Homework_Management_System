@@ -27,8 +27,8 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
     setBirth_Date(new Date(selectedStudent.birth_date));
     setGender(selectedStudent.gender || gender);
     setJoining_Date(new Date(selectedStudent.joining_date));
-    setJoining_Year_Group(new Date(selectedStudent.joining_year_group));
-    setCurrent_Year_Group(new Date(selectedStudent.current_year_group));
+    setJoining_Year_Group(selectedStudent.joining_year_group ||joining_year_group);
+    setCurrent_Year_Group(selectedStudent.current_year_group || current_year_group);
   }, [
     selectedStudent.name,
     selectedStudent.joining_date,
@@ -168,12 +168,13 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               <label className="floating-label" htmlFor="Birth">
                 Joining Year Group
               </label>
-              <DatePicker
-                selected={joining_year_group}
-                className="form-control date__width"
-                onChange={(date) => setJoining_Year_Group(date)}
-                dateFormat="MM/yyyy"
-                showMonthYearPicker
+              <input
+                onChange={(e) => setJoining_Year_Group(e.target.value)}
+                value={joining_year_group}
+                name="joining_year_group"
+                type="text"
+                className="form-control"
+                
               />
             </div>
           </div>
@@ -183,12 +184,13 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
                 Current Year Group
               </label>
 
-              <DatePicker
-                selected={current_year_group}
+              <input
+                onChange={(e) => setCurrent_Year_Group(e.target.value)}
+                value={current_year_group}
+                name="current_year_group"
+                type="text"
                 className="form-control"
-                onChange={(date) => setCurrent_Year_Group(date)}
-                dateFormat="MM/yyyy"
-                showMonthYearPicker
+                
               />
             </div>
           </div>

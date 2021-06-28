@@ -18,8 +18,8 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [birth_date, setBirth_Date] = useState(new Date());
   const [gender, setGender] = useState("");
   const [joining_date, setJoining_Date] = useState(new Date());
-  const [joining_year_group, setJoining_Year_Group] = useState(new Date());
-  const [current_year_group, setCurrent_Year_Group] = useState(new Date());
+  const [joining_year_group, setJoining_Year_Group] = useState("");
+  const [current_year_group, setCurrent_Year_Group] = useState("");
 
   // ** Adds New Student
   const handleRegisterStudents = () => {
@@ -251,16 +251,17 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                           </div>
                         </div>
                         <div className="col-sm-6">
-                          <div className="form-group fill label_display">
+                          <div className="form-group fill ">
                             <label className="floating-label" htmlFor="Birth">
                               Joining Year Group
                             </label>
-                            <DatePicker
-                              selected={joining_year_group}
-                              className="form-control date__width"
-                              onChange={(date) => setJoining_Year_Group(date)}
-                              dateFormat="MM/yyyy"
-                              showMonthYearPicker
+                            <input
+                              onChange={(e) => setJoining_Year_Group(e.target.value)}
+                              name="username"
+                              value={joining_year_group}
+                              type="text"
+                              className="form-control"
+                              placeholder
                             />
                           </div>
                         </div>
@@ -270,12 +271,13 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                               Current Year Group
                             </label>
 
-                            <DatePicker
-                              selected={current_year_group}
+                            <input
+                              onChange={(e) => setCurrent_Year_Group(e.target.value)}
+                              name="current_year_group"
+                              value={current_year_group}
+                              type="text"
                               className="form-control"
-                              onChange={(date) => setCurrent_Year_Group(date)}
-                              dateFormat="MM/yyyy"
-                              showMonthYearPicker
+                              placeholder
                             />
                           </div>
                         </div>

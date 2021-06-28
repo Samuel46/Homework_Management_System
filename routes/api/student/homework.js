@@ -41,6 +41,28 @@ router.get("/work", authStudent || authParent, async (req, res) => {
   }
 });
 
+// @Route Get   api/student/homework/classroom
+// @Descri      Get all homewoek associate with this student @@ using the classroom
+// @Access      Private
+router.get("/classroom", authStudent || authParent, async (req, res) => {
+  try {
+    const student = await Student.findById(req.student.id).select("-password");
+    const classrooms = await Class.find({
+      add_students: student.name,
+    }).populate("user", ["name", "email"]);
+
+    const myClassrooms = Array.prototype.concat(
+      ...classrooms.map((room) => room.name.split())
+    );
+    const homework = await Homework.find({
+      allocate_classes: { $in: myClassrooms },
+    }).populate("teacher", ["name", "email"]);
+    res.json(homework);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 // // @Route Get   api/student/homework
 // @Descri         Get homework by ID
 // @Access         Private

@@ -37,11 +37,11 @@ const StudentSchema = new mongoose.Schema({
         default: Date.now,
     },
     joining_year_group: {
-        type: Date,
+        type: [String],
         required: true,
     },
     current_year_group: {
-        type: Date,
+        type: [String],
         required: true,
     },
 

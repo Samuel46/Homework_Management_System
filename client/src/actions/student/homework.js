@@ -15,7 +15,7 @@ import {
 // Get all pending homework
 export const getHomework = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/student/homework");
+    const res = await axios.get("/api/student/homework") 
 
     dispatch({
       type: GET_STUDENT_HOMEWORK,
@@ -46,6 +46,23 @@ export const getMyClass = () => async (dispatch) => {
   }
 };
 
+
+// Get all homework associate with student using the classroom
+export const getHomeworkFromClass = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/student/homework/classroom");
+
+    dispatch({
+      type: GET_STUDENT_HOMEWORK,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: HOMEWORK_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
 // Get all complete Homework
 export const getCompletWork = () => async (dispatch) => {
   try {
@@ -109,7 +126,7 @@ export const submitHomework = (id, formData, history) => async (dispatch) => {
   }
 };
 
-// Remove homework from pending to complete after the student submits the homework
+// remove complete homework
 export const removeHomework = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/student/complete/${id}`);

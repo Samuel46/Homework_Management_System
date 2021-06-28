@@ -12,6 +12,7 @@ import {
   getCompletWork,
   getHomework,
   getMyClass,
+  getHomeworkFromClass 
 } from "../../actions/student/homework";
 import Spinner from "../layouts/Spinner";
 import { logoutStudent } from "../../actions/student";
@@ -23,6 +24,7 @@ import setStudentToken from "../../utils/setStudentToken";
 
 function StudentDash({
   getHomework,
+  getHomeworkFromClass, 
   getCompletWork,
   getParent,
   logoutStudent,
@@ -40,6 +42,9 @@ function StudentDash({
   useEffect(() => {
     getHomework();
   }, [getHomework]);
+  useEffect(() => {
+    getHomeworkFromClass() 
+  }, [getHomeworkFromClass])
   useEffect(() => {
     getCompletWork();
   }, [getCompletWork]);
@@ -180,6 +185,7 @@ StudentDash.propTypes = {
   getMyClass: PropTypes.func.isRequired,
   getParent: PropTypes.func.isRequired,
   parent: PropTypes.object.isRequired,
+  getHomeworkFromClass: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -196,4 +202,5 @@ export default connect(mapStateToProps, {
   getMsg,
   logoutStudent,
   getParent,
+  getHomeworkFromClass 
 })(StudentDash);
