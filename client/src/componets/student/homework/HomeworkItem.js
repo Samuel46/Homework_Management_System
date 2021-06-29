@@ -10,6 +10,7 @@ import { Fragment } from "react";
 import Spinner from "../../layouts/Spinner";
 import Moment from "react-moment";
 import { logoutStudent } from "../../../actions/student";
+
 import {
   Table,
   Badge,
@@ -288,6 +289,7 @@ function HomeworkItem({
                               id="file"
                             />
                           </div>
+                          <NodeAlert />
 
                           <div className="form-group col-md-6 mt-5 ">
                             <label
@@ -313,6 +315,7 @@ function HomeworkItem({
                           Attach your complete Homework here make sure the
                           Document are well formatted
                         </UncontrolledTooltip>
+                        <NodeAlert />
                       </form>
                     </div>
 

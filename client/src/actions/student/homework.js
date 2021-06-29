@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { setAlert } from "../alert";
 import {
   HOMEWORK_ERROR,
@@ -15,7 +16,7 @@ import {
 // Get all pending homework
 export const getHomework = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/student/homework") 
+    const res = await axios.get("/api/student/homework");
 
     dispatch({
       type: GET_STUDENT_HOMEWORK,
@@ -45,7 +46,6 @@ export const getMyClass = () => async (dispatch) => {
     });
   }
 };
-
 
 // Get all homework associate with student using the classroom
 export const getHomeworkFromClass = () => async (dispatch) => {
@@ -116,7 +116,7 @@ export const submitHomework = (id, formData, history) => async (dispatch) => {
       type: SUBMIT_HOMEWORK,
       payload: res.data,
     });
-    dispatch(setAlert("Homework Submited", "success"));
+    dispatch(setAlert("Your Homework has being submitted🤗", "success"));
     history.push("/student-dashboard");
   } catch (err) {
     dispatch({

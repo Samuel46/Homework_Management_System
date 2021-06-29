@@ -7,7 +7,7 @@ import StudentNavigation from "./StudentNavigation";
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
-import { Alert } from "reactstrap";
+import NodeAlert from "../layouts/NodeAlert";
 import {
   getCompletWork,
   getHomework,
@@ -157,6 +157,7 @@ function StudentDash({
           </div>
 
           <StudentDashActions parents={parents} />
+          <NodeAlert />
 
           {/* {!isComplete ? <PendingWork homeworks={homeworks} /> :    <CompleteWork /> } */}
           <PendingWork homeworks={homeworks} completework={completework} />
