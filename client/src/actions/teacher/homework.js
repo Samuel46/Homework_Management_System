@@ -188,7 +188,7 @@ export const deleteDoneWorkById = (id, history) => async (dispatch) => {
 // Get all the students
 export const getStudents = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/teacher/homework/student");
+    const res = await axios.get("/api/teacher/teacher/student");
 
     dispatch({
       type: GET_STUDENTS,
