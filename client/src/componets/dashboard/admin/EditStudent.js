@@ -129,10 +129,6 @@ function EditStudent({
               </div>
             </div>
           </div>
-
-          <div className="col-md-12  py-3 mb-3  ">
-            <button className="btn btn-danger">Delete Account</button>
-          </div>
         </div>
       </div>
       {/*  */}
