@@ -37,7 +37,11 @@ function EditClassForm({
     setName(selectedClass.name || name);
     setAdd_Students(selectedClass.add_students || add_students);
     setAssign_Teachers(selectedClass.assign_teachers || assign_teachers);
-  }, [selectedClass.name]);
+  }, [
+    selectedClass.name,
+    selectedClass.add_students,
+    selectedClass.assign_teachers,
+  ]);
 
   //   render teacher's options
   const teacherOptions =

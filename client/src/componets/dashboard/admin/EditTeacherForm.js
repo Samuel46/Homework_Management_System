@@ -31,7 +31,13 @@ function EditTeacherForm({
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
     setCreate_Classes(selectedTeacher.create_classes || create_classes);
     setJoining_Date(new Date(selectedTeacher.joining_date));
-  }, [selectedTeacher.name, selectedTeacher.joining_date, selectedTeacher.allocate_classes]);
+  }, [
+    selectedTeacher.name,
+    selectedTeacher.joining_date,
+    selectedTeacher.allocate_classes,
+    selectedTeacher.email,
+    selectedTeacher.password,
+  ]);
 
   // handle onChange event of the dropdown
   const classOptions =

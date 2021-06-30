@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Alert } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import { updateStudent, getStudentById } from "../../../actions/student";
 import EditStudentForm from "./EditStudentForm";
@@ -138,13 +138,32 @@ function EditStudent({
       {/*  */}
     </>
   ) : (
-    <Alert color="danger">
-      <h4 className="alert-heading">Student not found</h4>
-      <div className="alert-body">
-        Student with id: {match.params.id} doesn't exist. Check list of all
-        Student: <Link to="/dashboard">Dashboard</Link>
+    <div className="misc-wrapper">
+      <div className="misc-inner p-2 p-sm-3">
+        <div className="w-100 text-center">
+          <Alert color="danger">
+            <h4 className="alert-heading">Student not found</h4>
+            <div className="alert-body">
+              Student with id: {match.params.id} doesn't exist. Check list of
+              all Student: <Link to="/dashboard">Dashboard</Link>
+            </div>
+          </Alert>
+          <Button
+            tag={Link}
+            to="/dashboard"
+            color="primary"
+            className="btn-sm-block mb-2"
+          >
+            Back to home
+          </Button>
+          <img
+            className="img-fluid"
+            src="https://image.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg"
+            alt="Not authorized page"
+          />
+        </div>
       </div>
-    </Alert>
+    </div>
   );
 }
 

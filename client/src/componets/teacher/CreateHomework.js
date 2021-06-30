@@ -127,9 +127,7 @@ function CreateHomework({
           </div>
 
           {/* HomeworkList */}
-          <div className="py-2">
-            <NodeAlert />
-          </div>
+
           <div className="container">
             <div className="col-md-12 py-4">
               <div className="card  shadow">

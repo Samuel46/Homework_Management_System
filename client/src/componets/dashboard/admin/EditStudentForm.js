@@ -27,14 +27,22 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
     setBirth_Date(new Date(selectedStudent.birth_date));
     setGender(selectedStudent.gender || gender);
     setJoining_Date(new Date(selectedStudent.joining_date));
-    setJoining_Year_Group(selectedStudent.joining_year_group ||joining_year_group);
-    setCurrent_Year_Group(selectedStudent.current_year_group || current_year_group);
+    setJoining_Year_Group(
+      selectedStudent.joining_year_group || joining_year_group
+    );
+    setCurrent_Year_Group(
+      selectedStudent.current_year_group || current_year_group
+    );
   }, [
     selectedStudent.name,
     selectedStudent.joining_date,
     selectedStudent.birth_date,
     selectedStudent.joining_year_group,
     selectedStudent.current_year_group,
+    selectedStudent.email,
+    selectedStudent.code,
+    selectedStudent.username,
+    selectedStudent.gender,
   ]);
 
   // ** Edit exising Student
@@ -174,7 +182,6 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
                 name="joining_year_group"
                 type="text"
                 className="form-control"
-                
               />
             </div>
           </div>
@@ -190,7 +197,6 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
                 name="current_year_group"
                 type="text"
                 className="form-control"
-                
               />
             </div>
           </div>

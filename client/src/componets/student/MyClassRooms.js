@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
@@ -19,13 +19,14 @@ function MyClassRooms({ classRooms }) {
         ))}
       </td>
       <td>
-      {room.add_students.map((student, index) => (
+        {room.add_students.map((student, index) => (
           <ListGroup key={index}>
-            <ListGroupItem color="info" className="mb-2">
+            <ListGroupItem color={"info"} className="mb-2">
               {" "}
               {""}✔{""} {student}
             </ListGroupItem>
-          </ListGroup>))}
+          </ListGroup>
+        ))}
       </td>
     </tr>
   ));
@@ -42,12 +43,12 @@ function MyClassRooms({ classRooms }) {
                   </span>
                 </h4>
                 <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/internet-lessons-searching-remote-university-educational-programs-online-classes-website-high-school-student-with-magnifying-glass-cartoon-character_335657-3269.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
-              </div>
+                  <img
+                    src="https://image.freepik.com/free-vector/internet-lessons-searching-remote-university-educational-programs-online-classes-website-high-school-student-with-magnifying-glass-cartoon-character_335657-3269.jpg"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
               </div>
               <div className="card-body">
                 <div className="row align-items-center m-l-0">

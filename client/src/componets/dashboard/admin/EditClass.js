@@ -5,7 +5,7 @@ import {
   getClasses,
   getClassById,
 } from "../../../actions/classRoom";
-import { Alert } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -20,17 +20,17 @@ function EditClass({
   updateClassRoom,
   teacher: { teachers },
   student: { students },
-  auth:{user},
-  logout
+  auth: { user },
+  logout,
 }) {
   useEffect(() => {
     getClassById(match.params.id);
   }, [getClassById, match.params.id]);
 
   return selectedClass !== null && selectedClass !== undefined ? (
-    <> 
-     <Navigation />
-     <header className="pc-header ">
+    <>
+      <Navigation />
+      <header className="pc-header ">
         <div className="header-wrapper">
           <div className="mr-auto pc-mob-drp">
             <ul className="list-unstyled"></ul>
@@ -112,49 +112,64 @@ function EditClass({
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
 
-          
           <div className="py-4">
-          <div className="conatainer">
-      <div className="col-md-12 py-4">
-        <div className="card ">
-          <div className="card-header">
-            <h4 className="card-title">Edit Class</h4>
-            <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
+            <div className="conatainer">
+              <div className="col-md-12 py-4">
+                <div className="card ">
+                  <div className="card-header">
+                    <h4 className="card-title">Edit Class</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <EditClassForm
+                      updateClassRoom={updateClassRoom}
+                      selectedClass={selectedClass}
+                      loading={loading}
+                      teachers={teachers}
+                      students={students}
+                    />
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
-          <div className="card-body">
-            <EditClassForm
-              updateClassRoom={updateClassRoom}
-              selectedClass={selectedClass}
-              loading={loading}
-              teachers={teachers}
-              students={students}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-          </div>
-
         </div>
       </div>
       {/*  */}
-  
-
     </>
   ) : (
-    <Alert color="danger">
-      <h4 className="alert-heading">Class not found</h4>
-      <div className="alert-body">
-        Class with id: {match.params.id} doesn't exist. Check list of all Class:{" "}
-        <Link to="/dashboard">Dashboard</Link>
+    <div className="misc-wrapper">
+      <div className="misc-inner p-2 p-sm-3">
+        <div className="w-100 text-center">
+          <Alert color="danger">
+            <h4 className="alert-heading">Class not found</h4>
+            <div className="alert-body">
+              Class with id: {match.params.id} doesn't exist. Check list of all
+              Class: <Link to="/dashboard">Class List</Link>
+            </div>
+          </Alert>
+          <Button
+            tag={Link}
+            to="/dashboard"
+            color="primary"
+            className="btn-sm-block mb-2"
+          >
+            Back to home
+          </Button>
+          <img
+            className="img-fluid"
+            src="https://image.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg"
+            alt="Not authorized page"
+          />
+        </div>
       </div>
-    </Alert>
+    </div>
   );
 }
 
@@ -173,12 +188,12 @@ const mapStateToProps = (state) => ({
   classRoom: state.classRoom,
   teacher: state.teacher,
   student: state.student,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {
   updateClassRoom,
   getClassById,
   getClasses,
-  logout
+  logout,
 })(withRouter(EditClass));

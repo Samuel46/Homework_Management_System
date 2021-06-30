@@ -21,7 +21,11 @@ function EditSubjectForm({
     setSubject_Name(selectedSubject.subject_name || subject_name);
     setAdd_classes(selectedSubject.add_classes || add_classes);
     setAssign_Teacher(selectedSubject.assign_teachers || assign_teachers);
-  }, [selectedSubject.subject_name]);
+  }, [
+    selectedSubject.subject_name,
+    selectedSubject.add_classes,
+    selectedSubject.assign_teachers,
+  ]);
 
   // class options from the state
   const classOptions =

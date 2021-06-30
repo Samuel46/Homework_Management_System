@@ -164,7 +164,7 @@ function StudentDash({
           {/* ////////////////////// */}
 
           {/* All my assigned classes */}
-          <MyClassRooms classRooms={classRooms} />
+          <MyClassRooms classRooms={classRooms} myname={student} />
 
           <Feedback messages={messages} />
         </div>

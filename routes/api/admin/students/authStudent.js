@@ -44,7 +44,7 @@ router.post(
       let student = await Student.findOne({ username });
       // See if user exists
       if (!student)
-        res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+        res.status(400).json({ errors: [{ msg: "username is incorrect" }] });
 
       const isMatch = await bcrypt.compare(code, student.code);
 
