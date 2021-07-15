@@ -16,9 +16,9 @@ function EditClassForm({
   getStudents,
   getClassById,
   getTeachers,
-  loading,
   teachers,
   students,
+  history,
 }) {
   useEffect(() => {
     getTeachers();
@@ -68,18 +68,7 @@ function EditClassForm({
       add_students,
       assign_teachers,
     };
-    updateClassRoom(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    updateClassRoom(obj, history);
   };
 
   const onSubmit = (e) => {
@@ -112,7 +101,7 @@ function EditClassForm({
           </div>
           {/* add students */}
 
-          {students !== null ? (
+          {students.length > 0 ? (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label className="floating-label" htmlFor="Email">
@@ -134,26 +123,13 @@ function EditClassForm({
             </div>
           ) : (
             <h2>no available</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
 
           {/* add Teacher */}
 
-          {teachers !== null ? (
+          {!teachers.length && teachers.length === 0 ? (
+            <h2>not available</h2>
+          ) : (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label className="floating-label" htmlFor="Email">
@@ -173,29 +149,12 @@ function EditClassForm({
                 </Select>
               </div>
             </div>
-          ) : (
-            <h2>not available</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success mr-2">
               Update Class
             </button>
-            <Link to="/dashboard" className="btn btn-secondary">
+            <Link to="/manage-classrooms" className="btn btn-secondary">
               Go Back
             </Link>
           </div>
@@ -217,4 +176,4 @@ export default connect(null, {
   getStudents,
   getTeachers,
   getClassById,
-})(EditClassForm);
+})(withRouter(EditClassForm));

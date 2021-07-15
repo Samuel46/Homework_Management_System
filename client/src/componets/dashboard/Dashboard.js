@@ -197,7 +197,7 @@ function Dashboard({
 
             {/* <TeacherList teachers={teachers} /> */}
             <StudentList students={students} />
-            <Class classes={classes} />
+            {/* <Class classes={classes} /> */}
             <SubjectList subjects={subjects} />
           </div>
         </div>

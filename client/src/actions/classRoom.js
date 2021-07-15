@@ -26,6 +26,8 @@ export const addClassRoom = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Class Added", "success"));
+    dispatch(getClasses());
+    history.push("/manage-classrooms");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -83,8 +85,8 @@ export const deleteClass = (id, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Class deleted", "danger"));
-    history.push("./create-class");
-    history.push("./dashboard");
+    dispatch(getClasses());
+    history.push("/manage-classrooms");
   } catch (err) {
     dispatch({
       type: CLASS_ERROR,
@@ -110,8 +112,8 @@ export const updateClassRoom = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Class Updated", "success"));
-
-    // history.push("/dashboard");
+    dispatch(getClasses());
+    history.push("/manage-classrooms");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

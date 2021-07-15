@@ -55,7 +55,6 @@ export const registerTeacher = (formData, history) => async (dispatch) => {
     dispatch(setAlert("Teacher registered", "success"));
     history.push("/manage-teachers");
     dispatch(loadTeacher());
-   
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -171,8 +170,8 @@ export const deleteTeacher = (id, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Teacher deleted", "danger"));
-    history.push("/create-subject");
-    history.push("/dashboard");
+    dispatch(getTeachers());
+    history.push("/manage-teachers");
   } catch (err) {
     dispatch({
       type: GET_TEACHERS_FAIL,

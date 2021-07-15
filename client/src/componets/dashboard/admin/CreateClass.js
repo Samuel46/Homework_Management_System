@@ -7,7 +7,7 @@ import { Select } from "antd";
 import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import Navigation from "../Navigation";
-import {Alert} from 'reactstrap'
+import { Alert } from "reactstrap";
 const { Option } = Select;
 
 function CreateClass({
@@ -43,18 +43,7 @@ function CreateClass({
       add_students,
       assign_teachers,
     };
-    addClassRoom(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    addClassRoom(obj, history);
   };
 
   const onSubmit = (e) => {
@@ -246,8 +235,8 @@ function CreateClass({
                               Teachers not found!
                             </h4>
                             <div className="alert-body">
-                              No Teacher's are available! Make you add teachers to
-                              the classroom,
+                              No Teacher's are available! Make you add teachers
+                              to the classroom,
                               <Link to="/create-teacher">
                                 Register Teachers
                               </Link>
@@ -262,7 +251,10 @@ function CreateClass({
                           >
                             Add Class
                           </button>
-                          <Link to="/dashboard" className="btn btn-secondary">
+                          <Link
+                            to="/manage-classrooms"
+                            className="btn btn-secondary"
+                          >
                             Go Back
                           </Link>
                         </div>
