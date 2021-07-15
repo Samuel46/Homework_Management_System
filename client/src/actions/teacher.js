@@ -53,7 +53,9 @@ export const registerTeacher = (formData, history) => async (dispatch) => {
     });
     dispatch(logoutTeacher());
     dispatch(setAlert("Teacher registered", "success"));
+    history.push("/manage-teachers");
     dispatch(loadTeacher());
+   
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -82,6 +84,7 @@ export const updateTeacher = (formData, history) => async (dispatch) => {
     });
     dispatch(logoutTeacher());
     dispatch(setAlert("Teacher updated", "success"));
+    history.push("/manage-teachers");
     dispatch(loadTeacher());
   } catch (err) {
     const errors = err.response.data.errors;

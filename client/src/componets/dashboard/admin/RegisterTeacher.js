@@ -17,6 +17,7 @@ function RegisterTeacher({
   classRoom: { classes },
   auth: { user },
   logout,
+  history
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,8 +33,8 @@ function RegisterTeacher({
     </Option>
   ));
 
-  // ** Adds New Lesson Event
-  const handleAddClass = () => {
+  // ** Adds New Teacher
+  const handleAddTeacher = () => {
     const obj = {
       name,
       email,
@@ -43,23 +44,12 @@ function RegisterTeacher({
       allocate_classes,
     };
 
-    registerTeacher(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    registerTeacher(obj, history);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleAddClass();
+    handleAddTeacher();
   };
 
   return (
@@ -275,7 +265,7 @@ function RegisterTeacher({
                           >
                             Add Teacher
                           </button>
-                          <Link to="/dashboard" className="btn btn-secondary">
+                          <Link to="/manage-teachers" className="btn btn-secondary">
                             Go Back
                           </Link>
                         </div>

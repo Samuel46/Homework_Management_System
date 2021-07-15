@@ -50,13 +50,13 @@ router.post(
     try {
       // See if user exists
       let teacher = await Teacher.findOne({ email });
-      const salt = await bcrypt.genSalt(10);
-      const hashpassword = await bcrypt.hash(req.body.password, salt);
+      // const salt = await bcrypt.genSalt(10);
+      // const hashpassword = await bcrypt.hash(req.body.password, salt);
       if (teacher) {
         // update the teacher by the school
         teacher = await Teacher.findOneAndUpdate(
           { email },
-          { $set: teacherFields, password: hashpassword },
+          { $set: teacherFields },
           { new: true }
         );
         return res.json(teacher);
@@ -64,8 +64,8 @@ router.post(
         // Create the new teacher by the school
         teacher = new Teacher(teacherFields);
         // @@@@@to-do Encrypt password
-        const salt = await bcrypt.genSalt(10);
-        teacher.password = await bcrypt.hash(password, salt);
+        // const salt = await bcrypt.genSalt(10);
+        // teacher.password = await bcrypt.hash(password, salt);
 
         //   Save the teacher to the database
         await teacher.save();
@@ -82,7 +82,7 @@ router.post(
           config.get("jwtTeacherSecret"),
           { expiresIn: 36000 },
           (err, token) => {
-            if (err) console.log(err, "samuel testing");
+            if (err) console.log(err, "Server Error");
             res.json({ token });
           }
         );
@@ -99,7 +99,7 @@ router.post(
 // @Access         Private
 router.get("/", auth, async (req, res) => {
   try {
-    const allTeachers = await Teacher.find({ user: req.user.id });
+    const allTeachers = await Teacher.find({ user: req.user.id }).select("-password");
 
     res.json(allTeachers);
   } catch (err) {
@@ -116,7 +116,7 @@ router.get("/:id", auth, async (req, res) => {
     const getTeaherById = await Teacher.findById(req.params.id).populate(
       "user",
       ["email", "name"]
-    );
+    )
     if (!getTeaherById) {
       return res.status(404).json({ msg: "Teacher not found" });
     }

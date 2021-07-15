@@ -195,7 +195,7 @@ function Dashboard({
               </Alert>
             ) : null}
 
-            <TeacherList teachers={teachers} />
+            {/* <TeacherList teachers={teachers} /> */}
             <StudentList students={students} />
             <Class classes={classes} />
             <SubjectList subjects={subjects} />

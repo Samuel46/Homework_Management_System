@@ -13,6 +13,7 @@ const { Option } = Select;
 function EditTeacherForm({
   selectedTeacher,
   loading,
+  history,
   updateTeacher,
   classRoom: { classes },
 }) {
@@ -23,13 +24,13 @@ function EditTeacherForm({
   const [create_classes, setCreate_Classes] = useState(false);
   const [joining_date, setJoining_Date] = useState(new Date());
 
+
   // fill the from with data from the state
   useEffect(() => {
     setName(selectedTeacher.name || name);
     setEmail(selectedTeacher.email || email);
-    setPassword(selectedTeacher.password || password);
+    setPassword(selectedTeacher.password   || password);
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
-    setCreate_Classes(selectedTeacher.create_classes || create_classes);
     setJoining_Date(new Date(selectedTeacher.joining_date));
   }, [
     selectedTeacher.name,
@@ -59,18 +60,8 @@ function EditTeacherForm({
       allocate_classes,
     };
 
-    updateTeacher(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    updateTeacher(obj, history);
+   
   };
 
   const onReset = () => {
@@ -182,7 +173,6 @@ function EditTeacherForm({
               </label>
               <input
                 value={password}
-                defaultValue={"**********"}
                 onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 type="password"
@@ -207,7 +197,7 @@ function EditTeacherForm({
             <button type="submit" className="btn btn-success mr-2">
               Update Teacher
             </button>
-            <Link to="/dashboard" className="btn btn-secondary">
+            <Link to="/manage-teachers" className="btn btn-secondary">
               Go Back
             </Link>
           </div>
@@ -225,4 +215,4 @@ const mapStateToProps = (state) => ({
   classRoom: state.classRoom,
 });
 
-export default connect(mapStateToProps, {})(EditTeacherForm);
+export default connect(mapStateToProps, {})(withRouter(EditTeacherForm));

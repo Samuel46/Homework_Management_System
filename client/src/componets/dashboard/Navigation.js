@@ -41,24 +41,20 @@ function Navigation({ logout }) {
             <nav className="pc-sidebar">
                 <div className="navbar-wrapper">
                     <div className="m-header">
-                        <a href="index.html" className="b-brand">
+                        <Link to="/dashboard" className="b-brand">
 
                             <strong>Dashboard</strong>
-                        </a>
+                        </Link>
                     </div>
                     <div className="navbar-content">
                         <ul className="pc-navbar">
                             <li className="pc-item pc-caption">
                                 <label>Navigation</label>
                             </li>
-                            <li className="pc-item"><Link className="pc-link text-primary" to="#!"><i className="fas fa-home f-26" /> Dashboard</Link></li>
+                            <li className="pc-item"><Link className="pc-link text-primary" to="/dashboard"><i className="fas fa-home f-26" /> Dashboard</Link></li>
                             <li className="pc-item"><Link to="#!" className="pc-link text-danger">
                                 <i class="far fa-user-circle f-26"></i> My Account
-    </Link></li>
-                            {/* <li className="pc-item"><Link className="pc-link" to="#!">Student's</Link></li>
-                            <li className="pc-item"><Link className="pc-link" to="#!">Subject</Link></li>
-                            <li className="pc-item"><Link className="pc-link" to="#!">Class</Link></li> */}
-
+                                   </Link></li>
                         </ul>
                     </div>
                 </div>

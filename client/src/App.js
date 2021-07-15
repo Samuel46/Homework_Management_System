@@ -52,6 +52,7 @@ import ParentForm from "./componets/student/Parents/ParentForm";
 import RegisterParent from "./componets/student/account/RegisterParent";
 import Parents from "./componets/student/Parents/Parents";
 import EditParent from "./componets/student/Parents/eiditParent";
+import TeacherSection from './componets/dashboard/admin/teacherSection'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -98,6 +99,11 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             {/* Admin routes */}
+            <PrivateRoute
+              exact
+              path="/manage-teachers"
+              component={TeacherSection}
+            />
             <PrivateRoute
               exact
               path="/create-teacher"

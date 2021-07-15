@@ -22,7 +22,7 @@ function AdminAction() {
                         </div>
                     </div>
                     <div className="col-md-12  py-3 mb-3 ">
-                        <Link to="/create-teacher" className="btn btn-info">Manage Teachers</Link>
+                        <Link to="/manage-teachers" className="btn btn-info">Manage Teachers</Link>
                     </div>
                 </div>
             </div>
