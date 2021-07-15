@@ -7,9 +7,7 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { logout } from "../../../../actions/auth";
 import Navigation from "../../Navigation";
-import Spinner from "../../../layouts/Spinner";
 import { getTeachers } from "../../../../actions/teacher";
-import { Alert } from "reactstrap";
 import NodeAlert from "../../../layouts/NodeAlert";
 
 function TeacherSection({
