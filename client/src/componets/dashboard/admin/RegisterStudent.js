@@ -11,7 +11,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
-  const [name, setName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [sirname, setSirName] = useState("");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [username, setUserName] = useState("");
@@ -21,10 +22,23 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [joining_year_group, setJoining_Year_Group] = useState("");
   const [current_year_group, setCurrent_Year_Group] = useState("");
 
+  // username gen
+  const a = firstname.split("");
+  const b = sirname.split(" ");
+
+  const rA = Math.floor(Math.random() * a.length);
+  const rB = Math.floor(Math.random() * b.length);
+  const name = a[rB] + a[rA] + b[rB] + Math.floor(Math.random() * 100);
+
+  function generateName(e) {
+    setUserName(name);
+  }
+
   // ** Adds New Student
   const handleRegisterStudents = () => {
     const obj = {
-      name,
+      firstname,
+      sirname,
       email,
       username,
       code,
@@ -35,18 +49,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
       current_year_group,
     };
 
-    registerStudent(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    registerStudent(obj, history);
   };
 
   const onSubmit = (e) => {
@@ -167,11 +170,27 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                         <div className="col-sm-6">
                           <div className="form-group">
                             <label className="floating-label" htmlFor="Name">
-                              Name
+                              Firstname
                             </label>
                             <input
-                              onChange={(e) => setName(e.target.value)}
-                              value={name}
+                              onChange={(e) => setFirstName(e.target.value)}
+                              value={firstname}
+                              name="name"
+                              type="text"
+                              className="form-control"
+                              id="Name"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Sirname/Lastname
+                            </label>
+                            <input
+                              onChange={(e) => setSirName(e.target.value)}
+                              value={sirname}
                               name="name"
                               type="text"
                               className="form-control"
@@ -200,19 +219,28 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                         </div>
 
                         <div className="col-sm-6">
-                          <div className="form-group fill">
-                            <label className="floating-label" htmlFor="Email">
-                              Username
-                            </label>
-                            <input
-                              onChange={(e) => setUserName(e.target.value)}
-                              name="username"
-                              value={username}
-                              type="username"
-                              className="form-control"
-                              placeholder
-                            />
+                          <div class="form-group fill ">
+                            <label for="">Username</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <button
+                                  class="btn btn-outline-primary"
+                                  type="button"
+                                  onClick={generateName}
+                                >
+                                  Generate username
+                                </button>
+                              </div>
+                              <input
+                                onChange={(e) => setUserName(e.target.value)}
+                                name="username"
+                                value={username}
+                                type="username"
+                                className="form-control"
+                              />
+                            </div>
                           </div>
+                          {/*  */}
                         </div>
                         <div className="col-sm-6">
                           <div className="form-group fill label_display">
@@ -256,7 +284,9 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                               Joining Year Group
                             </label>
                             <input
-                              onChange={(e) => setJoining_Year_Group(e.target.value)}
+                              onChange={(e) =>
+                                setJoining_Year_Group(e.target.value)
+                              }
                               name="username"
                               value={joining_year_group}
                               type="text"
@@ -265,14 +295,16 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                             />
                           </div>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                           <div className="form-group fill label_display">
                             <label className="floating-label" htmlFor="Birth">
                               Current Year Group
                             </label>
 
                             <input
-                              onChange={(e) => setCurrent_Year_Group(e.target.value)}
+                              onChange={(e) =>
+                                setCurrent_Year_Group(e.target.value)
+                              }
                               name="current_year_group"
                               value={current_year_group}
                               type="text"
@@ -281,7 +313,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                             />
                           </div>
                         </div>
-                        <div className="col-sm-2">
+                        <div className="col-sm-6">
                           <div className="form-group fill">
                             <label className="floating-label">
                               Student Code
@@ -328,7 +360,10 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                           >
                             Add Student
                           </button>
-                          <Link to="/dashboard" className="btn btn-secondary">
+                          <Link
+                            to="/manage-students"
+                            className="btn btn-secondary"
+                          >
                             Go back
                           </Link>
                         </div>

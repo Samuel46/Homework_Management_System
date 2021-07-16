@@ -18,7 +18,8 @@ router.post(
   [
     auth,
     [
-      check("name", "Name is required").not().isEmpty(),
+      check("firstname", "FirstName is required").not().isEmpty(),
+      check("sirname", "Sirname is required").not().isEmpty(),
       check("username", "Username is required").not().isEmpty(),
       check("gender", "gender is required").not().isEmpty(),
       check("birth_date", "Birth date data is required").not().isEmpty(),
@@ -38,7 +39,8 @@ router.post(
     }
 
     const {
-      name,
+      firstname,
+      sirname,
       username,
       email,
       birth_date,
@@ -53,7 +55,8 @@ router.post(
 
     const studentField = {};
     studentField.user = req.user.id;
-    if (name) studentField.name = name;
+    if (firstname) studentField.firstname = firstname;
+    if (sirname) studentField.sirname = sirname;
     if (username) studentField.username = username;
     if (email) studentField.email = email;
     if (code) studentField.code = code;
@@ -70,19 +73,14 @@ router.post(
 
       let student = await Student.findOne({ email });
       if (student) {
-        const salt = await bcrypt.genSalt(10);
-        const hashpassword = await bcrypt.hash(req.body.code, salt);
         student = await Student.findOneAndUpdate(
           { email },
-          { $set: studentField, code: hashpassword },
+          { $set: studentField },
           { new: true }
         );
         return res.json(student);
       }
       student = new Student(studentField);
-      // @@@@@to-do Encrypt password
-      const salt = await bcrypt.genSalt(10);
-      student.code = await bcrypt.hash(code, salt);
       //   Save the teacher to the database
       await student.save();
 

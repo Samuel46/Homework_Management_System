@@ -39,7 +39,7 @@ function AdminAction() {
             </div>
           </div>
           <div className="col-md-12  text-center py-4 mb-4 ">
-            <Link to="/create-student" className="btn btn-info">
+            <Link to="/manage-students" className="btn btn-info">
               Manage Student😄
             </Link>
           </div>
@@ -80,7 +80,7 @@ function AdminAction() {
           </div>
           <div className="col-md-12  text-center py-4 mb-4 ">
             <Link to="/manage-subjects" className="btn btn-info">
-              Manage Subject📜s
+              Manage Subjects📜
             </Link>
           </div>
         </div>

@@ -40,7 +40,7 @@ export const loadStudent = () => async (dispatch) => {
 };
 
 // Register student/@@ admin level
-export const registerStudent = (formData) => async (dispatch) => {
+export const registerStudent = (formData, history) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -59,8 +59,7 @@ export const registerStudent = (formData) => async (dispatch) => {
     });
     dispatch(logoutStudent());
     dispatch(setAlert("Student registered", "success"));
-   
-
+    history.push("/manage-students");
     dispatch(loadStudent());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -94,6 +93,8 @@ export const updateStudent = (formData, history) => async (dispatch) => {
     });
     dispatch(logoutStudent());
     dispatch(setAlert("Student updated", "success"));
+    history.push("/manage-students");
+    dispatch(getStudents());
     dispatch(loadStudent());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -183,8 +184,8 @@ export const deleteStudent = (id, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Student deleted", "danger"));
-    history.push("/create-subject");
-    history.push("/dashboard");
+    history.push("/manage-students");
+    dispatch(getStudents());
   } catch (err) {
     dispatch({
       type: GET_STUDENTS_FAIL,

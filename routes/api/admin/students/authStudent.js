@@ -46,7 +46,7 @@ router.post(
       if (!student)
         res.status(400).json({ errors: [{ msg: "username is incorrect" }] });
 
-      const isMatch = await bcrypt.compare(code, student.code);
+      const isMatch = await (code, student.code);
 
       if (!isMatch)
         res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });

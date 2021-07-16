@@ -7,20 +7,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Moment from "react-moment";
 
-function EditStudentForm({ updateStudent, loading, selectedStudent }) {
-  const [name, setName] = useState("");
+function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
+  const [firstname, setFirstName] = useState("");
+  const [sirname, setSirName] = useState("");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [username, setUserName] = useState("");
-  const [birth_date, setBirth_Date] = useState("");
+  const [birth_date, setBirth_Date] = useState(new Date());
   const [gender, setGender] = useState("");
-  const [joining_date, setJoining_Date] = useState("");
+  const [joining_date, setJoining_Date] = useState(new Date());
   const [joining_year_group, setJoining_Year_Group] = useState("");
   const [current_year_group, setCurrent_Year_Group] = useState("");
+
   // setStartPicker(new Date(selectedEvent.start && selectedEvent.start));
   // fill the from with data from the state
   useEffect(() => {
-    setName(selectedStudent.name || name);
+    setFirstName(selectedStudent.firstname || firstname);
+    setSirName(selectedStudent.sirname || sirname);
     setEmail(selectedStudent.email || email);
     setCode(selectedStudent.code || code);
     setUserName(selectedStudent.username || username);
@@ -34,7 +37,8 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
       selectedStudent.current_year_group || current_year_group
     );
   }, [
-    selectedStudent.name,
+    selectedStudent.sirname,
+    selectedStudent.firstname,
     selectedStudent.joining_date,
     selectedStudent.birth_date,
     selectedStudent.joining_year_group,
@@ -48,7 +52,8 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
   // ** Edit exising Student
   const handleUpdateStudents = () => {
     const obj = {
-      name,
+      firstname,
+      sirname,
       email,
       username,
       code,
@@ -59,18 +64,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
       current_year_group,
     };
 
-    updateStudent(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    updateStudent(obj, history);
   };
 
   const onReset = () => {
@@ -87,17 +81,31 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
       <NodeAlert />
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
-          <div className="col-12">
-            <h5>Personal Information</h5>
-          </div>
           <div className="col-sm-6">
             <div className="form-group">
               <label className="floating-label" htmlFor="Name">
-                Name
+                Firstname
               </label>
               <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstname}
+                name="name"
+                type="text"
+                className="form-control"
+                id="Name"
+                placeholder
+              />
+            </div>
+          </div>
+
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label className="floating-label" htmlFor="Name">
+                Sirname
+              </label>
+              <input
+                onChange={(e) => setSirName(e.target.value)}
+                value={sirname}
                 name="name"
                 type="text"
                 className="form-control"
@@ -116,7 +124,6 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
-                disabled
                 value={email}
                 type="email"
                 className="form-control"
@@ -134,6 +141,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               <input
                 onChange={(e) => setUserName(e.target.value)}
                 name="username"
+                disabled
                 value={username}
                 type="username"
                 className="form-control"
@@ -185,7 +193,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               />
             </div>
           </div>
-          <div className="col-sm-4">
+          <div className="col-sm-6">
             <div className="form-group fill label_display">
               <label className="floating-label" htmlFor="Birth">
                 Current Year Group
@@ -200,17 +208,29 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
               />
             </div>
           </div>
-          <div className="col-sm-2">
-            <div className="form-group fill">
-              <label className="floating-label">Student Code</label>
-              <input
-                onChange={(e) => setCode(e.target.value)}
-                value={code}
-                name="code"
-                type="password"
-                className="form-control"
-                id="Birth"
-              />
+          <div className="col-sm-6">
+            {/*  */}
+            <div class="form-group fill ">
+              <label for="">Student Code</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    onClick={onReset}
+                  >
+                    Reset Code 🔐
+                  </button>
+                </div>
+                <input
+                  onChange={(e) => setCode(e.target.value)}
+                  value={code}
+                  name="code"
+                  type="password"
+                  className="form-control"
+                  id="Birth"
+                />
+              </div>
             </div>
           </div>
           <div className="col-sm-6">
@@ -231,23 +251,11 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
             </div>
           </div>
 
-          <div className="col-sm-4 ">
-            <div className="form-group fill">
-              <button
-                type="reset"
-                onClick={onReset}
-                className="btn btn-secondary"
-              >
-                Reset Code
-              </button>
-            </div>
-          </div>
-
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success mr-2">
               Update Student😃
             </button>
-            <Link to="/dashboard" className="btn btn-secondary">
+            <Link to="/manage-students" className="btn btn-secondary">
               Go back
             </Link>
           </div>
@@ -259,4 +267,4 @@ function EditStudentForm({ updateStudent, loading, selectedStudent }) {
   );
 }
 
-export default EditStudentForm;
+export default withRouter(EditStudentForm);

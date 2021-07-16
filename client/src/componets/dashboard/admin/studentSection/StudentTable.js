@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-import { deleteStudent } from "../../../actions/student";
+import { deleteStudent } from "../../../../actions/student";
 import { Link, withRouter } from "react-router-dom";
 import { Popconfirm, message } from "antd";
 import { ListGroup, ListGroupItem } from "reactstrap";
@@ -13,7 +13,7 @@ function cancel(e) {
   message.error("Click on No");
 }
 
-function StudentList({ students, deleteStudent, history }) {
+function StudentTable({ students, deleteStudent, history }) {
   const allStudents = students.map((student) => (
     <tr key={student._id}>
       <td>
@@ -31,14 +31,21 @@ function StudentList({ students, deleteStudent, history }) {
         {" "}
         {""}
         <ListGroup>
-          <ListGroupItem color="primary" className="mb-2">
+          <ListGroupItem color="info" className="mb-2">
             {" "}
             {student.sirname}
           </ListGroupItem>
         </ListGroup>
       </td>
       <td>{student.gender}</td>
-      <td>{student.username}</td>
+      <td>
+        <ListGroup>
+          <ListGroupItem color="primary" className="mb-2">
+            {" "}
+            {student.username}
+          </ListGroupItem>
+        </ListGroup>
+      </td>
       <td>
         {" "}
         <Moment format="YYYY/MM/DD">{student.birth_date}</Moment>
@@ -127,8 +134,8 @@ function StudentList({ students, deleteStudent, history }) {
   );
 }
 
-StudentList.propTypes = {
+StudentTable.propTypes = {
   deleteStudent: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteStudent })(withRouter(StudentList));
+export default connect(null, { deleteStudent })(withRouter(StudentTable));

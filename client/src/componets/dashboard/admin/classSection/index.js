@@ -105,9 +105,26 @@ function ClassRoomSections({
             </div>
           </div>
           <div div className="row dash_width">
-            {/* Student */}
+            <div className="col-xl-4 col-md-6">
+              <div className="card shadow rounded ">
+                <div className="card-body bg-danger">
+                  <div className="col-md-12 text-center ">
+                    <i className="fas fa-user f-36 text-danger" />
+                    <h5 className="text-danger  m-b-10">
+                      {" "}
+                      <strong>Students</strong>
+                    </h5>
+                  </div>
+                </div>
+                <div className="col-md-12  text-center py-3 mb-3 ">
+                  <Link to="/manage-students" className="btn btn-info">
+                    Manage Student😄
+                  </Link>
+                </div>
+              </div>
+            </div>
 
-            <div className="col-xl-6 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="card shadow rounded ">
                 <div className="card-body bg-info">
                   <div className="col-md-12 text-center ">
@@ -125,7 +142,7 @@ function ClassRoomSections({
                 </div>
               </div>
             </div>
-            <div className="col-xl-6 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="card shadow  ">
                 <div className="card-body bg-primary">
                   <div className="col-md-12 text-center">

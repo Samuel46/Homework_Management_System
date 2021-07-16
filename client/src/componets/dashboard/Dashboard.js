@@ -2,22 +2,16 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-
 import { useEffect } from "react";
-
 import Spinner from "../layouts/Spinner";
 import { logout } from "../../actions/auth";
 import Navigation from "./Navigation";
 import AdminAction from "./admin/AdminAction";
 import NodeAlert from "../layouts/NodeAlert";
-import Class from "./admin/ClassList";
 import { getClasses } from "../../actions/classRoom";
-import SubjectList from "./admin/SubjectList";
 import { getSubject } from "../../actions/subject";
 import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
-import TeacherList from "./admin/TeacherList";
-import StudentList from "./admin/StudentList";
 import { Alert } from "reactstrap";
 
 function Dashboard({
@@ -195,10 +189,7 @@ function Dashboard({
               </Alert>
             ) : null}
 
-            {/* <TeacherList teachers={teachers} /> */}
-            <StudentList students={students} />
-            {/* <Class classes={classes} /> */}
-            {/* <SubjectList subjects={subjects} /> */}
+            {/*  */}
           </div>
         </div>
       </div>

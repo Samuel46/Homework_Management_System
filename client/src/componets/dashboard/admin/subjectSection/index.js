@@ -107,7 +107,7 @@ function SubjectSection({
           <div div className="row dash_width">
             {/* Student */}
 
-            <div className="col-xl-6 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="card shadow rounded ">
                 <div className="card-body bg-info">
                   <div className="col-md-12 text-center ">
@@ -125,11 +125,11 @@ function SubjectSection({
                 </div>
               </div>
             </div>
-            <div className="col-xl-6 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="card shadow rounded ">
                 <div className="card-body bg-success">
                   <div className="col-md-12 text-center ">
-                    <i className="fas fa-laptop f-36 text-success text-center py-1" />
+                    <i className="fas fa-laptop f-36 text-success text-center " />
                     <h5 className="text-success  m-b-10">
                       {" "}
                       <strong>Classrooms</strong>
@@ -139,6 +139,24 @@ function SubjectSection({
                 <div className="col-md-12  py-3 mb-3  text-center">
                   <Link to="/manage-classrooms" className="btn btn-info">
                     Manage Classes🚀
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-4 col-md-6">
+              <div className="card shadow rounded ">
+                <div className="card-body bg-danger">
+                  <div className="col-md-12 text-center ">
+                    <i className="fas fa-user f-36 text-danger" />
+                    <h5 className="text-danger  m-b-10">
+                      {" "}
+                      <strong>Students</strong>
+                    </h5>
+                  </div>
+                </div>
+                <div className="col-md-12  text-center py-3 mb-3 ">
+                  <Link to="/manage-students" className="btn btn-info">
+                    Manage Student😄
                   </Link>
                 </div>
               </div>
