@@ -65,7 +65,7 @@ body {
 }
 
 .img_img img{
-  height: 150px;
+  height: 200px;
    object-fit: contain;
    width: 100%;
 }
@@ -76,7 +76,7 @@ body {
     width: 100%;
     padding-top: 10px;
  }
- 
+
 
 
 [tabindex="-1"]:focus:not(:focus-visible) {

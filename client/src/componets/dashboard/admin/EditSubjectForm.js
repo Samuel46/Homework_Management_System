@@ -11,6 +11,7 @@ function EditSubjectForm({
   selectedSubject,
   classes,
   teachers,
+  history,
 }) {
   const [subject_name, setSubject_Name] = useState("");
   const [add_classes, setAdd_classes] = useState([]);
@@ -51,18 +52,7 @@ function EditSubjectForm({
       assign_teachers,
     };
 
-    updateSubject(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    updateSubject(obj, history);
   };
 
   const onSubmit = (e) => {
@@ -135,7 +125,7 @@ function EditSubjectForm({
           )}
 
           {/* add Teacher */}
-          {teachers !== null ? (
+          {teachers.length !== 0 ? (
             <div className="col-sm-6 ">
               <div className="form-group">
                 <label className="floating-label" htmlFor="Email">
@@ -157,28 +147,13 @@ function EditSubjectForm({
             </div>
           ) : (
             <h2>not available</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
           )}
 
           <div className="col-sm-12">
             <button type="submit" className="btn btn-success mr-2">
               Update Subject
             </button>
-            <Link to="/dashboard" className="btn btn-secondary">
+            <Link to="/manage-subjects" className="btn btn-secondary">
               Go Back
             </Link>
           </div>
@@ -190,4 +165,4 @@ function EditSubjectForm({
   );
 }
 
-export default EditSubjectForm;
+export default withRouter(EditSubjectForm);

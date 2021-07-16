@@ -12,14 +12,14 @@ function AdminAction() {
                 <i className="fas fa-user-graduate f-36 text-info" />
               </div>
               <div className="col-auto">
-                <h6 className="text-info m-b-10">Teachers</h6>
+                <h6 className="text-info  m-b-10 text-center">Teachers</h6>
                 {/* <h2 className="m-b-0 text-info">5</h2> */}
               </div>
             </div>
           </div>
-          <div className="col-md-12  py-3 mb-3 ">
+          <div className="col-md-12  text-center text-center py-4 mb-4 ">
             <Link to="/manage-teachers" className="btn btn-info">
-              Manage Teachers
+              Manage Teachers😎
             </Link>
           </div>
         </div>
@@ -33,14 +33,14 @@ function AdminAction() {
                 <i className="fas fa-user f-36 text-danger" />
               </div>
               <div className="col-auto">
-                <h6 className="text-danger m-b-10">Students</h6>
+                <h6 className="text-danger text-center m-b-10">Students</h6>
                 {/* <h2 className="m-b-0 text-danger">45</h2> */}
               </div>
             </div>
           </div>
-          <div className="col-md-12  py-3 mb-3 ">
+          <div className="col-md-12  text-center py-4 mb-4 ">
             <Link to="/create-student" className="btn btn-info">
-              Manage Student
+              Manage Student😄
             </Link>
           </div>
         </div>
@@ -53,14 +53,14 @@ function AdminAction() {
                 <i className="fas fa-laptop f-36 text-success" />
               </div>
               <div className="col-auto">
-                <h6 className="text-success m-b-10">Classes</h6>
+                <h6 className="text-success m-b-10 text-center">Classes</h6>
                 {/* <h2 className="m-b-0 text-success">9</h2> */}
               </div>
             </div>
           </div>
-          <div className="col-md-12  py-3 mb-3    ">
+          <div className="col-md-12  text-center py-4 mb-4   ">
             <Link to="/manage-classrooms" className="btn btn-info">
-              Manage Classes
+              Manage Classes🚀
             </Link>
           </div>
         </div>
@@ -73,14 +73,14 @@ function AdminAction() {
                 <i className="fas fa-book-open f-36 text-primary" />
               </div>
               <div className="col-auto">
-                <h6 className="text-primary m-b-10">Subjects</h6>
+                <h6 className="text-primary m-b-10 text-center">Subjects</h6>
                 {/* <h2 className="m-b-0 text-primary">25</h2> */}
               </div>
             </div>
           </div>
-          <div className="col-md-12  py-3 mb-3  ">
-            <Link to="/create-subject" className="btn btn-info">
-              Manage Subject
+          <div className="col-md-12  text-center py-4 mb-4 ">
+            <Link to="/manage-subjects" className="btn btn-info">
+              Manage Subject📜s
             </Link>
           </div>
         </div>

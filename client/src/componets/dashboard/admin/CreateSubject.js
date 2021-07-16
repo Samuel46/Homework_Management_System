@@ -7,15 +7,15 @@ import { Select } from "antd";
 import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import Navigation from "../Navigation";
-import {Alert}  from 'reactstrap'
+import { Alert } from "reactstrap";
 const { Option } = Select;
 function CreateSubject({
   addSubject,
   history,
   classRoom: { classes },
   teacher: { teachers },
-  auth: {user},
-  logout
+  auth: { user },
+  logout,
 }) {
   const [subject_name, setSubject_Name] = useState("");
   const [add_classes, setAdd_classes] = useState([]);
@@ -40,18 +40,7 @@ function CreateSubject({
       assign_teachers,
     };
 
-    addSubject(obj);
-    // e.preventDefault();
-    // refetchEvents();
-    // handleAddEventSidebar();
-    // toast.success(
-    //   <ToastComponent title="Event Added" color="success" icon={<Check />} />,
-    //   {
-    //     autoClose: 2000,
-    //     hideProgressBar: true,
-    //     closeButton: false,
-    //   }
-    // );
+    addSubject(obj, history);
   };
 
   const onSubmit = (e) => {
@@ -59,9 +48,9 @@ function CreateSubject({
     handleAddSubject();
   };
   return (
-    <> 
-    <Navigation/>
-    <header className="pc-header ">
+    <>
+      <Navigation />
+      <header className="pc-header ">
         <div className="header-wrapper">
           <div className="mr-auto pc-mob-drp">
             <ul className="list-unstyled"></ul>
@@ -143,135 +132,131 @@ function CreateSubject({
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
 
-       
           <div className="py-4">
-          <div className="container">
-      <div className="col-md-12 py-4">
-        <div className="card">
-          <div className="card-header">
-            <h4 className="card-title">Create Subject</h4>
-            <div class="cover-img-block img_img">
-                <img
-                  src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
-                  alt=""
-                  class="img-fluid"
-                />
+            <div className="container">
+              <div className="col-md-12 py-4">
+                <div className="card">
+                  <div className="card-header">
+                    <h4 className="card-title">Create Subject</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <div>
+                      <NodeAlert />
+                    </div>
+                    <form className="form" onSubmit={(e) => onSubmit(e)}>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Subject Name
+                            </label>
+                            <input
+                              onChange={(e) => setSubject_Name(e.target.value)}
+                              name="subject_name"
+                              value={subject_name}
+                              type="text"
+                              className="form-control"
+                              placeholder
+                            />
+                          </div>
+                        </div>
+                        {/* add classes */}
+
+                        {classes.length !== 0 ? (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Add Class
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Add Class"
+                                onChange={setAdd_classes}
+                                value={add_classes}
+                              >
+                                {classOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        ) : (
+                          <Alert color="info">
+                            <h4 className="alert-heading">Class not found!</h4>
+                            <div className="alert-body">
+                              No Classes are available! Make you add class to
+                              the subject,
+                              <Link to="/create-class">Create Class</Link>
+                            </div>
+                          </Alert>
+                        )}
+
+                        {/* add Teacher */}
+                        {teachers.length !== 0 ? (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Assign Teacher
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Assign Teacher"
+                                onChange={setAssign_Teacher}
+                                value={assign_teachers}
+                              >
+                                {teacherOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        ) : (
+                          <Alert color="info">
+                            <h4 className="alert-heading">
+                              Teachers not found!
+                            </h4>
+                            <div className="alert-body">
+                              No Teachers are available! Make you add class to
+                              the subject,
+                              <Link to="/create-teacher">Create Class</Link>
+                            </div>
+                          </Alert>
+                        )}
+
+                        <div className="col-sm-12">
+                          <button
+                            type="submit"
+                            className="btn btn-success mr-2"
+                          >
+                            Add Class
+                          </button>
+                          <Link
+                            to="/manage-subjects"
+                            className="btn btn-secondary"
+                          >
+                            Go Back
+                          </Link>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-          </div>
-          <div className="card-body">
-            <div>
-              <NodeAlert />
             </div>
-            <form className="form" onSubmit={(e) => onSubmit(e)}>
-              <div className="row">
-                <div className="col-sm-6">
-                  <div className="form-group">
-                    <label className="floating-label" htmlFor="Name">
-                      Subject Name
-                    </label>
-                    <input
-                      onChange={(e) => setSubject_Name(e.target.value)}
-                      name="subject_name"
-                      value={subject_name}
-                      type="text"
-                      className="form-control"
-                      placeholder
-                    />
-                  </div>
-                </div>
-                {/* add classes */}
-
-                {classes.length !== 0 ? (
-                  <div className="col-sm-6 ">
-                    <div className="form-group">
-                      <label className="floating-label" htmlFor="Email">
-                        Add Class
-                      </label>
-                      <Select
-                        mode="multiple"
-                        autoFocus
-                        allowClear
-                        defaultValue={[""]}
-                        style={{ width: "100%" }}
-                        placeholder="Please Add Class"
-                        onChange={setAdd_classes}
-                        value={add_classes}
-                      >
-                        {classOptions}
-                      </Select>
-                    </div>
-                  </div>
-                ) : (
-                  <Alert color="info">
-                  <h4 className="alert-heading">
-                    Class not found!
-                  </h4>
-                  <div className="alert-body">
-                    No Classes are available! Make you add class to
-                    the subject,
-                    <Link to="/create-class">
-                      Create Class
-                    </Link>
-                  </div>
-                </Alert>
-                )}
-
-                {/* add Teacher */}
-                {teachers.length !== 0 ? (
-                  <div className="col-sm-6 ">
-                    <div className="form-group">
-                      <label className="floating-label" htmlFor="Email">
-                        Assign Teacher
-                      </label>
-                      <Select
-                        mode="multiple"
-                        autoFocus
-                        allowClear
-                        defaultValue={[""]}
-                        style={{ width: "100%" }}
-                        placeholder="Please Assign Teacher"
-                        onChange={setAssign_Teacher}
-                        value={assign_teachers}
-                      >
-                        {teacherOptions}
-                      </Select>
-                    </div>
-                  </div>
-                ) : (
-                  <Alert color="info">
-                  <h4 className="alert-heading">
-                    Teachers not found!
-                  </h4>
-                  <div className="alert-body">
-                    No Teachers are available! Make you add class to
-                    the subject,
-                    <Link to="/create-teacher">
-                      Create Class
-                    </Link>
-                  </div>
-                </Alert>
-                )}
-
-                <div className="col-sm-12">
-                  <button type="submit" className="btn btn-success mr-2">
-                    Add Class
-                  </button>
-                  <Link to="/dashboard" className="btn btn-secondary">
-                    Go Back
-                  </Link>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </div>
-    </div>
-          </div>
-
-       
-        </div>
-      </div>
-   
     </>
   );
 }
@@ -287,7 +272,7 @@ CreateSubject.propType = {
 const mapStateToProps = (state) => ({
   classRoom: state.classRoom,
   teacher: state.teacher,
-  auth: state.auth
+  auth: state.auth,
 });
 export default connect(mapStateToProps, { addSubject, logout })(
   withRouter(CreateSubject)

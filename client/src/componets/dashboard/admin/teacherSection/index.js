@@ -106,6 +106,47 @@ function TeacherSection({
           </div>
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
+          <div div className="row dash_width">
+            {/* Student */}
+
+            <div className="col-xl-6 col-md-6">
+              <div className="card shadow rounded ">
+                <div className="card-body bg-success">
+                  <div className="col-md-12 text-center ">
+                    <i className="fas fa-laptop f-36 text-success text-center py-1" />
+                    <h5 className="text-success  m-b-10">
+                      {" "}
+                      <strong>Classrooms</strong>
+                    </h5>
+                  </div>
+                </div>
+                <div className="col-md-12  py-3 mb-3  text-center">
+                  <Link to="/manage-classrooms" className="btn btn-info">
+                    Manage Classes🚀
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-6 col-md-6">
+              <div className="card shadow  ">
+                <div className="card-body bg-primary">
+                  <div className="col-md-12 text-center">
+                    <i className="fas fa-book-open f-36 text-primary" />
+                    <h5 className="text-primary m-b-10">
+                      {" "}
+                      <strong>Subjects</strong>{" "}
+                    </h5>
+                  </div>
+                </div>
+                <div className="col-md-12  py-3 mb-3 text-center  ">
+                  <Link to="/manage-subjects" className="btn btn-info">
+                    Manage Subject📜
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/*  */}
 
           <div className="py-5">
             <NodeAlert />

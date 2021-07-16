@@ -31,8 +31,8 @@ export const addSubject = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Subject Added", "success"));
-
-    // history.push('/dashboard')
+    dispatch(getSubject());
+    history.push("/manage-subjects");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -99,9 +99,9 @@ export const updateSubject = (formData, history) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(setAlert("Subject Edited", "info"));
-
-    // history.push("/dashboard");
+    dispatch(setAlert("Subject Edited", "success"));
+    dispatch(getSubject());
+    history.push("/manage-subjects");
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -125,8 +125,8 @@ export const deleteSubject = (id, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Subject deleted", "danger"));
-    history.push("/create-subject");
-    history.push("/dashboard");
+    dispatch(getSubject());
+    history.push("/manage-subjects");
   } catch (err) {
     dispatch({
       type: SUBJECT_ERROR,

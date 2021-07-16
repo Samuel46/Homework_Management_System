@@ -6,20 +6,20 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { logout } from "../../../../actions/auth";
 import Navigation from "../../Navigation";
-import { getClasses } from "../../../../actions/classRoom";
+import { getSubject } from "../../../../actions/subject";
 import NodeAlert from "../../../layouts/NodeAlert";
-import ClassRoomTable from "./ClassRoomTable";
+import SubjectTable from "./SubjectTable";
 
-function ClassRoomSections({
-  classRoom: { classes },
-  getClasses,
+function SubjectSection({
+  subject: { subjects },
+  getSubject,
   logout,
   auth: { user },
 }) {
   // on mount
   useEffect(() => {
-    getClasses();
-  }, [getClasses]);
+    getSubject();
+  }, [getSubject]);
 
   return (
     <Fragment>
@@ -95,7 +95,7 @@ function ClassRoomSections({
               <div className="row align-items-center">
                 <div className="col-md-6">
                   <div className="page-header-title">
-                    <h5 className="m-b-10">Manage Classrooms</h5>
+                    <h5 className="m-b-10">Manage Subjects</h5>
                   </div>
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">{user && user.name}</li>
@@ -126,29 +126,27 @@ function ClassRoomSections({
               </div>
             </div>
             <div className="col-xl-6 col-md-6">
-              <div className="card shadow  ">
-                <div className="card-body bg-primary">
-                  <div className="col-md-12 text-center">
-                    <i className="fas fa-book-open f-36 text-primary" />
-                    <h5 className="text-primary m-b-10">
+              <div className="card shadow rounded ">
+                <div className="card-body bg-success">
+                  <div className="col-md-12 text-center ">
+                    <i className="fas fa-laptop f-36 text-success text-center py-1" />
+                    <h5 className="text-success  m-b-10">
                       {" "}
-                      <strong>Subjects</strong>{" "}
+                      <strong>Classrooms</strong>
                     </h5>
                   </div>
                 </div>
-                <div className="col-md-12  py-3 mb-3 text-center  ">
-                  <Link to="/manage-subjects" className="btn btn-info">
-                    Manage Subject📜
+                <div className="col-md-12  py-3 mb-3  text-center">
+                  <Link to="/manage-classrooms" className="btn btn-info">
+                    Manage Classes🚀
                   </Link>
                 </div>
               </div>
             </div>
           </div>
-          {/*  */}
-
           <div className="py-5">
             <NodeAlert />
-            <ClassRoomTable classes={classes} />
+            <SubjectTable subjects={subjects} />
           </div>
         </div>
       </div>
@@ -156,17 +154,17 @@ function ClassRoomSections({
   );
 }
 
-ClassRoomSections.propTypes = {
-  classRoom: PropTypes.object.isRequired,
-  getClasses: PropTypes.func.isRequired,
+SubjectSection.propTypes = {
+  subject: PropTypes.object.isRequired,
+  getSubject: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
-  classRoom: state.classRoom,
+  subject: state.subject,
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getClasses, logout })(
-  withRouter(ClassRoomSections)
+export default connect(mapStateToProps, { getSubject, logout })(
+  withRouter(SubjectSection)
 );
