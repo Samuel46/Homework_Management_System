@@ -23,14 +23,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, add_students } = req.body;
+    const { name, add_subjects, add_students } = req.body;
 
     // Bulilding a class object
     const classFields = {};
     classFields.teacher = req.teacher.id;
     if (name) classFields.name = name;
     if (add_students) classFields.add_students = add_students;
-
+    if (add_subjects) classFields.add_subjects = add_subjects;
     try {
       // see if user exists
       let classRoom = await ClassRoom.findOne({ name });

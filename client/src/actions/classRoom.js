@@ -6,6 +6,7 @@ import {
   DELETE_CLASS,
   GET_CLASSES,
   GET_CLASSESBYID,
+  GET_CLASSES_TEACHER,
   UPDATE_CLASS,
 } from "./types";
 
@@ -56,6 +57,22 @@ export const getClasses = () => async (dispatch) => {
     });
   }
 };
+//  get classroom created by the teacher's
+export const getTeacherClass = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/admin/classes/class/myteachers");
+
+    dispatch({
+      type: GET_CLASSES_TEACHER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CLASS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
 
 // Get CLASS  by ID @@school level
 export const getClassById = (id, history) => async (dispatch) => {
@@ -86,6 +103,26 @@ export const deleteClass = (id, history) => async (dispatch) => {
 
     dispatch(setAlert("Class deleted", "danger"));
     dispatch(getClasses());
+    history.push("/manage-classrooms");
+  } catch (err) {
+    dispatch({
+      type: CLASS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+// Delete classes created by the teachers
+export const deleteClassTeacher = (id, history) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/admin/classes/class/myteachers/${id}`);
+
+    dispatch({
+      type: DELETE_CLASS,
+      payload: res.data,
+    });
+
+    dispatch(setAlert("Classroom by the teacher removed!!", "danger"));
+    dispatch(getTeacherClass());
     history.push("/manage-classrooms");
   } catch (err) {
     dispatch({

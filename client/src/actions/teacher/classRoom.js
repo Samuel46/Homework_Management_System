@@ -27,6 +27,8 @@ export const addClassRoom = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert("Class Added", "success"));
+    history.push("./manage-classes");
+    dispatch(getClassRooms());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -56,6 +58,8 @@ export const updatedClassRoom = (formData, history) => async (dispatch) => {
     });
 
     dispatch(setAlert(" Your ClassRoom has been updated!", "success"));
+    history.push("/manage-classes");
+    dispatch(getClassRooms());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -114,7 +118,7 @@ export const deleteClassRoom = (id, history) => async (dispatch) => {
 
     dispatch(setAlert("Class deleted", "success"));
     history.push("./manage-classes");
-    history.push("./teacher-dashboard");
+    dispatch(getClassRooms());
   } catch (err) {
     dispatch({
       type: CLASS_ERROR,

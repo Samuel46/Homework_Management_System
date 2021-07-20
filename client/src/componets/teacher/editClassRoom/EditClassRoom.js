@@ -5,7 +5,7 @@ import {
   updatedClassRoom,
   getClassById,
 } from "../../../actions/teacher/classRoom";
-import { getStudents } from "../../../actions/teacher/teacher";
+import { getStudents, getSubject } from "../../../actions/teacher/teacher";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Alert } from "reactstrap";
@@ -14,10 +14,12 @@ import TeacherTop from "../TeacherTop";
 function EditClassRoom({
   teacher: { teacher },
   getStudents,
+  getSubject,
   updatedClassRoom,
   getClassById,
   teacherReducer: { studentList },
   classroomTeacher: { selectedClassRoom },
+  subject: { subjects },
   match,
 }) {
   useEffect(() => {
@@ -65,9 +67,11 @@ function EditClassRoom({
                 <div className="card-body">
                   <EditClassRoomForm
                     getStudents={getStudents}
+                    getSubject={getSubject}
                     updatedClassRoom={updatedClassRoom}
                     studentList={studentList}
                     selectedClassRoom={selectedClassRoom}
+                    subjects={subjects}
                   />
                 </div>
               </div>
@@ -95,16 +99,20 @@ EditClassRoom.propType = {
   updatedClassRoom: PropTypes.func.isRequired,
   getClassById: PropTypes.func.isRequired,
   classroomTeacher: PropTypes.object.isRequired,
+  getSubject: PropTypes.func.isRequired,
+  subject: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   teacher: state.teacher,
   teacherReducer: state.teacherReducer,
   classroomTeacher: state.classroomTeacher,
+  subject: state.subject,
 });
 
 export default connect(mapStateToProps, {
   getStudents,
+  getSubject,
   getClassById,
   updatedClassRoom,
 })(EditClassRoom);

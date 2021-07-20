@@ -21,6 +21,7 @@ function EditClass({
   teacher: { teachers },
   student: { students },
   auth: { user },
+  subject: { subjects },
   logout,
 }) {
   useEffect(() => {
@@ -133,6 +134,7 @@ function EditClass({
                       loading={loading}
                       teachers={teachers}
                       students={students}
+                      subjects={subjects}
                     />
                   </div>
                 </div>
@@ -182,6 +184,7 @@ EditClass.propTypes = {
   student: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  subject: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -189,6 +192,7 @@ const mapStateToProps = (state) => ({
   teacher: state.teacher,
   student: state.student,
   auth: state.auth,
+  subject: state.subject,
 });
 
 export default connect(mapStateToProps, {

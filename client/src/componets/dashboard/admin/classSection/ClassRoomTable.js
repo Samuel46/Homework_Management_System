@@ -1,6 +1,6 @@
 import React from "react";
 import { Popconfirm, message } from "antd";
-import { deleteClass } from "../../../../actions/classRoom";
+import { deleteClass, deleteClassTeacher } from "../../../../actions/classRoom";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -13,7 +13,14 @@ function cancel(e) {
   message.error("cancle");
 }
 
-function ClassRoomTable({ classes, deleteClass, history }) {
+function ClassRoomTable({
+  classes,
+  teacherClassrooms,
+  deleteClassTeacher,
+  deleteClass,
+  history,
+}) {
+  console.log(teacherClassrooms);
   const allClasses = classes.map((clas) => (
     <tr key={clas._id}>
       <td>{clas.name}</td>
@@ -26,6 +33,22 @@ function ClassRoomTable({ classes, deleteClass, history }) {
                   {" "}
                   {""} 😃 {""}
                   {add_student}
+                </ListGroupItem>
+              </ListGroup>
+            </p>
+          </>
+        ))}{" "}
+        <br />
+      </td>
+      <td>
+        {clas.add_subjects.map((subject, index) => (
+          <>
+            <p key={index}>
+              <ListGroup>
+                <ListGroupItem color="warning" className="mb-2">
+                  {" "}
+                  {""} 📜 {""}
+                  {subject}
                 </ListGroupItem>
               </ListGroup>
             </p>
@@ -71,6 +94,72 @@ function ClassRoomTable({ classes, deleteClass, history }) {
       </td>
     </tr>
   ));
+
+  const teacherClasses = teacherClassrooms.map((clas) => (
+    <tr key={clas._id}>
+      <td>{clas.name}</td>
+      <td>
+        {clas.add_students.map((add_student, index) => (
+          <>
+            <p key={index}>
+              <ListGroup>
+                <ListGroupItem color="info" className="mb-2">
+                  {" "}
+                  {""} 😃 {""}
+                  {add_student}
+                </ListGroupItem>
+              </ListGroup>
+            </p>
+          </>
+        ))}{" "}
+        <br />
+      </td>
+      <td>
+        {clas.add_subjects.map((subject, index) => (
+          <>
+            <p key={index}>
+              <ListGroup>
+                <ListGroupItem color="warning" className="mb-2">
+                  {" "}
+                  {""} 📜 {""}
+                  {subject}
+                </ListGroupItem>
+              </ListGroup>
+            </p>
+          </>
+        ))}{" "}
+        <br />
+      </td>
+      <td>
+        <ListGroup>
+          <ListGroupItem color="light-primary" className="mb-2">
+            {" "}
+            {""} 😎 {""}
+            {Object.values(
+              clas.teacher.name !== null && clas.teacher.name !== undefined ? (
+                clas.teacher.name
+              ) : (
+                <Spinner />
+              )
+            )}
+          </ListGroupItem>
+        </ListGroup>
+      </td>
+      <td>
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This classroom was created by a teacher. This will permanently delete this classroom🙄?"
+          onConfirm={(e) => deleteClassTeacher(clas._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <a href="#">Remove Classroom</a>
+        </Popconfirm>
+      </td>
+    </tr>
+  ));
   return (
     <div className="container">
       <div className="row">
@@ -108,15 +197,16 @@ function ClassRoomTable({ classes, deleteClass, history }) {
                   <thead>
                     <tr>
                       <th>Class Name</th>
-                      <th>
-                        Student'
-                        <small /> Name
-                      </th>
+                      <th>Student' Name</th>
+                      <th>Allocated Subjects</th>
                       <th>Teacher's Name</th>
                       <th>Options</th>
                     </tr>
                   </thead>
-                  <tbody>{allClasses}</tbody>
+                  <tbody>
+                    {allClasses}
+                    {teacherClasses}
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -130,6 +220,9 @@ function ClassRoomTable({ classes, deleteClass, history }) {
 
 ClassRoomTable.propTypes = {
   deleteClass: PropTypes.func.isRequired,
+  deleteClassTeacher: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteClass })(withRouter(ClassRoomTable));
+export default connect(null, { deleteClass, deleteClassTeacher })(
+  withRouter(ClassRoomTable)
+);

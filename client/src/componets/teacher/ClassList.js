@@ -42,6 +42,17 @@ function ClassList({
         ))}
       </td>
       <td>
+        {clas.add_subjects.map((subject, index) => (
+          <ListGroup key={index}>
+            <ListGroupItem color="warning" className="mb-2">
+              {" "}
+              {""}📜 {""}
+              {subject}
+            </ListGroupItem>
+          </ListGroup>
+        ))}
+      </td>
+      <td>
         Mr/Mrs. {""}
         {teacher && teacher.name}
       </td>
@@ -63,6 +74,17 @@ function ClassList({
               {" "}
               {""}😃 {""}
               {student}
+            </ListGroupItem>
+          </ListGroup>
+        ))}
+      </td>
+      <td>
+        {clas.add_subjects.map((subject, index) => (
+          <ListGroup key={index}>
+            <ListGroupItem color="warning" className="mb-2">
+              {" "}
+              {""}📜 {""}
+              {subject}
             </ListGroupItem>
           </ListGroup>
         ))}
@@ -110,7 +132,7 @@ function ClassList({
                 <div className="col-sm-6"></div>
                 <div className="col-sm-6 text-right">
                   <Link
-                    to="/manage-classes"
+                    to="/create-classes"
                     className="btn btn-success btn-sm mb-3 btn-round"
                   >
                     <i className="feather icon-plus" /> Add Class
@@ -125,7 +147,8 @@ function ClassList({
                   <thead>
                     <tr>
                       <th>Class Name</th>
-                      <th>Student'Name</th>
+                      <th>Student's Name</th>
+                      <th>Subject's Allocated</th>
                       <th>Teacher's Name</th>
                       <th>Options</th>
                     </tr>

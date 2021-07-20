@@ -56,6 +56,7 @@ import TeacherSection from "./componets/dashboard/admin/teacherSection";
 import ClassRoomSections from "./componets/dashboard/admin/classSection";
 import SubjectSection from "./componets/dashboard/admin/subjectSection";
 import StudentSection from "./componets/dashboard/admin/studentSection";
+import ClassroomTeacher from "./componets/teacher/classRoom";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -169,6 +170,11 @@ const App = () => {
             <AuthTeacherRoute
               exact
               path="/manage-classes"
+              component={ClassroomTeacher}
+            />
+            <AuthTeacherRoute
+              exact
+              path="/create-classes"
               component={AddClass}
             />
             <AuthTeacherRoute

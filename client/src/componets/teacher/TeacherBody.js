@@ -121,8 +121,6 @@ function TeacherBody({
           <NodeAlert />
         </div>
         <HomeList homeworks={homeworks} />
-        {/* ClassList */}
-        <ClassList classes={classes} />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import NodeAlert from "../../layouts/NodeAlert";
 import { Select } from "antd";
 import Spinner from "../../layouts/Spinner";
+import { Alert } from "reactstrap";
 const { Option } = Select;
 
 function EditClassForm({
@@ -18,6 +19,7 @@ function EditClassForm({
   getTeachers,
   teachers,
   students,
+  subjects,
   history,
 }) {
   useEffect(() => {
@@ -30,17 +32,19 @@ function EditClassForm({
   const [name, setName] = useState("");
   const [add_students, setAdd_Students] = useState([]);
   const [assign_teachers, setAssign_Teachers] = useState([]);
-  //   console.log(teachers, "samueuueueueue");
+  const [add_subjects, setSubject] = useState([]);
 
   // fill the from with data from the state
   useEffect(() => {
     setName(selectedClass.name || name);
     setAdd_Students(selectedClass.add_students || add_students);
+    setSubject(selectedClass.add_subjects || add_subjects);
     setAssign_Teachers(selectedClass.assign_teachers || assign_teachers);
   }, [
     selectedClass.name,
     selectedClass.add_students,
     selectedClass.assign_teachers,
+    selectedClass.add_subjects,
   ]);
 
   //   render teacher's options
@@ -61,12 +65,20 @@ function EditClassForm({
       </Option>
     ));
 
+  // render  subject's options
+  const subjectOptions = subjects.map((subject) => (
+    <Option value={subject.subject_name} key={subject._id}>
+      ✔{""} {subject.subject_name}
+    </Option>
+  ));
+
   // ** Adds New Lesson Event
   const handleUpdateClass = () => {
     const obj = {
       name,
       add_students,
       assign_teachers,
+      add_subjects,
     };
     updateClassRoom(obj, history);
   };
@@ -146,6 +158,33 @@ function EditClassForm({
                   value={assign_teachers}
                 >
                   {teacherOptions}
+                </Select>
+              </div>
+            </div>
+          )}
+          {/* subjects */}
+          {!subjects.length && subjects.length === 0 ? (
+            <Alert color="info">
+              <h4 className="alert-heading">Subjects not found</h4>
+              <div className="alert-body">No Subjects are available!</div>
+            </Alert>
+          ) : (
+            <div className="col-sm-6 ">
+              <div className="form-group">
+                <label className="floating-label" htmlFor="Email">
+                  Add Subject
+                </label>
+                <Select
+                  mode="multiple"
+                  autoFocus
+                  allowClear
+                  defaultValue={[""]}
+                  style={{ width: "100%" }}
+                  placeholder="Please Allocate Subjects"
+                  onChange={setSubject}
+                  value={add_subjects}
+                >
+                  {subjectOptions}
                 </Select>
               </div>
             </div>

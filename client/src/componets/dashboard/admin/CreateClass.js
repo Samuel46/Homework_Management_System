@@ -15,12 +15,14 @@ function CreateClass({
   history,
   teacher: { teachers },
   student: { students },
+  subject: { subjects },
   logout,
   auth: { user },
 }) {
   const [name, setName] = useState("");
   const [add_students, setAdd_Students] = useState([]);
   const [assign_teachers, setAssign_Teachers] = useState([]);
+  const [add_subjects, setSubject] = useState([]);
 
   // render teacher's options
   const teacherOptions = teachers.map((teacher) => (
@@ -36,12 +38,20 @@ function CreateClass({
     </Option>
   ));
 
+  // render  subject's options
+  const subjectOptions = subjects.map((subject) => (
+    <Option value={subject.subject_name} key={subject._id}>
+      ✔{""} {subject.subject_name}
+    </Option>
+  ));
+
   // ** Adds New Lesson Event
   const handleCreateClass = () => {
     const obj = {
       name,
       add_students,
       assign_teachers,
+      add_subjects,
     };
     addClassRoom(obj, history);
   };
@@ -243,6 +253,37 @@ function CreateClass({
                             </div>
                           </Alert>
                         )}
+                        {/* subjects */}
+                        {!subjects.length && subjects.length === 0 ? (
+                          <Alert color="info">
+                            <h4 className="alert-heading">
+                              Subjects not found
+                            </h4>
+                            <div className="alert-body">
+                              No Subjects are available!
+                            </div>
+                          </Alert>
+                        ) : (
+                          <div className="col-sm-6 ">
+                            <div className="form-group">
+                              <label className="floating-label" htmlFor="Email">
+                                Add Subject
+                              </label>
+                              <Select
+                                mode="multiple"
+                                autoFocus
+                                allowClear
+                                defaultValue={[""]}
+                                style={{ width: "100%" }}
+                                placeholder="Please Allocate Subjects"
+                                onChange={setSubject}
+                                value={add_subjects}
+                              >
+                                {subjectOptions}
+                              </Select>
+                            </div>
+                          </div>
+                        )}
 
                         <div className="col-sm-12">
                           <button
@@ -277,12 +318,14 @@ CreateClass.propType = {
   student: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
+  subject: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   teacher: state.teacher,
   student: state.student,
   auth: state.auth,
+  subject: state.subject,
 });
 export default connect(mapStateToProps, { addClassRoom, logout })(
   withRouter(CreateClass)

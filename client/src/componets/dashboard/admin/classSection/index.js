@@ -6,20 +6,22 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { logout } from "../../../../actions/auth";
 import Navigation from "../../Navigation";
-import { getClasses } from "../../../../actions/classRoom";
+import { getClasses, getTeacherClass } from "../../../../actions/classRoom";
 import NodeAlert from "../../../layouts/NodeAlert";
 import ClassRoomTable from "./ClassRoomTable";
 
 function ClassRoomSections({
-  classRoom: { classes },
+  classRoom: { classes, teacherClassrooms },
   getClasses,
+  getTeacherClass,
   logout,
   auth: { user },
 }) {
   // on mount
   useEffect(() => {
     getClasses();
-  }, [getClasses]);
+    getTeacherClass();
+  }, [getClasses, getTeacherClass]);
 
   return (
     <Fragment>
@@ -165,7 +167,10 @@ function ClassRoomSections({
 
           <div className="py-5">
             <NodeAlert />
-            <ClassRoomTable classes={classes} />
+            <ClassRoomTable
+              classes={classes}
+              teacherClassrooms={teacherClassrooms}
+            />
           </div>
         </div>
       </div>
@@ -178,12 +183,15 @@ ClassRoomSections.propTypes = {
   getClasses: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getTeacherClass: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   classRoom: state.classRoom,
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getClasses, logout })(
-  withRouter(ClassRoomSections)
-);
+export default connect(mapStateToProps, {
+  getClasses,
+  getTeacherClass,
+  logout,
+})(withRouter(ClassRoomSections));
