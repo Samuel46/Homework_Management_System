@@ -17,7 +17,8 @@ router.post(
   [
     auth,
     [
-      check("name", "Name is require").not().isEmpty(),
+      check("firstname", "Firstname is require").not().isEmpty(),
+      check("sirname", "Sirname is require").not().isEmpty(),
       check("email", "Email is required").isEmail(),
       check("password", "Password is required").isLength({ min: 6 }),
     ],
@@ -28,7 +29,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const {
-      name,
+      firstname,
+      sirname,
+      title,
       email,
       password,
       create_class,
@@ -39,7 +42,9 @@ router.post(
     // Bulilding student object
     const teacherFields = {};
     teacherFields.user = req.user.id;
-    if (name) teacherFields.name = name;
+    if (firstname) teacherFields.firstname = firstname;
+    if (sirname) teacherFields.sirname = sirname;
+    if (title) teacherFields.title = title;
     if (email) teacherFields.email = email;
     if (password) teacherFields.password = password;
     if (create_class) teacherFields.create_class = create_class;
@@ -99,7 +104,9 @@ router.post(
 // @Access         Private
 router.get("/", auth, async (req, res) => {
   try {
-    const allTeachers = await Teacher.find({ user: req.user.id }).select("-password");
+    const allTeachers = await Teacher.find({ user: req.user.id }).select(
+      "-password"
+    );
 
     res.json(allTeachers);
   } catch (err) {
@@ -116,7 +123,7 @@ router.get("/:id", auth, async (req, res) => {
     const getTeaherById = await Teacher.findById(req.params.id).populate(
       "user",
       ["email", "name"]
-    )
+    );
     if (!getTeaherById) {
       return res.status(404).json({ msg: "Teacher not found" });
     }

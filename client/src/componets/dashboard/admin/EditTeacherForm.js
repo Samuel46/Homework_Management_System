@@ -17,25 +17,29 @@ function EditTeacherForm({
   updateTeacher,
   classRoom: { classes },
 }) {
-  const [name, setName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [sirname, setSirName] = useState("");
+  const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
-  const [create_classes, setCreate_Classes] = useState(false);
   const [joining_date, setJoining_Date] = useState(new Date());
 
 
   // fill the from with data from the state
   useEffect(() => {
-    setName(selectedTeacher.name || name);
+    setFirstName(selectedTeacher.firstname || firstname);
+    setSirName(selectedTeacher.sirname || sirname);
+    setTitle(selectedTeacher.title || title);
     setEmail(selectedTeacher.email || email);
-    setPassword(selectedTeacher.password   || password);
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
+    setPassword(selectedTeacher.password   || password);
     setJoining_Date(new Date(selectedTeacher.joining_date));
   }, [
-    selectedTeacher.name,
+    selectedTeacher.firstname,
+    selectedTeacher.sirname,
+    selectedTeacher.allocate_classes ,
     selectedTeacher.joining_date,
-    selectedTeacher.allocate_classes,
     selectedTeacher.email,
     selectedTeacher.password,
   ]);
@@ -52,10 +56,11 @@ function EditTeacherForm({
   // ** Adds New Lesson Event
   const handleUpdateClass = () => {
     const obj = {
-      name,
+      firstname,
+      sirname,
+      title,
       email,
       password,
-      create_classes,
       joining_date,
       allocate_classes,
     };
@@ -80,22 +85,71 @@ function EditTeacherForm({
       </div>
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label className="floating-label" htmlFor="Name">
-                Name
-              </label>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                name="name"
-                value={name}
-                type="text"
-                className="form-control"
-                id="Name"
-                placeholder
-              />
-            </div>
-          </div>
+        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Firstname
+                            </label>
+                            <input
+                              onChange={(e) => setFirstName(e.target.value)}
+                              name="name"
+                              value={firstname}
+                              type="text"
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        {/* sirname */}
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Sirname
+                            </label>
+                            <input
+                              onChange={(e) => setSirName(e.target.value)}
+                              value={sirname}
+                              type="text"
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        {/* salutation */}
+                        <div className="col-sm-12">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              What's your title?
+                            </label>
+                            <Select
+                                // mode="multiple"
+                                autoFocus
+                                allowClear
+                                style={{ width: "100%" }}
+                                placeholder="Please Allocate Classes"
+                                onChange={setTitle}
+                                value={title}
+                              >
+                                <Option value="Mr.">
+                                    Mr.
+                                  </Option>
+                                  <Option value="Mrs.">
+                                  Mrs.
+                                </Option>
+                                  <Option value="Miss.">
+                                  Miss.
+                                </Option>
+                                <Option value="Ms.">
+                                Ms.
+                              </Option>
+                                <Option value="Dr.">
+                                Dr.
+                              </Option>
+                              <Option value="Prof.">
+                              Prof.
+                              </Option>
+                              </Select>
+                          </div>
+                        </div>
           <div className="col-sm-6">
             <div className="form-group fill">
               <label className="floating-label" htmlFor="Email">
@@ -136,21 +190,7 @@ function EditTeacherForm({
             </div>
           ) : (
             <h2>no availabel</h2>
-            // <div className="col-sm-6">
-            //   <div className="form-group">
-            //     <label className="floating-label" htmlFor="Name">
-            //       Allocate Class
-            //     </label>
-            //     <input
-            //       name="allocate_classes"
-            //       value={allocate_classes}
-            //       type="text"
-            //       className="form-control"
-            //       id="Name"
-            //       placeholder
-            //     />
-            //   </div>
-            // </div>
+            
           )}
 
           <div className="col-sm-6">

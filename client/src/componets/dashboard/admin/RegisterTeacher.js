@@ -17,13 +17,14 @@ function RegisterTeacher({
   classRoom: { classes },
   auth: { user },
   logout,
-  history
+  history,
 }) {
-  const [name, setName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [sirname, setSirName] = useState("");
+  const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [allocate_classes, setAllocate_Classes] = useState([]);
-  const [create_classes, setCreate_Classes] = useState(false);
   const [joining_date, setJoining_Date] = useState(new Date());
 
   // render all classroom options
@@ -33,13 +34,15 @@ function RegisterTeacher({
     </Option>
   ));
 
+
   // ** Adds New Teacher
   const handleAddTeacher = () => {
     const obj = {
-      name,
+      firstname,
+      sirname,
+      title,
       email,
       password,
-      create_classes,
       joining_date,
       allocate_classes,
     };
@@ -161,17 +164,66 @@ function RegisterTeacher({
                         <div className="col-sm-6">
                           <div className="form-group">
                             <label className="floating-label" htmlFor="Name">
-                              Name
+                              Firstname
                             </label>
                             <input
-                              onChange={(e) => setName(e.target.value)}
+                              onChange={(e) => setFirstName(e.target.value)}
                               name="name"
-                              value={name}
+                              value={firstname}
                               type="text"
                               className="form-control"
-                              id="Name"
-                              placeholder
                             />
+                          </div>
+                        </div>
+
+                        {/* sirname */}
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              Sirname
+                            </label>
+                            <input
+                              onChange={(e) => setSirName(e.target.value)}
+                              value={sirname}
+                              type="text"
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+                        {/* salutation */}
+                        <div className="col-sm-12">
+                          <div className="form-group">
+                            <label className="floating-label" htmlFor="Name">
+                              What's your title?
+                            </label>
+                            <Select
+                                // mode="multiple"
+                                autoFocus
+                                allowClear
+                                style={{ width: "100%" }}
+                                placeholder="Please Allocate Classes"
+                                onChange={setTitle}
+                                value={title}
+                              >
+                                <Option value="Mr.">
+                                    Mr.
+                                  </Option>
+                                  <Option value="Mrs.">
+                                  Mrs.
+                                </Option>
+                                  <Option value="Miss.">
+                                  Miss.
+                                </Option>
+                                <Option value="Ms.">
+                                Ms.
+                              </Option>
+                                <Option value="Dr.">
+                                Dr.
+                              </Option>
+                              <Option value="Prof.">
+                              Prof.
+                              </Option>
+                              </Select>
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -265,7 +317,10 @@ function RegisterTeacher({
                           >
                             Add Teacher
                           </button>
-                          <Link to="/manage-teachers" className="btn btn-secondary">
+                          <Link
+                            to="/manage-teachers"
+                            className="btn btn-secondary"
+                          >
                             Go Back
                           </Link>
                         </div>

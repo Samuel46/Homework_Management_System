@@ -20,7 +20,7 @@ function TeacherTable({teachers, deleteTeacher, history}) {
         <ListGroupItem color="primary" className="mb-2">
           {" "}
           {""} 😎 {""}
-          {teacher.name}
+          {teacher.title + " " + teacher.firstname + " " + teacher.sirname}
         </ListGroupItem>
       </ListGroup>
     </td>

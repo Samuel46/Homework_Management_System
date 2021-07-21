@@ -5,7 +5,15 @@ const TeacherSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
-  name: {
+  firstname: {
+    type: String,
+    require: true,
+  },
+  sirname: {
+    type: String,
+    require: true,
+  },
+  title: {
     type: String,
     require: true,
   },
@@ -23,7 +31,6 @@ const TeacherSchema = new mongoose.Schema({
   },
   allocate_classes: {
     type: [String],
-    
   },
 
   profile_image: {
