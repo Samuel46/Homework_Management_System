@@ -1,0 +1,163 @@
+import React, { useEffect } from "react";
+import Navigation from "../../Navigation";
+import PropTypes from "prop-types";
+import { withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Alert, Button } from "reactstrap";
+import { logout, loadUser, updateSchool } from "../../../../actions/auth";
+import AccountForm from "./AccountForm";
+
+function UpdateAccount({ auth: { user }, logout, updateSchool }) {
+  useEffect(() => {
+    loadUser();
+  }, []);
+  return user !== null ? (
+    <>
+      <Navigation />
+      <header className="pc-header ">
+        <div className="header-wrapper">
+          <div className="mr-auto pc-mob-drp">
+            <ul className="list-unstyled"></ul>
+          </div>
+          <div className="ml-auto">
+            <ul className="list-unstyled">
+              <li className="pc-h-item ">
+                <Link
+                  onClick={() => logout()}
+                  className="pc-head-link mr-0"
+                  to="#!"
+                >
+                  <i className="fas fa-sign-out-alt"></i>
+                  {""}
+                  <span>Logout</span>
+                </Link>
+              </li>
+
+              <li className="dropdown pc-h-item">
+                <Link
+                  className="pc-head-link dropdown-toggle arrow-none mr-0"
+                  data-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="false"
+                  aria-expanded="false"
+                >
+                  <span>
+                    <span className="user-name">
+                      Welcome {user && user.name}
+                    </span>
+                    <span className="user-desc">Administrator</span>
+                  </span>
+                </Link>
+                <div className="dropdown-menu dropdown-menu-right pc-h-dropdown">
+                  <div className=" dropdown-header">
+                    <h6 className="text-overflow m-0">
+                      Welcome {user && user.name}
+                    </h6>
+                  </div>
+                  <Link href="#!" className="dropdown-item">
+                    <i data-feather="settings" />
+                    <span>Account</span>
+                  </Link>
+                  <Link
+                    onClick={() => logout()}
+                    className="pc-head-link mr-0"
+                    to="#!"
+                  >
+                    <i className="fas fa-sign-out-alt"></i>
+                    {""}
+                    <span>Logout</span>
+                  </Link>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      {/* [ Main Content ] start */}
+      <div className="pc-container">
+        <div className="pcoded-content">
+          {/* [ breadcrumb ] start */}
+          <div className="page-header">
+            <div className="page-block">
+              <div className="row align-items-center">
+                <div className="col-md-6">
+                  <div className="page-header-title">
+                    <h5 className="m-b-10">Dashboard</h5>
+                  </div>
+                  <ul className="breadcrumb">
+                    <li className="breadcrumb-item">{user && user.name}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* [ breadcrumb ] end */}
+          {/* [ Main Content ] start */}
+
+          <div className="py-4">
+            <div className="conatainer">
+              <div className="col-md-12 py-4">
+                <div className="card ">
+                  <div className="card-header">
+                    <h4 className="card-title">Edit Account</h4>
+                    <div class="cover-img-block img_img">
+                      <img
+                        src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <AccountForm updateSchool={updateSchool} user={user} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/*  */}
+    </>
+  ) : (
+    <div className="misc-wrapper">
+      <div className="misc-inner p-2 p-sm-3">
+        <div className="w-100 text-center">
+          <Alert color="danger">
+            <h4 className="alert-heading">School not found</h4>
+            <div className="alert-body">
+              User doesn't exist. <Link to="/dashboard">Home</Link>
+            </div>
+          </Alert>
+          <Button
+            tag={Link}
+            to="/dashboard"
+            color="primary"
+            className="btn-sm-block mb-2"
+          >
+            Back to home
+          </Button>
+          <img
+            className="img-fluid"
+            src="https://image.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg"
+            alt="Not authorized page"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+UpdateAccount.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  updateSchool: PropTypes.func.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout, updateSchool })(
+  UpdateAccount
+);

@@ -222,8 +222,8 @@ function CreateHomework({
                         <Alert color="info">
                           <h4 className="alert-heading">Classes not found</h4>
                           <div className="alert-body">
-                            No Classes are available! Make you assign a
-                            classroom to the homework
+                            You have not being assigned any class. Make you
+                            assign a classroom to the homework
                           </div>
                         </Alert>
                       ) : (

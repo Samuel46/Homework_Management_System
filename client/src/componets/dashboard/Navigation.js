@@ -27,7 +27,7 @@ function Navigation({ logout }) {
             </li>
 
             <li className="pc-item mr-5 ">
-              <Link to="#!" className="pc-link  text-danger">
+              <Link to="/manage-account" className="pc-link  text-danger">
                 <i class="far fa-user-circle f-26"></i> <br />
                 <small className="mobo__nav">Account</small>
               </Link>
@@ -60,7 +60,7 @@ function Navigation({ logout }) {
                 </Link>
               </li>
               <li className="pc-item">
-                <Link to="#!" className="pc-link text-danger">
+                <Link to="/manage-account" className="pc-link text-danger">
                   <i class="far fa-user-circle f-26"></i> My Account
                 </Link>
               </li>
@@ -75,6 +75,8 @@ function Navigation({ logout }) {
 Navigation.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  classRoom: PropTypes.object.isRequired,
+  subject: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

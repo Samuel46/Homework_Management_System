@@ -57,6 +57,8 @@ import ClassRoomSections from "./componets/dashboard/admin/classSection";
 import SubjectSection from "./componets/dashboard/admin/subjectSection";
 import StudentSection from "./componets/dashboard/admin/studentSection";
 import ClassroomTeacher from "./componets/teacher/classRoom";
+import SchoolAccount from "./componets/dashboard/admin/Account";
+import UpdateAccount from "./componets/dashboard/admin/Account/UpdateAccount";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -106,6 +108,16 @@ const App = () => {
               exact
               path="/manage-teachers"
               component={TeacherSection}
+            />
+            <PrivateRoute
+              exact
+              path="/update-account"
+              component={UpdateAccount}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-account"
+              component={SchoolAccount}
             />
             <PrivateRoute
               exact

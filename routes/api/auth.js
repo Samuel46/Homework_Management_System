@@ -14,7 +14,7 @@ const { check, validationResult } = require("express-validator");
 // @access public
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id);
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -29,7 +29,7 @@ router.post(
   "/",
   [
     check("email", "Please include a valid email").isEmail(),
-    check('password', 'Password is required').isLength({ min: 6 }),
+    check("password", "Password is required").isLength({ min: 6 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);

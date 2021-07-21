@@ -7,6 +7,8 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
+export const UPDATE_USERS = "UPDATE_USERS";
+export const UPDATE_USERS_FAIL = "UPDATE_USERS_FAIL";
 
 // Add Teacher
 export const REGISTER_TEACHER = "REGISTER_TEACHER";
