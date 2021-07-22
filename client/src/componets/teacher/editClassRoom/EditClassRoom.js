@@ -60,7 +60,7 @@ function EditClassRoom({
                 <div className="card-header">
                   <h4 className="card-title">Edit Class</h4> <br />
                   <h5 className="card-title">
-                    Teacher Name:
+                    Teacher Name:{" "}
                     {teacher &&
                       teacher.title +
                         " " +

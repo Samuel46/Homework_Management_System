@@ -53,8 +53,8 @@ function ClassList({
         ))}
       </td>
       <td>
-        Mr/Mrs. {""}
-        {teacher && teacher.name}
+        {teacher &&
+          teacher.title + " " + teacher.firstname + " " + teacher.sirname}
       </td>
       <td>
         <Link className="btn btn-secondary disabled btn-sm mr-2">Edit</Link>
@@ -89,7 +89,11 @@ function ClassList({
           </ListGroup>
         ))}
       </td>
-      <td>{teacher && teacher.name}</td>
+      <td>
+        {" "}
+        {teacher &&
+          teacher.title + " " + teacher.firstname + " " + teacher.sirname}
+      </td>
       <td>
         <Link
           to={`/edit-classRoom/${clas._id}`}
