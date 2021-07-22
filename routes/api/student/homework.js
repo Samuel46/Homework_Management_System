@@ -14,7 +14,7 @@ router.get("/", authStudent || authParent, async (req, res) => {
     const student = await Student.findById(req.student.id).select("-password");
 
     const homeWork = await Homework.find({
-      students: student.name,
+      students: student.firstname + " " + student.sirname,
     }).populate("teacher", ["name", "email"]);
 
     res.json(homeWork);
@@ -31,7 +31,7 @@ router.get("/work", authStudent || authParent, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select("-password");
     const classrooms = await Class.find({
-      add_students: student.name,
+      add_students: student.firstname + " " + student.sirname,
     }).populate("user", ["name", "email"]);
 
     res.json(classrooms);
@@ -48,7 +48,7 @@ router.get("/classroom", authStudent || authParent, async (req, res) => {
   try {
     const student = await Student.findById(req.student.id).select("-password");
     const classrooms = await Class.find({
-      add_students: student.name,
+      add_students: student.firstname + " " + student.sirname,
     }).populate("user", ["name", "email"]);
 
     const myClassrooms = Array.prototype.concat(

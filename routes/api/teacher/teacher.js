@@ -15,7 +15,8 @@ router.get("/subject", authTeacher || auth, async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.teacher.id).select("-password");
     const allSubject = await Subject.find({
-      assign_teachers: teacher.name,
+      assign_teachers:
+        teacher.title + " " + teacher.firstname + " " + teacher.sirname,
     });
 
     res.json(allSubject);
@@ -32,8 +33,11 @@ router.get("/subject", authTeacher || auth, async (req, res) => {
 router.get("/classRoom", authTeacher, async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.teacher.id).select("-password");
-    
-    const allClass = await Class.find({ assign_teachers: teacher.name });
+
+    const allClass = await Class.find({
+      assign_teachers:
+        teacher.title + " " + teacher.firstname + " " + teacher.sirname,
+    });
 
     res.json(allClass);
   } catch (err) {

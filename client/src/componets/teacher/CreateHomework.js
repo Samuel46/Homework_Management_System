@@ -79,8 +79,8 @@ function CreateHomework({
   ));
   // render  student's options
   const studentOptions = studentList.map((student) => (
-    <Option value={student.name} key={student._id}>
-      {""} {student.name}
+    <Option value={student.firstname + " " + student.sirname} key={student._id}>
+      {""} {student.firstname + " " + student.sirname}
     </Option>
   ));
 

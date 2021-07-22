@@ -67,8 +67,11 @@ function EditClassForm({
   const studentOptions =
     students &&
     students.map((student) => (
-      <Option value={student.name} key={student._id}>
-        ✔{""} {student && student.name}
+      <Option
+        value={student.firstname + " " + student.sirname}
+        key={student._id}
+      >
+        ✔{""} {student && student.firstname + " " + student.sirname}
       </Option>
     ));
 

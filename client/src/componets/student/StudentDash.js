@@ -106,7 +106,9 @@ function StudentDash({
                 >
                   {/* <img src="../assets/images/user/avatar-3.jpg" alt="user-image" className="user-avtar" /> */}
                   <span>
-                    <span className="user-name">{student && student.name}</span>
+                    <span className="user-name">
+                      {student && student.firstname + " " + student.sirname}
+                    </span>
                     <span className="user-desc">Student</span>
                   </span>
                 </Link>

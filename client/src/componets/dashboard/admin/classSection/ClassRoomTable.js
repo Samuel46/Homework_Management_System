@@ -213,6 +213,52 @@ function ClassRoomTable({
           </div>
         </div>
         {/* subscribe end */}
+        {/* classlist by teachers */}
+        <div className="col-md-12 py-3">
+          <div className="card">
+            <div className="card-header">
+              <h5>ClassList by Teachers</h5>
+              <div class="cover-img-block img_img">
+                <img
+                  src="https://image.freepik.com/free-vector/teacher-concept-illustration_114360-2166.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+            </div>
+
+            <div className="card-body">
+              <div className="row align-items-center m-l-0">
+                <div className="col-sm-6"></div>
+                <div className="col-sm-6 text-right">
+                  <Link
+                    to="/create-class"
+                    className="btn btn-success btn-sm mb-3 btn-round"
+                  >
+                    Add Classroom
+                  </Link>
+                </div>
+              </div>
+              <div className="table-responsive">
+                <table
+                  id="report-table"
+                  className="table table-bordered table-striped mb-0"
+                >
+                  <thead>
+                    <tr>
+                      <th>Class Name</th>
+                      <th>Student' Name</th>
+                      <th>Allocated Subjects</th>
+                      <th>Teacher's Name</th>
+                      <th>Options</th>
+                    </tr>
+                  </thead>
+                  <tbody>{teacherClasses}</tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
