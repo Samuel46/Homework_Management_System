@@ -190,7 +190,7 @@ router.get("/", authTeacher, async (req, res) => {
   try {
     const homeWork = await Homework.find({ teacher: req.teacher.id }).populate(
       "teacher",
-      ["name", "email"]
+      ["firstname", "sirname", "title"]
     );
 
     res.json(homeWork);

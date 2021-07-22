@@ -64,7 +64,9 @@ router.post(
 // @Access         Private
 router.get("/", authTeacher, async (req, res) => {
   try {
-    const classRooms = await ClassRoom.find({ teacher: req.teacher.id });
+    const classRooms = await ClassRoom.find({
+      teacher: req.teacher.id,
+    }).populate("student", ["firstname", "sirname"]);
 
     res.json(classRooms);
   } catch (err) {
@@ -78,10 +80,9 @@ router.get("/", authTeacher, async (req, res) => {
 // @Access      Private
 router.get("/:id", authTeacher, async (req, res) => {
   try {
-    const getClassById = await ClassRoom.findById(req.params.id).populate(
-      "user",
-      ["email", "name"]
-    );
+    const getClassById = await ClassRoom.findById(req.params.id)
+      .populate("teacher", ["firstname", "sirname", "title"])
+      .populate("student", ["firstname", "sirname"]);
     if (!getClassById) {
       return res.status(404).json({ msg: "ClassRoom not found" });
     }

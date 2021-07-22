@@ -37,7 +37,13 @@ function EditClassRoom({
                 <div className="col-md-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      Teacher|| {teacher && teacher.name}
+                      Teacher||{" "}
+                      {teacher &&
+                        teacher.title +
+                          " " +
+                          teacher.firstname +
+                          " " +
+                          teacher.sirname}
                     </li>
                   </ul>
                 </div>
@@ -54,7 +60,13 @@ function EditClassRoom({
                 <div className="card-header">
                   <h4 className="card-title">Edit Class</h4> <br />
                   <h5 className="card-title">
-                    Teacher Name:{teacher && teacher.name}
+                    Teacher Name:
+                    {teacher &&
+                      teacher.title +
+                        " " +
+                        teacher.firstname +
+                        " " +
+                        teacher.sirname}
                   </h5>
                   <div class="cover-img-block img_img">
                     <img

@@ -22,7 +22,10 @@ function CompleteWork({ isComplete, deleteDoneWorkById, history }) {
           <ListGroupItem color="info" className="mb-2">
             {" "}
             {""}😃 {""}
-            {Object.values(complete.student.name)}
+            {Object.values(
+              complete &&
+                complete.student.firstname + " " + complete.student.sirname
+            )}
           </ListGroupItem>
         </ListGroup>
       </td>

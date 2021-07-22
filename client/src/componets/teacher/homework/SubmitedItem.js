@@ -33,7 +33,7 @@ function SubmitedItem({
                 <div className="col-md-12">
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">
-                      Teacher|| {teacher && teacher.name}
+                      Teacher|| {teacher && teacher.firstname}
                     </li>
                   </ul>
                 </div>
@@ -146,7 +146,7 @@ function SubmitedItem({
                           target="_blank"
                           download
                         >
-                          {complete && complete.attachements.length === 0
+                          {complete && complete.attachements === undefined
                             ? "No files available"
                             : " Download Files"}
                         </a>

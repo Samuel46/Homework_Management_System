@@ -5,17 +5,15 @@ const authStudent = require("../../../middleware/authStudent");
 const Complete = require("../../../models/student/Complete");
 const Student = require("../../../models/admin/students/Student");
 
-
 // @Route Get      api/teacher/homework
 // @Descri         Get all complete homework from the student @@@ teacher level
 // @Access         Private
 router.get("/", authTeacher || authStudent, async (req, res) => {
   try {
-   
     const homeWork = await Complete.find({ teacher: req.teacher.id }).populate(
-        "student",
-        ["name", "email"]
-      );
+      "student",
+      ["firstname", "sirname"]
+    );
 
     res.json(homeWork);
   } catch (err) {
@@ -31,7 +29,7 @@ router.get("/:id", authTeacher || authStudent, async (req, res) => {
   try {
     const homeWorkId = await Complete.findById(req.params.id).populate(
       "student",
-      ["name", "username"]
+      ["firstname", "sirname"]
     );
     if (!homeWorkId) {
       return res.status(404).json({ msg: "Homework not found" });
@@ -54,7 +52,7 @@ router.delete("/:id", authTeacher || authStudent, async (req, res) => {
   try {
     const deleteHomeWorkId = await Complete.findById(req.params.id).populate(
       "student",
-      ["name", "username"]
+      ["firstname", "sirname"]
     );
     if (!deleteHomeWorkId) {
       return res.status(404).json({ msg: "Homework not found" });
