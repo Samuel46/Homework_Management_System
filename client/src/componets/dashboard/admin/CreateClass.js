@@ -26,15 +26,24 @@ function CreateClass({
 
   // render teacher's options
   const teacherOptions = teachers.map((teacher) => (
-    <Option value={teacher.name} key={teacher._id}>
-      {teacher.name}
+    <Option
+      value={
+        teacher.title && teacher.firstname && teacher.sirname
+          ? teacher.title + " " + teacher.firstname + " " + teacher.sirname
+          : null
+      }
+      key={teacher._id}
+    >
+      {teacher.title && teacher.firstname && teacher.sirname
+        ? teacher.title + " " + teacher.firstname + " " + teacher.sirname
+        : null}
     </Option>
   ));
 
   // render  student's options
   const studentOptions = students.map((student) => (
-    <Option value={student.name} key={student._id}>
-      ✔{""} {student.name}
+    <Option value={student.firstname + " " + student.sirname} key={student._id}>
+      ✔{""} {student.firstname + " " + student.sirname}
     </Option>
   ));
 

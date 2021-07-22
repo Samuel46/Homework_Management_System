@@ -48,13 +48,20 @@ function EditClassForm({
   ]);
 
   //   render teacher's options
-  const teacherOptions =
-    teachers &&
-    teachers.map((teacher) => (
-      <Option value={teacher.name} key={teacher._id}>
-        {teacher.name}
-      </Option>
-    ));
+  const teacherOptions = teachers.map((teacher) => (
+    <Option
+      value={
+        teacher.title && teacher.firstname && teacher.sirname
+          ? teacher.title + " " + teacher.firstname + " " + teacher.sirname
+          : null
+      }
+      key={teacher._id}
+    >
+      {teacher.title && teacher.firstname && teacher.sirname
+        ? teacher.title + " " + teacher.firstname + " " + teacher.sirname
+        : null}
+    </Option>
+  ));
 
   //   render  student's options
   const studentOptions =

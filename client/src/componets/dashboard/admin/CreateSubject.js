@@ -29,8 +29,8 @@ function CreateSubject({
   ));
 
   const teacherOptions = teachers.map((teacher) => (
-    <Option value={teacher.name} key={teacher._id}>
-      {teacher.name}
+    <Option value={teacher.title + " " + teacher.firstname + " " + teacher.sirname} key={teacher._id}>
+      {teacher.title + " " + teacher.firstname + " " + teacher.sirname}
     </Option>
   ));
   const handleAddSubject = () => {

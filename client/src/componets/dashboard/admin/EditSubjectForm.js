@@ -37,13 +37,14 @@ function EditSubjectForm({
       </Option>
     ));
 
-  const teacherOptions =
-    teachers &&
-    teachers.map((teacher) => (
-      <Option value={teacher.name} key={teacher._id}>
-        {teacher.name}
-      </Option>
-    ));
+  const teacherOptions = teachers.map((teacher) => (
+    <Option
+      value={teacher.title + " " + teacher.firstname + " " + teacher.sirname}
+      key={teacher._id}
+    >
+      {teacher.title + " " + teacher.firstname + " " + teacher.sirname}
+    </Option>
+  ));
 
   const handleAddSubject = () => {
     const obj = {

@@ -25,7 +25,6 @@ function EditTeacherForm({
   const [allocate_classes, setAllocate_Classes] = useState([]);
   const [joining_date, setJoining_Date] = useState(new Date());
 
-
   // fill the from with data from the state
   useEffect(() => {
     setFirstName(selectedTeacher.firstname || firstname);
@@ -33,12 +32,12 @@ function EditTeacherForm({
     setTitle(selectedTeacher.title || title);
     setEmail(selectedTeacher.email || email);
     setAllocate_Classes(selectedTeacher.allocate_classes || allocate_classes);
-    setPassword(selectedTeacher.password   || password);
+    setPassword(selectedTeacher.password || password);
     setJoining_Date(new Date(selectedTeacher.joining_date));
   }, [
     selectedTeacher.firstname,
     selectedTeacher.sirname,
-    selectedTeacher.allocate_classes ,
+    selectedTeacher.allocate_classes,
     selectedTeacher.joining_date,
     selectedTeacher.email,
     selectedTeacher.password,
@@ -66,7 +65,6 @@ function EditTeacherForm({
     };
 
     updateTeacher(obj, history);
-   
   };
 
   const onReset = () => {
@@ -85,71 +83,59 @@ function EditTeacherForm({
       </div>
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
-        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label className="floating-label" htmlFor="Name">
-                              Firstname
-                            </label>
-                            <input
-                              onChange={(e) => setFirstName(e.target.value)}
-                              name="name"
-                              value={firstname}
-                              type="text"
-                              className="form-control"
-                            />
-                          </div>
-                        </div>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label className="floating-label" htmlFor="Name">
+                Firstname
+              </label>
+              <input
+                onChange={(e) => setFirstName(e.target.value)}
+                name="name"
+                value={firstname}
+                type="text"
+                className="form-control"
+              />
+            </div>
+          </div>
 
-                        {/* sirname */}
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label className="floating-label" htmlFor="Name">
-                              Sirname
-                            </label>
-                            <input
-                              onChange={(e) => setSirName(e.target.value)}
-                              value={sirname}
-                              type="text"
-                              className="form-control"
-                            />
-                          </div>
-                        </div>
-                        {/* salutation */}
-                        <div className="col-sm-12">
-                          <div className="form-group">
-                            <label className="floating-label" htmlFor="Name">
-                              What's your title?
-                            </label>
-                            <Select
-                                // mode="multiple"
-                                autoFocus
-                                allowClear
-                                style={{ width: "100%" }}
-                                placeholder="Please Allocate Classes"
-                                onChange={setTitle}
-                                value={title}
-                              >
-                                <Option value="Mr.">
-                                    Mr.
-                                  </Option>
-                                  <Option value="Mrs.">
-                                  Mrs.
-                                </Option>
-                                  <Option value="Miss.">
-                                  Miss.
-                                </Option>
-                                <Option value="Ms.">
-                                Ms.
-                              </Option>
-                                <Option value="Dr.">
-                                Dr.
-                              </Option>
-                              <Option value="Prof.">
-                              Prof.
-                              </Option>
-                              </Select>
-                          </div>
-                        </div>
+          {/* sirname */}
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label className="floating-label" htmlFor="Name">
+                Sirname
+              </label>
+              <input
+                onChange={(e) => setSirName(e.target.value)}
+                value={sirname}
+                type="text"
+                className="form-control"
+              />
+            </div>
+          </div>
+          {/* salutation */}
+          <div className="col-sm-12">
+            <div className="form-group">
+              <label className="floating-label" htmlFor="Name">
+                What's your title?
+              </label>
+              <Select
+                // mode="multiple"
+                autoFocus
+                allowClear
+                style={{ width: "100%" }}
+                placeholder="Please Allocate Classes"
+                onChange={setTitle}
+                value={title}
+              >
+                <Option value="Mr.">Mr.</Option>
+                <Option value="Mrs.">Mrs.</Option>
+                <Option value="Miss.">Miss.</Option>
+                <Option value="Ms.">Ms.</Option>
+                <Option value="Dr.">Dr.</Option>
+                <Option value="Prof.">Prof.</Option>
+              </Select>
+            </div>
+          </div>
           <div className="col-sm-6">
             <div className="form-group fill">
               <label className="floating-label" htmlFor="Email">
@@ -190,7 +176,6 @@ function EditTeacherForm({
             </div>
           ) : (
             <h2>no availabel</h2>
-            
           )}
 
           <div className="col-sm-6">

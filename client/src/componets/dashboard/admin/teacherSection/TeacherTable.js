@@ -12,52 +12,52 @@ function cancel(e) {
   message.error("cancle");
 }
 
-function TeacherTable({teachers, deleteTeacher, history}) {
-  const teacherList = teachers.map(teacher => (
+function TeacherTable({ teachers, deleteTeacher, history }) {
+  const teacherList = teachers.map((teacher) => (
     <tr key={teacher._id}>
-    <td>
-      <ListGroup>
-        <ListGroupItem color="primary" className="mb-2">
-          {" "}
-          {""} 😎 {""}
-          {teacher.title + " " + teacher.firstname + " " + teacher.sirname}
-        </ListGroupItem>
-      </ListGroup>
-    </td>
-    <td>{teacher.email}</td>
-    <td>
-      {teacher.allocate_classes.map((allocate_class, index) => (
-        <p key={index}>
-          {""}✔{""}
-          {allocate_class}
-        </p>
-      ))}
-    </td>
-    <td>
-      <Link
-        to={`/edit-teacher/${teacher._id}`}
-        className="btn btn-info btn-sm  btn-round"
-      >
-        <i className="feather icon-settings" />
-        Edit
-      </Link>
+      <td>
+        <ListGroup>
+          <ListGroupItem color="primary" className="mb-2">
+            {" "}
+            {teacher.title && teacher.firstname && teacher.sirname
+              ? teacher.title + " " + teacher.firstname + " " + teacher.sirname
+              : null}
+          </ListGroupItem>
+        </ListGroup>
+      </td>
+      <td>{teacher.email}</td>
+      <td>
+        {teacher.allocate_classes.map((allocate_class, index) => (
+          <p key={index}>
+            {""}✔{""}
+            {allocate_class}
+          </p>
+        ))}
+      </td>
+      <td>
+        <Link
+          to={`/edit-teacher/${teacher._id}`}
+          className="btn btn-info btn-sm  btn-round"
+        >
+          <i className="feather icon-settings" />
+          Edit
+        </Link>
 
-      <Popconfirm
-        icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-        className="btn btn-danger btn-sm ml-2"
-        title="Are you absolutely sure? This action cannot be undone. This will permanently delete this teacher🙄?"
-        onConfirm={() => deleteTeacher(teacher._id, history)}
-        onCancel={cancel}
-        okText="Yes"
-        cancelText="No"
-      >
-        <a href="#">Remove Teacher</a>
-      </Popconfirm>
-    </td>
-  </tr>
-  ))
+        <Popconfirm
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          className="btn btn-danger btn-sm ml-2"
+          title="Are you absolutely sure? This action cannot be undone. This will permanently delete this teacher🙄?"
+          onConfirm={() => deleteTeacher(teacher._id, history)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        >
+          <a href="#">Remove Teacher</a>
+        </Popconfirm>
+      </td>
+    </tr>
+  ));
   return (
-    
     <div className="container">
       <div className="row">
         <div className="col-md-12">
@@ -98,9 +98,7 @@ function TeacherTable({teachers, deleteTeacher, history}) {
                       <th>Options</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {teacherList}
-                  </tbody>
+                  <tbody>{teacherList}</tbody>
                 </table>
               </div>
             </div>
@@ -113,6 +111,6 @@ function TeacherTable({teachers, deleteTeacher, history}) {
 
 TeacherTable.propTypes = {
   deleteTeacher: PropTypes.func.isRequired,
-}
+};
 
-export default connect(null, {deleteTeacher}) (withRouter(TeacherTable));
+export default connect(null, { deleteTeacher })(withRouter(TeacherTable));
