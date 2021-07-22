@@ -22,10 +22,15 @@ function PendingWork({ homeworks, completework }) {
           <td>
             <ListGroup>
               <ListGroupItem color="primary" className="mb-2">
-                {" "}
-                {""}Mr/Mrs {""}
                 {Object.values(
-                  homework !== null ? homework && homework.teacher.name : null
+                  homework !== null
+                    ? homework &&
+                        homework.teacher.title +
+                          " " +
+                          homework.teacher.firstname +
+                          " " +
+                          homework.teacher.sirname
+                    : null
                 )}
               </ListGroupItem>
             </ListGroup>
@@ -63,10 +68,15 @@ function PendingWork({ homeworks, completework }) {
           <td>
             <ListGroup>
               <ListGroupItem color="primary" className="mb-2">
-                {" "}
-                {""}Mr/Mrs {""}
                 {Object.values(
-                  homework !== null ? homework && homework.teacher.name : null
+                  homework !== null
+                    ? homework &&
+                        homework.teacher.title +
+                          " " +
+                          homework.teacher.firstname +
+                          " " +
+                          homework.teacher.sirname
+                    : null
                 )}
               </ListGroupItem>
             </ListGroup>

@@ -15,7 +15,7 @@ router.get("/", authStudent || authParent, async (req, res) => {
 
     const homeWork = await Homework.find({
       students: student.firstname + " " + student.sirname,
-    }).populate("teacher", ["name", "email"]);
+    }).populate("teacher", ["firstname", "sirname", "title"]);
 
     res.json(homeWork);
   } catch (err) {
@@ -56,7 +56,7 @@ router.get("/classroom", authStudent || authParent, async (req, res) => {
     );
     const homework = await Homework.find({
       allocate_classes: { $in: myClassrooms },
-    }).populate("teacher", ["name", "email"]);
+    }).populate("teacher", ["firstname", "sirname", "title"]);
     res.json(homework);
   } catch (err) {
     console.error(err.message);
@@ -70,7 +70,7 @@ router.get("/:id", authStudent || authParent, async (req, res) => {
   try {
     const homeWorkId = await Homework.findById(req.params.id).populate(
       "teacher",
-      ["name", "email"]
+      ["firstname", "sirname", "title"]
     );
     if (!homeWorkId) {
       return res.status(404).json({ msg: "Homework not found" });

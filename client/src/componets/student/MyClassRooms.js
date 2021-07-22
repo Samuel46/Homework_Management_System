@@ -12,8 +12,7 @@ function MyClassRooms({ classRooms }) {
         {room.assign_teachers.map((teacher, index) => (
           <ListGroup key={index}>
             <ListGroupItem color="primary" className="mb-2">
-              {" "}
-              {""}Mr/Mrs {""} {teacher}
+              {teacher}
             </ListGroupItem>
           </ListGroup>
         ))}

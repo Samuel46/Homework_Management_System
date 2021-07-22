@@ -8,12 +8,7 @@ import { getDoneWorkById } from "../../actions/parent/homework";
 import Spinner from "../layouts/Spinner";
 import ParentNavigation from "./ParentNavigation";
 import { logoutParent } from "../../actions/student/parents/parent";
-import {
-  Table,
-  Badge,
-  ListGroupItem, ListGroup
-  
-} from "reactstrap";
+import { Table, Badge, ListGroupItem, ListGroup } from "reactstrap";
 
 function CompleteObject({
   getDoneWorkById,
@@ -26,7 +21,7 @@ function CompleteObject({
     getDoneWorkById(match.params.id);
   }, [getDoneWorkById, match.params.id]);
 
-  return parent !== null && complete !== null || complete !== undefined ? (
+  return (parent !== null && complete !== null) || complete !== undefined ? (
     <>
       <ParentNavigation />
       <header className="pc-header ">
@@ -55,7 +50,13 @@ function CompleteObject({
                   <span>
                     <span className="user-name">
                       {" "}
-                      {parent && Object.values(parent && parent.student.name)}
+                      {parent &&
+                        Object.values(
+                          parent &&
+                            parent.student.firstname +
+                              " " +
+                              parent.student.firstname
+                        )}
                     </span>
                     <span className="user-desc">Studen't Account</span>
                   </span>
@@ -123,7 +124,7 @@ function CompleteObject({
           </div>
 
           <div className="container py-5">
-            {complete  === null ? (
+            {complete === null ? (
               <Spinner />
             ) : (
               <Fragment>
@@ -248,10 +249,9 @@ function CompleteObject({
       </div>
       {/*  */}
     </>
-  ):
-  (
-      <Spinner/>
-  )
+  ) : (
+    <Spinner />
+  );
 }
 
 CompleteObject.propTypes = {
