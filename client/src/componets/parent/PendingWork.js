@@ -39,7 +39,7 @@ function PendingWork({ homeworks }) {
       </td>
     </tr>
   ));
-  return homeworks.length !== 0 ? (
+  return (
     <Fragment>
       <div className="col-md-12" id="pending__homework">
         <div className="card shadow">
@@ -87,8 +87,6 @@ function PendingWork({ homeworks }) {
         </div>
       </div>
     </Fragment>
-  ) : (
-    <Spinner />
   );
 }
 
