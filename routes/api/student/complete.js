@@ -126,8 +126,8 @@ router.post(
 router.get("/", authStudent || authTeacher, async (req, res) => {
   try {
     const homeWork = await Complete.find({ student: req.student.id }).populate(
-      "student",
-      ["name", "email"]
+      "teacher",
+      ["firstname", "sirname", "title"]
     );
 
     res.json(homeWork);

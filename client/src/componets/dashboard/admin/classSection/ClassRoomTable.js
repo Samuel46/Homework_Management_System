@@ -203,10 +203,7 @@ function ClassRoomTable({
                       <th>Options</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {allClasses}
-                    {teacherClasses}
-                  </tbody>
+                  <tbody>{allClasses}</tbody>
                 </table>
               </div>
             </div>
@@ -228,17 +225,7 @@ function ClassRoomTable({
             </div>
 
             <div className="card-body">
-              <div className="row align-items-center m-l-0">
-                <div className="col-sm-6"></div>
-                <div className="col-sm-6 text-right">
-                  <Link
-                    to="/create-class"
-                    className="btn btn-success btn-sm mb-3 btn-round"
-                  >
-                    Add Classroom
-                  </Link>
-                </div>
-              </div>
+              <div className="row align-items-center m-l-0"></div>
               <div className="table-responsive">
                 <table
                   id="report-table"

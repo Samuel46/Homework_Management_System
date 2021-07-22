@@ -115,7 +115,14 @@ function PendingWork({ homeworks, completework }) {
         <ListGroup>
           <ListGroupItem color="info" className="mb-2">
             {" "}
-            {Object.values(work.student.name)}
+            {Object.values(
+              work &&
+                work.teacher.title +
+                  " " +
+                  work.teacher.firstname +
+                  " " +
+                  work.teacher.sirname
+            )}
           </ListGroupItem>
         </ListGroup>
       </td>
