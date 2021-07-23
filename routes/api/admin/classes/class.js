@@ -79,7 +79,7 @@ router.get("/myteachers", auth, async (req, res) => {
     const teacher_Id = myTeachers.map((item) => item._id);
     const allClass = await ClassRoom.find({
       teacher: { $in: teacher_Id },
-    }).populate("teacher", ["email", "name"]);
+    }).populate("teacher", ["firstname", "sirname", "title"]);
 
     res.json(allClass);
   } catch (err) {

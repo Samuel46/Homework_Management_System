@@ -136,8 +136,12 @@ function ClassRoomTable({
             {" "}
             {""} 😎 {""}
             {Object.values(
-              clas.teacher.name !== null && clas.teacher.name !== undefined ? (
-                clas.teacher.name
+              clas.teacher !== null && clas.teacher !== undefined ? (
+                clas.teacher.title +
+                  " " +
+                  clas.teacher.firstname +
+                  " " +
+                  clas.teacher.sirname
               ) : (
                 <Spinner />
               )

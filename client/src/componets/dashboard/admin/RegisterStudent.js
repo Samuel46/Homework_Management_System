@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NodeAlert from "../../layouts/NodeAlert";
 import { registerStudent } from "../../../actions/student";
+import { toast, ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
@@ -8,7 +9,12 @@ import { logout } from "../../../actions/auth";
 import Navigation from "../Navigation";
 import PasswordGen from "../../PasswordGen";
 import DatePicker from "react-datepicker";
+import { Select } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-toastify/dist/ReactToastify.css";
+import { COPY_SUCCESS } from "./teacherSection/message";
+import { UncontrolledTooltip } from "reactstrap";
+const { Option } = Select;
 
 function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [firstname, setFirstName] = useState("");
@@ -19,16 +25,22 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [birth_date, setBirth_Date] = useState(new Date());
   const [gender, setGender] = useState("");
   const [joining_date, setJoining_Date] = useState(new Date());
-  const [joining_year_group, setJoining_Year_Group] = useState("");
-  const [current_year_group, setCurrent_Year_Group] = useState("");
+  const [joining_year_group, setJoining_Year_Group] = useState([]);
+  const [current_year_group, setCurrent_Year_Group] = useState([]);
+
+  // var arr = ["a", "b", "c", "d", "e", "f"];
+
+  // var indexToSplit = 3;
+  // var first = arr.slice(0, indexToSplit);
+  // var second = arr.slice(indexToSplit + 1);
+
+  // console.log({ first, second });
 
   // username gen
   const a = firstname.split("");
   const b = sirname.split(" ");
-
-  const rA = Math.floor(Math.random() * a.length);
   const rB = Math.floor(Math.random() * b.length);
-  const name = a[rB] + a[rA] + b[rB] + Math.floor(Math.random() * 100);
+  const name = a[0] + b[rB] + Math.floor(Math.random() * 20000);
 
   function generateName(e) {
     setUserName(name);
@@ -56,6 +68,71 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
     e.preventDefault();
     handleRegisterStudents();
   };
+
+  // *************passwordgen option******************//
+  const [genpassword, setGenPassword] = useState("");
+  const handleGeneratePassword = (e) => {
+    let characterList = "0123456789";
+    setGenPassword(createPassword(characterList));
+  };
+  const createPassword = (characterList) => {
+    let genpassword = "";
+    const characterListLength = characterList.length;
+
+    for (let i = 0; i < 4; i++) {
+      const characterIndex = Math.round(Math.random() * characterListLength);
+      genpassword = genpassword + characterList.charAt(characterIndex);
+    }
+    return genpassword;
+  };
+
+  const copyToClipboard = () => {
+    const newTextArea = document.createElement("textarea");
+    newTextArea.innerText = genpassword;
+    document.body.appendChild(newTextArea);
+    newTextArea.select();
+    document.execCommand("copy");
+    newTextArea.remove();
+  };
+
+  const notify = (message, hasError = false) => {
+    if (hasError) {
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast(message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  const handleCopyPassword = (e) => {
+    e.preventDefault();
+    if (genpassword === "") {
+      notify("Nothing To Copy", true);
+    } else {
+      copyToClipboard();
+      notify(COPY_SUCCESS);
+    }
+  };
+
+  function useGenPassword(e) {
+    e.preventDefault();
+    setCode(genpassword);
+  }
 
   return (
     <>
@@ -240,7 +317,6 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                               />
                             </div>
                           </div>
-                          {/*  */}
                         </div>
                         <div className="col-sm-6">
                           <div className="form-group fill label_display">
@@ -283,16 +359,37 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                             <label className="floating-label" htmlFor="Birth">
                               Joining Year Group
                             </label>
-                            <input
-                              onChange={(e) =>
-                                setJoining_Year_Group(e.target.value)
-                              }
-                              name="username"
+                            <Select
+                              mode="multiple"
+                              autoFocus
+                              allowClear
+                              style={{ width: "100%" }}
+                              size="large"
+                              placeholder="Please Allocate the Joining Year Group"
+                              onChange={setJoining_Year_Group}
                               value={joining_year_group}
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
+                            >
+                              <Option value="Year 1">Year 1</Option>
+                              <Option value="Year 2">Year 2</Option>
+                              <Option value="Year 3">Year 3</Option>
+                              <Option value="Year 4">Year 4</Option>
+                              <Option value="Year 5">Year 5</Option>
+                              <Option value="Year 6">Year 6</Option>
+                              <Option value="Year 7">Year 7</Option>
+                              <Option value="Year 8">Year 8</Option>
+                              <Option value="Year 9">Year 9</Option>
+                              <Option value="Year 10">Year 10</Option>
+                              <Option value="Year 11">Year 11</Option>
+                              <Option value="Year 12">Year 12</Option>
+                              <Option value="Year 13">Year 13</Option>
+                              <Option value="Year 14">Year 14</Option>
+                              <Option value="Year 15">Year 15</Option>
+                              <Option value="Year 16">Year 16</Option>
+                              <Option value="Year 17">Year 17</Option>
+                              <Option value="Year 18">Year 18</Option>
+                              <Option value="Year 19">Year 19</Option>
+                              <Option value="Year 20">Year 20</Option>
+                            </Select>
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -301,31 +398,67 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                               Current Year Group
                             </label>
 
-                            <input
-                              onChange={(e) =>
-                                setCurrent_Year_Group(e.target.value)
-                              }
-                              name="current_year_group"
+                            <Select
+                              mode="multiple"
+                              autoFocus
+                              allowClear
+                              style={{ width: "100%" }}
+                              size="large"
+                              placeholder="Please Allocate the Current Year Group"
+                              onChange={setCurrent_Year_Group}
                               value={current_year_group}
-                              type="text"
-                              className="form-control"
-                              placeholder
-                            />
+                            >
+                              <Option value="Year 1">Year 1</Option>
+                              <Option value="Year 2">Year 2</Option>
+                              <Option value="Year 3">Year 3</Option>
+                              <Option value="Year 4">Year 4</Option>
+                              <Option value="Year 5">Year 5</Option>
+                              <Option value="Year 6">Year 6</Option>
+                              <Option value="Year 7">Year 7</Option>
+                              <Option value="Year 8">Year 8</Option>
+                              <Option value="Year 9">Year 9</Option>
+                              <Option value="Year 10">Year 10</Option>
+                              <Option value="Year 11">Year 11</Option>
+                              <Option value="Year 12">Year 12</Option>
+                              <Option value="Year 13">Year 13</Option>
+                              <Option value="Year 14">Year 14</Option>
+                              <Option value="Year 15">Year 15</Option>
+                              <Option value="Year 16">Year 16</Option>
+                              <Option value="Year 17">Year 17</Option>
+                              <Option value="Year 18">Year 18</Option>
+                              <Option value="Year 19">Year 19</Option>
+                              <Option value="Year 20">Year 20</Option>
+                            </Select>
                           </div>
                         </div>
+                        <UncontrolledTooltip
+                          placement="top"
+                          target="positionTop"
+                        >
+                          Generate unique <strong>CODE</strong> for the student
+                        </UncontrolledTooltip>
                         <div className="col-sm-6">
-                          <div className="form-group fill">
-                            <label className="floating-label">
-                              Student Code
-                            </label>
-                            <input
-                              onChange={(e) => setCode(e.target.value)}
-                              value={code}
-                              name="code"
-                              type="password"
-                              className="form-control"
-                              id="Birth"
-                            />
+                          <div class="form-group fill ">
+                            <label for="">Student Code</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <button
+                                  class="btn btn-outline-primary"
+                                  type="button"
+                                  onClick={handleGeneratePassword}
+                                >
+                                  Generate code
+                                </button>
+                              </div>
+                              <input
+                                onChange={(e) => setCode(e.target.value)}
+                                name="username"
+                                id="positionTop"
+                                value={code}
+                                type="password"
+                                className="form-control"
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -346,11 +479,58 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                             </select>
                           </div>
                         </div>
-                        <div className="col-sm-4">
-                          <div className="form-group"></div>
+                        <UncontrolledTooltip
+                          placement="top"
+                          target="positionTopp"
+                        >
+                          We recommend copying the<strong>CODE</strong> for
+                          later use
+                        </UncontrolledTooltip>
+
+                        <UncontrolledTooltip
+                          placement="top"
+                          target="positionTopn"
+                        >
+                          Use the generated <strong>CODE</strong> as the student
+                          code
+                        </UncontrolledTooltip>
+
+                        <div className="col-sm-6">
+                          {/* <PasswordGen /> */}
+                          <div className="form-group">
+                            <div className="generator__password">
+                              <h3 id="positionTopp">{genpassword}</h3>
+                              <button
+                                onClick={handleCopyPassword}
+                                className="copy__btn"
+                              >
+                                <i className="far fa-clipboard"></i> Copy Code
+                              </button>
+                            </div>
+
+                            <ToastContainer
+                              position="top-center"
+                              autoClose={5000}
+                              hideProgressBar={false}
+                              newestOnTop={false}
+                              closeOnClick
+                              rtl={false}
+                              pauseOnFocusLoss
+                              draggable
+                              pauseOnHover
+                            />
+                          </div>
                         </div>
-                        <div className="col-sm-8">
-                          <PasswordGen />
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <button
+                              onClick={useGenPassword}
+                              id="positionTopn"
+                              className="btn btn-light-primary mr-2"
+                            >
+                              Use Generated Code
+                            </button>
+                          </div>
                         </div>
 
                         <div className="col-sm-12">

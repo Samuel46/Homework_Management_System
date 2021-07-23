@@ -4,8 +4,10 @@ import { Link, withRouter } from "react-router-dom";
 import NodeAlert from "../../layouts/NodeAlert";
 import PasswordGen from "../../PasswordGen";
 import DatePicker from "react-datepicker";
+import { Select } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
 import Moment from "react-moment";
+const { Option } = Select;
 
 function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
   const [firstname, setFirstName] = useState("");
@@ -16,8 +18,8 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
   const [birth_date, setBirth_Date] = useState(new Date());
   const [gender, setGender] = useState("");
   const [joining_date, setJoining_Date] = useState(new Date());
-  const [joining_year_group, setJoining_Year_Group] = useState("");
-  const [current_year_group, setCurrent_Year_Group] = useState("");
+  const [joining_year_group, setJoining_Year_Group] = useState([]);
+  const [current_year_group, setCurrent_Year_Group] = useState([]);
 
   // setStartPicker(new Date(selectedEvent.start && selectedEvent.start));
   // fill the from with data from the state
@@ -125,6 +127,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 value={email}
+                disabled
                 type="email"
                 className="form-control"
                 id="Email"
@@ -184,13 +187,37 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
               <label className="floating-label" htmlFor="Birth">
                 Joining Year Group
               </label>
-              <input
-                onChange={(e) => setJoining_Year_Group(e.target.value)}
+              <Select
+                mode="multiple"
+                autoFocus
+                allowClear
+                style={{ width: "100%" }}
+                size="large"
+                placeholder="Please Allocate the Joining Year Group"
+                onChange={setJoining_Year_Group}
                 value={joining_year_group}
-                name="joining_year_group"
-                type="text"
-                className="form-control"
-              />
+              >
+                <Option value="Year 1">Year 1</Option>
+                <Option value="Year 2">Year 2</Option>
+                <Option value="Year 3">Year 3</Option>
+                <Option value="Year 4">Year 4</Option>
+                <Option value="Year 5">Year 5</Option>
+                <Option value="Year 6">Year 6</Option>
+                <Option value="Year 7">Year 7</Option>
+                <Option value="Year 8">Year 8</Option>
+                <Option value="Year 9">Year 9</Option>
+                <Option value="Year 10">Year 10</Option>
+                <Option value="Year 11">Year 11</Option>
+                <Option value="Year 12">Year 12</Option>
+                <Option value="Year 13">Year 13</Option>
+                <Option value="Year 14">Year 14</Option>
+                <Option value="Year 15">Year 15</Option>
+                <Option value="Year 16">Year 16</Option>
+                <Option value="Year 17">Year 17</Option>
+                <Option value="Year 18">Year 18</Option>
+                <Option value="Year 19">Year 19</Option>
+                <Option value="Year 20">Year 20</Option>
+              </Select>
             </div>
           </div>
           <div className="col-sm-6">
@@ -199,13 +226,37 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
                 Current Year Group
               </label>
 
-              <input
-                onChange={(e) => setCurrent_Year_Group(e.target.value)}
+              <Select
+                mode="multiple"
+                autoFocus
+                allowClear
+                style={{ width: "100%" }}
+                size="large"
+                placeholder="Please Allocate the Current Year Group"
+                onChange={setCurrent_Year_Group}
                 value={current_year_group}
-                name="current_year_group"
-                type="text"
-                className="form-control"
-              />
+              >
+                <Option value="Year 1">Year 1</Option>
+                <Option value="Year 2">Year 2</Option>
+                <Option value="Year 3">Year 3</Option>
+                <Option value="Year 4">Year 4</Option>
+                <Option value="Year 5">Year 5</Option>
+                <Option value="Year 6">Year 6</Option>
+                <Option value="Year 7">Year 7</Option>
+                <Option value="Year 8">Year 8</Option>
+                <Option value="Year 9">Year 9</Option>
+                <Option value="Year 10">Year 10</Option>
+                <Option value="Year 11">Year 11</Option>
+                <Option value="Year 12">Year 12</Option>
+                <Option value="Year 13">Year 13</Option>
+                <Option value="Year 14">Year 14</Option>
+                <Option value="Year 15">Year 15</Option>
+                <Option value="Year 16">Year 16</Option>
+                <Option value="Year 17">Year 17</Option>
+                <Option value="Year 18">Year 18</Option>
+                <Option value="Year 19">Year 19</Option>
+                <Option value="Year 20">Year 20</Option>
+              </Select>
             </div>
           </div>
           <div className="col-sm-6">

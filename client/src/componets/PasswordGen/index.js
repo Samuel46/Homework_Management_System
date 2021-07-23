@@ -1,185 +1,91 @@
-import React, { useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
-import './App.css'
-import {
-  numbers,
-  upperCaseLetters,
-  lowerCaseLetters,
-  specialCharacters,
-} from './characters'
-import 'react-toastify/dist/ReactToastify.css'
-import { COPY_SUCCESS } from './message'
-import { Check } from 'react-feather'
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "./App.css";
+import { numbers } from "./characters";
+import "react-toastify/dist/ReactToastify.css";
+import { COPY_SUCCESS } from "./message";
+import { Check } from "react-feather";
 
 function CodeGenerator() {
-  const [password, setPassword] = useState('')
-  const [passwordLength, setPasswordLength] = useState(20)
-  const [includeUppercase, setIncludeUppercase] = useState(false)
-  const [includeLowercase, setIncludeLowercase] = useState(false)
-  const [includeNumbers, setIncludeNumbers] = useState(false)
-  const [includeSymbols, setIncludeSymbols] = useState(false)
-
+  const [password, setPassword] = useState("");
   const handleGeneratePassword = (e) => {
-    if (
-      !includeUppercase &&
-      !includeLowercase &&
-      !includeNumbers &&
-      !includeSymbols
-    ) {
-      notify('You must Select atleast one option', true)
-    }
-    let characterList = ''
-
-    if (includeLowercase) {
-      characterList = characterList + lowerCaseLetters
-    }
-
-    if (includeUppercase) {
-      characterList = characterList + upperCaseLetters
-    }
-
-    if (includeNumbers) {
-      characterList = characterList + numbers
-    }
-
-    if (includeSymbols) {
-      characterList = characterList + specialCharacters
-    }
-
-    setPassword(createPassword(characterList))
-  }
+    let characterList = "0123456789";
+    setPassword(createPassword(characterList));
+  };
   const createPassword = (characterList) => {
-    let password = ''
-    const characterListLength = characterList.length
+    let password = "";
+    const characterListLength = characterList.length;
 
-    for (let i = 0; i < passwordLength; i++) {
-      const characterIndex = Math.round(Math.random() * characterListLength)
-      password = password + characterList.charAt(characterIndex)
+    for (let i = 0; i < 4; i++) {
+      const characterIndex = Math.round(Math.random() * characterListLength);
+      password = password + characterList.charAt(characterIndex);
     }
-    return password
-  }
+    return password;
+  };
 
   const copyToClipboard = () => {
-    
-    const newTextArea = document.createElement('textarea')
-    newTextArea.innerText = password
-    document.body.appendChild(newTextArea)
-    newTextArea.select()
-    document.execCommand('copy')
-    newTextArea.remove()
-  }
+    const newTextArea = document.createElement("textarea");
+    newTextArea.innerText = password;
+    document.body.appendChild(newTextArea);
+    newTextArea.select();
+    document.execCommand("copy");
+    newTextArea.remove();
+  };
 
   const notify = (message, hasError = false) => {
     if (hasError) {
       toast.error(message, {
-        position: 'top-center',
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      })
+      });
     } else {
       toast(message, {
-        position: 'top-center',
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      })
+      });
     }
-  }
+  };
 
   const handleCopyPassword = (e) => {
-    e.preventDefault()
-    if (password === '') {
-      notify('Nothing To Copy', true)
+    e.preventDefault();
+    if (password === "") {
+      notify("Nothing To Copy", true);
     } else {
-      copyToClipboard()
-      notify( COPY_SUCCESS)
+      copyToClipboard();
+      notify(COPY_SUCCESS);
     }
-  }
+  };
 
   return (
-    <div className='App'>
-      <div className='container'>
-        <div className='generator'>
-          <h2 className='generator__header'>Generate Code</h2>
-          <div className='generator__password'>
+    <div className="App">
+      <div className="container">
+        <div className="generator">
+          <h2 className="generator__header">Generate Code</h2>
+          <div className="generator__password">
             <h3>{password}</h3>
-            <button onClick={handleCopyPassword} className='copy__btn'>
-              <i className='far fa-clipboard'></i>
+            <button onClick={handleCopyPassword} className="copy__btn">
+              <i className="far fa-clipboard"></i>
             </button>
           </div>
 
-          <div className='form-groupp'>
-            <label className="label-color" htmlFor='password-strength'>Password length</label>
-            <input
-              defaultValue={passwordLength}
-              className="form-control"
-              onChange={(e) => setPasswordLength(e.target.value)}
-              type='number'
-              id='password-strength'
-              name='password-strength'
-              max='20'
-              min='5'
-            />
-          </div>
-
-          <div className='form-groupp'>
-            <label className="label-color" htmlFor='uppercase-letters'>Include Uppercase Letters</label>
-            <input
-              checked={includeUppercase}
-              onChange={(e) => setIncludeUppercase(e.target.checked)}
-              type='checkbox'
-              id='uppercase-letters'
-              name='uppercase-letters'
-            />
-          </div>
-
-          <div className='form-groupp'>
-            <label className="label-color" htmlFor='lowercase-letters'>Include Lowercase Letters</label>
-            <input
-              checked={includeLowercase}
-              onChange={(e) => setIncludeLowercase(e.target.checked)}
-              type='checkbox'
-              id='lowercase-letters'
-              name='lowercase-letters'
-            />
-          </div>
-
-          <div className='form-groupp'>
-            <label className="label-color" htmlFor='include-numbers'>Include Numbers</label>
-            <input
-              checked={includeNumbers}
-              
-              onChange={(e) => setIncludeNumbers(e.target.checked)}
-              type='checkbox'
-              id='include-numbers'
-              name='include-numbers'
-            />
-          </div>
-
-          <div className='form-groupp'>
-            <label className="label-color" htmlFor='include-symbols'>Include Symbols</label>
-            <input
-              checked={includeSymbols}
-              
-              onChange={(e) => setIncludeSymbols(e.target.checked)}
-              type='checkbox'
-              id='include-symbols'
-              name='include-symbols'
-            />
-          </div>
-
-          <button onClick={handleGeneratePassword} className="btn btn-light-primary mr-2">
+          <button
+            onClick={handleGeneratePassword}
+            className="btn btn-light-primary mr-2"
+          >
             Generate Code
           </button>
           <ToastContainer
-            position='top-center'
+            position="top-center"
             autoClose={5000}
             hideProgressBar={false}
             newestOnTop={false}
@@ -192,7 +98,7 @@ function CodeGenerator() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CodeGenerator
+export default CodeGenerator;

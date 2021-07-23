@@ -30,7 +30,7 @@ function ClassroomTeacher({
                   <div className="col-md-12">
                     <ul className="breadcrumb">
                       <li className="breadcrumb-item">
-                        Teacher||{" "}
+                        Teacher||{"  "}
                         {teacher &&
                           teacher.title +
                             " " +
