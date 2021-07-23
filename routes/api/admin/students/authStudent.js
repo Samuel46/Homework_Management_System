@@ -31,7 +31,7 @@ router.post(
   "/",
   [
     check("username", "Username is required").not().isEmpty(),
-    check("code", "Unique code is required").isLength({ min: 6 }),
+    check("code", "Unique code is required").isLength({ min: 4 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
