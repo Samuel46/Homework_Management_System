@@ -23,7 +23,7 @@ router.post(
       check("username", "Username is required").not().isEmpty(),
       check("gender", "gender is required").not().isEmpty(),
       check("birth_date", "Birth date data is required").not().isEmpty(),
-      check("code", "Unique code is required").isLength({ min: 4 }),
+      check("code", "Please add a code").isLength({ min: 4 }),
       check("joining_year_group", "Joing year group is required")
         .not()
         .isEmpty(),
