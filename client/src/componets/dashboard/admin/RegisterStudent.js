@@ -29,7 +29,34 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [joining_year_group, setJoining_Year_Group] = useState([]);
   const [current_year_group, setCurrent_Year_Group] = useState([]);
 
-  // var arr = ["a", "b", "c", "d", "e", "f"];
+  var arr = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
 
   // var indexToSplit = 3;
   // var first = arr.slice(0, indexToSplit);
@@ -41,7 +68,13 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const a = firstname.split("");
   const b = sirname.split(" ");
   const rB = Math.floor(Math.random() * b.length);
-  const name = a[0] + b[rB] + Math.floor(Math.random() * 20000);
+  const rA = Math.floor(Math.random() * arr.length);
+  const name =
+    a[0] +
+    arr[rA] +
+    Math.floor(Math.random() * 10) +
+    b[rB] +
+    Math.floor(Math.random() * 20000);
 
   function generateName(e) {
     setUserName(name);
