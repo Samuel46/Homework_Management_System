@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NodeAlert from "../../layouts/NodeAlert";
-import { registerStudent } from "../../../actions/student";
+import { registerStudent, getStudents } from "../../../actions/student";
 import { toast, ToastContainer } from "react-toastify";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -15,9 +15,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { COPY_SUCCESS } from "./teacherSection/message";
 import { UncontrolledTooltip } from "reactstrap";
 import { useEffect } from "react";
+import { Alert } from "reactstrap";
 const { Option } = Select;
 
-function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
+function RegisterStudent({
+  registerStudent,
+  history,
+  getStudents,
+  student: { students },
+  auth: { user },
+  logout,
+}) {
   const [firstname, setFirstName] = useState("");
   const [sirname, setSirName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,34 +37,15 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const [joining_year_group, setJoining_Year_Group] = useState([]);
   const [current_year_group, setCurrent_Year_Group] = useState([]);
 
-  var arr = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ];
+  // gett all usernames
+  useEffect(() => {
+    getStudents();
+  }, []);
+  // check whether the username exist in the db
+  const studentName = students.map((student) => student.username);
+  const usernamePresent = studentName.includes(username);
+
+  var arr = ["a", "b", "c", "d", "v", "w", "x", "y", "z"];
 
   // var indexToSplit = 3;
   // var first = arr.slice(0, indexToSplit);
@@ -69,12 +58,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
   const b = sirname.split(" ");
   const rB = Math.floor(Math.random() * b.length);
   const rA = Math.floor(Math.random() * arr.length);
-  const name =
-    a[0] +
-    arr[rA] +
-    Math.floor(Math.random() * 10) +
-    b[rB] +
-    Math.floor(Math.random() * 20000);
+  const name = a[0] + arr[rA] + b[rB] + Math.floor(Math.random() * 2000);
 
   function generateName(e) {
     setUserName(name);
@@ -341,13 +325,35 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                                   Generate username
                                 </button>
                               </div>
-                              <input
-                                onChange={(e) => setUserName(e.target.value)}
-                                name="username"
-                                value={username}
-                                type="username"
-                                className="form-control"
-                              />
+                              {usernamePresent !== false &&
+                              username !== undefined ? (
+                                <>
+                                  <input
+                                    onChange={(e) =>
+                                      setUserName(e.target.value)
+                                    }
+                                    disabled
+                                    name="username"
+                                    value={username}
+                                    type="username"
+                                    className="form-control"
+                                  />
+                                  <Alert color="danger" className="mt-2">
+                                    <h6 className="alert-heading">
+                                      This username🙄 is already
+                                      registered,Please choose another
+                                    </h6>
+                                  </Alert>
+                                </>
+                              ) : (
+                                <input
+                                  onChange={(e) => setUserName(e.target.value)}
+                                  name="username"
+                                  value={username}
+                                  type="username"
+                                  className="form-control"
+                                />
+                              )}
                             </div>
                           </div>
                         </div>
@@ -580,11 +586,16 @@ RegisterStudent.propTypes = {
   registerStudent: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  student: state.student,
 });
-export default connect(mapStateToProps, { registerStudent, logout })(
-  withRouter(RegisterStudent)
-);
+export default connect(mapStateToProps, {
+  registerStudent,
+  getStudents,
+  logout,
+})(withRouter(RegisterStudent));
