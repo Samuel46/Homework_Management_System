@@ -14,6 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
 import { COPY_SUCCESS } from "./teacherSection/message";
 import { UncontrolledTooltip } from "reactstrap";
+import { useEffect } from "react";
 const { Option } = Select;
 
 function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
@@ -129,10 +130,9 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
     }
   };
 
-  function useGenPassword(e) {
-    e.preventDefault();
+  useEffect(() => {
     setCode(genpassword);
-  }
+  }, [handleGeneratePassword, handleCopyPassword]);
 
   return (
     <>
@@ -299,9 +299,9 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                           <div class="form-group fill ">
                             <label for="">Username</label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
+                              <div class="input-group-prepend btn_opc">
                                 <button
-                                  class="btn btn-outline-primary btn_opc"
+                                  class="btn btn-primary "
                                   type="button"
                                   onClick={generateName}
                                 >
@@ -329,7 +329,8 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
 
                             <DatePicker
                               selected={birth_date}
-                              className="form-control date__width"
+                              className=" form-control date__width"
+                              wrapperClassName="datePicker"
                               showYearDropdown
                               dateFormatCalendar="MMMM"
                               yearDropdownItemNumber={100}
@@ -349,7 +350,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
 
                             <DatePicker
                               selected={joining_date}
-                              className="form-control date__width"
+                              className="date__width form-control"
                               onChange={(date) => setJoining_Date(date)}
                             />
                           </div>
@@ -441,9 +442,9 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                           <div class="form-group fill ">
                             <label for="">Student Code</label>
                             <div class="input-group">
-                              <div class="input-group-prepend">
+                              <div class="input-group-prepend btn_opc">
                                 <button
-                                  class="btn btn-outline-primary"
+                                  class="btn btn-outline-primary "
                                   type="button"
                                   onClick={handleGeneratePassword}
                                 >
@@ -455,7 +456,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                                 name="username"
                                 id="positionTop"
                                 value={code}
-                                type="password"
+                                type="text"
                                 className="form-control"
                               />
                             </div>
@@ -487,14 +488,6 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                           later use
                         </UncontrolledTooltip>
 
-                        <UncontrolledTooltip
-                          placement="top"
-                          target="positionTopn"
-                        >
-                          Use the generated <strong>CODE</strong> as the student
-                          code
-                        </UncontrolledTooltip>
-
                         <div className="col-sm-6">
                           {/* <PasswordGen /> */}
                           <div className="form-group">
@@ -519,17 +512,6 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                               draggable
                               pauseOnHover
                             />
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <button
-                              onClick={useGenPassword}
-                              id="positionTopn"
-                              className="btn btn-light-primary mr-2"
-                            >
-                              Use Generated Code
-                            </button>
                           </div>
                         </div>
 

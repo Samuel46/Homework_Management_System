@@ -40,6 +40,9 @@
 .date__width {
   width: 100% !important;
 }
+.btn_opc {
+  z-index: 0 !important;
+}
 
 .label_display {
   display: grid;

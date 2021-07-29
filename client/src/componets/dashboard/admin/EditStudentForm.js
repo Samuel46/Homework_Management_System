@@ -264,7 +264,7 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
             <div class="form-group fill ">
               <label for="">Student Code</label>
               <div class="input-group">
-                <div class="input-group-prepend">
+                <div class="input-group-prepend btn_opc">
                   <button
                     class="btn btn-outline-primary"
                     type="button"
