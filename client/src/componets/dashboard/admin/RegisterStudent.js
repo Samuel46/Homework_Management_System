@@ -489,7 +489,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                                 name="username"
                                 id="positionTop"
                                 value={code}
-                                type="text"
+                                type="password"
                                 className="form-control"
                               />
                             </div>
