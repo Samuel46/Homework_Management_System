@@ -83,6 +83,31 @@ function EditTeacherForm({
       </div>
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="row">
+          {/* salutation */}
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label className="floating-label" htmlFor="Name">
+                What's your title?
+              </label>
+              <Select
+                // mode="multiple"
+                autoFocus
+                allowClear
+                style={{ width: "100%" }}
+                placeholder="Please Allocate Classes"
+                onChange={setTitle}
+                value={title}
+              >
+                <Option value="Mr.">Mr.</Option>
+                <Option value="Mrs.">Mrs.</Option>
+                <Option value="Miss.">Miss.</Option>
+                <Option value="Ms.">Ms.</Option>
+                <Option value="Dr.">Dr.</Option>
+                <Option value="Prof.">Prof.</Option>
+              </Select>
+            </div>
+          </div>
+          <div className="col-sm-6"></div>
           <div className="col-sm-6">
             <div className="form-group">
               <label className="floating-label" htmlFor="Name">
@@ -112,30 +137,7 @@ function EditTeacherForm({
               />
             </div>
           </div>
-          {/* salutation */}
-          <div className="col-sm-12">
-            <div className="form-group">
-              <label className="floating-label" htmlFor="Name">
-                What's your title?
-              </label>
-              <Select
-                // mode="multiple"
-                autoFocus
-                allowClear
-                style={{ width: "100%" }}
-                placeholder="Please Allocate Classes"
-                onChange={setTitle}
-                value={title}
-              >
-                <Option value="Mr.">Mr.</Option>
-                <Option value="Mrs.">Mrs.</Option>
-                <Option value="Miss.">Miss.</Option>
-                <Option value="Ms.">Ms.</Option>
-                <Option value="Dr.">Dr.</Option>
-                <Option value="Prof.">Prof.</Option>
-              </Select>
-            </div>
-          </div>
+
           <div className="col-sm-6">
             <div className="form-group fill">
               <label className="floating-label" htmlFor="Email">

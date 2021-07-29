@@ -301,7 +301,7 @@ function RegisterStudent({ registerStudent, history, auth: { user }, logout }) {
                             <div class="input-group">
                               <div class="input-group-prepend">
                                 <button
-                                  class="btn btn-outline-primary"
+                                  class="btn btn-outline-primary btn_opc"
                                   type="button"
                                   onClick={generateName}
                                 >

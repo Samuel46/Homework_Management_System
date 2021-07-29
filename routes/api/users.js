@@ -39,7 +39,6 @@ router.post(
     try {
       // see if user exists
       let user = await User.findOne({ email });
-
       if (user) {
         user = await User.findOneAndUpdate(
           { email: email },
@@ -51,8 +50,8 @@ router.post(
 
       user = new User(userFields);
       // encrpt the password
-      const salt = await bcrypt.genSalt(10);
-      user.password = await bcrypt.hash(password, salt);
+      // const salt = await bcrypt.genSalt(10);
+      // user.password = await bcrypt.hash(password, salt);
       await user.save();
 
       // Return  Jsonwentoken
