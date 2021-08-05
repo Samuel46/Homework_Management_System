@@ -45,8 +45,6 @@ function RegisterStudent({
   const studentName = students.map((student) => student.username);
   const usernamePresent = studentName.includes(username);
 
-  var arr = ["a", "b", "c", "d", "v", "w", "x", "y", "z"];
-
   // var indexToSplit = 3;
   // var first = arr.slice(0, indexToSplit);
   // var second = arr.slice(indexToSplit + 1);
@@ -57,8 +55,7 @@ function RegisterStudent({
   const a = firstname.split("");
   const b = sirname.split(" ");
   const rB = Math.floor(Math.random() * b.length);
-  const rA = Math.floor(Math.random() * arr.length);
-  const name = a[0] + arr[rA] + b[rB] + Math.floor(Math.random() * 2000);
+  const name = a[0] + b[rB] + Math.floor(Math.random() * 2000);
 
   function generateName(e) {
     setUserName(name);
