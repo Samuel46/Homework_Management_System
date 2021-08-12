@@ -368,7 +368,7 @@ const ClassImport = ({ auth: { user }, logout, addClassRoom, history }) => {
               <div className="row align-items-center">
                 <div className="col-md-6">
                   <div className="page-header-title">
-                    <h5 className="m-b-10">Import Students</h5>
+                    <h5 className="m-b-10">Import Classrooms</h5>
                   </div>
                   <ul className="breadcrumb">
                     <li className="breadcrumb-item">{user && user.name}</li>
