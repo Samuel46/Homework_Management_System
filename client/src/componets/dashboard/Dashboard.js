@@ -14,6 +14,7 @@ import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
 import { Alert } from "reactstrap";
 
+
 function Dashboard({
   getClasses,
   getSubject,
@@ -40,6 +41,8 @@ function Dashboard({
   useEffect(() => {
     getSubject();
   }, [getSubject]);
+
+
 
   return user !== null && user !== undefined ? (
     <Fragment>
@@ -191,6 +194,9 @@ function Dashboard({
           </div>
         </div>
       </div>
+      {/* polor chat for more info */}
+    
+
     </Fragment>
   ) : (
     <Spinner />

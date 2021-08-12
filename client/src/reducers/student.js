@@ -12,6 +12,7 @@ import {
   GET_STUDENTSBYID,
   UPDATE_STUDENT,
   UPDATE_STUDENT_FAIL,
+  GET_STUDENT_EXPORT,
 } from "../actions/types";
 
 const intialState = {
@@ -22,6 +23,7 @@ const intialState = {
   student: null,
   students: [],
   selectedStudent: null,
+  studentExport: [],
   isLogin: null,
   error: {},
 };
@@ -60,6 +62,16 @@ export default function (state = intialState, action) {
         isLogin: true,
         loading: false,
       };
+
+    case GET_STUDENT_EXPORT:
+      return {
+        ...state,
+        studentExport: payload,
+        isAuthenticated: true,
+        isLogin: true,
+        loading: false,
+      };
+
     case GET_STUDENTSBYID:
       return {
         ...state,

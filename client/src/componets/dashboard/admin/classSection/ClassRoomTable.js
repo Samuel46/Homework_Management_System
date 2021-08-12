@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { ListGroupItem, ListGroup } from "reactstrap";
 import Spinner from "../../../layouts/Spinner";
+import { Download, UserPlus } from "react-feather";
 
 function cancel(e) {
   console.log(e);
@@ -183,13 +184,28 @@ function ClassRoomTable({
 
             <div className="card-body">
               <div className="row align-items-center m-l-0">
-                <div className="col-sm-6"></div>
-                <div className="col-sm-6 text-right">
+                <div className="col-sm-4">
                   <Link
-                    to="/create-class"
+                    to="/import-classroom"
+                    className="btn btn-secondary btn-sm mb-3 btn-round"
+                  >
+                    <UserPlus /> Import Classrooms
+                  </Link>
+                </div>
+                <div className="col-sm-4 ">
+                  {/* <Link
+                    to="/export-students"
+                    className="btn btn-secondary btn-sm mb-3 btn-round"
+                  >
+                    <Download /> Export Students
+                  </Link> */}
+                </div>
+                <div className="col-sm-4 text-right">
+                  <Link
+                    to="/create-student"
                     className="btn btn-success btn-sm mb-3 btn-round"
                   >
-                    Add Classroom
+                    <i className="feather icon-plus" /> Add Classrooms
                   </Link>
                 </div>
               </div>

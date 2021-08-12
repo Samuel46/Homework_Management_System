@@ -140,7 +140,7 @@ function RegisterStudent({
       notify("Nothing To Copy", true);
     } else {
       copyToClipboard();
-      notify(COPY_SUCCESS);
+      notify("sema bro");
     }
   };
 
@@ -585,6 +585,7 @@ RegisterStudent.propTypes = {
   logout: PropTypes.func.isRequired,
   getStudents: PropTypes.func.isRequired,
   student: PropTypes.object.isRequired,
+  registerStudent: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

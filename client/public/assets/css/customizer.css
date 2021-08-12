@@ -43,6 +43,34 @@
 .btn_opc {
   z-index: 0 !important;
 }
+.tb_display {
+  display: none!;
+}
+/*  */
+.uppy-Root {
+  border-radius: 0.357rem;
+  border-color: #7367f0;
+}
+
+.uppy-DragDrop-container:focus {
+  box-shadow: none;
+}
+.uppy-DragDrop-arrow {
+  fill: #7367f0;
+}
+.uppy-DragDrop-label {
+  color: #6e6b7b;
+}
+
+.uppy-DragDrop-browse {
+  color: #7367f0;
+}
+
+.uppy-Root {
+  background-color: #161d31;
+}
+
+/*  */
 
 .label_display {
   display: grid;

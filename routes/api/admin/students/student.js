@@ -22,14 +22,7 @@ router.post(
       check("sirname", "Sirname is required").not().isEmpty(),
       check("username", "Username is required").not().isEmpty(),
       check("gender", "gender is required").not().isEmpty(),
-      check("birth_date", "Birth date data is required").not().isEmpty(),
       check("code", "Please add a code").isLength({ min: 4 }),
-      check("joining_year_group", "Joing year group is required")
-        .not()
-        .isEmpty(),
-      check("current_year_group", "Current year group is required")
-        .not()
-        .isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -111,7 +104,29 @@ router.post(
 // @Access         Private
 router.get("/", auth, async (req, res) => {
   try {
-    const allStudents = await Student.find({ user: req.user.id });
+    const allStudents = await Student.find({ user: req.user.id }).select(
+      "-user"
+    );
+
+    res.json(allStudents);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @Route Get  /api/admin/teacher
+// @Descri         Get all Students
+// @Access         Private
+router.get("/all", auth, async (req, res) => {
+  try {
+    const allStudents = await Student.find({ user: req.user.id })
+      .select("-user")
+      .select("-joining_year_group")
+      .select("-current_year_group")
+      .select("-joining_date")
+      .select("-birth_date")
+      .select("-_id");
 
     res.json(allStudents);
   } catch (err) {

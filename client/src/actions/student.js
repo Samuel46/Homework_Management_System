@@ -14,6 +14,7 @@ import {
   UPDATE_STUDENT,
   UPDATE_STUDENT_FAIL,
   GET_STUDENTSBYID,
+  GET_STUDENT_EXPORT,
 } from "../actions/types";
 
 import setStudentToken from "../utils/setStudentToken";
@@ -60,6 +61,7 @@ export const registerStudent = (formData, history) => async (dispatch) => {
     dispatch(logoutStudent());
     dispatch(setAlert("Student registered", "success"));
     history.push("/manage-students");
+    dispatch(getStudents());
     dispatch(loadStudent());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -147,6 +149,23 @@ export const getStudents = () => async (dispatch) => {
 
     dispatch({
       type: GET_STUDENTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: GET_STUDENTS_FAIL,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get all the  for export function
+export const getStudentsForExport = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/admin/students/student/all");
+
+    dispatch({
+      type: GET_STUDENT_EXPORT,
       payload: res.data,
     });
   } catch (err) {

@@ -27,7 +27,6 @@ const StudentSchema = new mongoose.Schema({
   },
   birth_date: {
     type: Date,
-    required: true,
   },
 
   gender: {
@@ -39,11 +38,9 @@ const StudentSchema = new mongoose.Schema({
   },
   joining_year_group: {
     type: [String],
-    required: true,
   },
   current_year_group: {
     type: [String],
-    required: true,
   },
 });
 

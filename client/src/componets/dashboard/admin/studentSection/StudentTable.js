@@ -7,6 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Popconfirm, message } from "antd";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { QuestionCircleOutlined } from "@ant-design/icons";
+import { ChevronDown, Download, FilePlus, UserPlus } from "react-feather";
 
 function cancel(e) {
   console.log(e);
@@ -96,8 +97,24 @@ function StudentTable({ students, deleteStudent, history }) {
             </div>
             <div className="card-body">
               <div className="row align-items-center m-l-0">
-                <div className="col-sm-6"></div>
-                <div className="col-sm-6 text-right">
+
+                <div className="col-sm-4">
+                <Link
+                    to="/import-students"
+                    className="btn btn-secondary btn-sm mb-3 btn-round"
+                  >
+                    <UserPlus /> Import Students
+                  </Link>
+                </div>
+                <div className="col-sm-4 ">
+                  <Link
+                    to="/export-students"
+                    className="btn btn-secondary btn-sm mb-3 btn-round"
+                  >
+                    <Download /> Export Students
+                  </Link>
+                </div>
+                <div className="col-sm-4 text-right">
                   <Link
                     to="/create-student"
                     className="btn btn-success btn-sm mb-3 btn-round"

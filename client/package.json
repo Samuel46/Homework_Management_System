@@ -6,8 +6,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@uppy/react": "^1.12.1",
     "antd": "^4.16.1",
     "axios": "^0.20.0",
+    "chart.js": "^3.5.0",
+    "classnames": "^2.3.1",
     "draft-js": "^0.11.7",
     "mdbreact": "^5.0.2",
     "moment": "^2.29.1",
@@ -32,7 +35,9 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.35.2",
     "swiper": "^6.7.0",
-    "uuid": "^8.3.1"
+    "uppy": "^1.31.0",
+    "uuid": "^8.3.1",
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
