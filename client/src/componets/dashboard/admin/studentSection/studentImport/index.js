@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import XLSX from "xlsx";
 import classnames from "classnames";
 import Uppy from "@uppy/core";
@@ -9,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { Link, withRouter } from "react-router-dom";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { Popconfirm, message } from "antd";
+import { getStudents } from "../../../../../actions/student";
 import { ListGroup, ListGroupItem, Alert } from "reactstrap";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -69,7 +70,9 @@ const ImportStudent = ({
   auth: { user },
   logout,
   registerStudent,
+  getStudents,
   history,
+  student: { students },
 }) => {
   const [tableData, setTableData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -89,6 +92,11 @@ const ImportStudent = ({
     setTableData(arr);
     setName(name);
   };
+
+  // get all students
+  useEffect(() => {
+    getStudents();
+  }, []);
 
   uppy.on("complete", (result) => {
     const reader = new FileReader();
@@ -181,10 +189,16 @@ const ImportStudent = ({
     ? tableData
     : null;
 
+  // render all students in list
+  const studentsFromDb = students.map((student) => student.username);
+
   // register students
   const handleExport = () => {
     dataArr.map((item) => {
-      if (selectedRows.includes(item.username)) {
+      if (
+        selectedRows.includes(item.username) &&
+        studentsFromDb?.includes(item?.username) == false
+      ) {
         const obj = {
           firstname: item.firstname,
           sirname: item.sirname,
@@ -200,7 +214,16 @@ const ImportStudent = ({
 
         registerStudent(obj, history);
       } else {
-        return null;
+        notify(
+          <>
+            <div className="toastify-body">
+              <span role="img" aria-label="toast-text">
+                👋 You have already register {item.username},
+              </span>
+            </div>
+          </>,
+          true
+        );
       }
     });
 
@@ -283,7 +306,10 @@ const ImportStudent = ({
 
   const handleExportStudents = () => {
     return dataArr?.map((item) => {
-      if (selectedRows.includes(item.username)) {
+      if (
+        selectedRows.includes(item.username) &&
+        studentsFromDb?.includes(item?.username) == false
+      ) {
         return (
           <tr key={item.username}>
             <td>
@@ -292,7 +318,7 @@ const ImportStudent = ({
               <ListGroup>
                 <ListGroupItem color="info" className="mb-2">
                   {" "}
-                  {""} 😃 {""}
+                  {""} ✔✔ {""}
                   {item.firstname}
                 </ListGroupItem>
               </ListGroup>
@@ -311,7 +337,38 @@ const ImportStudent = ({
           </tr>
         );
       } else {
-        return null;
+        return (
+          <tr key={item.username}>
+            <td>
+              {" "}
+              {""}
+              <ListGroup>
+                <ListGroupItem color="danger" className="mb-2">
+                  <h6>
+                    {" "}
+                    ❌<small>Student Already </small>{" "}
+                  </h6>{" "}
+                  {item.firstname}
+                </ListGroupItem>
+              </ListGroup>
+            </td>
+
+            <td>
+              {" "}
+              {""}
+              <ListGroup>
+                <ListGroupItem color="danger" className="mb-2">
+                  {" "}
+                  <h6>
+                    {" "}
+                    <small>Registered </small>{" "}
+                  </h6>
+                  {item.sirname}
+                </ListGroupItem>
+              </ListGroup>
+            </td>
+          </tr>
+        );
       }
     });
   };
@@ -583,12 +640,17 @@ ImportStudent.propTypes = {
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   registerStudent: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  student: state.student,
 });
 
-export default connect(mapStateToProps, { logout, registerStudent })(
-  withRouter(ImportStudent)
-);
+export default connect(mapStateToProps, {
+  logout,
+  getStudents,
+  registerStudent,
+})(withRouter(ImportStudent));

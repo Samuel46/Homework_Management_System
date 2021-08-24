@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import XLSX from "xlsx";
 import classnames from "classnames";
 import Uppy from "@uppy/core";
@@ -31,6 +31,7 @@ import {
 } from "reactstrap";
 import Navigation from "../../../Navigation";
 import { logout } from "../../../../../actions/auth";
+import { getStudents } from "../../../../../actions/student";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "uppy/dist/uppy.css";
@@ -65,7 +66,14 @@ const notify = (message, hasError = false) => {
   }
 };
 
-const ClassImport = ({ auth: { user }, logout, addClassRoom, history }) => {
+const ClassImport = ({
+  auth: { user },
+  logout,
+  addClassRoom,
+  getStudents,
+  history,
+  student: { students },
+}) => {
   const [tableData, setTableData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [value, setValue] = useState("");
@@ -562,12 +570,15 @@ ClassImport.propTypes = {
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   addClassRoom: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  student: state.student,
 });
 
-export default connect(mapStateToProps, { logout, addClassRoom })(
+export default connect(mapStateToProps, { logout, getStudents, addClassRoom })(
   withRouter(ClassImport)
 );
