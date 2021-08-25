@@ -208,7 +208,7 @@ const ClassImport = ({
     teachersFrommDB?.includes(fullname?.Firstname + " " + fullname?.Sirname)
   );
   console.log(allTeacherNames, "this are the teachers");
-  console.log(teachersFrommDB, "db teacher");
+  console.log(dataArr, "db teacher");
 
   // Create classes
   const handleExport = () => {
@@ -221,16 +221,12 @@ const ClassImport = ({
         // register new teachers from Spreadsheet
         // generate email sample
 
-        const b = item.Sirname.split(" ");
-        const rB = Math.floor(Math.random() * b.length);
-        const emailHead = b[rB] + Math.floor(Math.random() * 600);
-
         const objj = {
           firstname: item.Firstname,
           sirname: item.Sirname,
           title: item.Title,
           password: 12345,
-          email: `${emailHead}@changeme.now`,
+          email: item.TeacherEmail,
         };
         registerTeacher(objj, history);
 

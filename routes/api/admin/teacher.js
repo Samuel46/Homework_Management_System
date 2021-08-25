@@ -19,7 +19,7 @@ router.post(
     [
       check("firstname", "Firstname is require").not().isEmpty(),
       check("sirname", "Sirname is require").not().isEmpty(),
-      check("email", "Email is required").isEmail(),
+      check("email", "Email is required Teacher").isEmail(),
     ],
   ],
   async (req, res) => {
@@ -54,24 +54,19 @@ router.post(
     try {
       // See if user exists
       let teacher = await Teacher.findOne({ email });
-      // const salt = await bcrypt.genSalt(10);
-      // const hashpassword = await bcrypt.hash(req.body.password, salt);
+
       if (teacher) {
         // update the teacher by the school
+
         teacher = await Teacher.findOneAndUpdate(
           { email },
           { $set: teacherFields },
-          { new: true }
+          { new: true, upsert: true, setDefaultsOnInsert: true }
         );
         return res.json(teacher);
       } else {
         // Create the new teacher by the school
         teacher = new Teacher(teacherFields);
-        // @@@@@to-do Encrypt password
-        // const salt = await bcrypt.genSalt(10);
-        // teacher.password = await bcrypt.hash(password, salt);
-
-        //   Save the teacher to the database
         await teacher.save();
 
         // Return jsonwebtoken

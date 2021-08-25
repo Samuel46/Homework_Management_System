@@ -144,6 +144,7 @@ function EditTeacherForm({
                 Email Address
               </label>
               <input
+                disabled
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
                 value={email}

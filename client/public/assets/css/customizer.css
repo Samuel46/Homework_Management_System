@@ -12,10 +12,7 @@
   max-width: 750px;
 }
 
-.card-width{
-  margin-left: -60px !important;
-  margin-right: -60px !important;
-}
+
 .brand-logo {
   display: flex;
   justify-content: center;
