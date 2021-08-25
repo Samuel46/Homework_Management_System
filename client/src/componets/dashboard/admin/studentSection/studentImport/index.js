@@ -361,7 +361,7 @@ const ImportStudent = ({
                   {" "}
                   <h6>
                     {" "}
-                    <small>Registered </small>{" "}
+                    <small>Registered! </small>{" "}
                   </h6>
                   {item.sirname}
                 </ListGroupItem>

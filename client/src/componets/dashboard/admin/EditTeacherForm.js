@@ -146,7 +146,6 @@ function EditTeacherForm({
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
-                disabled
                 value={email}
                 type="email"
                 className="form-control"

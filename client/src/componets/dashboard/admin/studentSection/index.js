@@ -165,9 +165,12 @@ function StudentSection({
           </div>
           {/*  */}
 
-          <div className="py-5">
+          <div className=" row py-5">
+            <div className="col-md-12">
             <NodeAlert />
             <StudentTable students={students} />
+            </div>
+            
           </div>
         </div>
       </div>

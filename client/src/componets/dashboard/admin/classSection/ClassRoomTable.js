@@ -202,7 +202,7 @@ function ClassRoomTable({
                 </div>
                 <div className="col-sm-4 text-right">
                   <Link
-                    to="/create-student"
+                    to="/create-class"
                     className="btn btn-success btn-sm mb-3 btn-round"
                   >
                     <i className="feather icon-plus" /> Add Classrooms

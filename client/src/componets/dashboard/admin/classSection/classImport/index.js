@@ -3,7 +3,7 @@ import XLSX from "xlsx";
 import classnames from "classnames";
 import Uppy from "@uppy/core";
 import { Download, UserPlus, X } from "react-feather";
-import { addClassRoom } from "../../../../../actions/classRoom";
+import { addClassRoom, getClasses } from "../../../../../actions/classRoom";
 import { DragDrop } from "@uppy/react";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, withRouter } from "react-router-dom";
@@ -31,7 +31,7 @@ import {
 } from "reactstrap";
 import Navigation from "../../../Navigation";
 import { logout } from "../../../../../actions/auth";
-import { getStudents } from "../../../../../actions/student";
+import { getTeachers, registerTeacher } from "../../../../../actions/teacher";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "uppy/dist/uppy.css";
@@ -70,9 +70,12 @@ const ClassImport = ({
   auth: { user },
   logout,
   addClassRoom,
-  getStudents,
+  getClasses,
+  classRoom: { classes },
+  getTeachers,
+  teacher: { teachers },
   history,
-  student: { students },
+  registerTeacher,
 }) => {
   const [tableData, setTableData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -92,6 +95,16 @@ const ClassImport = ({
     setTableData(arr);
     setName(name);
   };
+
+  // get all classes
+  useEffect(() => {
+    getClasses();
+  }, []);
+
+  // get all teachers
+  useEffect(() => {
+    getTeachers();
+  }, []);
 
   uppy.on("complete", (result) => {
     const reader = new FileReader();
@@ -184,20 +197,78 @@ const ClassImport = ({
     ? tableData
     : null;
 
+  //  render all classes form the   db
+  const classRoomFromDb = classes.map((room) => room.name);
+  // render all teachers
+  const teachersFrommDB = teachers.map(
+    (teacher) => teacher.firstname + " " + teacher.sirname
+  );
+
+  const allTeacherNames = dataArr?.map((fullname) =>
+    teachersFrommDB?.includes(fullname?.Firstname + " " + fullname?.Sirname)
+  );
+  console.log(allTeacherNames, "this are the teachers");
+  console.log(teachersFrommDB, "db teacher");
+
   // Create classes
   const handleExport = () => {
     dataArr.map((item) => {
-      if (selectedRows.includes(item.Classname)) {
+      if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Teachers) == false
+      ) {
+        // register new teachers from Spreadsheet
+        // generate email sample
+
+        const b = item.Sirname.split(" ");
+        const rB = Math.floor(Math.random() * b.length);
+        const emailHead = b[rB] + Math.floor(Math.random() * 600);
+
+        const objj = {
+          firstname: item.Firstname,
+          sirname: item.Sirname,
+          title: item.Title,
+          password: 12345,
+          email: `${emailHead}@changeme.now`,
+        };
+        registerTeacher(objj, history);
+
+        //  add new classes from spreadsheet
         const obj = {
           name: item.Classname,
           add_students: item.Students,
-          assign_teachers: item.Teachers,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+          add_subjects: item.Subjects,
+        };
+
+        addClassRoom(obj, history);
+      } else if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Teachers) == true
+      ) {
+        const obj = {
+          name: item.Classname,
+          add_students: item.Students,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
           add_subjects: item.Subjects,
         };
 
         addClassRoom(obj, history);
       } else {
-        return null;
+        notify(
+          <>
+            <div className="toastify-body">
+              <span role="img" aria-label="toast-text">
+                👋{item.Classname} already exists!
+              </span>
+            </div>
+          </>,
+          true
+        );
       }
     });
 
@@ -216,7 +287,6 @@ const ClassImport = ({
     }
 
     setSelectedRows([...selectedRowsArr]);
-    console.log(selectedRowsArr, "sads");
   };
 
   // select all students
@@ -232,7 +302,6 @@ const ClassImport = ({
     }
 
     setSelectedRows(selectedRowsArr);
-    console.log(selectedRowsArr, "sads");
   };
 
   const renderTableBody = () => {
@@ -281,9 +350,12 @@ const ClassImport = ({
     }
   };
 
-  const handleExportStudents = () => {
+  const handleExportClasses = () => {
     return dataArr?.map((item, index) => {
-      if (selectedRows.includes(item.Classname)) {
+      if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false
+      ) {
         return (
           <tr key={item.Classname || index}>
             <td>
@@ -292,7 +364,7 @@ const ClassImport = ({
               <ListGroup>
                 <ListGroupItem color="info" className="mb-2">
                   {" "}
-                  {""} 😃 {""}
+                  {""} ✔✔ {""}
                   {item.Classname}
                 </ListGroupItem>
               </ListGroup>
@@ -300,7 +372,23 @@ const ClassImport = ({
           </tr>
         );
       } else {
-        return null;
+        return (
+          <tr key={item.Classname || index}>
+            <td>
+              {" "}
+              {""}
+              <ListGroup>
+                <ListGroupItem color="danger" className="mb-2">
+                  <h6>
+                    {" "}
+                    ❌<small>Class Already Exist</small>{" "}
+                  </h6>{" "}
+                  {item.Classname}
+                </ListGroupItem>
+              </ListGroup>
+            </td>
+          </tr>
+        );
       }
     });
   };
@@ -547,7 +635,7 @@ const ClassImport = ({
                       <th>Classname</th>
                     </tr>
                   </thead>
-                  <tbody>{handleExportStudents()}</tbody>
+                  <tbody>{handleExportClasses()}</tbody>
                 </Table>
               </FormGroup>
             </ModalBody>
@@ -570,15 +658,23 @@ ClassImport.propTypes = {
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
   addClassRoom: PropTypes.func.isRequired,
-  getStudents: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
+  getClasses: PropTypes.func.isRequired,
+  classRoom: PropTypes.object.isRequired,
+  getTeachers: PropTypes.func.isRequired,
+  teacher: PropTypes.object.isRequired,
+  registerTeacher: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  student: state.student,
+  classRoom: state.classRoom,
+  teacher: state.teacher,
 });
 
-export default connect(mapStateToProps, { logout, getStudents, addClassRoom })(
-  withRouter(ClassImport)
-);
+export default connect(mapStateToProps, {
+  logout,
+  getClasses,
+  getTeachers,
+  addClassRoom,
+  registerTeacher,
+})(withRouter(ClassImport));

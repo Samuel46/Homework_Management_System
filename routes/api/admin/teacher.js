@@ -20,7 +20,6 @@ router.post(
       check("firstname", "Firstname is require").not().isEmpty(),
       check("sirname", "Sirname is require").not().isEmpty(),
       check("email", "Email is required").isEmail(),
-      check("password", "Password is required").isLength({ min: 6 }),
     ],
   ],
   async (req, res) => {

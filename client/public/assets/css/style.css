@@ -42,6 +42,8 @@
 }
 
 
+
+
 html {
     font-family: Sofia Pro,sans-serif;
     line-height: 1.15;
@@ -623,6 +625,7 @@ pre code {
     .container, .container-sm, .container-md, .container-lg, .container-xl {
         max-width: 1140px;
     }
+   
 }
 
 .row {
@@ -2035,6 +2038,9 @@ pre code {
     .table-responsive-lg > .table-bordered {
         border: 0;
     }
+
+
+
 }
 
 @media (max-width: 1199.98px) {
@@ -13158,8 +13164,8 @@ body:not(.minimenu) .pc-sidebar .pc-submenu .pc-submenu > .pc-item:before {
 }
 
 .pc-container .pcoded-content {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 30px;
 }
 

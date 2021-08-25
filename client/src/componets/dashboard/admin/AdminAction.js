@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function AdminAction() {
   return (
-    <div div className="row dash_width">
+    <div div className="row">
       <div className="col-xl-3 col-md-6">
         <div className="card shadow">
           <div className="card-body bg-info">

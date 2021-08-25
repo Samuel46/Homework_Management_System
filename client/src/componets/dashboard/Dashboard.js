@@ -14,7 +14,6 @@ import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
 import { Alert } from "reactstrap";
 
-
 function Dashboard({
   getClasses,
   getSubject,
@@ -41,8 +40,6 @@ function Dashboard({
   useEffect(() => {
     getSubject();
   }, [getSubject]);
-
-
 
   return user !== null && user !== undefined ? (
     <Fragment>
@@ -112,7 +109,7 @@ function Dashboard({
       </header>
 
       {/* [ Main Content ] start */}
-      <div className="pc-container">
+      <div className="pc-container dash_width">
         <div className="pcoded-content">
           {/* [ breadcrumb ] start */}
           <div className="page-header">
@@ -195,8 +192,6 @@ function Dashboard({
         </div>
       </div>
       {/* polor chat for more info */}
-    
-
     </Fragment>
   ) : (
     <Spinner />

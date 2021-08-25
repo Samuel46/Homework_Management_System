@@ -20,11 +20,9 @@ const TeacherSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   password: {
     type: String,
-    required: true,
   },
   create_class: {
     type: Boolean,

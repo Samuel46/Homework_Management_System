@@ -47,10 +47,10 @@ function StudentTable({ students, deleteStudent, history }) {
           </ListGroupItem>
         </ListGroup>
       </td>
-      <td>
+      {/* <td>
         {" "}
         <Moment format="YYYY/MM/DD">{student.birth_date}</Moment>
-      </td>
+      </td> */}
       <td>
         {" "}
         <Moment format="YYYY/MM/DD">{student.joining_date}</Moment>
@@ -83,8 +83,8 @@ function StudentTable({ students, deleteStudent, history }) {
     <div className="container">
       <div className="row">
         {/* subscribe start */}
-        <div className="col-md-12">
-          <div className="card">
+        <div className="col-md-12 ">
+          <div className="card ">
             <div className="card-header">
               <h5>Student List </h5>
               <div class="cover-img-block img_img">
@@ -114,7 +114,7 @@ function StudentTable({ students, deleteStudent, history }) {
                     <Download /> Export Students
                   </Link>
                 </div>
-                <div className="col-sm-4 text-right">
+                <div className="col-sm-4 text-right pl-5">
                   <Link
                     to="/create-student"
                     className="btn btn-success btn-sm mb-3 btn-round"
@@ -134,9 +134,9 @@ function StudentTable({ students, deleteStudent, history }) {
                       <th>Sirname</th>
                       <th>Gender</th>
                       <th>Username</th>
-                      <th>Birth Date</th>
+                      {/* <th>Birth Date</th> */}
                       <th>Joining Date</th>
-                      <th>Current Year Group</th>
+                      <th>Current-Yr Group</th>
                       <th>Options</th>
                     </tr>
                   </thead>
