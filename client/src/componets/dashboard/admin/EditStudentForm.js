@@ -6,7 +6,11 @@ import PasswordGen from "../../PasswordGen";
 import DatePicker from "react-datepicker";
 import { Select } from "antd";
 import "react-datepicker/dist/react-datepicker.css";
+import { Fragment } from "react";
+import { Label } from "reactstrap";
+import Flatpickr from "react-flatpickr";
 import Moment from "react-moment";
+import "flatpickr/dist/themes/airbnb.css";
 const { Option } = Select;
 
 function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
@@ -20,6 +24,8 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
   const [joining_date, setJoining_Date] = useState(new Date());
   const [joining_year_group, setJoining_Year_Group] = useState([]);
   const [current_year_group, setCurrent_Year_Group] = useState([]);
+
+  const [picker, setPicker] = useState(new Date());
 
   // setStartPicker(new Date(selectedEvent.start && selectedEvent.start));
   // fill the from with data from the state
@@ -158,15 +164,29 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
                 Birth Date
               </label>
 
-              <DatePicker
+              <Flatpickr
+                value={birth_date}
+                id="hf-picker"
+                disabled={false}
+                className="form-control"
+                onChange={(date) => setBirth_Date(date)}
+                options={{
+                  altInput: true,
+                  altFormat: "F j, Y",
+                  dateFormat: "Y-m-d",
+                }}
+              />
+
+              {/* <DatePicker
                 selected={birth_date}
+                maxDate={new Date("December 31, 9999 00:00:00")}
                 className="form-control date__width"
                 showYearDropdown
                 dateFormatCalendar="MMMM"
                 yearDropdownItemNumber={100}
                 scrollableYearDropdown
                 onChange={(date) => setBirth_Date(date)}
-              />
+              /> */}
             </div>
           </div>
           <div className="col-sm-6">
@@ -175,11 +195,24 @@ function EditStudentForm({ updateStudent, loading, selectedStudent, history }) {
                 Joining Date
               </label>
 
-              <DatePicker
+              <Flatpickr
+                value={joining_date}
+                id="hf-picker"
+                className="form-control"
+                onChange={(date) => setJoining_Date(date)}
+                options={{
+                  altInput: true,
+                  altFormat: "F j, Y",
+                  dateFormat: "Y-m-d",
+                }}
+              />
+
+              {/* <DatePicker
+                maxDate={new Date("December 31, 9999 00:00:00")}
                 selected={joining_date}
                 className="form-control date__width"
                 onChange={(date) => setJoining_Date(date)}
-              />
+              /> */}
             </div>
           </div>
           <div className="col-sm-6">

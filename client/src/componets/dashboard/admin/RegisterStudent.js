@@ -8,9 +8,9 @@ import { Link, withRouter } from "react-router-dom";
 import { logout } from "../../../actions/auth";
 import Navigation from "../Navigation";
 import PasswordGen from "../../PasswordGen";
-import DatePicker from "react-datepicker";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/airbnb.css";
 import { Select } from "antd";
-import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
 import { COPY_SUCCESS } from "./teacherSection/message";
 import { UncontrolledTooltip } from "reactstrap";
@@ -140,7 +140,7 @@ function RegisterStudent({
       notify("Nothing To Copy", true);
     } else {
       copyToClipboard();
-      notify("sema bro");
+      notify("Password copied successfully!");
     }
   };
 
@@ -363,16 +363,18 @@ function RegisterStudent({
                               Birth Date
                             </label>
 
-                            <DatePicker
-                              selected={birth_date}
-                              className=" form-control date__width"
-                              wrapperClassName="datePicker"
-                              showYearDropdown
-                              dateFormatCalendar="MMMM"
-                              yearDropdownItemNumber={100}
-                              scrollableYearDropdown
-                              onChange={(date) => setBirth_Date(date)}
-                            />
+                            <Flatpickr
+                value={birth_date}
+                id="hf-picker"
+                disabled={false}
+                className="form-control"
+                onChange={(date) => setBirth_Date(date)}
+                options={{
+                  altInput: true,
+                  altFormat: "F j, Y",
+                  dateFormat: "Y-m-d",
+                }}
+              />
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -384,11 +386,17 @@ function RegisterStudent({
                               Joining Date
                             </label>
 
-                            <DatePicker
-                              selected={joining_date}
-                              className="date__width form-control"
-                              onChange={(date) => setJoining_Date(date)}
-                            />
+                            <Flatpickr
+                value={joining_date}
+                id="hf-picker"
+                className="form-control"
+                onChange={(date) => setJoining_Date(date)}
+                options={{
+                  altInput: true,
+                  altFormat: "F j, Y",
+                  dateFormat: "Y-m-d",
+                }}
+              />
                           </div>
                         </div>
                         <div className="col-sm-6">

@@ -12,6 +12,10 @@
   max-width: 750px;
 }
 
+.color_input {
+  display: none!
+}
+
 
 .brand-logo {
   display: flex;

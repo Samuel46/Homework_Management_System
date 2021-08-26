@@ -8,8 +8,8 @@ import { Select } from "antd";
 import Navigation from "../Navigation";
 import { Alert } from "reactstrap";
 import { logout } from "../../../actions/auth";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/airbnb.css";
 const { Option } = Select;
 
 function RegisterTeacher({
@@ -272,11 +272,23 @@ function RegisterTeacher({
                             >
                               Joining Date
                             </label>
-                            <DatePicker
+                            <Flatpickr
+                              value={joining_date}
+                              id="hf-picker"
+                              disabled={false}
+                              className="form-control"
+                              onChange={(date) => setJoining_Date(date)}
+                              options={{
+                                altInput: true,
+                                altFormat: "F j, Y",
+                                dateFormat: "Y-m-d",
+                              }}
+                            />
+                            {/* <DatePicker
                               selected={joining_date}
                               className="form-control date__width"
                               onChange={(date) => setJoining_Date(date)}
-                            />
+                            /> */}
                           </div>
                         </div>
                         <div className="col-sm-6">

@@ -32,6 +32,8 @@ import {
 import Navigation from "../../../Navigation";
 import { logout } from "../../../../../actions/auth";
 import { getTeachers, registerTeacher } from "../../../../../actions/teacher";
+import { getStudents, registerStudent } from "../../../../../actions/student";
+import { getSubject, addSubject } from "../../../../../actions/subject";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "uppy/dist/uppy.css";
@@ -76,6 +78,12 @@ const ClassImport = ({
   teacher: { teachers },
   history,
   registerTeacher,
+  getStudents,
+  registerStudent,
+  getSubject,
+  addSubject,
+  student: { students },
+  subject: { subjects },
 }) => {
   const [tableData, setTableData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -104,6 +112,16 @@ const ClassImport = ({
   // get all teachers
   useEffect(() => {
     getTeachers();
+  }, []);
+
+  // get all students
+  useEffect(() => {
+    getStudents();
+  }, []);
+
+  // get all Subjects
+  useEffect(() => {
+    getSubject();
   }, []);
 
   uppy.on("complete", (result) => {
@@ -197,6 +215,11 @@ const ClassImport = ({
     ? tableData
     : null;
 
+  // render all the subjects
+
+  const subjectFromDB = subjects.map((subject) => subject.subject_name);
+  console.log(subjectFromDB, "subjetcss");
+
   //  render all classes form the   db
   const classRoomFromDb = classes.map((room) => room.name);
   // render all teachers
@@ -204,8 +227,14 @@ const ClassImport = ({
     (teacher) => teacher.firstname + " " + teacher.sirname
   );
 
+  // render all the students
+  const studentsFromDB = students.map(
+    (student) => student.firstname + " " + student.sirname
+  );
+  console.log(studentsFromDB, "here");
+
   const allTeacherNames = dataArr?.map((fullname) =>
-    teachersFrommDB?.includes(fullname?.Firstname + " " + fullname?.Sirname)
+    studentsFromDB?.includes(fullname.StdFirstname + " " + fullname?.StdSirname)
   );
   console.log(allTeacherNames, "this are the teachers");
   console.log(dataArr, "db teacher");
@@ -216,41 +245,99 @@ const ClassImport = ({
       if (
         selectedRows.includes(item.Classname) &&
         classRoomFromDb?.includes(item?.Classname) == false &&
-        teachersFrommDB?.includes(item?.Teachers) == false
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          false &&
+     
+        subjectFromDB?.includes(item?.subject_name) == false
       ) {
-        // register new teachers from Spreadsheet
-        // generate email sample
+        // Register subjects
+        const subjectObj = {
+          subject_name: item?.SubjectName,
+          add_classes: item?.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+        };
+        addSubject(subjectObj, history);
 
-        const objj = {
+        // register new teachers from Spreadsheet
+        const teacherObj = {
           firstname: item.Firstname,
           sirname: item.Sirname,
           title: item.Title,
           password: 12345,
+          allocate_classes: item.Classname,
           email: item.TeacherEmail,
         };
-        registerTeacher(objj, history);
+        registerTeacher(teacherObj, history);
+      
 
         //  add new classes from spreadsheet
         const obj = {
           name: item.Classname,
-          add_students: item.Students,
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
-          add_subjects: item.Subjects,
+          add_subjects: item?.SubjectName,
+        };
+
+        addClassRoom(obj, history);
+      }
+      // edge case for the teachers
+      else if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          true && subjectFromDB?.includes(item?.subject_name) == false
+        
+      ) {
+        const obj = {
+          name: item.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+          add_subjects: item?.SubjectName,
+        };
+
+        addClassRoom(obj, history);
+          
+      
+      }
+      // edge case for subjects
+      else if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          false &&
+          subjectFromDB?.includes(item?.subject_name) == true
+      ) {
+        
+        // Register subjects
+        const subjectObj = {
+          subject_name: item?.SubjectName,
+          add_classes: item?.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+        };
+        addSubject(subjectObj, history);
+
+        const obj = {
+          name: item.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+          add_subjects: item?.SubjectName,
         };
 
         addClassRoom(obj, history);
       } else if (
         selectedRows.includes(item.Classname) &&
         classRoomFromDb?.includes(item?.Classname) == false &&
-        teachersFrommDB?.includes(item?.Teachers) == true
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          true && subjectFromDB?.includes(item?.subject_name) == true
+        
       ) {
         const obj = {
           name: item.Classname,
-          add_students: item.Students,
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
-          add_subjects: item.Subjects,
+          add_subjects: item?.SubjectName,
         };
 
         addClassRoom(obj, history);
@@ -659,12 +746,20 @@ ClassImport.propTypes = {
   getTeachers: PropTypes.func.isRequired,
   teacher: PropTypes.object.isRequired,
   registerTeacher: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
+  student: PropTypes.object.isRequired,
+  registerStudent: PropTypes.func.isRequired,
+  getSubject: PropTypes.func.isRequired,
+  subject: PropTypes.object.isRequired,
+  addSubject: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   classRoom: state.classRoom,
   teacher: state.teacher,
+  student: state.student,
+  subject: state.subject,
 });
 
 export default connect(mapStateToProps, {
@@ -673,4 +768,8 @@ export default connect(mapStateToProps, {
   getTeachers,
   addClassRoom,
   registerTeacher,
+  getStudents,
+  registerStudent,
+  getSubject,
+  addSubject,
 })(withRouter(ClassImport));

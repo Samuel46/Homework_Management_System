@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import { Select } from "antd";
 import Spinner from "../../layouts/Spinner";
 import NodeAlert from "../../layouts/NodeAlert";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/airbnb.css";
 
 const { Option } = Select;
 
@@ -186,10 +186,17 @@ function EditTeacherForm({
                 Joining Date
               </label>
 
-              <DatePicker
-                selected={joining_date}
-                className="form-control date__width"
+              <Flatpickr
+                value={joining_date}
+                id="hf-picker"
+                disabled={false}
+                className="form-control"
                 onChange={(date) => setJoining_Date(date)}
+                options={{
+                  altInput: true,
+                  altFormat: "F j, Y",
+                  dateFormat: "Y-m-d",
+                }}
               />
             </div>
           </div>

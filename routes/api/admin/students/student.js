@@ -41,7 +41,7 @@ router.post(
       joining_year_group,
       gender,
       current_year_group,
-      joining_date,
+      // joining_date,
     } = req.body;
 
     // Bulilding student object
@@ -58,7 +58,7 @@ router.post(
     if (gender) studentField.gender = gender;
     if (current_year_group)
       studentField.current_year_group = current_year_group;
-    if (joining_date) studentField.joining_date = joining_date;
+    // if (joining_date) studentField.joining_date = joining_date;
     if (birth_date) studentField.birth_date = birth_date;
 
     try {

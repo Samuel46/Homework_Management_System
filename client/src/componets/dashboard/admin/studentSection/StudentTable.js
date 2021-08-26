@@ -97,9 +97,8 @@ function StudentTable({ students, deleteStudent, history }) {
             </div>
             <div className="card-body">
               <div className="row align-items-center m-l-0">
-
                 <div className="col-sm-4">
-                <Link
+                  <Link
                     to="/import-students"
                     className="btn btn-secondary btn-sm mb-3 btn-round"
                   >
