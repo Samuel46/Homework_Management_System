@@ -7,6 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 import EditTeacherForm from "./EditTeacherForm";
 import Navigation from "../Navigation";
 import { logout } from "../../../actions/auth";
+import images from "../../../img/6.png";
 
 function EditTeacher({
   updateTeacher,
@@ -114,11 +115,7 @@ function EditTeacher({
                   <div className="card-header">
                     <h4 className="card-title">Edit Teacher</h4>
                     <div class="cover-img-block img_img">
-                      <img
-                        src="https://image.freepik.com/free-vector/usability-testing-concept-illustration_114360-1571.jpg"
-                        alt=""
-                        class="img-fluid"
-                      />
+                      <img src={images} alt="" class="img-fluid" />
                     </div>
                   </div>
                   <div className="card-body">

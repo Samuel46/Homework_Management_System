@@ -8,6 +8,7 @@ import { logout } from "../../../actions/auth";
 import { connect } from "react-redux";
 import Navigation from "../Navigation";
 import { Alert } from "reactstrap";
+import images from "../../../img/1.png";
 const { Option } = Select;
 
 function CreateClass({
@@ -161,11 +162,7 @@ function CreateClass({
                   <div className="card-header">
                     <h4 className="card-title">Create Class</h4>
                     <div class="cover-img-block img_img">
-                      <img
-                        src="https://image.freepik.com/free-vector/add-notes-concept-illustration_114360-3376.jpg"
-                        alt=""
-                        class="img-fluid"
-                      />
+                      <img src={images} alt="" class="img-fluid" />
                     </div>
                   </div>
                   <div className="card-body">

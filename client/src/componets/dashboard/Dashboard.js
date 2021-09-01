@@ -13,6 +13,7 @@ import { getSubject } from "../../actions/subject";
 import { getTeachers } from "../../actions/teacher";
 import { getStudents } from "../../actions/student";
 import { Alert } from "reactstrap";
+import images from "../../../src/img/0.png";
 
 function Dashboard({
   getClasses,
@@ -128,6 +129,11 @@ function Dashboard({
           </div>
           {/* [ breadcrumb ] end */}
           {/* [ Main Content ] start */}
+          <div className="col-md-12 img_img">
+            <div class="cover-img-block  py-4">
+              <img src={images} alt="" class="img-fluid" />
+            </div>
+          </div>
 
           <AdminAction />
           <div className="py-2">
