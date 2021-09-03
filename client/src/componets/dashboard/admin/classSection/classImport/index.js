@@ -247,9 +247,19 @@ const ClassImport = ({
         classRoomFromDb?.includes(item?.Classname) == false &&
         teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
           false &&
-     
-        subjectFromDB?.includes(item?.subject_name) == false
+        subjectFromDB?.includes(item?.subject_name) == false &&
+        studentsFromDB?.includes(item?.Firstname + " " + item?.Sirname) == false
       ) {
+        // Register students
+
+        const studentObj = {
+          firstname: item?.StdFirstname,
+          sirname: item?.StdSirname,
+          username: item?.Username,
+          code: item?.Code,
+          gender: item?.Gender,
+        };
+
         // Register subjects
         const subjectObj = {
           subject_name: item?.SubjectName,
@@ -257,7 +267,6 @@ const ClassImport = ({
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
         };
-        addSubject(subjectObj, history);
 
         // register new teachers from Spreadsheet
         const teacherObj = {
@@ -268,8 +277,6 @@ const ClassImport = ({
           allocate_classes: item.Classname,
           email: item.TeacherEmail,
         };
-        registerTeacher(teacherObj, history);
-      
 
         //  add new classes from spreadsheet
         const obj = {
@@ -277,17 +284,22 @@ const ClassImport = ({
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
           add_subjects: item?.SubjectName,
+          add_students: item?.StdFirstname + " " + item?.StdSirname,
         };
 
-        addClassRoom(obj, history);
+        addClassRoom(obj, history) &&
+          registerStudent(studentObj, history) &&
+          registerStudent(studentObj, history) &&
+          addSubject(subjectObj, history) &&
+          registerTeacher(teacherObj, history);
       }
-      // edge case for the teachers
+      // edge case for the teachers- done
       else if (
         selectedRows.includes(item.Classname) &&
         classRoomFromDb?.includes(item?.Classname) == false &&
         teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
-          true && subjectFromDB?.includes(item?.subject_name) == false
-        
+          true &&
+        subjectFromDB?.includes(item?.subject_name) == false
       ) {
         const obj = {
           name: item.Classname,
@@ -297,18 +309,16 @@ const ClassImport = ({
         };
 
         addClassRoom(obj, history);
-          
-      
-      }
-      // edge case for subjects
-      else if (
-        selectedRows.includes(item.Classname) &&
-        classRoomFromDb?.includes(item?.Classname) == false &&
-        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
-          false &&
-          subjectFromDB?.includes(item?.subject_name) == true
-      ) {
-        
+
+        const studentObj = {
+          firstname: item?.StdFirstname,
+          sirname: item?.StdSirname,
+          username: item?.Username,
+          code: item?.Code,
+          gender: item?.Gender,
+        };
+        registerStudent(studentObj, history);
+
         // Register subjects
         const subjectObj = {
           subject_name: item?.SubjectName,
@@ -316,6 +326,27 @@ const ClassImport = ({
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
         };
+
+        addSubject(subjectObj, history);
+      }
+
+      // edge case for students- done
+      else if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          false &&
+        subjectFromDB?.includes(item?.subject_name) == false &&
+        studentsFromDB?.includes(item?.Firstname + " " + item?.Sirname) == true
+      ) {
+        // Register subjects
+        const subjectObj = {
+          subject_name: item?.SubjectName,
+          add_classes: item?.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+        };
+
         addSubject(subjectObj, history);
 
         const obj = {
@@ -323,6 +354,55 @@ const ClassImport = ({
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
           add_subjects: item?.SubjectName,
+          add_students: item?.StdFirstname + " " + item?.StdSirname,
+        };
+
+        addClassRoom(obj, history);
+        // register new teachers from Spreadsheet
+        const teacherObj = {
+          firstname: item.Firstname,
+          sirname: item.Sirname,
+          title: item.Title,
+          password: 12345,
+          allocate_classes: item.Classname,
+          email: item.TeacherEmail,
+        };
+        registerTeacher(teacherObj, history);
+      }
+      // edge case for subjects- done
+      else if (
+        selectedRows.includes(item.Classname) &&
+        classRoomFromDb?.includes(item?.Classname) == false &&
+        teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
+          false &&
+        subjectFromDB?.includes(item?.subject_name) == true &&
+        studentsFromDB?.includes(item?.Firstname + " " + item?.Sirname) == false
+      ) {
+        const studentObj = {
+          firstname: item?.StdFirstname,
+          sirname: item?.StdSirname,
+          username: item?.Username,
+          code: item?.Code,
+          gender: item?.Gender,
+        };
+        registerStudent(studentObj, history);
+
+        const teacherObj = {
+          firstname: item.Firstname,
+          sirname: item.Sirname,
+          title: item.Title,
+          password: 12345,
+          allocate_classes: item.Classname,
+          email: item.TeacherEmail,
+        };
+        registerTeacher(teacherObj, history);
+
+        const obj = {
+          name: item.Classname,
+          assign_teachers:
+            item.Title + " " + item.Firstname + " " + item.Sirname,
+          add_subjects: item?.SubjectName,
+          add_students: item?.StdFirstname + " " + item?.StdSirname,
         };
 
         addClassRoom(obj, history);
@@ -330,14 +410,16 @@ const ClassImport = ({
         selectedRows.includes(item.Classname) &&
         classRoomFromDb?.includes(item?.Classname) == false &&
         teachersFrommDB?.includes(item?.Firstname + " " + item?.Sirname) ==
-          true && subjectFromDB?.includes(item?.subject_name) == true
-        
+          true &&
+        subjectFromDB?.includes(item?.subject_name) == true &&
+        studentsFromDB?.includes(item?.Firstname + " " + item?.Sirname) == true
       ) {
         const obj = {
           name: item.Classname,
           assign_teachers:
             item.Title + " " + item.Firstname + " " + item.Sirname,
           add_subjects: item?.SubjectName,
+          add_students: item?.StdFirstname + " " + item?.StdSirname,
         };
 
         addClassRoom(obj, history);
@@ -357,6 +439,30 @@ const ClassImport = ({
 
     toggleModal();
   };
+
+  // Register student
+
+  // const studentSpreadsheet =  dataArr
+  //   useEffect(() => {
+
+  //     const NewStudent = () => {
+  //       registerStudent({
+  //         firstname,
+  //         sirname,
+  //         email,
+  //         username,
+  //         code,
+  //         birth_date,
+  //         gender,
+  //         joining_date,
+  //         joining_year_group,
+  //         current_year_group,
+
+  //       })
+  //     }
+  //     NewT()
+
+  //   },[handleExport])
 
   //  select classrooms
   const handleSelect = (name) => {
